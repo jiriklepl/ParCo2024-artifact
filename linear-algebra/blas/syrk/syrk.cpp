@@ -19,10 +19,7 @@ constexpr auto j_vec =  noarr::vector<'j'>();
 constexpr auto k_vec =  noarr::vector<'k'>();
 
 struct tuning {
-	DEFINE_PROTO_STRUCT(block_i, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_k, noarr::neutral_proto());
-
-	DEFINE_PROTO_STRUCT(order, block_i ^ block_k);
+	DEFINE_PROTO_STRUCT(order, noarr::hoist<'k'>());
 
 	DEFINE_PROTO_STRUCT(c_layout, i_vec ^ j_vec);
 	DEFINE_PROTO_STRUCT(a_layout, i_vec ^ k_vec);
@@ -64,31 +61,23 @@ void kernel_syrk(num_t alpha, num_t beta, auto C, auto A, Order order = {}) noex
 	auto A_renamed = A ^ noarr::rename<'i', 'j'>();
 
 	#pragma scop
-	noarr::traverser(C)
+	noarr::traverser(C, A, A_renamed)
 		.template for_dims<'i'>([=](auto inner) constexpr noexcept {
 			auto state = inner.state();
 
 			inner
 				.order(noarr::slice<'j'>(0, noarr::get_index<'i'>(state) + 1))
-				.for_each([=](auto state) constexpr noexcept {
-					C[state] *= beta;
+				.template for_dims<'j'>([=](auto inner) constexpr noexcept {
+					C[inner.state()] *= beta;
 				});
-		});
-
-	noarr::planner(C, A)
-		.for_each([=](auto state) constexpr noexcept {
-			C[state] += alpha * A[state] * A_renamed[state];
-		})
-		.template for_sections<'i'>([](auto inner) constexpr noexcept {
-			auto state = inner.state();
 
 			inner
 				.order(noarr::slice<'j'>(0, noarr::get_index<'i'>(state) + 1))
-				();
-		})
-		.order(noarr::hoist<'i'>())
-		.order(order)
-		();
+				.order(order)
+				.for_each([=](auto state) constexpr noexcept {
+					C[state] += alpha * A[state] * A_renamed[state];
+				});
+		});
 	#pragma endscop
 }
 
@@ -116,7 +105,7 @@ int main(int argc, char *argv[]) {
 	auto start = std::chrono::high_resolution_clock::now();
 
 	// run kernel
-	kernel_syrk(alpha, beta, C.get_ref(), A.get_ref(), tuning.order);
+	kernel_syrk(alpha, beta, C.get_ref(), A.get_ref());
 
 	auto end = std::chrono::high_resolution_clock::now();
 

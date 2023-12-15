@@ -18,11 +18,6 @@ constexpr auto i_vec =  noarr::vector<'i'>();
 constexpr auto j_vec =  noarr::vector<'j'>();
 
 struct tuning {
-	DEFINE_PROTO_STRUCT(block_i, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_j, noarr::neutral_proto());
-
-	DEFINE_PROTO_STRUCT(order, block_i ^ block_j);
-
 	DEFINE_PROTO_STRUCT(a_layout, i_vec ^ j_vec);
 	DEFINE_PROTO_STRUCT(b_layout, i_vec ^ j_vec);
 } tuning;
@@ -56,9 +51,8 @@ void init_array(num_t &alpha, num_t &beta, auto A, auto B, auto x) noexcept {
 }
 
 // computation kernel
-template<class Order = noarr::neutral_proto>
 [[gnu::flatten, gnu::noinline]]
-void kernel_gesummv(num_t alpha, num_t beta, auto A, auto B, auto tmp, auto x, auto y, Order order = {}) noexcept {
+void kernel_gesummv(num_t alpha, num_t beta, auto A, auto B, auto tmp, auto x, auto y) noexcept {
 	// A: i x j
 	// B: i x j
 	// tmp: i
@@ -66,22 +60,19 @@ void kernel_gesummv(num_t alpha, num_t beta, auto A, auto B, auto tmp, auto x, a
 	// y: i
 
 	#pragma scop
-	noarr::traverser(A, B, tmp, x, y).for_each([=](auto state) constexpr noexcept {
+	noarr::traverser(A, B, tmp, x, y).template for_dims<'i'>([=](auto inner) constexpr noexcept {
+		auto state = inner.state();
+
 		tmp[state] = 0;
 		y[state] = 0;
-	});
 
-	noarr::traverser(A, B, tmp, x, y)
-		.order(order)
-		.for_each([=](auto state) constexpr noexcept {
+		inner.for_each([=](auto state) constexpr noexcept {
 			tmp[state] += A[state] * x[state];
 			y[state] += B[state] * x[state];
 		});
 
-	noarr::traverser(y, tmp)
-		.for_each([=](auto state) constexpr noexcept {
-			y[state] = alpha * tmp[state] + beta * y[state];
-		});
+		y[state] = alpha * tmp[state] + beta * y[state];
+	});
 	#pragma endscop
 }
 
@@ -110,7 +101,7 @@ int main(int argc, char *argv[]) {
 	auto start = std::chrono::high_resolution_clock::now();
 
 	// run kernel
-	kernel_gesummv(alpha, beta, A.get_ref(), B.get_ref(), tmp.get_ref(), x.get_ref(), y.get_ref(), tuning.order);
+	kernel_gesummv(alpha, beta, A.get_ref(), B.get_ref(), tmp.get_ref(), x.get_ref(), y.get_ref());
 
 	auto end = std::chrono::high_resolution_clock::now();
 

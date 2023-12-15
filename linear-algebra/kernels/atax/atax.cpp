@@ -9,7 +9,6 @@
 
 #include "defines.hpp"
 #include "atax.hpp"
-#include "noarr/structures/structs/blocks.hpp"
 
 using num_t = DATA_TYPE;
 
@@ -19,16 +18,6 @@ constexpr auto i_vec =  noarr::vector<'i'>();
 constexpr auto j_vec =  noarr::vector<'j'>();
 
 struct tuning {
-	DEFINE_PROTO_STRUCT(block_i1, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_j1, noarr::neutral_proto());
-
-	DEFINE_PROTO_STRUCT(order1, block_i1 ^ block_j1);
-
-	DEFINE_PROTO_STRUCT(block_i2, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_j2, noarr::neutral_proto());
-
-	DEFINE_PROTO_STRUCT(order2, block_i2 ^ block_j2);
-
 	DEFINE_PROTO_STRUCT(c_layout, i_vec ^ j_vec);
 } tuning;
 
@@ -52,9 +41,8 @@ void init_array(auto A, auto x) noexcept {
 }
 
 // computation kernel
-template<class Order1 = noarr::neutral_proto, class Order2 = noarr::neutral_proto>
 [[gnu::flatten, gnu::noinline]]
-void kernel_atax(auto A, auto x, auto y, auto tmp, Order1 order1 = {}, Order2 order2 = {}) noexcept {
+void kernel_atax(auto A, auto x, auto y, auto tmp) noexcept {
 	// A: i x j
 	// x: j
 	// y: j
@@ -65,21 +53,17 @@ void kernel_atax(auto A, auto x, auto y, auto tmp, Order1 order1 = {}, Order2 or
 		y[state] = 0;
 	});
 
-	noarr::traverser(tmp).for_each([=](auto state) constexpr noexcept {
-		tmp[state] = 0;
-	});
+	noarr::traverser(tmp, A, x, y).template for_dims<'i'>([=](auto inner) constexpr noexcept {
+		tmp[inner.state()] = 0;
 
-	noarr::traverser(tmp, A, x)
-		.order(order1)
-		.for_each([=](auto state) constexpr noexcept {
+		inner.for_each([=](auto state) constexpr noexcept {
 			tmp[state] += A[state] * x[state];
 		});
 
-	noarr::traverser(y, A, tmp)
-		.order(order2)
-		.for_each([=](auto state) constexpr noexcept {
+		inner.for_each([=](auto state) constexpr noexcept {
 			y[state] += A[state] * tmp[state];
 		});
+	});
 	#pragma endscop
 }
 
@@ -106,7 +90,7 @@ int main(int argc, char *argv[]) {
 	auto start = std::chrono::high_resolution_clock::now();
 
 	// run kernel
-	kernel_atax(A.get_ref(), x.get_ref(), y.get_ref(), tmp.get_ref(), tuning.order1, tuning.order2);
+	kernel_atax(A.get_ref(), x.get_ref(), y.get_ref(), tmp.get_ref());
 
 	auto end = std::chrono::high_resolution_clock::now();
 

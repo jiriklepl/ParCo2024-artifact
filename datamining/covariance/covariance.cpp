@@ -19,11 +19,6 @@ constexpr auto j_vec =  noarr::vector<'j'>();
 constexpr auto k_vec =  noarr::vector<'k'>();
 
 struct tuning {
-	DEFINE_PROTO_STRUCT(block_i, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_k, noarr::neutral_proto());
-
-	DEFINE_PROTO_STRUCT(order, block_i ^ block_k);
-
 	DEFINE_PROTO_STRUCT(data_layout, k_vec ^ j_vec);
 	DEFINE_PROTO_STRUCT(cov_layout, i_vec ^ j_vec);
 } tuning;
@@ -41,9 +36,8 @@ void init_array(num_t &float_n, auto data) noexcept {
 }
 
 // computation kernel
-template<class Order = noarr::neutral_proto>
 [[gnu::flatten, gnu::noinline]]
-void kernel_covariance(num_t float_n, auto data, auto cov, auto mean, Order order = {}) noexcept {
+void kernel_covariance(num_t float_n, auto data, auto cov, auto mean) noexcept {
 	// data: k x j
 	// cov: i x j
 	// mean: j
@@ -68,38 +62,22 @@ void kernel_covariance(num_t float_n, auto data, auto cov, auto mean, Order orde
 		data[state] -= mean[state];
 	});
 
-	noarr::traverser(cov).template for_dims<'i'>([=](auto inner) constexpr noexcept {
+	noarr::traverser(data, cov, data_ki, cov_ji).template for_dims<'i'>([=](auto inner) constexpr noexcept {
 		inner
 			.order(noarr::shift<'j'>(noarr::get_index<'i'>(inner.state())))
-			.for_each([=](auto state) constexpr noexcept {
+			.template for_dims<'j'>([=](auto inner) constexpr noexcept {
+				auto state = inner.state();
+
 				cov[state] = 0;
+
+				inner.for_each([=](auto state) constexpr noexcept {
+					cov[state] += data[state] * data_ki[state];
+				});
+
+				cov[state] /= float_n - (num_t)1;
+				cov_ji[state] = cov[state];
 			});
 	});
-
-	noarr::planner(data, cov, mean)
-		.for_each([=](auto state) constexpr noexcept {
-			cov[state] += data[state] * data_ki[state];
-		})
-		.template for_sections<'i'>([](auto inner) constexpr noexcept {
-			inner
-				.order(noarr::shift<'j'>(noarr::get_index<'i'>(inner.state())))
-				();
-		})
-		.order(noarr::hoist<'k'>())
-		.order(noarr::hoist<'j'>())
-		.order(noarr::hoist<'i'>())
-		.order(order)
-		();
-
-	noarr::traverser(cov, cov_ji)
-		.template for_dims<'i'>([=](auto inner) constexpr noexcept {
-			inner
-				.order(noarr::shift<'j'>(noarr::get_index<'i'>(inner.state())))
-				.for_each([=](auto state) constexpr noexcept {
-					cov[state] /= float_n - (num_t)1;
-					cov_ji[state] = cov[state];
-				});
-		});
 	#pragma endscop
 }
 
@@ -126,7 +104,7 @@ int main(int argc, char *argv[]) {
 	auto start = std::chrono::high_resolution_clock::now();
 
 	// run kernel
-	kernel_covariance(float_n, data.get_ref(), cov.get_ref(), mean.get_ref(), tuning.order);
+	kernel_covariance(float_n, data.get_ref(), cov.get_ref(), mean.get_ref());
 
 	auto end = std::chrono::high_resolution_clock::now();
 
