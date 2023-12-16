@@ -15,6 +15,15 @@ using num_t = DATA_TYPE;
 
 namespace {
 
+constexpr auto i_vec =  noarr::vector<'i'>();
+constexpr auto j_vec =  noarr::vector<'j'>();
+constexpr auto k_vec =  noarr::vector<'k'>();
+
+struct tuning {
+	DEFINE_PROTO_STRUCT(data_layout, j_vec ^ k_vec);
+	DEFINE_PROTO_STRUCT(corr_layout, j_vec ^ i_vec);
+} tuning;
+
 // initialization function
 void init_array(num_t &float_n, auto data) noexcept {
 	// data: k x j
@@ -115,8 +124,8 @@ int main(int argc, char *argv[]) {
 
 	// data
 	num_t float_n;
-	auto data = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'k', 'j'>(nk, nj));
-	auto corr = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'i', 'j'>(nj, nj));
+	auto data = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.data_layout ^ noarr::set_length<'k'>(nk) ^ noarr::set_length<'j'>(nj));
+	auto corr = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.corr_layout ^ noarr::set_length<'i'>(nj) ^ noarr::set_length<'j'>(nj));
 	auto mean = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vector<'j'>(nj));
 	auto stddev = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vector<'j'>(nj));
 

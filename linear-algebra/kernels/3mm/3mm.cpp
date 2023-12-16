@@ -21,24 +21,24 @@ constexpr auto l_vec =  noarr::vector<'l'>();
 constexpr auto m_vec =  noarr::vector<'m'>();
 
 struct tuning {
-	DEFINE_PROTO_STRUCT(block_i1, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_j1, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_j2, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_l2, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_i3, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_l3, noarr::neutral_proto());
+	DEFINE_PROTO_STRUCT(block_i1, noarr::hoist<'i'>());
+	DEFINE_PROTO_STRUCT(block_j1, noarr::hoist<'j'>());
+	DEFINE_PROTO_STRUCT(block_j2, noarr::hoist<'j'>());
+	DEFINE_PROTO_STRUCT(block_l2, noarr::hoist<'l'>());
+	DEFINE_PROTO_STRUCT(block_i3, noarr::hoist<'i'>());
+	DEFINE_PROTO_STRUCT(block_l3, noarr::hoist<'l'>());
 
-	DEFINE_PROTO_STRUCT(order1, block_i1 ^ block_j1);
-	DEFINE_PROTO_STRUCT(order2, block_j2 ^ block_l2);
-	DEFINE_PROTO_STRUCT(order3, block_i3 ^ block_l3);
+	DEFINE_PROTO_STRUCT(order1, block_j1 ^ block_i1);
+	DEFINE_PROTO_STRUCT(order2, block_l2 ^ block_j2);
+	DEFINE_PROTO_STRUCT(order3, block_l3 ^ block_i3);
 
-	DEFINE_PROTO_STRUCT(e_layout, i_vec ^ j_vec);
-	DEFINE_PROTO_STRUCT(a_layout, i_vec ^ k_vec);
-	DEFINE_PROTO_STRUCT(b_layout, k_vec ^ j_vec);
-	DEFINE_PROTO_STRUCT(f_layout, j_vec ^ l_vec);
-	DEFINE_PROTO_STRUCT(c_layout, j_vec ^ m_vec);
-	DEFINE_PROTO_STRUCT(d_layout, m_vec ^ l_vec);
-	DEFINE_PROTO_STRUCT(g_layout, i_vec ^ l_vec);
+	DEFINE_PROTO_STRUCT(e_layout, j_vec ^ i_vec);
+	DEFINE_PROTO_STRUCT(a_layout, k_vec ^ i_vec);
+	DEFINE_PROTO_STRUCT(b_layout, j_vec ^ k_vec);
+	DEFINE_PROTO_STRUCT(f_layout, l_vec ^ j_vec);
+	DEFINE_PROTO_STRUCT(c_layout, m_vec ^ j_vec);
+	DEFINE_PROTO_STRUCT(d_layout, l_vec ^ m_vec);
+	DEFINE_PROTO_STRUCT(g_layout, l_vec ^ i_vec);
 } tuning;
 
 // initialization function

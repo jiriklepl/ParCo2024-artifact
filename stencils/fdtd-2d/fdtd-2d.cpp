@@ -14,6 +14,15 @@ using num_t = DATA_TYPE;
 
 namespace {
 
+constexpr auto i_vec =  noarr::vector<'i'>();
+constexpr auto j_vec =  noarr::vector<'j'>();
+
+struct tuning {
+	DEFINE_PROTO_STRUCT(ex_layout, j_vec ^ i_vec);
+	DEFINE_PROTO_STRUCT(ey_layout, j_vec ^ i_vec);
+	DEFINE_PROTO_STRUCT(hz_layout, j_vec ^ i_vec);
+} tuning;
+
 // initialization function
 void init_array(auto ex, auto ey, auto hz, auto _fict_) noexcept {
 	// ex: i x j
@@ -93,9 +102,9 @@ int main(int argc, char *argv[]) {
 	std::size_t nj = NJ;
 
 	// data
-	auto ex = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'i', 'j'>(ni, nj));
-	auto ey = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'i', 'j'>(ni, nj));
-	auto hz = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'i', 'j'>(ni, nj));
+	auto ex = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.ex_layout ^ noarr::set_length<'i'>(ni) ^ noarr::set_length<'j'>(nj));
+	auto ey = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.ey_layout ^ noarr::set_length<'i'>(ni) ^ noarr::set_length<'j'>(nj));
+	auto hz = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.hz_layout ^ noarr::set_length<'i'>(ni) ^ noarr::set_length<'j'>(nj));
 	auto _fict_ = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vector<'t'>(t));
 
 	// initialize data

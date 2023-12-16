@@ -15,6 +15,13 @@ using num_t = DATA_TYPE;
 
 namespace {
 
+constexpr auto i_vec =  noarr::vector<'i'>();
+constexpr auto j_vec =  noarr::vector<'j'>();
+
+struct tuning {
+	DEFINE_PROTO_STRUCT(l_layout, j_vec ^ i_vec);
+} tuning;
+
 // initialization function
 void init_array(auto L, auto x, auto b) noexcept {
 	// L: i x j
@@ -76,7 +83,7 @@ int main(int argc, char *argv[]) {
 	std::size_t n = N;
 
 	// data
-	auto L = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'i', 'j'>(n, n));
+	auto L = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.l_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
 	auto x = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vector<'i'>(n));
 	auto b = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vector<'i'>(n));
 

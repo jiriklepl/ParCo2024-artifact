@@ -21,8 +21,8 @@ constexpr auto k_vec =  noarr::vector<'k'>();
 struct tuning {
 	DEFINE_PROTO_STRUCT(order, noarr::hoist<'k'>());
 
-	DEFINE_PROTO_STRUCT(c_layout, i_vec ^ j_vec);
-	DEFINE_PROTO_STRUCT(a_layout, i_vec ^ k_vec);
+	DEFINE_PROTO_STRUCT(c_layout, j_vec ^ i_vec);
+	DEFINE_PROTO_STRUCT(a_layout, k_vec ^ i_vec);
 } tuning;
 
 // initialization function

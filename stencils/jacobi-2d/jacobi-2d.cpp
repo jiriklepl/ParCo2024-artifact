@@ -14,11 +14,17 @@ using num_t = DATA_TYPE;
 
 namespace {
 
+constexpr auto i_vec =  noarr::vector<'i'>();
+constexpr auto j_vec =  noarr::vector<'j'>();
+
 struct tuning {
 	DEFINE_PROTO_STRUCT(block_i, noarr::neutral_proto());
 	DEFINE_PROTO_STRUCT(block_j, noarr::neutral_proto());
 
-	DEFINE_PROTO_STRUCT(order, block_i ^ block_j);
+	DEFINE_PROTO_STRUCT(order, block_j ^ block_i);
+
+	DEFINE_PROTO_STRUCT(a_layout, j_vec ^ i_vec);
+	DEFINE_PROTO_STRUCT(b_layout, j_vec ^ i_vec);
 } tuning;
 
 
@@ -84,8 +90,8 @@ int main(int argc, char *argv[]) {
 	std::size_t t = TSTEPS;
 
 	// data
-	auto A = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'i', 'j'>(n, n));
-	auto B = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'i', 'j'>(n, n));
+	auto A = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.a_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
+	auto B = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.b_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
 
 	// initialize data
 	init_array(A.get_ref(), B.get_ref());

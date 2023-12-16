@@ -15,6 +15,17 @@ using num_t = DATA_TYPE;
 
 namespace {
 
+constexpr auto w_vec =  noarr::vector<'w'>();
+constexpr auto h_vec =  noarr::vector<'h'>();
+
+struct tuning {
+	DEFINE_PROTO_STRUCT(img_in_layout, h_vec ^ w_vec);
+	DEFINE_PROTO_STRUCT(img_out_layout, h_vec ^ w_vec);
+
+	DEFINE_PROTO_STRUCT(y1_layout, h_vec ^ w_vec);
+	DEFINE_PROTO_STRUCT(y2_layout, h_vec ^ w_vec);
+} tuning;
+
 // initialization function
 void init_array(num_t &alpha, auto imgIn, auto) noexcept {
 	// imgIn: w x h
@@ -138,11 +149,11 @@ int main(int argc, char *argv[]) {
 
 	// data
 	num_t alpha;
-	auto imgIn = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'w', 'h'>(nw, nh));
-	auto imgOut = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'w', 'h'>(nw, nh));
+	auto imgIn = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.img_in_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
+	auto imgOut = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.img_out_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
 
-	auto y1 = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'w', 'h'>(nw, nh));
-	auto y2 = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'w', 'h'>(nw, nh));
+	auto y1 = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.y1_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
+	auto y2 = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.y2_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
 
 	// initialize data
 	init_array(alpha, imgIn.get_ref(), imgOut.get_ref());

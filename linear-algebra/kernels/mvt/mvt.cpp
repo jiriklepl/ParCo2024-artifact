@@ -18,15 +18,15 @@ constexpr auto i_vec =  noarr::vector<'i'>();
 constexpr auto j_vec =  noarr::vector<'j'>();
 
 struct tuning {
-	DEFINE_PROTO_STRUCT(block_i1, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_j1, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_i2, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_j2, noarr::neutral_proto());
+	DEFINE_PROTO_STRUCT(block_i1, noarr::hoist<'i'>());
+	DEFINE_PROTO_STRUCT(block_j1, noarr::hoist<'j'>());
+	DEFINE_PROTO_STRUCT(block_i2, noarr::hoist<'i'>());
+	DEFINE_PROTO_STRUCT(block_j2, noarr::hoist<'j'>());
 
-	DEFINE_PROTO_STRUCT(order1, block_i1 ^ block_j1);
-	DEFINE_PROTO_STRUCT(order2, block_i2 ^ block_j2);
+	DEFINE_PROTO_STRUCT(order1, block_j1 ^ block_i1);
+	DEFINE_PROTO_STRUCT(order2, block_j2 ^ block_i2);
 
-	DEFINE_PROTO_STRUCT(a_layout, i_vec ^ j_vec);
+	DEFINE_PROTO_STRUCT(a_layout, j_vec ^ i_vec);
 } tuning;
 
 // initialization function

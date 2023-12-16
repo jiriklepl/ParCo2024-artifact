@@ -14,6 +14,16 @@ using num_t = DATA_TYPE;
 
 namespace {
 
+constexpr auto i_vec =  noarr::vector<'i'>();
+constexpr auto j_vec =  noarr::vector<'j'>();
+
+struct tuning {
+	DEFINE_PROTO_STRUCT(u_layout, j_vec ^ i_vec);
+	DEFINE_PROTO_STRUCT(v_layout, i_vec ^ j_vec);
+	DEFINE_PROTO_STRUCT(p_layout, j_vec ^ i_vec);
+	DEFINE_PROTO_STRUCT(q_layout, j_vec ^ i_vec);
+} tuning;
+
 // initialization function
 void init_array(auto u) noexcept {
 	// u: i x j
@@ -123,10 +133,10 @@ int main(int argc, char *argv[]) {
 	std::size_t t = TSTEPS;
 
 	// data
-	auto u = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'i', 'j'>(n, n));
-	auto v = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'j', 'i'>(n, n));
-	auto p = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'i', 'j'>(n, n));
-	auto q = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'i', 'j'>(n, n));
+	auto u = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.u_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n)); 
+	auto v = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.v_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
+	auto p = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.p_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
+	auto q = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.q_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
 
 	// initialize data
 	init_array(u.get_ref());

@@ -18,8 +18,8 @@ constexpr auto i_vec =  noarr::vector<'i'>();
 constexpr auto j_vec =  noarr::vector<'j'>();
 
 struct tuning {
-	DEFINE_PROTO_STRUCT(a_layout, i_vec ^ j_vec);
-	DEFINE_PROTO_STRUCT(b_layout, i_vec ^ j_vec);
+	DEFINE_PROTO_STRUCT(a_layout, j_vec ^ i_vec);
+	DEFINE_PROTO_STRUCT(b_layout, j_vec ^ i_vec);
 } tuning;
 
 // initialization function

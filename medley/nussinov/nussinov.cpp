@@ -16,6 +16,13 @@ using base_t = char;
 
 namespace {
 
+constexpr auto i_vec =  noarr::vector<'i'>();
+constexpr auto j_vec =  noarr::vector<'j'>();
+
+struct tuning {
+	DEFINE_PROTO_STRUCT(table_layout, j_vec ^ i_vec);
+} tuning;
+
 // initialization function
 void init_array(auto seq, auto table) noexcept {
 	// seq: i
@@ -101,7 +108,7 @@ int main(int argc, char *argv[]) {
 
 	// data
 	auto seq = noarr::make_bag(noarr::scalar<base_t>() ^ noarr::sized_vector<'i'>(n));
-	auto table = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'i', 'j'>(n, n));
+	auto table = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.table_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
 
 	// initialize data
 	init_array(seq.get_ref(), table.get_ref());

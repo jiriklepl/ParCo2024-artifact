@@ -20,13 +20,13 @@ constexpr auto p_vec =  noarr::vector<'p'>();
 constexpr auto s_vec =  noarr::vector<'s'>();
 
 struct tuning {
-	DEFINE_PROTO_STRUCT(block_r, noarr::neutral_proto());
-	DEFINE_PROTO_STRUCT(block_q, noarr::neutral_proto());
+	DEFINE_PROTO_STRUCT(block_r, noarr::hoist<'r'>());
+	DEFINE_PROTO_STRUCT(block_q, noarr::hoist<'q'>());
 
-	DEFINE_PROTO_STRUCT(order, block_r ^ block_q);
+	DEFINE_PROTO_STRUCT(order, block_q ^ block_r);
 
-	DEFINE_PROTO_STRUCT(a_layout, r_vec ^ q_vec ^ p_vec);
-	DEFINE_PROTO_STRUCT(c4_layout, s_vec ^ p_vec);
+	DEFINE_PROTO_STRUCT(a_layout, p_vec ^ q_vec ^ r_vec);
+	DEFINE_PROTO_STRUCT(c4_layout, p_vec ^ s_vec);
 } tuning;
 
 // initialization function
