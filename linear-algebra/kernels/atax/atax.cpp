@@ -29,12 +29,12 @@ void init_array(auto A, auto x) noexcept {
 	auto ni = A | noarr::get_length<'i'>();
 	auto nj = A | noarr::get_length<'j'>();
 
-	noarr::traverser(x).for_each([=](auto state) constexpr noexcept {
+	noarr::traverser(x).for_each([=](auto state) {
 		auto j = noarr::get_index<'j'>(state);
 		x[state] = 1 + j / (num_t)nj;
 	});
 
-	noarr::traverser(A).for_each([=](auto state) constexpr noexcept {
+	noarr::traverser(A).for_each([=](auto state) {
 		auto [i, j] = noarr::get_indices<'i', 'j'>(state);
 		A[state] = (num_t)((i + j) % nj) / (5 * ni);
 	});
@@ -49,18 +49,18 @@ void kernel_atax(auto A, auto x, auto y, auto tmp) noexcept {
 	// tmp: i
 
 	#pragma scop
-	noarr::traverser(y).for_each([=](auto state) constexpr noexcept {
+	noarr::traverser(y).for_each([=](auto state) {
 		y[state] = 0;
 	});
 
-	noarr::traverser(tmp, A, x, y).template for_dims<'i'>([=](auto inner) constexpr noexcept {
+	noarr::traverser(tmp, A, x, y).template for_dims<'i'>([=](auto inner) {
 		tmp[inner.state()] = 0;
 
-		inner.for_each([=](auto state) constexpr noexcept {
+		inner.for_each([=](auto state) {
 			tmp[state] += A[state] * x[state];
 		});
 
-		inner.for_each([=](auto state) constexpr noexcept {
+		inner.for_each([=](auto state) {
 			y[state] += A[state] * tmp[state];
 		});
 	});
