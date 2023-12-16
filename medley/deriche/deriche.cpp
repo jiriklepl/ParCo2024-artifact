@@ -40,6 +40,8 @@ void kernel_deriche(num_t alpha, auto imgIn, auto imgOut, auto y1, auto y2) noex
 
 	num_t k;
 	num_t a1, a2, a3, a4, a5, a6, a7, a8, b1, b2, c1, c2;
+
+	#pragma scop
 	k = ((num_t)1.0 - std::exp(-alpha)) * ((num_t)1.0 - std::exp(-alpha)) / ((num_t)1.0 + (num_t)2.0 * alpha * std::exp(-alpha) - std::exp(((num_t)2.0 * alpha)));
 	a1 = a5 = k;
 	a2 = a6 = k * std::exp(-alpha) * (alpha - (num_t)1.0);
@@ -49,7 +51,6 @@ void kernel_deriche(num_t alpha, auto imgIn, auto imgOut, auto y1, auto y2) noex
 	b2 = -std::exp(((num_t)(-2.0) * alpha));
 	c1 = c2 = 1;
 
-	#pragma scop
 	noarr::traverser(imgIn, y1)
 		.template for_dims<'w'>([=](auto inner) constexpr noexcept {
 			num_t ym1 = 0;
