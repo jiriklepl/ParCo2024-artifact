@@ -4,7 +4,6 @@
 # It assumes that the C++/Noarr implementations are built in the build directory and that the C implementations are built in the $POLYBENCH_C_DIR/build directory
 
 BUILD_DIR=${BUILD_DIR:-build}
-IGNORE_AUTOTUNED=${IGNORE_AUTOTUNED:-0}
 SKIP_DIFF=${SKIP_DIFF:-0}
 
 if [ -z "$POLYBENCH_C_DIR" ]; then
@@ -28,6 +27,12 @@ find "$BUILD_DIR" -maxdepth 1 -executable -type f |
 while read -r file; do
 	filename=$(basename "$file")
 
+	case "$filename" in
+		*_autotune)
+			continue
+			;;
+	esac
+
 	echo "Comparing $filename"
 
 	printf "\tNoarr:             "
@@ -35,6 +40,10 @@ while read -r file; do
 
 	printf "\tC:                 "
 	"$POLYBENCH_C_DIR/$BUILD_DIR/$filename" 2> "$dirname/c"
+
+	if [ "$SKIP_DIFF" -eq 1 ]; then
+		continue
+	fi
 
 	paste <(grep -oE '[0-9]+\.[0-9]+' "$dirname/c") <(grep -oE '[0-9]+(\.[0-9]+)?' "$dirname/cpp") |
 	awk "BEGIN {
