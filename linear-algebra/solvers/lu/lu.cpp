@@ -18,6 +18,8 @@ constexpr auto i_vec =  noarr::vector<'i'>();
 constexpr auto j_vec =  noarr::vector<'j'>();
 
 struct tuning {
+	DEFINE_PROTO_STRUCT(order, noarr::hoist<'j'>());
+
 	DEFINE_PROTO_STRUCT(a_layout, j_vec ^ i_vec);
 } tuning;
 
@@ -69,8 +71,9 @@ void init_array(auto A) noexcept {
 }
 
 // computation kernel
+template<typename Order = noarr::neutral_proto>
 [[gnu::flatten, gnu::noinline]]
-void kernel_lu(auto A) noexcept {
+void kernel_lu(auto A, Order order = {}) noexcept {
 	// A: i x j
 
 	auto A_ik = A ^ noarr::rename<'j', 'k'>();
@@ -98,6 +101,7 @@ void kernel_lu(auto A) noexcept {
 			inner
 				.order(noarr::shift<'j'>(noarr::get_index<'i'>(state)))
 				.order(noarr::slice<'k'>(0, noarr::get_index<'i'>(state)))
+				.order(order)
 				.for_each([=](auto state) {
 					A[state] -= A_ik[state] * A_kj[state];
 				});
@@ -122,7 +126,7 @@ int main(int argc, char *argv[]) {
 	auto start = std::chrono::high_resolution_clock::now();
 
 	// run kernel
-	kernel_lu(A.get_ref());
+	kernel_lu(A.get_ref(), tuning.order);
 
 	auto end = std::chrono::high_resolution_clock::now();
 
