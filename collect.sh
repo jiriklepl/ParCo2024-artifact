@@ -35,5 +35,5 @@ while read -r file; do
     echo "collecting $filename"
     ( srun -A kdss -p mpi-homo-short --exclusive -ww201 ./run_noarr_algorithm.sh "Noarr" "$BUILD_DIR/$filename" & wait ) > "$DATA_DIR/$filename.log"
     ( srun -A kdss -p mpi-homo-short --exclusive -ww201 ./run_c_algorithm.sh "C" "$POLYBENCH_C_DIR/$BUILD_DIR/$filename" & wait ) >> "$DATA_DIR/$filename.log"
-    echo done
+    echo "done"
 done
