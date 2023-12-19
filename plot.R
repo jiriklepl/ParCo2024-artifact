@@ -19,19 +19,22 @@ data <- read.csv(
 
 data <- data %>%
     group_by(name) %>%
-    reframe(time = time / mean(time), implementation) %>%
+    reframe(time = time / mean(time[(implementation == "c") | (implementation == "baseline")]), implementation) %>%
     group_by(name, implementation) %>%
-    reframe(time = mean(time))
+    filter(implementation != "baseline" & implementation != "c") %>%
+    reframe(time = mean(time)) %>%
+    mutate(speedup = 1 / time)
 
 plot <-
     ggplot(
         data,
-        aes(x = name, y = time, color = implementation, shape = implementation)) +
+        aes(x = name, y = speedup, color = implementation, shape = implementation)) +
     geom_point() +
     xlab("algorithm") +
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-    ylab("relative runtime") +
-    theme(legend.position = "bottom")
+    ylab("speedup relative to baseline") +
+    # theme(legend.position = "bottom")
+    theme(legend.position = "none")
 
 plot <- plot
 
