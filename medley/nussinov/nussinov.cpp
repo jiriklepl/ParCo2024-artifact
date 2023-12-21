@@ -14,6 +14,9 @@
 using num_t = DATA_TYPE;
 using base_t = char;
 
+#define match(b1, b2) (((b1)+(b2)) == 3 ? 1 : 0)
+#define max_score(s1, s2) ((s1 >= s2) ? s1 : s2)
+
 namespace {
 
 constexpr auto i_vec =  noarr::vector<'i'>();
@@ -63,32 +66,32 @@ void kernel_nussinov(auto seq, auto table) noexcept {
 					auto state = inner.state();
 
 					if (noarr::get_index<'j'>(state) >= 0)
-						table[state] = std::max(
+						table[state] = max_score(
 							table[state],
 							table[noarr::neighbor<'j'>(state, -1)]);
 
 					if (noarr::get_index<'i'>(state) + 1 < (table | noarr::get_length<'i'>()))
-						table[state] = std::max(
+						table[state] = max_score(
 							table[state],
 							table[noarr::neighbor<'i'>(state, 1)]);
 
 					if (noarr::get_index<'j'>(state) >= 0
 					 || noarr::get_index<'i'>(state) + 1 < (table | noarr::get_length<'i'>())) {
 						if (noarr::get_index<'i'>(state) < noarr::get_index<'j'>(state) - 1)
-							table[state] = std::max(
+							table[state] = max_score(
 								table[state],
-								table[noarr::neighbor<'i', 'j'>(state, 1, -1)] +
-								(seq[state] + seq_j[state] == 3 ? 1 : 0));
+								(table[noarr::neighbor<'i', 'j'>(state, 1, -1)]) +
+								match(seq[state], seq_j[state]));
 						else
-							table[state] = std::max(
+							table[state] = max_score(
 								table[state],
-								table[noarr::neighbor<'i', 'j'>(state, 1, -1)]);
+								(table[noarr::neighbor<'i', 'j'>(state, 1, -1)]));
 					}
 
 					inner
 						.order(noarr::span<'k'>(noarr::get_index<'i'>(state) + 1, noarr::get_index<'j'>(state)))
 						.template for_each<'k'>([=](auto state) {
-							table[state] = std::max(
+							table[state] = max_score(
 								table[state],
 								table_ik[state] +
 								table_kj[noarr::neighbor<'k'>(state, 1)]);
