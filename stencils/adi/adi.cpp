@@ -49,6 +49,8 @@ void kernel_adi(auto steps, auto u, auto v, auto p, auto q) noexcept {
 	auto v_trans = v ^ noarr::rename<'i', 'j', 'j', 'i'>();
 	auto traverser = noarr::traverser(u, v, p, q).order(noarr::bcast<'t'>(steps));
 
+	#pragma scop
+
 	num_t DX = (num_t)1.0 / (traverser.top_struct() | noarr::get_length<'i'>());
 	num_t DY = (num_t)1.0 / (traverser.top_struct() | noarr::get_length<'j'>());
 	num_t DT = (num_t)1.0 / (traverser.top_struct() | noarr::get_length<'t'>());
@@ -67,7 +69,6 @@ void kernel_adi(auto steps, auto u, auto v, auto p, auto q) noexcept {
 	num_t e = (num_t)1.0 + mul2;
 	num_t f = d;
 
-	#pragma scop
 	traverser.order(noarr::symmetric_spans<'i', 'j'>(traverser.top_struct(), 1, 1))
 		.template for_dims<'t'>([=](auto inner) {
 			// column sweep
