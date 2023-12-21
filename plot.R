@@ -28,11 +28,12 @@ data <- data %>%
 plot <-
     ggplot(
         data,
-        aes(x = name, y = speedup, color = implementation, shape = implementation)) +
+        aes(x = name, y = speedup)) +
     geom_point() +
     xlab("algorithm") +
+    geom_hline(yintercept = 1, linetype = "dashed") +
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-    ylab("speedup relative to baseline") +
+    ylab("speedup") +
     # theme(legend.position = "bottom")
     theme(legend.position = "none")
 
