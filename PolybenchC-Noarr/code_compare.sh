@@ -2,15 +2,7 @@
 
 BUILD_DIR=${BUILD_DIR:-build}
 
-if [ -z "$POLYBENCH_C_DIR" ]; then
-	POLYBENCH_C_DIR="$BUILD_DIR/PolyBenchC-4.2.1"
-	mkdir -p "$POLYBENCH_C_DIR" || exit 1
-	if [ -d "$POLYBENCH_C_DIR/.git" ]; then
-		( cd "$POLYBENCH_C_DIR" && git checkout master && git pull ) || exit 1
-	else
-		git clone "https://github.com/jiriklepl/PolyBenchC-4.2.1.git" "$POLYBENCH_C_DIR" || exit 1
-	fi
-fi
+POLYBENCH_C_DIR="../PolybenchC-4.2.1"
 
 tmpdir=$(mktemp -d) || exit 1
 
@@ -18,6 +10,8 @@ mkdir -p "$tmpdir/noarr" || exit 1
 mkdir -p "$tmpdir/polybench" || exit 1
 
 trap "rm -rf $tmpdir" EXIT
+
+printf "implementation,algorithm,lines,characters,tokens,gzip_size\n" > "statistics.csv"
 
 find datamining linear-algebra medley stencils -type f -name "*.cpp" | while read -r file; do
 	dir=$(dirname "$file")
@@ -34,6 +28,23 @@ find datamining linear-algebra medley stencils -type f -name "*.cpp" | while rea
 	#extract scop
 	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$file" | gcc -fpreprocessed -dD -E - | clang-format "$CLANG_FORMAT_FLAGS" | tee noarr.cpp > "$tmpdir/noarr/scop-${filename}pp" || exit 1
 	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$polybench_file" | gcc -fpreprocessed -dD -E - | clang-format "$CLANG_FORMAT_FLAGS" | tee c.cpp > "$tmpdir/polybench/scop-${filename}pp" || exit 1
+
+	printf "noarr,%s,%s,%s,%s,%s\n" \
+		"$(basename $file | sed 's/\.[^.]*//')" \
+		"$(wc -l < "$tmpdir/noarr/scop-${filename}pp")" \
+		"$(wc -m < "$tmpdir/noarr/scop-${filename}pp")" \
+		"$(clang -fsyntax-only -Xclang -dump-tokens "$tmpdir/noarr/scop-${filename}pp" 2>&1 | wc -l)" \
+		"$(gzip -c < "$tmpdir/noarr/scop-${filename}pp" | wc -c)" \
+		>> "statistics.csv"
+
+	printf "baseline,%s,%s,%s,%s,%s\n" \
+		"$(basename $file | sed 's/\.[^.]*//')" \
+		"$(wc -l < "$tmpdir/polybench/scop-${filename}pp")" \
+		"$(wc -m < "$tmpdir/polybench/scop-${filename}pp")" \
+		"$(clang -fsyntax-only -Xclang -dump-tokens "$tmpdir/polybench/scop-${filename}pp" 2>&1 | wc -l)" \
+		"$(gzip -c < "$tmpdir/polybench/scop-${filename}pp" | wc -c)" \
+		>> "statistics.csv"
+
 
 done
 

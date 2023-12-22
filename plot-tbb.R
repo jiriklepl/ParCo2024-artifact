@@ -12,6 +12,9 @@ if (length(args) != 1 && length(args) != 3 && length(args) != 4)
 if (length(args) >= 3) {
     width <- as.numeric(args[2])
     height <- as.numeric(args[3])
+} else {
+    width <- 1.3
+    height <- 3
 }
 
 if (length(args) >= 4) {
@@ -33,7 +36,6 @@ data <- data %>%
     reframe(time = time / mean(time[(implementation == "c") | (implementation == "baseline")]), implementation) %>%
     group_by(name, implementation) %>%
     filter(implementation != "baseline" & implementation != "c") %>%
-    reframe(time = mean(time)) %>%
     mutate(speedup = 1 / time)
 
 plot <-
@@ -41,10 +43,11 @@ plot <-
         data,
         aes(x = name, y = speedup)) +
     geom_hline(yintercept = 1, linetype = "solid", color="gray") +
-    geom_point() +
+    geom_boxplot() +
     xlab(x_label) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
     ylab("speedup") +
+    ylim(.95,1.13) +
     # theme(legend.position = "bottom")
     theme(legend.position = "none")
 
@@ -53,7 +56,7 @@ plot <- plot
 if (!dir.exists("plots"))
     dir.create("plots/", recursive = TRUE)
 
-plot_file <- paste0("plots/", str_replace(file, ".csv", ".pdf"))
+plot_file <- paste0("plots/", str_replace(basename(file), ".csv", ".pdf"))
 
 ggsave(
     plot_file,
