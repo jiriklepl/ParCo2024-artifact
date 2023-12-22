@@ -33,7 +33,6 @@ data <- data %>%
     reframe(time = time / mean(time[(implementation == "c") | (implementation == "baseline")]), implementation) %>%
     group_by(name, implementation) %>%
     filter(implementation != "baseline" & implementation != "c") %>%
-    reframe(time = mean(time)) %>%
     mutate(speedup = 1 / time)
 
 plot <-
@@ -41,10 +40,11 @@ plot <-
         data,
         aes(x = name, y = speedup)) +
     geom_hline(yintercept = 1, linetype = "solid", color="gray") +
-    geom_point() +
+    geom_boxplot() +
     xlab(x_label) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
     ylab("speedup") +
+    ylim(0.95, 1.1) +
     # theme(legend.position = "bottom")
     theme(legend.position = "none")
 
