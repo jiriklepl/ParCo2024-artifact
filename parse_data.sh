@@ -1,8 +1,13 @@
 #!/bin/bash
 
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <path-to-logs>"
+    exit 1
+fi
+
 echo "name,implementation,time"
 
-find data -name "*.log" |
+find "$1" -name "*.log" |
 while read -r file; do
     (awk -vfile="$(basename "$file" | sed 's/\..*$//')" '
 /Baseline:/ {
@@ -22,5 +27,4 @@ END {
             print(file ",baseline," data_baseline[i])
     }
 }' "$file" & wait )
-
 done
