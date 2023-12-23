@@ -4,11 +4,10 @@ export BUILD_DIR=${BUILD_DIR:-build}
 export DATASET_SIZE=${DATASET_SIZE:-MEDIUM}
 export DATA_TYPE=${DATA_TYPE:-FLOAT}
 export NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-main}
-export USE_SLURM=${USE_SLURM:-1}
-
+export USE_SLURM=${USE_SLURM:-0}
+export DATA_DIR=${DATA_DIR:-data}
 
 POLYBENCH_GPU_DIR="../PolyBenchGPU"
-DATA_DIR="data"
 
 if [ "$USE_SLURM" -eq 1 ]; then
 	RUN_SCRIPT="srun -A kdss -p gpu-short --exclusive -wampere01 --gres=gpu:1"
