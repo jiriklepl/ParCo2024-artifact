@@ -21,11 +21,9 @@ compare_algorithms() {
 
 
 	printf "\tnoarr: " >&2
-    "$BUILD_DIR/runner" "$1" >/dev/null 2>&1
     "$BUILD_DIR/runner" "$1" 2>&1 >"$tmpdir/noarr.log" | grep -oE "[0-9]+\.[0-9]{2,}" >&2
 
 	printf "\tbaseline: " >&2
-	"$2" >/dev/null 2>&1
     "$2" 2>"$tmpdir/baseline.log" | grep -oE "[0-9]+\.[0-9]{2,}" >&2
 
 	paste <(grep -oE '[0-9]+\.[0-9]+|nan' "$tmpdir/baseline.log") <(grep -oE '[0-9]+(\.[0-9]+)?|nan' "$tmpdir/noarr.log") |
@@ -57,11 +55,11 @@ compare_algorithms() {
 			printf \"Different output on %s \n\", \"$1\"
 			exit 1
 		}
-	}" 1>&2
+	}" 1>&2 || exit 1
 }
 
-compare_algorithms gemm "$POLYBENCH_GPU_DIR/CUDA/GEMM/gemm.exe"
-compare_algorithms 2mm "$POLYBENCH_GPU_DIR/CUDA/2MM/2mm.exe"
-compare_algorithms 2DConvolution "$POLYBENCH_GPU_DIR/CUDA/2DCONV/2DConvolution.exe"
-compare_algorithms gramschmidt "$POLYBENCH_GPU_DIR/CUDA/GRAMSCHM/gramschmidt.exe"
-compare_algorithms jacobi2d "$POLYBENCH_GPU_DIR/CUDA/JACOBI2D/jacobi2D.exe"
+compare_algorithms gemm "$POLYBENCH_GPU_DIR/CUDA/GEMM/gemm.exe" || exit 1
+compare_algorithms 2mm "$POLYBENCH_GPU_DIR/CUDA/2MM/2mm.exe" || exit 1
+compare_algorithms 2DConvolution "$POLYBENCH_GPU_DIR/CUDA/2DCONV/2DConvolution.exe" || exit 1
+compare_algorithms gramschmidt "$POLYBENCH_GPU_DIR/CUDA/GRAMSCHM/gramschmidt.exe" || exit 1
+compare_algorithms jacobi2d "$POLYBENCH_GPU_DIR/CUDA/JACOBI2D/jacobi2D.exe" || exit 1

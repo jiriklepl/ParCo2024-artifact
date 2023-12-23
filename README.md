@@ -22,8 +22,8 @@ The artifact contains the following directories:
   - [PolybenchC-tbb](PolybenchC-tbb): Parallelization of four algorithms from [PolybenchC-4.2.1](PolybenchC-4.2.1) using Intel TBB.
   - [PolybenchC-Noarr-tbb](PolybenchC-Noarr-tbb): Reimplementation of the parallelized algorithms from [PolybenchC-tbb](PolybenchC-tbb) using Noarr Traversers.
 - relating to the PolyBench/GPU-1.0 benchmark suite:
-  - [PolybenchGPU](PolybenchGPU): The Polybench/GPU with minor bug fixes (mostly relating to wrong arguments) and modified dataset sizes for convenience of measurement.
-  - [PolybenchGPU-Noarr](PolybenchGPU-Noarr): Reimplementation of the Polybench/GPU benchmark using Noarr structures and Noarr Traversers.
+  - [PolyBenchGPU](PolyBenchGPU): The PolyBench/GPU with minor bug fixes (mostly relating to wrong arguments) and modified dataset sizes for convenience of measurement.
+  - [PolyBenchGPU-Noarr](PolyBenchGPU-Noarr): Reimplementation of the PolyBench/GPU benchmark using Noarr structures and Noarr Traversers.
 
 ## Requirements
 

@@ -22,10 +22,10 @@ while read -r file; do
 	echo "Comparing $filename"
 
 	printf "\tNoarr:             "
-	"$BUILD_DIR/$filename" 2>&1 1> "$dirname/cpp"
+	"$BUILD_DIR/$filename" 2>&1 1> "$dirname/cpp" || exit 1
 
 	printf "\tBaseline:          "
-	"$POLYBENCH_C_DIR/$BUILD_DIR/$filename" 2> "$dirname/c"
+	"$POLYBENCH_C_DIR/$BUILD_DIR/$filename" 2> "$dirname/c" || exit 1
 
 	if [ "$SKIP_DIFF" -eq 1 ]; then
 		continue
@@ -60,5 +60,5 @@ while read -r file; do
 			printf \"Different output on %s \n\", \"$filename\"
 			exit 1
 		}
-	}" 1>&2
-done
+	}" 1>&2 || exit 1
+done || exit 1
