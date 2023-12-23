@@ -140,5 +140,6 @@ int main(int argc, char *argv[]) {
 			});
 	}();
 
+	std::cerr << std::fixed << std::setprecision(6);
 	std::cerr << duration.count() << std::endl;
 }

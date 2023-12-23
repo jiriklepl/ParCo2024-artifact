@@ -29,6 +29,7 @@ int main(int argc, char** argv) {
 
 	auto duration = std::chrono::duration<double>(end - start);
 
+	std::cerr << std::fixed << std::setprecision(6);
 	std::cerr << duration.count() << std::endl;
 
 	// print results

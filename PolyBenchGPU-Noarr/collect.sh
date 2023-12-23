@@ -10,7 +10,7 @@ export DATA_DIR=${DATA_DIR:-data}
 POLYBENCH_GPU_DIR="../PolyBenchGPU"
 
 if [ "$USE_SLURM" -eq 1 ]; then
-	RUN_SCRIPT="srun -A kdss -p gpu-short --exclusive -wampere01 --gres=gpu:1"
+	RUN_SCRIPT="srun -A kdss -p gpu-ffa --exclusive -wampere01 --gres=gpu:1"
 else
 	RUN_SCRIPT="$(which bash)"
 fi

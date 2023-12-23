@@ -137,5 +137,6 @@ int main(int argc, char *argv[]) {
 		noarr::serialize_data(std::cout, cov.get_ref() ^ noarr::hoist<'i'>());
 	}
 
+	std::cerr << std::fixed << std::setprecision(6);
 	std::cerr << duration.count() << std::endl;
 }

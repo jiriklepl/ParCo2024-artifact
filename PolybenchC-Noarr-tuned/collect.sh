@@ -10,7 +10,7 @@ export DATA_DIR=${DATA_DIR:-data}
 POLYBENCH_C_DIR="../PolybenchC-tuned"
 
 if [ "$USE_SLURM" -eq 1 ]; then
-	RUN_SCRIPT="srun -A kdss -p mpi-homo-short --exclusive -ww201"
+	RUN_SCRIPT="srun -A kdss -p mpi-homo-ffa --exclusive -ww201"
 else
 	RUN_SCRIPT="$(which bash)"
 fi
