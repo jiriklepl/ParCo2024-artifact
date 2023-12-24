@@ -25,6 +25,56 @@ The artifact contains the following directories:
   - [PolyBenchGPU](PolyBenchGPU): The PolyBench/GPU with minor bug fixes (mostly relating to wrong arguments) and modified dataset sizes for convenience of measurement.
   - [PolyBenchGPU-Noarr](PolyBenchGPU-Noarr): Reimplementation of the PolyBench/GPU benchmark using Noarr structures and Noarr Traversers.
 
+The artifact contains the following scripts:
+
+- [run-measurements-CPU.sh](run-measurements-CPU.sh): Script for running the measurements on CPU.
+
+  This script runs the measurements of Polybench/C and the tuned/tbb-paralleized versions in 10 repetitions with a warm-up run. The measured wall-clock times are stored in the `medium-data`, `large-data`, and `extralarge-data` directories in the respective benchmark directories (always in the ones ending with `-Noarr`). The measured wall-clock times are stored in `<algorithm>.log` files in the following format:
+
+  ```log
+  <implementation>: <wall-clock time>
+  ```
+
+  where `<implementation>` is either `Noarr` or `Baseline` and `<wall-clock time>` is the measured wall-clock time in seconds with 6 decimal places. The first line of each implementation is the warm-up run and it should be filtered out before analysis.
+
+- [run-measurements-GPU.sh](run-measurements-GPU.sh): Script for running the measurements on GPU.
+
+  This script runs the measurements of Polybench/GPU in 10 repetitions with a warm-up run. The measured wall-clock times are stored in the `data` directory in the `PolyBenchGPU-Noarr` directory. The log files are stored in the same format as in [run-measurements-CPU.sh](run-measurements-CPU.sh).
+
+- [validate-CPU.sh](validate-CPU.sh): Script for validating the implementations of the algorithms for CPU.
+
+  This script runs the implementations of the Polybench/C and the tuned/tbb-paralleized versions and compares their respective outputs with their Noarr counterparts. It outputs whether it found any mismatches in the outputs.
+
+- [validate-GPU.sh](validate-GPU.sh): Script for validating the implementation of the algorithms for GPU.
+
+  This script runs the implementations of the Polybench/GPU and compares their respective outputs with their Noarr counterparts. It outputs whether it found any mismatches in the outputs.
+
+- [parse_data.sh](parse_data.sh): Script for parsing the measured wall-clock times.
+
+  This script parses the measured wall-clock times from the given `data` directory (containing the log files in the format described above), filters out the warm-up runs, and outputs the results in the following comma-separated format (CSV) to the standard output:
+
+  ```csv
+  <name>,<implementation>,<wall-clock time>
+  ```
+
+  where `<name>` is the name of the algorithm, `<implementation>` is either `noarr` or `baseline`, and `<wall-clock time>` is the measured wall-clock time in seconds with 6 decimal places.
+
+- [generate_plots.sh](generate_plots.sh): Script for generating the plots from the measured wall-clock times using `parse_data.sh` and R scripts in the root directory.
+
+  This script generates the plots from the measured wall-clock times that are presented in the paper.
+
+- [PolybenchC-Noarr/code_compare.sh](PolybenchC-Noarr/code_compare.sh): Script for comparing the code of the original Polybench/C benchmark and the Noarr implementation.
+
+  This script compares the code of the original Polybench/C benchmark and the Noarr implementation and outputs the differences in the following comma-separated format (CSV) into the file `statistics.csv` in the `PolybenchC-Noarr` directory:
+
+  ```csv
+  <implementation>,<algorithm>,<lines>,<characters>,<tokens>,<gzip-size>
+  ```
+  
+  where `<implementation>` is either `noarr` or `baseline`, `<algorithm>` is the name of the algorithm, `<lines>` is the number of lines enclosed within SCOP regions after stripping any comments and applying clang-format, `<characters>` is then the number of characters, `<tokens>` is the number of single C/C++ tokens, and `<gzip-size>` is the preprocessed SCOP region compressed using gzip.
+
+  it also outputs files noarr.cpp and c.cpp that contain the concatenated SCOP regions of the respective implementations for inspection.
+
 ## Requirements
 
 The artifact considers the following software requirements for the experiments:

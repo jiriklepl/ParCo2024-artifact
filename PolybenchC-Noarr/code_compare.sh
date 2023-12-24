@@ -13,6 +13,10 @@ trap "rm -rf $tmpdir" EXIT
 
 printf "implementation,algorithm,lines,characters,tokens,gzip_size\n" > "statistics.csv"
 
+#reset noarr.cpp and c.cpp
+echo "" > noarr.cpp
+echo "" > c.cpp
+
 find datamining linear-algebra medley stencils -type f -name "*.cpp" | while read -r file; do
 	dir=$(dirname "$file")
     filename=$(basename "$file")
@@ -25,9 +29,10 @@ find datamining linear-algebra medley stencils -type f -name "*.cpp" | while rea
 
 	CLANG_FORMAT_FLAGS="-style={BasedOnStyle: LLVM, BreakBeforeBraces: Linux, IndentWidth: 4, ColumnLimit: 120, Language: Cpp, SpaceBeforeParens: ControlStatements, MaxEmptyLinesToKeep: 0}"
 
+
 	#extract scop
-	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$file" | gcc -fpreprocessed -dD -E - | clang-format "$CLANG_FORMAT_FLAGS" | tee noarr.cpp > "$tmpdir/noarr/scop-${filename}pp" || exit 1
-	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$polybench_file" | gcc -fpreprocessed -dD -E - | clang-format "$CLANG_FORMAT_FLAGS" | tee c.cpp > "$tmpdir/polybench/scop-${filename}pp" || exit 1
+	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$file" | gcc -fpreprocessed -dD -E - | grep -v "^#" | clang-format "$CLANG_FORMAT_FLAGS" | tee --append noarr.cpp > "$tmpdir/noarr/scop-${filename}pp" || exit 1
+	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$polybench_file" | gcc -fpreprocessed -dD -E - | grep -v "^#" | clang-format "$CLANG_FORMAT_FLAGS" | tee --append c.cpp > "$tmpdir/polybench/scop-${filename}pp" || exit 1
 
 	printf "noarr,%s,%s,%s,%s,%s\n" \
 		"$(basename $file | sed 's/\.[^.]*//')" \
