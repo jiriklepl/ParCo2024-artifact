@@ -19,12 +19,6 @@ constexpr auto j_vec =  noarr::vector<'j'>();
 constexpr auto k_vec =  noarr::vector<'k'>();
 
 struct tuning {
-	DEFINE_PROTO_STRUCT(block_i, noarr::hoist<'i'>());
-	DEFINE_PROTO_STRUCT(block_j, noarr::hoist<'j'>());
-	DEFINE_PROTO_STRUCT(block_k, noarr::hoist<'k'>());
-
-	DEFINE_PROTO_STRUCT(order, block_j ^ block_k ^ block_i);
-
 	DEFINE_PROTO_STRUCT(c_layout, j_vec ^ i_vec);
 	DEFINE_PROTO_STRUCT(a_layout, k_vec ^ i_vec);
 	DEFINE_PROTO_STRUCT(b_layout, j_vec ^ k_vec);
@@ -59,22 +53,22 @@ void init_array(num_t &alpha, num_t &beta, auto C, auto A, auto B) noexcept {
 }
 
 // computation kernel
-template<class Order = noarr::neutral_proto>
 [[gnu::flatten, gnu::noinline]]
-void kernel_gemm(num_t alpha, num_t beta, auto C, auto A, auto B, Order order = {}) noexcept {
+void kernel_gemm(num_t alpha, num_t beta, auto C, auto A, auto B) noexcept {
 	// C: i x j
 	// A: i x k
 	// B: k x j
 
 	#pragma scop
-	noarr::traverser(C)
-		.for_each([=](auto state) {
-			C[state] *= beta;
-		});
+	noarr::traverser(C, A, B)
+		.template for_dims<'i'>([=](auto inner) {
+			inner.template for_each<'j'>([=](auto state) {
+				C[state] *= beta;
+			});
 
-	noarr::traverser(C, A, B).order(order)
-		.for_each([=](auto state) {
-			C[state] += alpha * A[state] * B[state];
+			inner.for_each([=](auto state) {
+				C[state] += alpha * A[state] * B[state];
+			});
 		});
 	#pragma endscop
 }
@@ -105,7 +99,7 @@ int main(int argc, char *argv[]) {
 	auto start = std::chrono::high_resolution_clock::now();
 
 	// run kernel
-	kernel_gemm(alpha, beta, C.get_ref(), A.get_ref(), B.get_ref(), tuning.order);
+	kernel_gemm(alpha, beta, C.get_ref(), A.get_ref(), B.get_ref());
 
 	auto end = std::chrono::high_resolution_clock::now();
 
