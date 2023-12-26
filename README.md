@@ -2,6 +2,16 @@
 
 This is the replication package containing code and experimental results for the paper "Pure C++ Approach to Optimized Parallel Traversal of Regular Data Structures" submitted to the PMAM 2024 workshop.
 
+## Table of contents
+
+- [Overview](#overview) - overview of the contents of the artifact
+- [Requirements](#requirements) - software requirements for the experiments
+- [Experiment reproduction](#experiment-reproduction) - steps for reproducing the experiments
+- [Validation](#validation) - steps for validating the implementations
+- [Producing plots presented in the paper](#producing-plots-presented-in-the-paper) steps for generating the plots presented in the paper
+- [Code comparison](#code-comparison) - steps for comparing the code of the original Polybench/C benchmark and the Noarr implementation (summarization presented in the paper)
+- [Comparing transformations for tuning](#comparing-transformations-for-tuning) - steps for comparing the code changes required to perform the tuning transformations implemented in [PolybenchC-tuned](PolybenchC-tuned) on algorithms in [PolybenchC-pretune](PolybenchC-pretune) that are adjusted for the transformations
+
 ## Overview
 
 The artifact contains experimental results on various modifications of the following benchmark suits:
@@ -29,7 +39,7 @@ The artifact contains the following scripts:
 
 - [run-measurements-CPU.sh](run-measurements-CPU.sh): Script for running the measurements on CPU.
 
-  This script runs the measurements of Polybench/C and the tuned/tbb-paralleized versions in 10 repetitions with a warm-up run. The measured wall-clock times are stored in the `medium-data`, `large-data`, and `extralarge-data` directories in the respective benchmark directories (always in the ones ending with `-Noarr`). The measured wall-clock times are stored in `<algorithm>.log` files in the following format:
+  This script runs the measurements of Polybench/C and the tuned/TBB-parallelized versions in 10 repetitions with a warm-up run. The measured wall-clock times are stored in the `medium-data`, `large-data`, and `extralarge-data` directories in the respective benchmark directories (always in the ones ending with `-Noarr`). The measured wall-clock times are stored in `<algorithm>.log` files in the following format:
 
   ```log
   <implementation>: <wall-clock time>
@@ -43,7 +53,7 @@ The artifact contains the following scripts:
 
 - [validate-CPU.sh](validate-CPU.sh): Script for validating the implementations of the algorithms for CPU.
 
-  This script runs the implementations of the Polybench/C and the tuned/tbb-paralleized versions and compares their respective outputs with their Noarr counterparts. It outputs whether it found any mismatches in the outputs.
+  This script runs the implementations of the Polybench/C and the tuned/TBB-parallelized versions and compares their respective outputs with their Noarr counterparts. It outputs whether it found any mismatches in the outputs.
 
 - [validate-GPU.sh](validate-GPU.sh): Script for validating the implementation of the algorithms for GPU.
 
@@ -73,7 +83,13 @@ The artifact contains the following scripts:
   
   where `<implementation>` is either `noarr` or `baseline`, `<algorithm>` is the name of the algorithm, `<lines>` is the number of lines enclosed within SCOP regions after stripping any comments and applying clang-format, `<characters>` is then the number of characters, `<tokens>` is the number of single C/C++ tokens, and `<gzip-size>` is the preprocessed SCOP region compressed using gzip.
 
-  it also outputs files noarr.cpp and c.cpp that contain the concatenated SCOP regions of the respective implementations for inspection.
+  On the standard output, it outputs the summarized statistics (as shown in `code_overall.log` in the `PolybenchC-Noarr` directory), comparing the number of lines, characters, and tokens of the original Polybench/C benchmark and the Noarr implementation after the same preprocessing. It also outputs the total size of the preprocessed SCOP regions compressed using gzip as single files and as a tar archive.
+
+  it also outputs files `noarr.cpp` and `c.cpp` that contain the concatenated SCOP regions of the respective implementations for inspection.
+
+- [compare_transformations.sh](compare_transformations.sh): Script for comparing the code changes required to perform the tuning transformations implemented in [PolybenchC-tuned](PolybenchC-tuned) on algorithms in [PolybenchC-pretune](PolybenchC-pretune) that are adjusted for the transformations. The changes are compared against Noarr proto-structures in [PolybenchC-Noarr-tuned](PolybenchC-Noarr-tuned) that perform the same transformations on the Noarr abstraction of the algorithms.
+
+  On the standard output, it outputs the column-wise diff for the Polybench/C baseline and the list of proto-structures for the Noarr implementation for each algorithm preceded by the name of the algorithm. Each list is followed by the total number of changes or proto-structures.
 
 ## Requirements
 
@@ -94,8 +110,46 @@ The following software is required for the analysis of the results:
 
 ## Experiment reproduction
 
-TODO
+The experiments can be reproduced using the following steps:
 
-## Analysis of the results
+```bash
+# clone the repository
+git clone "https://github.com/jiriklepl/pmam2024-artifact.git"
 
-TODO
+# for the CPU experiments:
+./run-measurements-CPU.sh
+
+# for the GPU experiments:
+./run-measurements-GPU.sh
+```
+
+In our laboratory cluster, we use the Slurm workload manager. Setting the `USE_SLURM` environment variable to `1` configures the scripts to use Slurm for running the experiments in the configuration that we used for the paper. The configuration can be modified in the scripts run by the `run-measurements-CPU.sh` and `run-measurements-GPU.sh` scripts.
+
+## Validation
+
+The validation can be performed using the following steps:
+
+```bash
+# clone the repository
+git clone "https://github.com/jiriklepl/pmam2024-artifact.git"
+
+# for the CPU experiments:
+./validate-CPU.sh
+
+# for the GPU experiments:
+./validate-GPU.sh
+```
+
+This script runs the implementations of the Polybench/C and the tuned/TBB-parallelized versions as well as the PolyBench/GPU algorithms and compares their respective outputs with their Noarr counterparts. It outputs whether it found any mismatches in the outputs. Note that the validation scripts merely check whether the outputs of the implementations are the same (there is zero threshold for the difference). It provides a simple sanity check that the implementations are functionally equivalent (the baseline and the Noarr counterparts).
+
+## Producing plots presented in the paper
+
+After running the experiments, the plots presented in the paper can be generated using the `generate_plots.sh` script. It runs the `parse_data.sh` script on the measured wall-clock times and then runs the R scripts in the root directory to generate the plots. The plots are stored in the `plots` directory in the root directory.
+
+## Code comparison
+
+The code comparison can be performed by running the `PolybenchC-Noarr/code_compare.sh` script. It compares the code of the original Polybench/C benchmark and the Noarr implementation and outputs the differences into the file `statistics.csv` in the `PolybenchC-Noarr` directory and the summarized statistics to the standard output (as shown in `code_overall.log` in the `PolybenchC-Noarr` directory).
+
+## Comparing transformations for tuning
+
+The comparison of the transformations for tuning can be performed by running the `compare_transformations.sh` script. The output of the comparison is printed to the standard output (as shown in `compare_transformations.log`).

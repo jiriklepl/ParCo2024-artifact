@@ -1,0 +1,48 @@
+floyd-warshall:
+	  for (k = 0; k < _PB_N; k++)				      |	  for (K = 0; K < _PB_N; K+=8)
+								      >	  for (I = 0; I < _PB_N; I+=16)
+								      >	  for (k = K; k < K + 8 && k < _PB_N; k++)
+	      for(i = 0; i < _PB_N; i++)			      |	      for(i = I; i < I + 16 && i < _PB_N; i++)
+covariance:
+	  for (i = 0; i < _PB_M; i++)				      |	  for (I = 0; I < _PB_M; I+=8)
+	    for (j = i; j < _PB_M; j++)				      |	  for (K = 0; K < _PB_N; K+=16)
+	      for (k = 0; k < _PB_N; k++)			      |	  for (i = I; i < I + 8 && i < _PB_M; i++)
+								      >	    for (k = K; k < K + 16 && k < _PB_N; k++)
+								      >	      for (j = i; j < _PB_M; j++)
+2mm:
+	  for (i = 0; i < _PB_NI; i++)				      |	  for (I = 0; I < _PB_NI; I+=32)
+	    for (j = 0; j < _PB_NJ; j++)			      |	  for (J = 0; J < _PB_NJ; J+=2)
+								      >	  for (i = I; i < I+32 && i < _PB_NI; i++)
+								      >	    for (j = J; j < J+2 && j < _PB_NJ; j++)
+								      >	  for (J = 0; J < _PB_NL; J+=32)
+	    for (j = 0; j < _PB_NL; j++)			      |	    for (j = J; j < J + 32 && j < _PB_NL; j++)
+gemm:
+	  for (i = 0; i < _PB_NI; i++)				      |	  for (I = 0; I < _PB_NI; I+=16)
+	    for (k = 0; k < _PB_NK; k++)			      |	  for (K = 0; K < _PB_NK; K+=2)
+								      >	  for (i = I; i < I + 16 && i < _PB_NI; i++)
+								      >	    for (k = K; k < K + 2 && k < _PB_NK; k++)
+Changes in Polybench/C: 19
+floyd-warshall:
+		DEFINE_PROTO_STRUCT(block_i, noarr::strip_mine_dynamic<'i', 'I', 'i', 's'>(16));
+		DEFINE_PROTO_STRUCT(block_k, noarr::strip_mine_dynamic<'k', 'K', 'k', 'u'>(8));
+		DEFINE_PROTO_STRUCT(loop_order, noarr::hoist<'j'>() ^ noarr::hoist<'i'>() ^ noarr::hoist<'k'>());
+		DEFINE_PROTO_STRUCT(order, loop_order ^ block_j ^ block_i ^ block_k);
+covariance:
+		DEFINE_PROTO_STRUCT(block_i, noarr::strip_mine_dynamic<'i', 'I', 'i', 's'>(8));
+		DEFINE_PROTO_STRUCT(block_k, noarr::strip_mine_dynamic<'k', 'K', 'k', 'u'>(16));
+		DEFINE_PROTO_STRUCT(loop_order, noarr::hoist<'j'>() ^ noarr::hoist<'k'>() ^ noarr::hoist<'i'>());
+		DEFINE_PROTO_STRUCT(order, loop_order ^ block_k ^ block_i);
+2mm:
+		DEFINE_PROTO_STRUCT(block_i1, noarr::strip_mine_dynamic<'i', 'I', 'i', 's'>(32));
+		DEFINE_PROTO_STRUCT(block_j1, noarr::strip_mine_dynamic<'j', 'J', 'j', 't'>(2));
+		DEFINE_PROTO_STRUCT(block_l2, noarr::strip_mine_dynamic<'l', 'L', 'l', 'u'>(32));
+		DEFINE_PROTO_STRUCT(loop_order1, noarr::hoist<'j'>() ^ noarr::hoist<'i'>());
+		DEFINE_PROTO_STRUCT(loop_order2, noarr::hoist<'l'>() ^ noarr::hoist<'i'>());
+		DEFINE_PROTO_STRUCT(order1, loop_order1 ^ block_j1 ^ block_i1);
+		DEFINE_PROTO_STRUCT(order2, loop_order2 ^ block_l2 ^ block_i2);
+gemm:
+		DEFINE_PROTO_STRUCT(block_i, noarr::strip_mine_dynamic<'i', 'I', 'i', 's'>(16));
+		DEFINE_PROTO_STRUCT(block_k, noarr::strip_mine_dynamic<'k', 'K', 'k', 'u'>(2));
+		DEFINE_PROTO_STRUCT(loop_order, noarr::hoist<'j'>() ^ noarr::hoist<'k'>() ^ noarr::hoist<'i'>());
+		DEFINE_PROTO_STRUCT(order, loop_order ^ block_j ^ block_k ^ block_i);
+Changes in Noarr: 19
