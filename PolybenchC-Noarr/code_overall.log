@@ -1,0 +1,26 @@
+Comparing noarr and polybench using wc...
+	NOARR LINES: 503
+	POLYBENCH LINES: 452
+	NOARR/POLYBENCH: 1.11283
+
+	NOARR CHARS: 23603
+	POLYBENCH CHARS: 14424
+	NOARR/POLYBENCH: 1.63637
+
+	NOARR AVG LINE LENGTH: 46.9245
+	POLYBENCH AVG LINE LENGTH: 31.9115
+	NOARR/POLYBENCH: 1.47046
+
+Comparing noarr and polybench using C++ tokenization...
+	NOARR TOKENS: 8124
+	POLYBENCH TOKENS: 6157
+	NOARR/POLYBENCH: 1.31947
+
+Comparing noarr and polybench using gzip on single kernels
+	NOARR SIZE: 8487
+	POLYBENCH SIZE: 6011
+	NOARR/POLYBENCH: 1.41191
+Comparing noarr and polybench using gzipped tar archive...
+	NOARR ARCHIVE SIZE: 4439
+	POLYBENCH ARCHIVE SIZE: 3499
+	NOARR/POLYBENCH: 1.26865

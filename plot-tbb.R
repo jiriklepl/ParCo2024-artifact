@@ -47,7 +47,7 @@ plot <-
     xlab(x_label) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
     ylab("speedup") +
-    ylim(.95,1.13) +
+    ylim(.95,1.15) +
     # theme(legend.position = "bottom")
     theme(legend.position = "none")
 
