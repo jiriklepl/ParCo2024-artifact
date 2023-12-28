@@ -34,6 +34,14 @@ find datamining linear-algebra medley stencils -type f -name "*.cpp" | while rea
 	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$file" | gcc -fpreprocessed -dD -E - | grep -v "^#" | clang-format "$CLANG_FORMAT_FLAGS" | tee --append noarr.cpp > "$tmpdir/noarr/scop-${filename}pp" || exit 1
 	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$polybench_file" | gcc -fpreprocessed -dD -E - | grep -v "^#" | clang-format "$CLANG_FORMAT_FLAGS" | tee --append c.cpp > "$tmpdir/polybench/scop-${filename}pp" || exit 1
 
+	# set the modification time to 1 January 2000
+	touch -d "00:00:00 1 January 2000" "$tmpdir/noarr/scop-${filename}pp"
+	touch -d "00:00:00 1 January 2000" "$tmpdir/polybench/scop-${filename}pp"
+
+	# set the permissions to read-only
+	chmod 644 "$tmpdir/noarr/scop-${filename}pp"
+	chmod 644 "$tmpdir/polybench/scop-${filename}pp"
+
 	printf "noarr,%s,%s,%s,%s,%s\n" \
 		"$(basename $file | sed 's/\.[^.]*//')" \
 		"$(wc -l < "$tmpdir/noarr/scop-${filename}pp")" \
@@ -120,8 +128,8 @@ echo "Comparing noarr and polybench using gzip on single kernels"
 
 echo "Comparing noarr and polybench using gzipped tar archive..."
 
-	tar -czf "$tmpdir/noarr.tar.gz" "$tmpdir/noarr" 2>/dev/null || exit 1
-	tar -czf "$tmpdir/polybench.tar.gz" "$tmpdir/polybench" 2>/dev/null || exit 1
+	( cd "$tmpdir" && find noarr -type f -exec tar -cf - --owner=0 --group=0 {} + | gzip -n > noarr.tar.gz ) || exit 1
+	( cd "$tmpdir" && find polybench -type f -exec tar -cf - --owner=0 --group=0 {} + | gzip -n > polybench.tar.gz ) || exit 1
 
 	NOARR_ARCHIVE_SIZE=$(du -bs "$tmpdir/noarr.tar.gz" | awk '{print $1}')
 	POLYBENCH_ARCHIVE_SIZE=$(du -bs "$tmpdir/polybench.tar.gz" | awk '{print $1}')

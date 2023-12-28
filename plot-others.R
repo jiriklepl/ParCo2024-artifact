@@ -6,7 +6,7 @@ library("stringr")
 
 args = commandArgs(trailingOnly=TRUE)
 
-if (length(args) != 1 && length(args) != 3 && length(args) != 4)
+if (length(args) != 1 && length(args) != 3 && length(args) != 4 && length(args) != 5)
     stop("Usage: plot.R FILE")
 
 if (length(args) >= 3) {
@@ -21,6 +21,12 @@ if (length(args) >= 4) {
     x_label <- args[4]
 } else {
     x_label <- "algorithm"
+}
+
+if (length(args) >= 5 && args[5] == "no") {
+    y_lim <- FALSE
+} else {
+    y_lim <- TRUE
 }
 
 file <- args[1]
@@ -48,11 +54,11 @@ plot <-
     xlab(x_label) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
     ylab("speedup") +
-    ylim(.95,1.15) +
     # theme(legend.position = "bottom")
     theme(legend.position = "none")
 
-plot <- plot
+if (y_lim)
+    plot <- plot + ylim(.95, 1.15)
 
 if (!dir.exists("plots"))
     dir.create("plots/", recursive = TRUE)
