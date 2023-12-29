@@ -9,6 +9,7 @@ This is the replication package containing code and experimental results for the
 - [Experiment reproduction](#experiment-reproduction) - steps for reproducing the experiments
 - [Validation](#validation) - steps for validating the implementations
 - [Producing plots presented in the paper](#producing-plots-presented-in-the-paper) steps for generating the plots presented in the paper along with the corresponding CSV files from the measured wall-clock times
+- [Running examples](#running-examples) - steps for running the examples of Noarr code presented in the paper, mapping the code listings to the corresponding files
 - [Code comparison](#code-comparison) - steps for comparing the code of the original Polybench/C benchmark and the Noarr implementation (summarization presented in the paper)
 - [Comparing transformations for tuning](#comparing-transformations-for-tuning) - steps for comparing the code changes required to perform the tuning transformations implemented in [PolybenchC-tuned](PolybenchC-tuned) on algorithms in [PolybenchC-pretune](PolybenchC-pretune) that are adjusted for the transformations
 - [More visualizations](#more-visualizations) - steps for generating additional visualizations of the measured wall-clock times and the code comparison along with the corresponding CSV files
