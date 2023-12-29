@@ -3,14 +3,14 @@
 export BUILD_DIR=${BUILD_DIR:-build}
 export DATASET_SIZE=${DATASET_SIZE:-EXTRALARGE}
 export DATA_TYPE=${DATA_TYPE:-FLOAT}
-export NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-main}
+export NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-PMAM2024}
 export USE_SLURM=${USE_SLURM:-0}
 export DATA_DIR=${DATA_DIR:-data}
 
 POLYBENCH_C_DIR="../PolybenchC-4.2.1"
 
 if [ "$USE_SLURM" -eq 1 ]; then
-	RUN_SCRIPT="srun -A kdss -p mpi-homo-short --exclusive -ww201 -t 2:00:00"
+	RUN_SCRIPT="srun -A kdss -p mpi-homo-short --exclusive -ww201 -t 2:00:00 --mem=0"
 else
 	RUN_SCRIPT="$(which bash)"
 fi
