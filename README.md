@@ -8,9 +8,10 @@ This is the replication package containing code and experimental results for the
 - [Requirements](#requirements) - software requirements for the experiments
 - [Experiment reproduction](#experiment-reproduction) - steps for reproducing the experiments
 - [Validation](#validation) - steps for validating the implementations
-- [Producing plots presented in the paper](#producing-plots-presented-in-the-paper) steps for generating the plots presented in the paper
+- [Producing plots presented in the paper](#producing-plots-presented-in-the-paper) steps for generating the plots presented in the paper along with the corresponding CSV files from the measured wall-clock times
 - [Code comparison](#code-comparison) - steps for comparing the code of the original Polybench/C benchmark and the Noarr implementation (summarization presented in the paper)
 - [Comparing transformations for tuning](#comparing-transformations-for-tuning) - steps for comparing the code changes required to perform the tuning transformations implemented in [PolybenchC-tuned](PolybenchC-tuned) on algorithms in [PolybenchC-pretune](PolybenchC-pretune) that are adjusted for the transformations
+- [More visualizations](#more-visualizations) - steps for generating additional visualizations of the measured wall-clock times and the code comparison along with the corresponding CSV files
 - [Noarr Traverser-transformations](#noarr-traverser-transformations) - list of transformations provided by Noarr Traversers
 
 ## Overview
@@ -35,6 +36,7 @@ The artifact contains the following directories:
 - relating to the PolyBench/GPU-1.0 benchmark suite:
   - [PolyBenchGPU](PolyBenchGPU): The PolyBench/GPU with minor bug fixes (mostly relating to wrong arguments) and modified dataset sizes for convenience of measurement.
   - [PolyBenchGPU-Noarr](PolyBenchGPU-Noarr): Reimplementation of the PolyBench/GPU benchmark using Noarr structures and Noarr Traversers.
+  - [running-examples](running-examples): Contains the examples of Noarr code presented in the paper.
 
 The artifact contains the following scripts:
 
@@ -92,6 +94,14 @@ The artifact contains the following scripts:
 
   On the standard output, it outputs the column-wise diff for the Polybench/C baseline and the list of proto-structures for the Noarr implementation for each algorithm preceded by the name of the algorithm. Each list is followed by the total number of changes or proto-structures.
 
+- [more_visualizations.sh](more_visualizations.sh): Script for generating additional visualizations of the measured wall-clock times and the code comparison.
+
+  This script generates additional visualizations of the measured wall-clock times and the code comparison that are referenced in the paper.
+
+- [run-examples.sh](run-examples.sh): Script for running the examples of Noarr code presented in the paper.
+
+  This script runs the examples of Noarr code presented in the paper on freshly generated input data and performs a simple validation of the outputs. The purpose of this script is to demonstrate that the presented Noarr code is functional and can be used in practice. The script requires Python 3.6 or newer on top of the requirements for the experiments.
+
 ## Requirements
 
 The artifact considers the following software requirements for the experiments:
@@ -108,6 +118,14 @@ The following software is required for the analysis of the results:
 - gcc
 - clang, clang-format
 - standard tools: namely wc, gzip, tar
+
+The following software is required for the running examples presented in the paper:
+
+- C++ compiler with support for C++20 - preferably GCC 12 or newer
+- Intel TBB 2021.3 or newer
+- NVCC 12 or newer
+- CMake 3.10 or newer
+- Python 3.6 or newer
 
 ## Experiment reproduction
 
@@ -147,6 +165,33 @@ This script runs the implementations of the Polybench/C and the tuned/TBB-parall
 
 After running the experiments, the plots presented in the paper can be generated using the `generate_plots.sh` script. It runs the `parse_data.sh` script on the measured wall-clock times and then runs the R scripts in the root directory to generate the plots. The plots are stored in the `plots` directory in the root directory.
 
+This also generates the corresponding CSV files with the measured wall-clock times in the root directory.
+
+## Running examples
+
+The running examples presented in the paper can be run using the `run-examples.sh` script that also generates their input data and performs a simple validation of the outputs. The script requires Python 3.6 or newer on top of the requirements for the experiments.
+
+### Listings
+
+Each code position beginning a code snippet presented in the paper as a listing is marked with a comment `// PAPER: <section.subsection number> - <capitalized ordinal> listing``
+
+- Section 3.1
+
+  - First, second and third listing: [running-examples/matmul.cpp](running-examples/matmul.cpp)
+  - Fourth listing: [running-examples/matmul_factored.cpp](running-examples/matmul_factored.cpp)
+
+- Section 4.0
+
+  - First and second listing: [running-examples/histogram.cpp](running-examples/histogram.cpp)
+
+- Section 4.1
+
+  - First and second listing: [running-examples/histogram.cu](running-examples/histogram.cu)
+
+- Section 4.2
+
+  - First, second, third and fourth listing: [running-examples/histogram.cu](running-examples/histogram.cu)
+
 ## Code comparison
 
 The code comparison can be performed by running the `PolybenchC-Noarr/code_compare.sh` script. It compares the code of the original Polybench/C benchmark and the Noarr implementation and outputs the differences into the file `statistics.csv` in the `PolybenchC-Noarr` directory and the summarized statistics to the standard output (as shown in `code_overall.log` in the `PolybenchC-Noarr` directory).
@@ -154,6 +199,12 @@ The code comparison can be performed by running the `PolybenchC-Noarr/code_compa
 ## Comparing transformations for tuning
 
 The comparison of the transformations for tuning can be performed by running the `compare_transformations.sh` script. The output of the comparison is printed to the standard output (as shown in `compare_transformations.log`).
+
+## More visualizations
+
+Additional visualizations of the measured wall-clock times and the code comparison can be generated by running the `more_visualizations.sh` script. The plots are stored in the `plots` directory in the root directory.
+
+This also generates the corresponding CSV files with the measured wall-clock times in the root directory, the `noarr.cpp` and `c.cpp` files that contain the concatenated SCOP regions of the `PolybenchC-Noarr` directory for inspection, the `statistics.csv` file in the `PolybenchC-Noarr` directory with the code comparison of the original Polybench/C benchmark and the Noarr implementation, and the `code_overall.log` file in the `PolybenchC-Noarr` directory with the summarized statistics of the code comparison that are referenced in the paper.
 
 ## Noarr Traverser transformations
 
