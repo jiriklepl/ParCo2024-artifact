@@ -17,7 +17,7 @@ printf "implementation,algorithm,lines,characters,tokens,gzip_size\n" > "statist
 echo "" > noarr.cpp
 echo "" > c.cpp
 
-find datamining linear-algebra medley stencils -type f -name "*.cpp" | while read -r file; do
+find datamining linear-algebra medley stencils -type f -name "*.cpp" | sort | while read -r file; do
 	dir=$(dirname "$file")
     filename=$(basename "$file")
 
@@ -128,8 +128,8 @@ echo "Comparing noarr and polybench using gzip on single kernels"
 
 echo "Comparing noarr and polybench using gzipped tar archive..."
 
-	( cd "$tmpdir" && find noarr -type f -exec tar -cf - --owner=0 --group=0 {} + | gzip -n > noarr.tar.gz ) || exit 1
-	( cd "$tmpdir" && find polybench -type f -exec tar -cf - --owner=0 --group=0 {} + | gzip -n > polybench.tar.gz ) || exit 1
+	( cd "$tmpdir" && find noarr -type f -printf "%p\0" | sort -z | xargs -0 tar -cf - --numeric-owner --owner=0 --group=0 | gzip -cn > noarr.tar.gz ) || exit 1
+	( cd "$tmpdir" && find polybench -type f -printf "%p\0" | sort -z | xargs -0 tar -cf - --numeric-owner --owner=0 --group=0 | gzip -cn > polybench.tar.gz ) || exit 1
 
 	NOARR_ARCHIVE_SIZE=$(du -bs "$tmpdir/noarr.tar.gz" | awk '{print $1}')
 	POLYBENCH_ARCHIVE_SIZE=$(du -bs "$tmpdir/polybench.tar.gz" | awk '{print $1}')

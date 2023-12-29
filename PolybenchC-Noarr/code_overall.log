@@ -21,6 +21,6 @@ Comparing noarr and polybench using gzip on single kernels
 	POLYBENCH SIZE: 6011
 	NOARR/POLYBENCH: 1.41191
 Comparing noarr and polybench using gzipped tar archive...
-	NOARR ARCHIVE SIZE: 4379
-	POLYBENCH ARCHIVE SIZE: 3406
-	NOARR/POLYBENCH: 1.28567
+	NOARR ARCHIVE SIZE: 4434
+	POLYBENCH ARCHIVE SIZE: 3446
+	NOARR/POLYBENCH: 1.28671
