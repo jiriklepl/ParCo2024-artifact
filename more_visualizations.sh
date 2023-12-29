@@ -21,8 +21,6 @@ cd "$tmpdir" || exit 1
 "$base/parse_data.sh" "$base/PolybenchC-Noarr-tbb/medium-data" > medium-polybench-c-tbb.csv
 "$base/parse_data.sh" "$base/PolybenchC-Noarr-tuned/medium-data" > medium-polybench-c-tuned.csv
 
-"$base/parse_data.sh" "$base/PolyBenchGPU-Noarr/data" > polybench-gpu.csv
-
 ( cd "$base/PolybenchC-Noarr" && ./code_compare.sh > code_overall.log )
 
 "$base/plot-tbb.R" extralarge-polybench-c-tbb.csv 1.3 2.5 TBB no
@@ -36,8 +34,6 @@ cd "$tmpdir" || exit 1
 "$base/plot-tbb.R" medium-polybench-c-tbb.csv 1.3 2.5 TBB no
 "$base/plot-polybench.R" medium-polybench-c.csv 4 2.5
 "$base/plot-others.R" medium-polybench-c-tuned.csv 1.3 2.5 serial no
-
-"$base/plot-others.R" polybench-gpu.csv 1.3 2.5 GPU no
 
 "$base/plot-statistics.R" "$base/PolybenchC-Noarr/statistics.csv"
 
