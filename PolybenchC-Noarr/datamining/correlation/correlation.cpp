@@ -92,7 +92,7 @@ void kernel_correlation(num_t float_n, auto data, auto corr, auto mean, auto std
 			auto state = inner.state();
 			auto i = noarr::get_index<'i'>(state);
 
-			corr[state & noarr::idx<'j'>(i)] = 1; // TODO: corr_diag
+			corr[state & noarr::idx<'j'>(i)] = 1;
 
 			inner
 				.order(noarr::shift<'j'>(i + 1))

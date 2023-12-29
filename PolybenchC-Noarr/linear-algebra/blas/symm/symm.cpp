@@ -90,7 +90,7 @@ void kernel_symm(num_t alpha, num_t beta, auto C, auto A, auto B, Order order = 
 				})
 				();
 
-			C[state] = beta * C[state] + alpha * B[state] * A[state & noarr::idx<'k'>(noarr::get_index<'i'>(state))] + alpha * temp; // TODO: A_diag
+			C[state] = beta * C[state] + alpha * B[state] * A[state & noarr::idx<'k'>(noarr::get_index<'i'>(state))] + alpha * temp;
 		})
 		.order(noarr::hoist<'j'>())
 		.order(noarr::hoist<'i'>())

@@ -87,7 +87,7 @@ void kernel_adi(auto steps, auto u, auto v, auto p, auto q) noexcept {
 					           (a * p[noarr::neighbor<'j'>(state, -1)] + b);
 				});
 
-				v[state & noarr::idx<'j'>((traverser.top_struct() | noarr::get_length<'j'>()) - 1)] = (num_t)1.0; // TODO: think about this
+				v[state & noarr::idx<'j'>((traverser.top_struct() | noarr::get_length<'j'>()) - 1)] = (num_t)1.0;
 
 				inner
 					.order(noarr::reverse<'j'>())
