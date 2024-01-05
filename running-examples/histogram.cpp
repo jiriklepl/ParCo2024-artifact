@@ -30,8 +30,7 @@ if constexpr (HISTO_IMPL == histo_loop) {
 	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	for(std::size_t i = 0; i < size; ++i) {
-		value_t value = in[noarr::idx<'i'>(i)];
-		out[noarr::idx<'v'>(value)] += 1;
+		out[noarr::idx<'v'>(in[noarr::idx<'i'>(i)])] += 1;
 	}
 }
 
@@ -40,8 +39,7 @@ else if constexpr (HISTO_IMPL == histo_range) {
 	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	for(auto elem : noarr::traverser(in)) {
-		value_t value = in[elem.state()];
-		out[noarr::idx<'v'>(value)] += 1;
+		out[noarr::idx<'v'>(in[elem.state()])] += 1;
 	}
 }
 
@@ -50,9 +48,8 @@ else if constexpr (HISTO_IMPL == histo_foreach) {
 	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	// PAPER 4.0 - First listing
-	noarr::traverser(in).for_each([in, out](auto state) {
-		value_t value = in[state];
-		out[noarr::idx<'v'>(value)] += 1;
+	noarr::traverser(in).for_each([=](auto state) {
+		out[noarr::idx<'v'>(in[state])] += 1;
 	});
 }
 
@@ -73,8 +70,7 @@ else if constexpr (HISTO_IMPL == histo_tbbreduce) {
 
 		// Accumulation function, Out += InElem
 		[in](auto in_state, auto &out_left) {
-			value_t value = in[in_state];
-			out_left[noarr::idx<'v'>(value)] += 1;
+			out_left[noarr::idx<'v'>(in[in_state])] += 1;
 		},
 
 		// Joining function, OutElem += OutElem

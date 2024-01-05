@@ -20,7 +20,7 @@ __global__ void histogram(InT in_trav, In in, ShmS shm_s, Out out) {
 	// Let us split each copy further into "subsets", where each subset is owned by exactly one thread.
 	// Note that `shm_bag` uses `threadIdx%NUM_COPIES` as the index of copy.
 	// We can use the remaining bits, `threadIdx/NUM_COPIES`, as the index of subset within copy.
-	std::size_t my_copy_idx = shm_s.current_stripe_index();
+	[[maybe_unused]] std::size_t my_copy_idx = shm_s.current_stripe_index();
 	auto subset = noarr::cuda_step(shm_s.current_stripe_cg());
 
 	// Zero out shared memory. In this particular case, the access pattern happens
@@ -47,8 +47,7 @@ __global__ void histogram(InT in_trav, In in, ShmS shm_s, Out out) {
 			std::size_t sum = 0;
 
 			for(std::size_t i = 0; i < shm_s.num_stripes(); i++) {
-				auto shm_state = state.template with<noarr::cuda_stripe_index>((i + my_copy_idx) % shm_s.num_stripes());
-				sum += shm_bag[shm_state];
+				sum += shm_bag[state.template with<noarr::cuda_stripe_index>(i)];
 			}
 
 			atomicAdd(&out[state], sum);
