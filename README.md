@@ -1,6 +1,6 @@
 # Artifact Submission: Pure C++ Approach to Optimized Parallel Traversal of Regular Data Structures
 
-This is the replication package containing code and experimental results for the paper "Pure C++ Approach to Optimized Parallel Traversal of Regular Data Structures" submitted to the PMAM 2024 workshop.
+This is the replication package containing code and experimental results for the paper "Pure C++ Approach to Optimized Parallel Traversal of Regular Data Structures" submitted to the [PMAM 2024 workshop](https://www.cs.otago.ac.nz/pmam2024/) at the [PPoPP 2024 conference](https://conf.researchr.org/home/PPoPP-2024).
 
 ## Table of contents
 
@@ -9,7 +9,6 @@ This is the replication package containing code and experimental results for the
 - [Experiment reproduction](#experiment-reproduction) - steps for reproducing the experiments
 - [Validation](#validation) - steps for validating the implementations
 - [Producing plots presented in the paper](#producing-plots-presented-in-the-paper) steps for generating the plots presented in the paper along with the corresponding CSV files from the measured wall-clock times
-- [Running examples](#running-examples) - steps for running the examples of Noarr code presented in the paper, mapping the code listings to the corresponding files
 - [Code comparison](#code-comparison) - steps for comparing the code of the original Polybench/C benchmark and the Noarr implementation (summarization presented in the paper)
 - [Comparing transformations for tuning](#comparing-transformations-for-tuning) - steps for comparing the code changes required to perform the tuning transformations implemented in [PolybenchC-tuned](PolybenchC-tuned) on algorithms in [PolybenchC-pretune](PolybenchC-pretune) that are adjusted for the transformations
 - [More visualizations](#more-visualizations) - steps for generating additional visualizations of the measured wall-clock times and the code comparison along with the corresponding CSV files
@@ -19,13 +18,15 @@ This is the replication package containing code and experimental results for the
 
 The artifact contains experimental results on various modifications of the following benchmark suits:
 
-- Polybench/C-4.2.1 - The original Polybench/C benchmark suite can be found at [https://sourceforge.net/projects/polybench/files/](https://sourceforge.net/projects/polybench/files/).
-- PolyBench/GPU-1.0 - The original PolyBench/GPU benchmark suite can be found at [https://github.com/sgrauerg/polybenchGpu](https://github.com/sgrauerg/polybenchGpu).
+- [Polybench/C-4.2.1](https://sourceforge.net/projects/polybench/files/)
+- [PolyBench/GPU-1.0](https://github.com/sgrauerg/polybenchGpu)
 
 The artifact uses the implementation of Noarr from [https://github.com/jiriklepl/noarr-structures](https://github.com/jiriklepl/noarr-structures), which is continuously tested on various platforms using GitHub Actions. It supports  the following compilers: GCC (10, 11, 12, 13), Clang (14, 15), NVCC (12), and MSVC (19)
 
-The artifact contains the following directories:
+The artifact structure:
 
+- [running-examples](running-examples): Contains the examples of Noarr code presented in the paper.
+- [plots](plots): Generated plots used in paper figures.
 - relating to the Polybench/C-4.2.1 benchmark suite:
   - [PolybenchC-4.2.1](PolybenchC-4.2.1): The Polybench/C benchmark with custom build script for convenience and `flatten` pragmas for consistency with Noarr.
   - [PolybenchC-Noarr](PolybenchC-Noarr): Reimplementation of the Polybench/C benchmark using Noarr structures and Noarr Traversers.
@@ -37,7 +38,8 @@ The artifact contains the following directories:
 - relating to the PolyBench/GPU-1.0 benchmark suite:
   - [PolyBenchGPU](PolyBenchGPU): The PolyBench/GPU with minor bug fixes (mostly relating to wrong arguments) and modified dataset sizes for convenience of measurement.
   - [PolyBenchGPU-Noarr](PolyBenchGPU-Noarr): Reimplementation of the PolyBench/GPU benchmark using Noarr structures and Noarr Traversers.
-  - [running-examples](running-examples): Contains the examples of Noarr code presented in the paper.
+- [transformations.md](transformations.md): Detailed list of transformations provided by Noarr Traversers.
+
 
 The artifact contains the following scripts:
 
@@ -168,32 +170,9 @@ After running the experiments, the plots presented in the paper can be generated
 
 This also generates the corresponding CSV files with the measured wall-clock times in the root directory.
 
-## Running examples
+## Comparing Noarr code with regular C/C++ code
 
-The running examples presented in the paper can be run using the `run-examples.sh` script that also generates their input data and performs a simple validation of the outputs. The script requires Python 3.6 or newer on top of the requirements for the experiments.
-
-### Listings
-
-Each code position beginning a code snippet presented in the paper as a listing is marked with a comment `// PAPER: <section.subsection number> - <capitalized ordinal> listing``
-
-- Section 3.1
-
-  - First, second and third listing: [running-examples/matmul.cpp](running-examples/matmul.cpp)
-  - Fourth listing: [running-examples/matmul_factored.cpp](running-examples/matmul_factored.cpp)
-
-- Section 4.0
-
-  - First and second listing: [running-examples/histogram.cpp](running-examples/histogram.cpp)
-
-- Section 4.1
-
-  - First and second listing: [running-examples/histogram.cu](running-examples/histogram.cu)
-
-- Section 4.2
-
-  - First, second, third and fourth listing: [running-examples/histogram.cu](running-examples/histogram.cu)
-
-## Code comparison
+These experiments are designed to provide some insights, into where the Noarr approach is more verbose and where it saves some coding effort.
 
 The code comparison can be performed by running the `PolybenchC-Noarr/code_compare.sh` script. It compares the code of the original Polybench/C benchmark and the Noarr implementation and outputs the differences into the file `statistics.csv` in the `PolybenchC-Noarr` directory and the summarized statistics to the standard output (as shown in `code_overall.log` in the `PolybenchC-Noarr` directory).
 
@@ -207,36 +186,3 @@ Additional visualizations of the measured wall-clock times and the code comparis
 
 This also generates the corresponding CSV files with the measured wall-clock times in the root directory, the `noarr.cpp` and `c.cpp` files that contain the concatenated SCOP regions of the `PolybenchC-Noarr` directory for inspection, the `statistics.csv` file in the `PolybenchC-Noarr` directory with the code comparison of the original Polybench/C benchmark and the Noarr implementation, and the `code_overall.log` file in the `PolybenchC-Noarr` directory with the summarized statistics of the code comparison that are referenced in the paper.
 
-## Noarr Traverser transformations
-
-The traversals performed by Noarr Traversers can be transformed by applying the `.order()` method with an argument that specifies the desired transformation, these transformations include: (the list is non-exhaustive; also, the Noarr library defines many shortcuts for various transformation combinations)
-
-- `into_blocks<OldDim, NewMajorDim, NewMinorDim>(block_size)` - Separates the specified dimension into blocks according to the given block size; each index from the original index space is then uniquely associated with the cartesian product of a major index(block index) and a minor index. The dimension does not have to be contiguous. However, the transformation always assumes the dimension length is divisible by the block size; otherwise, some of the data are associated with indices outside the accessible index space and thus they cannot be traversed.
-
-  For the cases where the original dimension length is not guaranteed to be divisible by the block size, the Noarr library defines:
-
-  - `into_blocks_static<OldDim, NewIsBorderDim, NewMajorDim, NewMinorDim>(block_size)` - The `NewIsBorderDim` is the top-most of the three newly created dimensions, and the other two are dependent on its index. It has a length of `2`; and, if it is given the index `0`, the rest of `into_blocks_static` behaves just like `into_blocks`; if it is, instead, given the index `1`, then the length of the major dimension is set to `1` (there is only one block), and the length of the minor dimension is set to the division remainder (modulo) after dividing the original dimension length by the block size.
-
-  - `into_blocks_dynamic<OldDim, NewMajorDim, NewMinorDim, NewDimIsPresent>(block_size)` - The specified dimension is divided into blocks according to the given block size using round-up division. This means that each index within the original index space is uniquely associated with some major index (block index) and some minor index and it is always accessible within the new index space (contrasting the simple `into_blocks`). Without the *is-present* dimension, this would allow for accessing items outside the original index space - for such items (we can recognize them by `oldLength <= majorIdx * block_size + minorIdx` being `true`), the is-present dimension length is `0`; otherwise, it is `1`. This behavior of the is-present dimension ensures that traversing over the legal items behaves as expected, while the traversal over the items outside the original index space traverses `0` items.
-
-    This essentially emulates a pattern commonly found in algorithms for massively parallelized platforms (such as CUDA), where we map each thread to an element of an array (we assume an array for simplicity - but we can generalize) and then each thread starts its work by checking whether its corresponding index falls within the bounds of the array. For this case, we might use `into_blocks_dynamic<ArrayDim, GridDim, BlockDim, DimIsPresent>` and then use `auto ct = cuda_threads<GridDim, BlockDim>(transformed_traverser)` to bind the appropriate dimensions, the traversal performed by the `ct.inner()` inner traverser then transparently checks the array bound as if we used the `if (x >= array_length) return;` pattern manually.
-
-- `merge_blocks<OldMajor, OldMinor, NewDim>()` - A transformation that performs the transformation inverse to `into_blocks`. It merges the specified major and minor dimensions into a single dimension, effectively applying loop fusion.
-
-- `fix<Dim>(value)`, `fix<Dims...>(values...)`, `fix(state)` - Limits the traversal to a certain row, column, block, etc.
-
-- `bcast<Dim>(length)` - Creates a placeholder dimension that consumes the corresponding input index. The resulting memory access is not affected by the choice of any particular index supplied to the dimension.
-
-  - Typically used as a placeholder when binding dimensions via `cuda_threads`; or when adding blocking to some implementation configurations, we can use `bcast` in other configurations to preserve the same API.
-
-- `rename<OldDim, NewDim>()` - Renames a dimension of a structure. This is especially useful when we want to unify or disconnect dimensions of two or more data structures figuring in a certain traversal. Or, we want to access the same data structure in two different ways.
-
-- `shift<Dim>(offset)` - Makes the index provided for the specified dimension mapped to another one that is shifted by the given offset; also shortens the length of the traversal through the dimension accordingly so all shifted indices match the original range.
-
-- `slice<Dim>(offset, length)` - This is a generalization of `shift` that also explicitly restricts the length of the specified dimension. This is useful whenever we require a traversal through a contiguous subset of indices.
-
-  - `span<Dim>(offset_start, offset_end)` - A similar transformation to `slice` that specifies the end offset instead of the length.
-
-- `hoist<Dim>()` - Moves the specified dimension to the outermost position in the abstracted loop nest. This is equivalent to a loop interchange.
-
-Note that the listed transformations can be applied to memory layouts and traversals alike. The transformations are programmed in such a way they accept and propagate type-embedded literal arguments to enable further optimizations. It is also possible to provide more, user-defined, transformations as needed.
