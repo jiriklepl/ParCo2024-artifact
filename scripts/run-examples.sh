@@ -2,6 +2,10 @@
 
 # Run the examples
 
+if [ "$(basename "$(pwd)")" = "scripts" ]; then
+    cd ..
+fi
+
 cd running-examples
 
 tempdir=$(mktemp -d)

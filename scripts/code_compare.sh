@@ -11,6 +11,12 @@ mkdir -p "$tmpdir/polybench" || exit 1
 
 trap "rm -rf $tmpdir" EXIT
 
+if [ "$(basename "$(pwd)")" = "scripts" ]; then
+    cd ..
+fi
+
+cd "PolybenchC-Noarr" || exit 1
+
 printf "implementation,algorithm,lines,characters,tokens,gzip_size\n" > "statistics.csv"
 
 #reset noarr.cpp and c.cpp
@@ -43,7 +49,7 @@ find datamining linear-algebra medley stencils -type f -name "*.cpp" | sort | wh
 	chmod 644 "$tmpdir/polybench/scop-${filename}pp"
 
 	printf "noarr,%s,%s,%s,%s,%s\n" \
-		"$(basename $file | sed 's/\.[^.]*//')" \
+		"$(basename "$file" | sed 's/\.[^.]*//')" \
 		"$(wc -l < "$tmpdir/noarr/scop-${filename}pp")" \
 		"$(wc -m < "$tmpdir/noarr/scop-${filename}pp")" \
 		"$(clang -fsyntax-only -Xclang -dump-tokens "$tmpdir/noarr/scop-${filename}pp" 2>&1 | wc -l)" \
@@ -51,7 +57,7 @@ find datamining linear-algebra medley stencils -type f -name "*.cpp" | sort | wh
 		>> "statistics.csv"
 
 	printf "baseline,%s,%s,%s,%s,%s\n" \
-		"$(basename $file | sed 's/\.[^.]*//')" \
+		"$(basename "$file" | sed 's/\.[^.]*//')" \
 		"$(wc -l < "$tmpdir/polybench/scop-${filename}pp")" \
 		"$(wc -m < "$tmpdir/polybench/scop-${filename}pp")" \
 		"$(clang -fsyntax-only -Xclang -dump-tokens "$tmpdir/polybench/scop-${filename}pp" 2>&1 | wc -l)" \
@@ -117,8 +123,8 @@ echo "Comparing noarr and polybench using gzip on single kernels"
 
 		polybench_file="$tmpdir/polybench/$filename.cpp"
 
-		NOARR_SIZE=$(expr "$(gzip -c "$file" | wc -c)" "+" "$NOARR_SIZE")
-		POLYBENCH_SIZE=$(expr "$(gzip -c "$polybench_file" | wc -c)" "+" "$POLYBENCH_SIZE")
+		NOARR_SIZE=$(( "$(gzip -c "$file" | wc -c)" + "$NOARR_SIZE" ))
+		POLYBENCH_SIZE=$(( "$(gzip -c "$polybench_file" | wc -c)" + "$POLYBENCH_SIZE" ))
 	done < "$fifo"
 
 	printf "\t%s\n" "NOARR SIZE: $NOARR_SIZE"

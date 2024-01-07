@@ -1,11 +1,15 @@
 #!/bin/bash
 
+if [ "$(basename "$(pwd)")" = "scripts" ]; then
+    cd ..
+fi
+
 tmpdir=$(mktemp -d) || exit 1
 
 trap "rm -rf $tmpdir" EXIT
 
 measure_c_changes() {
-    CHANGES=$(find "PolybenchC-tuned" -type f -name "*.c" | while read -r file; do
+    CHANGES=$(find "PolybenchC-tuned" -mindepth 3 -maxdepth 4 -type f -name "*.c" | sort | while read -r file; do
         pretune="PolybenchC-pretune/${file#PolybenchC-tuned}"
 
         algorithm=$(echo "$file" | sed -e 's/.*\/\([^\/]*\)\.c/\1/')
@@ -27,7 +31,7 @@ measure_c_changes() {
 }
 
 measure_noarr() {
-    find "PolybenchC-Noarr-tuned" -type f -name "*.cpp" | while read -r file; do
+    find "PolybenchC-Noarr-tuned" -mindepth 3 -maxdepth 4 -type f -name "*.cpp" | sort | while read -r file; do
         case "$file" in
             */datamining/*|*/linear-algebra/*|*/medley/*|*/stencils/*)
                 ;;

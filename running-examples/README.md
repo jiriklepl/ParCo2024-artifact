@@ -2,9 +2,9 @@
 
 The running examples presented in the paper can be run using the `run-examples.sh` script that also generates their input data and performs a simple validation of the outputs. The script requires Python 3.6 or newer on top of the requirements for the experiments.
 
-### Listings
+## Listings
 
-Each code position beginning a code snippet presented in the paper as a listing is marked with a comment `// PAPER: <section.subsection number> - <capitalized ordinal> listing``
+Each code position beginning a code snippet presented in the paper as a listing is marked with a comment `// PAPER: <section.subsection number> - <capitalized ordinal> listing`
 
 - Section 3.1
 
@@ -22,4 +22,3 @@ Each code position beginning a code snippet presented in the paper as a listing 
 - Section 4.2
 
   - First, second, third and fourth listing: [running-examples/histogram.cu](running-examples/histogram.cu)
-

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ "$(basename "$(pwd)")" = "scripts" ]; then
+    cd ..
+fi
+
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <path-to-logs>"
     exit 1
