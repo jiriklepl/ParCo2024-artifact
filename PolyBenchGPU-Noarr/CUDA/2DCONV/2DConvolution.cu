@@ -27,7 +27,7 @@ template<class inner_t, class A_t, class B_t>
 __global__ void kernel_2dconv(inner_t inner, A_t A, B_t B) {
 	// A: i x j
 	// B: i x j
-	using noarr::neighbor;
+	using noarr::idx;
 
 	num_t c11, c12, c13, c21, c22, c23, c31, c32, c33;
 
@@ -41,15 +41,15 @@ __global__ void kernel_2dconv(inner_t inner, A_t A, B_t B) {
 		if (i == 0 || j == 0)
 			return;
 
-		B[state] = c11 * A[neighbor<'i', 'j'>(state, -1, -1)] +
-			c21 * A[neighbor<'i', 'j'>(state, -1, 0)] +
-			c31 * A[neighbor<'i', 'j'>(state, -1, +1)] +
-			c12 * A[neighbor<'i', 'j'>(state, 0, -1)] +
-			c22 * A[neighbor<'i', 'j'>(state, 0, 0)] +
-			c32 * A[neighbor<'i', 'j'>(state, 0, +1)] +
-			c13 * A[neighbor<'i', 'j'>(state, +1, -1)] +
-			c23 * A[neighbor<'i', 'j'>(state, +1, 0)] +
-			c33 * A[neighbor<'i', 'j'>(state, +1, +1)];
+		B[state] = c11 * A[state <'i'>(1) - idx<'j'>(1)] +
+			c21 * A[state - idx<'i'>(1) + idx<'j'>(0)] +
+			c31 * A[state - idx<'i'>(1) + idx<'j'>(1)] +
+			c12 * A[state + idx<'i'>(0) - idx<'j'>(1)] +
+			c22 * A[state + idx<'i'>(0) + idx<'j'>(0)] +
+			c32 * A[state + idx<'i'>(0) + idx<'j'>(1)] +
+			c13 * A[state + idx<'i'>(1) - idx<'j'>(1)] +
+			c23 * A[state + idx<'i'>(1) + idx<'j'>(0)] +
+			c33 * A[state + idx<'i'>(1) + idx<'j'>(1)];
 	});
 }
 

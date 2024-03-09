@@ -374,20 +374,20 @@ noarr::traverser(seq, table, table_ik, table_kj).order(noarr::reverse<'i'>()).te
     inner.order(noarr::shift<'j'>(noarr::get_index<'i'>(state) + 1)).template for_dims<'j'>([=](auto inner) {
         auto state = inner.state();
         if (noarr::get_index<'j'>(state) >= 0)
-            table[state] = max_score(table[state], table[noarr::neighbor<'j'>(state, -1)]);
+            table[state] = max_score(table[state], table[state - noarr::idx<'j'>(1)]);
         if (noarr::get_index<'i'>(state) + 1 < (table | noarr::get_length<'i'>()))
-            table[state] = max_score(table[state], table[noarr::neighbor<'i'>(state, 1)]);
+            table[state] = max_score(table[state], table[state + noarr::idx<'i'>(1)]);
         if (noarr::get_index<'j'>(state) >= 0 ||
             noarr::get_index<'i'>(state) + 1 < (table | noarr::get_length<'i'>())) {
             if (noarr::get_index<'i'>(state) < noarr::get_index<'j'>(state) - 1)
-                table[state] = max_score(table[state], (table[noarr::neighbor<'i', 'j'>(state, 1, -1)]) +
+                table[state] = max_score(table[state], (table[state + noarr::idx<'i'>(1) - noarr::idx<'j'>(1)]) +
                                                            match(seq[state], seq_j[state]));
             else
-                table[state] = max_score(table[state], (table[noarr::neighbor<'i', 'j'>(state, 1, -1)]));
+                table[state] = max_score(table[state], (table[state + noarr::idx<'i'>(1) - noarr::idx<'j'>(1)]));
         }
         inner.order(noarr::span<'k'>(noarr::get_index<'i'>(state) + 1, noarr::get_index<'j'>(state)))
             .template for_each<'k'>([=](auto state) {
-                table[state] = max_score(table[state], table_ik[state] + table_kj[noarr::neighbor<'k'>(state, 1)]);
+                table[state] = max_score(table[state], table_ik[state] + table_kj[state + noarr::idx<'k'>(1)]);
             });
     });
 });
@@ -412,14 +412,14 @@ traverser.order(noarr::symmetric_spans<'i', 'j'>(traverser.top_struct(), 1, 1)).
         p[state & noarr::idx<'j'>(0)] = (num_t)0.0;
         q[state & noarr::idx<'j'>(0)] = v[state & noarr::idx<'j'>(0)];
         inner.for_each([=](auto state) {
-            p[state] = -c / (a * p[noarr::neighbor<'j'>(state, -1)] + b);
-            q[state] = (-d * u_trans[noarr::neighbor<'i'>(state, -1)] + (B2 + B1 * d) * u_trans[state] -
-                        f * u_trans[noarr::neighbor<'i'>(state, +1)] - a * q[noarr::neighbor<'j'>(state, -1)]) /
-                       (a * p[noarr::neighbor<'j'>(state, -1)] + b);
+            p[state] = -c / (a * p[state - noarr::idx<'j'>(1)] + b);
+            q[state] = (-d * u_trans[state - noarr::idx<'i'>(1)] + (B2 + B1 * d) * u_trans[state] -
+                        f * u_trans[state + noarr::idx<'i'>(1)] - a * q[state - noarr::idx<'j'>(1)]) /
+                       (a * p[state - noarr::idx<'j'>(1)] + b);
         });
         v[state & noarr::idx<'j'>((traverser.top_struct() | noarr::get_length<'j'>()) - 1)] = (num_t)1.0;
         inner.order(noarr::reverse<'j'>()).for_each([=](auto state) {
-            v[state] = p[state] * v[noarr::neighbor<'j'>(state, 1)] + q[state];
+            v[state] = p[state] * v[state + noarr::idx<'j'>(1)] + q[state];
         });
     });
     inner.template for_dims<'i'>([=](auto inner) {
@@ -428,14 +428,14 @@ traverser.order(noarr::symmetric_spans<'i', 'j'>(traverser.top_struct(), 1, 1)).
         p[state & noarr::idx<'j'>(0)] = (num_t)0.0;
         q[state & noarr::idx<'j'>(0)] = u[state & noarr::idx<'j'>(0)];
         inner.for_each([=](auto state) {
-            p[state] = -f / (d * p[noarr::neighbor<'j'>(state, -1)] + e);
-            q[state] = (-a * v_trans[noarr::neighbor<'i'>(state, -1)] + (B2 + B1 * a) * v_trans[state] -
-                        c * v_trans[noarr::neighbor<'i'>(state, +1)] - d * q[noarr::neighbor<'j'>(state, -1)]) /
-                       (d * p[noarr::neighbor<'j'>(state, -1)] + e);
+            p[state] = -f / (d * p[state - noarr::idx<'j'>(1)] + e);
+            q[state] = (-a * v_trans[state - noarr::idx<'i'>(1)] + (B2 + B1 * a) * v_trans[state] -
+                        c * v_trans[state + noarr::idx<'i'>(1)] - d * q[state - noarr::idx<'j'>(1)]) /
+                       (d * p[state - noarr::idx<'j'>(1)] + e);
         });
         u[state & noarr::idx<'j'>((traverser.top_struct() | noarr::get_length<'j'>()) - 1)] = (num_t)1.0;
         inner.order(noarr::reverse<'j'>()).for_each([=](auto state) {
-            u[state] = p[state] * u[noarr::neighbor<'j'>(state, 1)] + q[state];
+            u[state] = p[state] * u[state + noarr::idx<'j'>(1)] + q[state];
         });
     });
 });
@@ -444,61 +444,61 @@ noarr::traverser(ex, ey, hz, _fict_).template for_dims<'t'>([=](auto inner) {
         ey[state & noarr::idx<'i'>(0)] = _fict_[state];
     });
     inner.order(noarr::shift<'i'>(1)).for_each([=](auto state) {
-        ey[state] = ey[state] - (num_t).5 * (hz[state] - hz[noarr::neighbor<'i'>(state, -1)]);
+        ey[state] = ey[state] - (num_t).5 * (hz[state] - hz[state - noarr::idx<'i'>(1)]);
     });
     inner.order(noarr::shift<'j'>(1)).for_each([=](auto state) {
-        ex[state] = ex[state] - (num_t).5 * (hz[state] - hz[noarr::neighbor<'j'>(state, -1)]);
+        ex[state] = ex[state] - (num_t).5 * (hz[state] - hz[state - noarr::idx<'j'>(1)]);
     });
     inner
         .order(noarr::span<'i'>(0, (inner.top_struct() | noarr::get_length<'i'>()) - 1) ^
                noarr::span<'j'>(0, (inner.top_struct() | noarr::get_length<'j'>()) - 1))
         .for_each([=](auto state) {
-            hz[state] = hz[state] - (num_t).7 * (ex[noarr::neighbor<'j'>(state, +1)] - ex[state] +
-                                                 ey[noarr::neighbor<'i'>(state, +1)] - ey[state]);
+            hz[state] = hz[state] - (num_t).7 * (ex[state + noarr::idx<'j'>(1)] - ex[state] +
+                                                 ey[state + noarr::idx<'i'>(1)] - ey[state]);
         });
 });
 traverser.order(noarr::symmetric_spans<'i', 'j', 'k'>(traverser.top_struct(), 1, 1, 1))
     .order(order)
     .template for_dims<'t'>([=](auto inner) {
         inner.for_each([=](auto state) {
-            B[state] = (num_t).125 * (A[neighbor<'i'>(state, -1)] - 2 * A[state] + A[neighbor<'i'>(state, +1)]) +
-                       (num_t).125 * (A[neighbor<'j'>(state, -1)] - 2 * A[state] + A[neighbor<'j'>(state, +1)]) +
-                       (num_t).125 * (A[neighbor<'k'>(state, -1)] - 2 * A[state] + A[neighbor<'k'>(state, +1)]) +
+            B[state] = (num_t).125 * (A[state - noarr::idx<'i'>(1)] - 2 * A[state] + A[state + noarr::idx<'i'>(1)]) +
+                       (num_t).125 * (A[state - noarr::idx<'j'>(1)] - 2 * A[state] + A[state + noarr::idx<'j'>(1)]) +
+                       (num_t).125 * (A[state - noarr::idx<'k'>(1)] - 2 * A[state] + A[state + noarr::idx<'k'>(1)]) +
                        A[state];
         });
         inner.for_each([=](auto state) {
-            A[state] = (num_t).125 * (B[neighbor<'i'>(state, -1)] - 2 * B[state] + B[neighbor<'i'>(state, +1)]) +
-                       (num_t).125 * (B[neighbor<'j'>(state, -1)] - 2 * B[state] + B[neighbor<'j'>(state, +1)]) +
-                       (num_t).125 * (B[neighbor<'k'>(state, -1)] - 2 * B[state] + B[neighbor<'k'>(state, +1)]) +
+            A[state] = (num_t).125 * (B[state - noarr::idx<'i'>(1)] - 2 * B[state] + B[state + noarr::idx<'i'>(1)]) +
+                       (num_t).125 * (B[state - noarr::idx<'j'>(1)] - 2 * B[state] + B[state + noarr::idx<'j'>(1)]) +
+                       (num_t).125 * (B[state - noarr::idx<'k'>(1)] - 2 * B[state] + B[state + noarr::idx<'k'>(1)]) +
                        B[state];
         });
     });
 traverser.template for_dims<'t'>([=](auto inner) {
     inner.order(noarr::symmetric_span<'i'>(traverser.top_struct(), 1)).for_each([=](auto state) {
-        B[state] = 0.33333 * (A[neighbor<'i'>(state, -1)] + A[state] + A[neighbor<'i'>(state, +1)]);
+        B[state] = 0.33333 * (A[state - noarr::idx<'i'>(1)] + A[state] + A[state + noarr::idx<'i'>(1)]);
     });
     inner.order(noarr::symmetric_span<'i'>(traverser.top_struct(), 1)).for_each([=](auto state) {
-        A[state] = 0.33333 * (B[neighbor<'i'>(state, -1)] + B[state] + B[neighbor<'i'>(state, +1)]);
+        A[state] = 0.33333 * (B[state - noarr::idx<'i'>(1)] + B[state] + B[state + noarr::idx<'i'>(1)]);
     });
 });
 traverser.order(noarr::symmetric_spans<'i', 'j'>(traverser.top_struct(), 1, 1))
     .order(order)
     .template for_dims<'t'>([=](auto inner) {
         inner.for_each([=](auto state) {
-            B[state] = (num_t).2 * (A[state] + A[neighbor<'j'>(state, -1)] + A[neighbor<'j'>(state, +1)] +
-                                    A[neighbor<'i'>(state, +1)] + A[neighbor<'i'>(state, -1)]);
+            B[state] = (num_t).2 * (A[state] + A[state - noarr::idx<'j'>(1)] + A[state + noarr::idx<'j'>(1)] +
+                                    A[state + noarr::idx<'i'>(1)] + A[state - noarr::idx<'i'>(1)]);
         });
         inner.for_each([=](auto state) {
-            A[state] = (num_t).2 * (B[state] + B[neighbor<'j'>(state, -1)] + B[neighbor<'j'>(state, +1)] +
-                                    B[neighbor<'i'>(state, +1)] + B[neighbor<'i'>(state, -1)]);
+            A[state] = (num_t).2 * (B[state] + B[state - noarr::idx<'j'>(1)] + B[state + noarr::idx<'j'>(1)] +
+                                    B[state + noarr::idx<'i'>(1)] + B[state - noarr::idx<'i'>(1)]);
         });
     });
 traverser.order(noarr::symmetric_spans<'i', 'j'>(traverser.top_struct(), 1, 1))
     .order(noarr::reorder<'t', 'i', 'j'>())
     .for_each([=](auto state) {
-        A[state] = (A[neighbor<'i', 'j'>(state, -1, -1)] + A[neighbor<'i'>(state, -1)] +
-                    A[neighbor<'i', 'j'>(state, -1, +1)] + A[neighbor<'j'>(state, -1)] + A[state] +
-                    A[neighbor<'j'>(state, +1)] + A[neighbor<'i', 'j'>(state, +1, -1)] + A[neighbor<'i'>(state, +1)] +
-                    A[neighbor<'i', 'j'>(state, +1, +1)]) /
+        A[state] = (A[state - noarr::idx<'i'>(1) - noarr::idx<'j'>(1)] + A[state - noarr::idx<'i'>(1)] +
+                    A[state - noarr::idx<'i'>(1) + noarr::idx<'j'>(1)] + A[state - noarr::idx<'j'>(1)] + A[state] +
+                    A[state + noarr::idx<'j'>(1)] + A[state + noarr::idx<'i'>(1) - noarr::idx<'j'>(1)] + A[state + noarr::idx<'i'>(1)] +
+                    A[state + noarr::idx<'i'>(1) + noarr::idx<'j'>(1)]) /
                    (num_t)9.0;
     });

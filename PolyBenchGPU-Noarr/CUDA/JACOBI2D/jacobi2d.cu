@@ -36,10 +36,10 @@ __global__ void jacobi2d_kernel1(inner_t inner, A_t A, B_t B) {
 		inner.for_each([=](auto state) {
 			B[state] = (num_t).2 * (
 				A[state] +
-				A[neighbor<'j'>(state, -1)] +
-				A[neighbor<'j'>(state, +1)] +
-				A[neighbor<'i'>(state, +1)] +
-				A[neighbor<'i'>(state, -1)]);
+				A[state - noarr::idx<'j'>(1)] +
+				A[state + noarr::idx<'j'>(1)] +
+				A[state + noarr::idx<'i'>(1)] +
+				A[state - noarr::idx<'i'>(1)]);
 		});
 	});
 }

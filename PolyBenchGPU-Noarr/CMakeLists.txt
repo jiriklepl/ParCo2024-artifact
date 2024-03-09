@@ -21,11 +21,15 @@ set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -allow-unsupported-compiler --expt-rel
 
 enable_language(CUDA)
 
+if(NOT DEFINED NOARR_STRUCTURES_BRANCH)
+  set(NOARR_STRUCTURES_BRANCH PMAM2024)
+endif()
+
 # download the Noarr Structures library
 FetchContent_Declare(
   Noarr
   GIT_REPOSITORY https://github.com/jiriklepl/noarr-structures.git
-  GIT_TAG        main)
+  GIT_TAG        ${NOARR_STRUCTURES_BRANCH})
 FetchContent_MakeAvailable(Noarr)
 
 include_directories(include)
