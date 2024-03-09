@@ -25,7 +25,7 @@ enable_language(CUDA)
 FetchContent_Declare(
   Noarr
   GIT_REPOSITORY https://github.com/jiriklepl/noarr-structures.git
-  GIT_TAG        PMAM2024)
+  GIT_TAG        main)
 FetchContent_MakeAvailable(Noarr)
 
 include_directories(include)
