@@ -41,7 +41,7 @@ __global__ void kernel_2dconv(inner_t inner, A_t A, B_t B) {
 		if (i == 0 || j == 0)
 			return;
 
-		B[state] = c11 * A[state <'i'>(1) - idx<'j'>(1)] +
+		B[state] = c11 * A[state - idx<'i'>(1) - idx<'j'>(1)] +
 			c21 * A[state - idx<'i'>(1) + idx<'j'>(0)] +
 			c31 * A[state - idx<'i'>(1) + idx<'j'>(1)] +
 			c12 * A[state + idx<'i'>(0) - idx<'j'>(1)] +
