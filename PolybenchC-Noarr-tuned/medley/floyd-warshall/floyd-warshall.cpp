@@ -33,7 +33,7 @@ struct tuning {
 } tuning;
 
 // initialization function
-void init_array(auto path) noexcept {
+void init_array(auto path) {
 	// path: i x j
 
 	noarr::traverser(path)
@@ -51,7 +51,7 @@ void init_array(auto path) noexcept {
 // computation kernel
 template<class Order = noarr::neutral_proto>
 [[gnu::flatten, gnu::noinline]]
-void kernel_floyd_warshall(auto path, Order order = {}) noexcept {
+void kernel_floyd_warshall(auto path, Order order = {}) {
 	// path: i x j
 
 	auto path_start_k = path ^ noarr::rename<'i', 'k'>();

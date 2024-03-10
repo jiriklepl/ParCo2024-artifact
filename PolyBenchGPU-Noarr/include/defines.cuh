@@ -46,12 +46,12 @@ public:
     managed_bag(const managed_bag &other) = delete;
     managed_bag &operator=(const managed_bag &other) = delete;
 
-    managed_bag(managed_bag &&other) noexcept : _layout(other._layout), _data(std::move(other._data)), _data_device(std::move(other._data_device)) {
+    managed_bag(managed_bag &&other) : _layout(other._layout), _data(std::move(other._data)), _data_device(std::move(other._data_device)) {
         other._data = nullptr;
         other._data_device = nullptr;
     }
 
-    managed_bag &operator=(managed_bag &&other) noexcept {
+    managed_bag &operator=(managed_bag &&other) {
         _data = std::move(other._data);
         _data_device = std::move(other._data_device);
         other._data = nullptr;
@@ -61,28 +61,28 @@ public:
         return *this;
     }
 
-    void fetch_to_device() noexcept {
+    void fetch_to_device() {
         assert(_data != nullptr);
         assert(_data_device != nullptr);
         CUCH(cudaMemcpy(_data_device, _data.get(), _layout | noarr::get_size(), cudaMemcpyDefault));
     }
 
-    void fetch_to_host() noexcept {
+    void fetch_to_host() {
         assert(_data != nullptr);
         assert(_data_device != nullptr);
         CUCH(cudaMemcpy(_data.get(), _data_device, _layout | noarr::get_size(), cudaMemcpyDefault));
     }
 
-    ~managed_bag() noexcept {
+    ~managed_bag() {
         CUCH(cudaFree(_data_device));
         _data_device = nullptr;
     }
 
-    auto get_host_ref() const noexcept {
+    auto get_host_ref() const {
         return noarr::make_bag(_layout, _data.get());
     }
 
-    auto get_device_ref() const noexcept {
+    auto get_device_ref() const {
         return noarr::make_bag(_layout, _data_device);
     }
 

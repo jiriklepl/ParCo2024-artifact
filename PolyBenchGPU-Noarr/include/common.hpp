@@ -24,7 +24,7 @@ protected:
 
 public:
 	virtual_experiment() = default;
-	virtual ~virtual_experiment() noexcept = default;
+	virtual ~virtual_experiment() = default;
 
 	void run() {
 		data->run();

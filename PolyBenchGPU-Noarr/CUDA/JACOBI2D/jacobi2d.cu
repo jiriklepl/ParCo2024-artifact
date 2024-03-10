@@ -20,7 +20,7 @@ void init(auto A, auto B) {
 	// A: i x j
 	// B: i x j
 
-	noarr::traverser(A, B).for_each([=](auto state){
+	noarr::traverser(A, B).for_each([=](auto state) {
 		auto [i, j] = noarr::get_indices<'i', 'j'>(state);
 		A[state] = ((num_t) i * ((int) j + 2) + 10) / N;
 		B[state] = ((num_t) ((int) i - 4) * ((int)j - 1) + 11) / N;
@@ -32,7 +32,7 @@ __global__ void jacobi2d_kernel1(inner_t inner, A_t A, B_t B) {
 	// A: i x j
 	// B: i x j
 
-	inner.template for_dims<'s', 't'>([=](auto inner){
+	inner.template for_dims<'s', 't'>([=](auto inner) {
 		inner.for_each([=](auto state) {
 			B[state] = (num_t).2 * (
 				A[state] +
@@ -49,7 +49,7 @@ __global__ void jacobi2d_kernel2(inner_t inner, A_t A, B_t B) {
 	// A: i x j
 	// B: i x j
 
-	inner.template for_dims<'s', 't'>([=](auto inner){
+	inner.template for_dims<'s', 't'>([=](auto inner) {
 		inner.for_each([=](auto state) {
 			A[state] = B[state];
 		});
