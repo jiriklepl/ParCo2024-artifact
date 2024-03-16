@@ -49,52 +49,48 @@ void init_array(auto seq, auto table) {
 void kernel_nussinov(auto seq, auto table) {
 	// seq: i
 	// table: i x j
+	using namespace noarr;
 
-	auto seq_j = seq ^ noarr::rename<'i', 'j'>();
-	auto table_ik = table ^ noarr::rename<'j', 'k'>();
-	auto table_kj = table ^ noarr::rename<'i', 'k'>();
+	auto seq_j = seq ^ rename<'i', 'j'>();
+	auto table_ik = table ^ rename<'j', 'k'>();
+	auto table_kj = table ^ rename<'i', 'k'>();
 
 	#pragma scop
-	noarr::traverser(seq, table, table_ik, table_kj)
-		.order(noarr::reverse<'i'>())
-		.template for_dims<'i'>([=](auto inner) {
-			auto state = inner.state();
-
-			inner
-				.order(noarr::shift<'j'>(noarr::get_index<'i'>(state) + 1))
-				.template for_dims<'j'>([=](auto inner) {
+	traverser(seq, table, table_ik, table_kj) ^ reverse<'i'>() |
+		for_dims<'i'>([=](auto inner) {
+			inner ^ shift<'j'>(get_index<'i'>(inner) + 1) |
+				for_dims<'j'>([=](auto inner) {
 					auto state = inner.state();
+					auto [i, j] = get_indices<'i', 'j'>(state);
 
-					if (noarr::get_index<'j'>(state) >= 0)
+					if (j >= 0)
 						table[state] = max_score(
 							table[state],
-							table[state - noarr::idx<'j'>(1)]);
+							table[state - idx<'j'>(1)]);
 
-					if (noarr::get_index<'i'>(state) + 1 < (table | noarr::get_length<'i'>()))
+					if (i + 1 < (table | get_length<'i'>()))
 						table[state] = max_score(
 							table[state],
-							table[state + noarr::idx<'i'>(1)]);
+							table[state + idx<'i'>(1)]);
 
-					if (noarr::get_index<'j'>(state) >= 0
-					 || noarr::get_index<'i'>(state) + 1 < (table | noarr::get_length<'i'>())) {
-						if (noarr::get_index<'i'>(state) < noarr::get_index<'j'>(state) - 1)
+					if (j >= 0 || i + 1 < (table | get_length<'i'>())) {
+						if (i < j - 1)
 							table[state] = max_score(
 								table[state],
-								(table[state + noarr::idx<'i'>(1) - noarr::idx<'j'>(1)]) +
+								(table[state + idx<'i'>(1) - idx<'j'>(1)]) +
 								match(seq[state], seq_j[state]));
 						else
 							table[state] = max_score(
 								table[state],
-								(table[state + noarr::idx<'i'>(1) - noarr::idx<'j'>(1)]));
+								(table[state + idx<'i'>(1) - idx<'j'>(1)]));
 					}
 
-					inner
-						.order(noarr::span<'k'>(noarr::get_index<'i'>(state) + 1, noarr::get_index<'j'>(state)))
-						.template for_each<'k'>([=](auto state) {
+					inner ^ span<'k'>(i + 1, j) |
+						for_each<'k'>([=](auto state) {
 							table[state] = max_score(
 								table[state],
 								table_ik[state] +
-								table_kj[state + noarr::idx<'k'>(1)]);
+								table_kj[state + idx<'k'>(1)]);
 						});
 				});
 		});
@@ -130,10 +126,9 @@ int main(int argc, char *argv[]) {
 		std::cout << std::fixed << std::setprecision(2);
 		noarr::traverser(table)
 			.template for_dims<'i'>([=](auto inner) {
-				auto state = inner.state();
 				std::cout << std::fixed << std::setprecision(2);
 				inner
-					.order(noarr::shift<'j'>(noarr::get_index<'i'>(state)))
+					.order(noarr::shift<'j'>(noarr::get_index<'i'>(inner)))
 					.template for_each<'j'>([=](auto state) {
 						std::cout << table[state] << " ";
 					});
