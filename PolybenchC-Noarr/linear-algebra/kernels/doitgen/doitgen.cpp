@@ -61,19 +61,19 @@ void kernel_doitgen(auto A, auto C4, auto sum, Order order = {}) {
 	auto A_rqs = A ^ rename<'p', 's'>();
 
 	#pragma scop
-	planner(A, C4, sum) ^ for_sections<'r', 'q'>([=](auto inner) {
-		inner ^ for_sections<'p'>([=](auto inner) {
+	planner(A, C4, sum) ^ for_dims<'r', 'q'>([=](auto inner) {
+		inner ^ for_dims<'p'>([=](auto inner) {
 			sum[inner] = 0;
 
 			inner ^ for_each([=](auto state) {
 				sum[state] += A_rqs[state] * C4[state];
 			}) | planner_execute();
-		}) ^ hoist<'p'>() | planner_execute();
+		}) | planner_execute();
 
-		inner ^ for_sections<'p'>([=](auto inner) {
+		inner ^ for_dims<'p'>([=](auto inner) {
 			A[inner] = sum[inner];
-		}) ^ hoist<'p'>() | planner_execute();
-	}) ^ hoist<'q'>() ^ hoist<'r'>() ^ order | planner_execute();
+		}) | planner_execute();
+	}) ^ order | planner_execute();
 	#pragma endscop
 }
 

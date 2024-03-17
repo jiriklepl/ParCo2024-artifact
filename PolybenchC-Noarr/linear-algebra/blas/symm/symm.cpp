@@ -77,7 +77,7 @@ void kernel_symm(num_t alpha, num_t beta, auto C, auto A, auto B, Order order = 
 	auto B_renamed = B ^ rename<'i', 'k'>();
 
 	#pragma scop
-	planner(C, A, B) ^ for_sections<'i', 'j'>([=](auto inner) {
+	planner(C, A, B) ^ for_dims<'i', 'j'>([=](auto inner) {
 		const auto i = get_index<'i'>(inner);
 
 		num_t temp = 0;
@@ -88,7 +88,7 @@ void kernel_symm(num_t alpha, num_t beta, auto C, auto A, auto B, Order order = 
 		}) | planner_execute();
 
 		C[inner] = beta * C[inner] + alpha * B[inner] * A[inner.state() & idx<'k'>(i)] + alpha * temp;
-	}) ^ hoist<'j'>() ^ hoist<'i'>() ^ order | planner_execute();
+	}) ^ order | planner_execute();
 	#pragma endscop
 }
 

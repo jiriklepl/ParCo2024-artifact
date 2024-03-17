@@ -96,20 +96,20 @@ void kernel_3mm(auto E, auto A, auto B, auto F, auto C, auto D, auto G, Order1 o
 	});
 
 	#pragma scop
-	planner(E, A, B) ^ madd ^ for_sections<'i', 'j'>([=](auto inner) {
+	planner(E, A, B) ^ madd ^ for_dims<'i', 'j'>([=](auto inner) {
 		E[inner] = 0;
 		inner();
-	}) ^ hoist<'k'>() ^ hoist<'j'>() ^ hoist<'i'>() ^ order1 | planner_execute();
+	}) ^ order1 | planner_execute();
 
-	planner(F, C, D) ^ madd ^ for_sections<'j', 'l'>([=](auto inner) {
+	planner(F, C, D) ^ madd ^ for_dims<'j', 'l'>([=](auto inner) {
 		F[inner] = 0;
 		inner();
-	}) ^ hoist<'m'>() ^ hoist<'l'>() ^ hoist<'j'>() ^ order2 | planner_execute();
+	}) ^ order2 | planner_execute();
 
-	planner(G, E, F) ^ madd ^ for_sections<'i', 'l'>([=](auto inner) {
+	planner(G, E, F) ^ madd ^ for_dims<'i', 'l'>([=](auto inner) {
 		G[inner] = 0;
 		inner();
-	}) ^ hoist<'j'>() ^ hoist<'l'>() ^ hoist<'i'>() ^ order3 | planner_execute();
+	}) ^ order3 | planner_execute();
 	#pragma endscop
 }
 

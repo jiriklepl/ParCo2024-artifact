@@ -73,11 +73,11 @@ void kernel_trmm(num_t alpha, auto A, auto B, Order order = {}) {
 		for_each_elem([](auto &&A, auto &&B, auto &&B_renamed) {
 			B += A * B_renamed;
 		}) ^
-		for_sections<'i', 'j'>([=](auto inner) {
+		for_dims<'i', 'j'>([=](auto inner) {
 			inner ^ shift<'k'>(get_index<'i'>(inner) + 1) | planner_execute();
 
 			B[inner] *= alpha;
-		}) ^ hoist<'j'>() ^ hoist<'i'>() ^ order | planner_execute();
+		}) ^ order | planner_execute();
 	#pragma endscop
 }
 

@@ -68,10 +68,10 @@ void kernel_bicg(auto A, auto s, auto q, auto p, auto r, Order order = {}) {
 	planner(A, s, q, p, r) ^ for_each_elem([](auto &&A, auto &&s, auto &&q, auto &&p, auto &&r) {
 		s += A * r;
 		q += A * p;
-	}) ^ for_sections<'i'>([=](auto inner) {
+	}) ^ for_dims<'i'>([=](auto inner) {
 		q[inner] = 0;
 		inner();
-	}) ^ hoist<'i'>() ^ order | planner_execute();
+	}) ^ order | planner_execute();
 	#pragma endscop
 }
 

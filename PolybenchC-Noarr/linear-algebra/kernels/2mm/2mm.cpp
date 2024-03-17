@@ -87,17 +87,17 @@ void kernel_2mm(num_t alpha, num_t beta, auto tmp, auto A, auto B, auto C, auto 
 	#pragma scop
 	planner(tmp, A, B) ^ for_each_elem([=](auto &&tmp, auto &&A, auto &&B) {
 		tmp += alpha * A * B;
-	}) ^ for_sections<'i', 'j'>([=](auto inner) {
+	}) ^ for_dims<'i', 'j'>([=](auto inner) {
 		tmp[inner] = 0;
 		inner();
-	}) ^ hoist<'j'>() ^ hoist<'i'>() ^ order1 | planner_execute();
+	}) ^ order1 | planner_execute();
 
 	planner(D, tmp, C) ^ for_each_elem([](auto &&D, auto &&tmp, auto &&C) {
 		D += tmp * C;
-	}) ^ for_sections<'i', 'l'>([=](auto inner) {
+	}) ^ for_dims<'i', 'l'>([=](auto inner) {
 		D[inner] *= beta;
 		inner();
-	}) ^ hoist<'l'>() ^ hoist<'i'>() ^ order2 | planner_execute();
+	}) ^ order2 | planner_execute();
 	#pragma endscop
 }
 
