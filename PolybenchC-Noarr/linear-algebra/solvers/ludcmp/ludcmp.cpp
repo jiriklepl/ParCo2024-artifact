@@ -104,10 +104,9 @@ void kernel_ludcmp(auto A, auto b, auto x, auto y) {
 
 			num_t w = A[inner];
 
-			inner ^ span<'k'>(j) |
-				for_each<'k'>([=, &w](auto state) {
-					w -= A_ik[state] * A_kj[state];
-				});
+			inner ^ span<'k'>(j) | [=, &w](auto state) {
+				w -= A_ik[state] * A_kj[state];
+			};
 
 			A[inner] = w / (A ^ fix<'i'>(j))[inner];
 		});
@@ -115,9 +114,9 @@ void kernel_ludcmp(auto A, auto b, auto x, auto y) {
 		inner ^ shift<'j'>(i) | for_dims<'j'>([=](auto inner) {
 			num_t w = A[inner];
 
-			inner ^ span<'k'>(i) | for_each<'k'>([=, &w](auto state) {
+			inner ^ span<'k'>(i) | [=, &w](auto state) {
 				w -= A_ik[state] * A_kj[state];
-			});
+			};
 
 			A[inner] = w;
 		});

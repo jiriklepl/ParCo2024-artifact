@@ -58,41 +58,41 @@ void kernel_nussinov(auto seq, auto table) {
 	#pragma scop
 	traverser(seq, table, table_ik, table_kj) ^ reverse<'i'>() |
 		for_dims<'i'>([=](auto inner) {
-			inner ^ shift<'j'>(get_index<'i'>(inner) + 1) |
-				for_dims<'j'>([=](auto inner) {
-					auto state = inner.state();
-					auto [i, j] = get_indices<'i', 'j'>(state);
+			auto i = get_index<'i'>(inner);
+			inner ^ shift<'j'>(i + 1) | for_dims<'j'>([=](auto inner) {
+				auto state = inner.state();
+				auto [i, j] = get_indices<'i', 'j'>(state);
+				auto ni = table | get_length<'i'>();
 
-					if (j >= 0)
+				if (j >= 0)
+					table[state] = max_score(
+						table[state],
+						table[state - idx<'j'>(1)]);
+
+				if (i + 1 < ni)
+					table[state] = max_score(
+						table[state],
+						table[state + idx<'i'>(1)]);
+
+				if (j >= 0 || i + 1 < ni) {
+					if (i < j - 1)
 						table[state] = max_score(
 							table[state],
-							table[state - idx<'j'>(1)]);
-
-					if (i + 1 < (table | get_length<'i'>()))
+							table[state + idx<'i'>(1) - idx<'j'>(1)] +
+							match(seq[state], seq_j[state]));
+					else
 						table[state] = max_score(
 							table[state],
-							table[state + idx<'i'>(1)]);
+							table[state + idx<'i'>(1) - idx<'j'>(1)]);
+				}
 
-					if (j >= 0 || i + 1 < (table | get_length<'i'>())) {
-						if (i < j - 1)
-							table[state] = max_score(
-								table[state],
-								(table[state + idx<'i'>(1) - idx<'j'>(1)]) +
-								match(seq[state], seq_j[state]));
-						else
-							table[state] = max_score(
-								table[state],
-								(table[state + idx<'i'>(1) - idx<'j'>(1)]));
-					}
-
-					inner ^ span<'k'>(i + 1, j) |
-						for_each<'k'>([=](auto state) {
-							table[state] = max_score(
-								table[state],
-								table_ik[state] +
-								table_kj[state + idx<'k'>(1)]);
-						});
-				});
+				inner ^ span<'k'>(i + 1, j) | [=](auto state) {
+					table[state] = max_score(
+						table[state],
+						table_ik[state] +
+						table_kj[state + idx<'k'>(1)]);
+				};
+			});
 		});
 	#pragma endscop
 }
