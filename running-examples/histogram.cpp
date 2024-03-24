@@ -59,7 +59,7 @@ else if constexpr (HISTO_IMPL == histo_tbbreduce) {
 	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	// PAPER 4.0 - Second listing
-	noarr::tbb_reduce_bag(
+	noarr::tbb_reduce(
 		// Input traverser.
 		noarr::traverser(in),
 
