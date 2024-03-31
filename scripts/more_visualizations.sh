@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # This script will make the visualizations for the data in the `*/*data` folders
 

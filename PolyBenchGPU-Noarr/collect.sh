@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 export BUILD_DIR=${BUILD_DIR:-build}
 export DATASET_SIZE=${DATASET_SIZE:-MEDIUM}
