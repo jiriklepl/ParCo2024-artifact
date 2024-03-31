@@ -6,4 +6,4 @@ if [ "$(basename "$(pwd)")" = "scripts" ]; then
     cd ..
 fi
 
-( cd PolyBenchGPU-Noarr && ./collect.sh & wait )
+( cd PolyBenchGPU-Noarr && DATA_DIR=../results/PolyBenchGPU/data ./collect.sh & wait )
