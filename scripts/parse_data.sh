@@ -1,11 +1,16 @@
-#!/bin/bash
+#!/bin/bash -e
 
 if [ "$(basename "$(pwd)")" = "scripts" ]; then
     cd ..
 fi
 
 if [ $# -ne 1 ]; then
-    echo "Usage: $0 <path-to-logs>"
+    echo "Usage: $0 <path-to-logs>" >&2
+    exit 1
+fi
+
+if [ ! -d "$1" ]; then
+    echo "Directory $1 does not exist" >&2
     exit 1
 fi
 

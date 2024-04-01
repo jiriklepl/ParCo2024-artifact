@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BUILD_DIR=${BUILD_DIR:-build}
-RESULTS_DIR=${RESULTS_DIR:-../results}
+RESULTS_DIR=${RESULTS_DIR:-results}
 POLYBENCH_C_DIR="../PolybenchC-4.2.1"
 
 tmpdir=$(mktemp -d) || exit 1
@@ -18,11 +18,11 @@ fi
 
 cd "PolybenchC-Noarr" || exit 1
 
-printf "implementation,algorithm,lines,characters,tokens,gzip_size\n" > "$RESULTS_DIR/statistics.csv"
+printf "implementation,algorithm,lines,characters,tokens,gzip_size\n" > "../$RESULTS_DIR/statistics.csv"
 
 #reset noarr.cpp and c.cpp
-echo "" > "$RESULTS_DIR/noarr.cpp"
-echo "" > "$RESULTS_DIR/c.cpp"
+echo "" > "../$RESULTS_DIR/noarr.cpp"
+echo "" > "../$RESULTS_DIR/c.cpp"
 
 find datamining linear-algebra medley stencils -type f -name "*.cpp" | sort | while read -r file; do
 	dir=$(dirname "$file")
@@ -38,8 +38,8 @@ find datamining linear-algebra medley stencils -type f -name "*.cpp" | sort | wh
 
 
 	#extract scop
-	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$file" | gcc -fpreprocessed -dD -E - | grep -v "^#" | clang-format "$CLANG_FORMAT_FLAGS" | tee --append "$RESULTS_DIR/noarr.cpp" > "$tmpdir/noarr/scop-${filename}pp" || exit 1
-	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$polybench_file" | gcc -fpreprocessed -dD -E - | grep -v "^#" | clang-format "$CLANG_FORMAT_FLAGS" | tee --append "$RESULTS_DIR/c.cpp" > "$tmpdir/polybench/scop-${filename}pp" || exit 1
+	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$file" | gcc -fpreprocessed -dD -E - | grep -v "^#" | clang-format "$CLANG_FORMAT_FLAGS" | tee --append "../$RESULTS_DIR/noarr.cpp" > "$tmpdir/noarr/scop-${filename}pp" || exit 1
+	awk '/#pragma endscop/{nextfile} /#pragma scop$/{read=1; next} read' "$polybench_file" | gcc -fpreprocessed -dD -E - | grep -v "^#" | clang-format "$CLANG_FORMAT_FLAGS" | tee --append "../$RESULTS_DIR/c.cpp" > "$tmpdir/polybench/scop-${filename}pp" || exit 1
 
 	# set the modification time to 1 January 2000
 	touch -d "00:00:00 1 January 2000" "$tmpdir/noarr/scop-${filename}pp"
@@ -55,7 +55,7 @@ find datamining linear-algebra medley stencils -type f -name "*.cpp" | sort | wh
 		"$(wc -m < "$tmpdir/noarr/scop-${filename}pp")" \
 		"$(clang -fsyntax-only -Xclang -dump-tokens "$tmpdir/noarr/scop-${filename}pp" 2>&1 | wc -l)" \
 		"$(gzip -c < "$tmpdir/noarr/scop-${filename}pp" | wc -c)" \
-		>> "$RESULTS_DIR/statistics.csv"
+		>> "../$RESULTS_DIR/statistics.csv"
 
 	printf "baseline,%s,%s,%s,%s,%s\n" \
 		"$(basename "$file" | sed 's/\.[^.]*//')" \
@@ -63,7 +63,7 @@ find datamining linear-algebra medley stencils -type f -name "*.cpp" | sort | wh
 		"$(wc -m < "$tmpdir/polybench/scop-${filename}pp")" \
 		"$(clang -fsyntax-only -Xclang -dump-tokens "$tmpdir/polybench/scop-${filename}pp" 2>&1 | wc -l)" \
 		"$(gzip -c < "$tmpdir/polybench/scop-${filename}pp" | wc -c)" \
-		>> "$RESULTS_DIR/statistics.csv"
+		>> "../$RESULTS_DIR/statistics.csv"
 
 
 done
