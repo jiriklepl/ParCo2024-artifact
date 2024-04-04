@@ -52,7 +52,12 @@ mkdir -p results
 "$base/scripts/plot-others.R" results/medium-polybench-c-tuned.csv 1.3 2.5 serial no
 "$base/scripts/plot-others.R" results/medium-polybench-c-omp.csv 1.3 2.5 OpenMP no
 
-"$base/scripts/plot-statistics.R" "$base/results/PolybenchC-Noarr/statistics.csv"
+"$base/scripts/plot-tbb.R" results/small-polybench-c-tbb.csv 1.3 2.5 TBB no
+"$base/scripts/plot-polybench.R" results/small-polybench-c.csv 4 2.5
+"$base/scripts/plot-others.R" results/small-polybench-c-tuned.csv 1.3 2.5 serial no
+"$base/scripts/plot-others.R" results/small-polybench-c-omp.csv 1.3 2.5 OpenMP no
+
+"$base/scripts/plot-statistics.R" "$base/results/statistics.csv"
 
 mkdir -p "$base/results"
 
