@@ -7,25 +7,32 @@ export NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-main}
 export USE_SLURM=${USE_SLURM:-0}
 export DATA_DIR=${DATA_DIR:-data}
 
+# SLURM settings (if used)
+export SLURM_ACCOUNT=${SLURM_ACCOUNT:-kdss}
+export SLURM_PARTITION=${SLURM_PARTITION:-gpu-short}
+export SLURM_WORKER=${SLURM_WORKER:-ampere01}
+export SLURM_TIMEOUT=${SLURM_TIMEOUT:-"2:00:00"}
+
 POLYBENCH_GPU_DIR="../PolyBenchGPU"
 
-if [ "$USE_SLURM" -eq 1 ]; then
-	RUN_SCRIPT="srun -A kdss -p gpu-short --exclusive -wampere01 --gres=gpu:1 -t 2:00:00 --mem=0"
-else
-	RUN_SCRIPT="$(which bash)"
-fi
+run_script() {
+    if [ "$USE_SLURM" -eq 1 ]; then
+        srun -A "$SLURM_ACCOUNT" -p "$SLURM_PARTITION" --exclusive -w"$SLURM_WORKER" --gres=gpu:1 -t "$SLURM_TIMEOUT" --mem=0 "$@"
+    else
+        "$@"
+    fi
+}
 
-( cd "$POLYBENCH_GPU_DIR/CUDA" && $RUN_SCRIPT compileCodes.sh ) || exit 1
-( cd . && $RUN_SCRIPT ./build.sh ) || exit 1
-
+( cd "$POLYBENCH_GPU_DIR/CUDA" && run_script compileCodes.sh ) || exit 1
+( cd . && run_script ./build.sh ) || exit 1
 
 mkdir -p "$DATA_DIR"
 
 compare_algorithms() {
     echo "collecting $1"
-    ( $RUN_SCRIPT ./run_noarr_algorithm.sh "Noarr" "$1" & wait ) > "$DATA_DIR/$1.log"
+    ( run_script ./run_noarr_algorithm.sh "Noarr" "$1" & wait ) > "$DATA_DIR/$1.log"
 	echo "" >> "$DATA_DIR/$1.log"
-    ( $RUN_SCRIPT ./run_baseline_algorithm.sh "Baseline" "$2" & wait ) >> "$DATA_DIR/$1.log"
+    ( run_script ./run_baseline_algorithm.sh "Baseline" "$2" & wait ) >> "$DATA_DIR/$1.log"
     echo "done"
 }
 
