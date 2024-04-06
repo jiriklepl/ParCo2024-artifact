@@ -47,8 +47,7 @@ void init(num_t &alpha, num_t &beta, auto A, auto B, auto C, auto D) {
 template<class inner_t, class tmp_t, class A_t, class B_t>
 __global__ void kernel_2mm_1(inner_t inner, num_t alpha, [[maybe_unused]] num_t beta, tmp_t tmp, A_t A, B_t B) {
 	inner.template for_dims<'s', 't'>([=](auto inner) {
-		auto state = inner.state();
-		tmp[state] = 0;
+		tmp[inner] = 0;
 
 		inner.template for_each<'k'>([=](auto state) {
 			tmp[state] += alpha * A[state] * B[state];
@@ -59,8 +58,7 @@ __global__ void kernel_2mm_1(inner_t inner, num_t alpha, [[maybe_unused]] num_t 
 template<class inner_t, class tmp_t, class C_t, class D_t>
 __global__ void kernel_2mm_2(inner_t inner, [[maybe_unused]] num_t alpha, num_t beta, tmp_t tmp, C_t C, D_t D) {
 	inner.template for_dims<'s', 'v'>([=](auto inner) {
-		auto state = inner.state();
-		D[state] *= beta;
+		D[inner] *= beta;
 
 		inner.template for_each<'j'>([=](auto state) {
 			D[state] += tmp[state] * C[state];

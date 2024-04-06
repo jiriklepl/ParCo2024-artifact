@@ -85,9 +85,7 @@ void kernel_2mm(num_t alpha, num_t beta, auto tmp, auto A, auto B, auto C, auto 
 
 			
 			inner.template for_dims<'j'>([=](auto inner) {
-				auto state = inner.state();
-
-				tmp[state] = 0;
+				tmp[inner] = 0;
 
 				inner.for_each([=](auto state) {
 					tmp[state] += alpha * A[state] * B[state];
@@ -103,9 +101,7 @@ void kernel_2mm(num_t alpha, num_t beta, auto tmp, auto A, auto B, auto C, auto 
 
 			
 			inner.template for_dims<'l'>([=](auto inner) {
-				auto state = inner.state();
-
-				D[state] *= beta;
+				D[inner] *= beta;
 
 				inner.for_each([=](auto state) {
 					D[state] += tmp[state] * C[state];

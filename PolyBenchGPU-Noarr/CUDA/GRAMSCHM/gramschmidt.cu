@@ -46,15 +46,13 @@ __global__ void gramschmidt_kernel1(inner_t inner, A_t A, R_t R_diag, [[maybe_un
 	// Q: i x k
 
 	inner.template for_dims<'t'>([=](auto inner) {
-		auto state = inner.state();
-
 		num_t nrm = 0;
 
 		inner.template for_each<'i'>([=, &nrm](auto state) {
 			nrm += A[state] * A[state];
 		});
 
-		R_diag[state] = sqrt(nrm);
+		R_diag[inner] = sqrt(nrm);
 	});
 }
 
@@ -76,14 +74,13 @@ __global__ void gramschmidt_kernel3(inner_t inner, A_t A_ij, R_t R, Q_t Q) {
 	// Q: i x k
 
 	inner.template for_dims<'t'>([=](auto inner) {
-		auto state = inner.state();
-		auto [j, k] = noarr::get_indices<'j', 'k'>(state);
+		auto [j, k] = noarr::get_indices<'j', 'k'>(inner);
 
 		if (j <= k)
 			return;
 
 
-		R[state] = 0;
+		R[inner] = 0;
 
 		inner.template for_each<'i'>([=](auto state) {
 			R[state] += Q[state] * A_ij[state];

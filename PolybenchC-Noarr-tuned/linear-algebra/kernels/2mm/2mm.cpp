@@ -95,10 +95,7 @@ void kernel_2mm(num_t alpha, num_t beta, auto tmp, auto A, auto B, auto C, auto 
 			tmp += alpha * A * B;
 		})
 		.template for_sections<'i', 'j'>([tmp](auto inner) {
-			auto state = inner.state();
-
-			tmp[state] = 0;
-
+			tmp[inner] = 0;
 			inner();
 		})
 		.order(noarr::hoist<'j'>())
@@ -111,10 +108,7 @@ void kernel_2mm(num_t alpha, num_t beta, auto tmp, auto A, auto B, auto C, auto 
 			D += tmp * C;
 		})
 		.template for_sections<'i', 'l'>([D, beta](auto inner) {
-			auto state = inner.state();
-
-			D[state] *= beta;
-
+			D[inner] *= beta;
 			inner();
 		})
 		.order(noarr::hoist<'l'>())

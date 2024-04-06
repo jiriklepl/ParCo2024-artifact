@@ -71,16 +71,14 @@ void kernel_covariance(num_t float_n, auto data, auto cov, auto mean) {
 			trav.order(noarr::fix(state))
 			.order(noarr::shift<'j'>(noarr::get_index<'i'>(state)))
 			.template for_dims<'j'>([=](auto inner) {
-				auto state = inner.state();
-
-				cov[state] = 0;
+				cov[inner] = 0;
 
 				inner.for_each([=](auto state) {
 					cov[state] += data[state] * data_ki[state];
 				});
 
-				cov[state] /= float_n - (num_t)1;
-				cov_ji[state] = cov[state];
+				cov[inner] /= float_n - (num_t)1;
+				cov_ji[inner] = cov[inner];
 			});
 		});
 
@@ -88,16 +86,14 @@ void kernel_covariance(num_t float_n, auto data, auto cov, auto mean) {
 	// 	inner
 	// 		.order(noarr::shift<'j'>(noarr::get_index<'i'>(inner.state())))
 	// 		.template for_dims<'j'>([=](auto inner) {
-	// 			auto state = inner.state();
-
-	// 			cov[state] = 0;
+	// 			cov[inner] = 0;
 
 	// 			inner.for_each([=](auto state) {
 	// 				cov[state] += data[state] * data_ki[state];
 	// 			});
 
-	// 			cov[state] /= float_n - (num_t)1;
-	// 			cov_ji[state] = cov[state];
+	// 			cov[inner] /= float_n - (num_t)1;
+	// 			cov_ji[inner] = cov[inner];
 	// 		});
 	// });
 }

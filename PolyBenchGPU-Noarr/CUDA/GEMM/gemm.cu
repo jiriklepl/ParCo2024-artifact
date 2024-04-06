@@ -55,8 +55,7 @@ __global__ void kernel_gemm(inner_t inner, num_t alpha, num_t beta, C_t C, A_t A
 	// B: k x j
 
 	inner.template for_dims<'s', 't'>([=](auto inner) {
-		auto state = inner.state();
-		C[state] *= beta;
+		C[inner] *= beta;
 
 		inner.template for_each<'k'>([=](auto state) {
 			C[state] += alpha * A[state] * B[state];
