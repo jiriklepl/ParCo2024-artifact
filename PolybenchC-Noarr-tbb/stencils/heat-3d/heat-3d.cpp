@@ -50,11 +50,11 @@ void init_array(auto A, auto B) {
 // computation kernel
 template<class Order = noarr::neutral_proto>
 [[gnu::flatten, gnu::noinline]]
-void kernel_heat_3d(std::size_t steps, auto A, auto B, Order order = {}) {
+void kernel_heat_3d(std::size_t tsteps, auto A, auto B, Order order = {}) {
 	// A: i x j x k
 	// B: i x j x k
 
-	noarr::traverser(A, B).order(noarr::bcast<'t'>(steps))
+	noarr::traverser(A, B).order(noarr::bcast<'t'>(tsteps))
 		.order(noarr::symmetric_spans<'j', 'k'>(A, 1, 1))
 		.order(order)
 		.template for_dims<'t'>([=](auto traverser) {
