@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script will make the visualizations for the data in the `*/*data` folders
+# This script will make the visualizations for the data in the `results/*/*data` folders
 
 if [ "$(basename "$(pwd)")" = "scripts" ]; then
     cd ..

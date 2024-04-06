@@ -6,11 +6,15 @@ POLYBENCH_C_DIR="../PolybenchC-4.2.1"
 
 tmpdir=$(mktemp -d) || exit 1
 
+cleanup() {
+	rm -rf "$tmpdir"
+}
+
 mkdir -p "$tmpdir/noarr" || exit 1
 mkdir -p "$tmpdir/polybench" || exit 1
 mkdir -p "$RESULTS_DIR" || exit 1
 
-trap "rm -rf $tmpdir" EXIT
+trap cleanup EXIT
 
 if [ "$(basename "$(pwd)")" = "scripts" ]; then
     cd ..
