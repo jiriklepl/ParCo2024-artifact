@@ -23,7 +23,7 @@ run_script() {
     fi
 }
 
-( cd "$POLYBENCH_GPU_DIR/CUDA" && run_script compileCodes.sh ) || exit 1
+( cd "$POLYBENCH_GPU_DIR/CUDA" && run_script ./compileCodes.sh ) || exit 1
 ( cd . && run_script ./build.sh ) || exit 1
 
 mkdir -p "$DATA_DIR"
