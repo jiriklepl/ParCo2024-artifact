@@ -36,7 +36,6 @@ void init_array(num_t &alpha, auto imgIn, auto) {
 
 	traverser(imgIn) | [=](auto state) {
 		auto [w, h] = get_indices<'w', 'h'>(state);
-
 		imgIn[state] = (num_t)((313 * w + 991 * h) % 65536) / 65535.0f;
 	};
 }

@@ -38,7 +38,7 @@ void init_array(auto L, auto x, auto b) {
 		b[inner] = i;
 
 		inner ^ span<'j'>(i + 1) | for_each<'j'>([=](auto state) {
-			auto j = noarr::get_index<'j'>(state);
+			auto j = get_index<'j'>(state);
 			L[state] = (num_t)(i + n - j + 1) * 2 / n;
 		});
 	});

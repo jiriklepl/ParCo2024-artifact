@@ -52,7 +52,6 @@ void init_array(num_t &alpha, auto A, auto B) {
 
 	traverser(B) | [=](auto state) {
 		auto [i, j] = get_indices<'i', 'j'>(state);
-
 		B[state] = (num_t)((nj + (i - j)) % nj) / nj;
 	};
 }
@@ -74,7 +73,6 @@ void kernel_trmm(num_t alpha, auto A, auto B, Order order = {}) {
 		}) ^
 		for_dims<'i', 'j'>([=](auto inner) {
 			inner ^ shift<'k'>(get_index<'i'>(inner) + 1) | planner_execute();
-
 			B[inner] *= alpha;
 		}) ^ order | planner_execute();
 	#pragma endscop

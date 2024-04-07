@@ -39,7 +39,6 @@ void init_array(auto A, auto B) {
 
 	traverser(A, B) | [=](auto state) {
 		auto [i, j, k] = get_indices<'i', 'j', 'k'>(state);
-
 		A[state] = B[state] = (num_t) (i + j + (n - k)) * 10 / n;
 	};
 }

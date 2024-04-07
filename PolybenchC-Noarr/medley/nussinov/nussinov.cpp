@@ -124,8 +124,8 @@ int main(int argc, char *argv[]) {
 		noarr::traverser(table) | noarr::for_dims<'i'>([=](auto inner) {
 			std::cout << std::fixed << std::setprecision(2);
 			inner ^ noarr::shift<'j'>(noarr::get_index<'i'>(inner)) | noarr::for_each<'j'>([=](auto state) {
-					std::cout << table[state] << " ";
-				});
+				std::cout << table[state] << " ";
+			});
 		});
 	}();
 
