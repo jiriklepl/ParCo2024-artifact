@@ -1,10 +1,13 @@
 #!/bin/bash
 
+set -eo pipefail
+
 # This script compares the output of the C and C++/Noarr implementations of the Polybench benchmarks
 # It assumes that the C++/Noarr implementations are built in the build directory and that the C implementations are built in the $POLYBENCH_C_DIR/build directory
 
-BUILD_DIR=${BUILD_DIR:-build}
-SKIP_DIFF=${SKIP_DIFF:-0}
+export BUILD_DIR=${BUILD_DIR:-build}
+export SKIP_DIFF=${SKIP_DIFF:-0}
+export ALGORITHM=${ALGORITHM:-}
 
 POLYBENCH_C_DIR="../PolybenchC-tuned"
 
@@ -17,20 +20,30 @@ cleanup() {
 
 trap cleanup EXIT
 
-( cd "$POLYBENCH_C_DIR" && ./build.sh ) || exit 1
-( cd . && ./build.sh ) || exit 1
+( cd "$POLYBENCH_C_DIR" && ./build.sh )
+( cd . && ./build.sh )
 
 find "$BUILD_DIR" -maxdepth 1 -executable -type f |
 while read -r file; do
 	filename=$(basename "$file")
 
+	if [ -n "$ALGORITHM" ]; then
+		case "$filename" in
+			"$ALGORITHM")
+				;;
+			*)
+				continue
+				;;
+		esac
+	fi
+
 	echo "Comparing $filename"
 
 	printf "\tNoarr:             "
-	"$BUILD_DIR/$filename" 2>&1 1> "$dirname/cpp" || exit 1
+	"$BUILD_DIR/$filename" 2>&1 1> "$dirname/cpp"
 
 	printf "\tBaseline:          "
-	"$POLYBENCH_C_DIR/$BUILD_DIR/$filename" 2> "$dirname/c" || exit 1
+	"$POLYBENCH_C_DIR/$BUILD_DIR/$filename" 2> "$dirname/c"
 
 	if [ "$SKIP_DIFF" -eq 1 ]; then
 		continue
@@ -54,7 +67,6 @@ while read -r file; do
 
 		if (changes >= 10)
 			nextfile
-
 		next
 	}
 
@@ -65,5 +77,5 @@ while read -r file; do
 			printf \"Different output on %s \n\", \"$filename\"
 			exit 1
 		}
-	}" 1>&2 || exit 1
-done || exit 1
+	}" 1>&2
+done

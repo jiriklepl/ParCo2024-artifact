@@ -10,15 +10,14 @@
 
 #include "defines.hpp"
 #include "floyd-warshall.hpp"
-#include "noarr/structures/structs/blocks.hpp"
 
 using num_t = DATA_TYPE;
 
 namespace {
 
-constexpr auto i_vec =  noarr::vector<'i'>();
-constexpr auto j_vec =  noarr::vector<'j'>();
-constexpr auto k_vec =  noarr::vector<'k'>();
+constexpr auto i_vec = noarr::vector<'i'>();
+constexpr auto j_vec = noarr::vector<'j'>();
+constexpr auto k_vec = noarr::vector<'k'>();
 
 struct tuning {
 	DEFINE_PROTO_STRUCT(block_i, noarr::strip_mine_dynamic<'i', 'I', 'i', 's'>(16));

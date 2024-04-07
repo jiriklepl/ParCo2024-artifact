@@ -7,6 +7,7 @@ export DATASET_SIZE=${DATASET_SIZE:-MEDIUM}
 export DATA_TYPE=${DATA_TYPE:-FLOAT}
 export NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-main}
 export SKIP_DIFF=${SKIP_DIFF:-0}
+export ALGORITHM=${ALGORITHM:-}
 
 POLYBENCH_GPU_DIR="../PolyBenchGPU"
 
@@ -23,8 +24,18 @@ trap cleanup EXIT
 ( cd . && ./build.sh )
 
 compare_algorithms() {
+	filename=$(basename "$2")
 	echo "Running $1" >&2
 
+	if [ -n "$ALGORITHM" ]; then
+		case "$filename" in
+			"$ALGORITHM")
+				;;
+			*)
+				continue
+				;;
+		esac
+	fi
 
 	printf "\tnoarr: " >&2
     "$BUILD_DIR/runner" "$1" 2>&1 >"$dirname/noarr.log" | grep -oE "[0-9]+\.[0-9]{2,}" >&2
@@ -54,7 +65,6 @@ compare_algorithms() {
 
 		if (changes >= 10)
 			nextfile
-
 		next
 	}
 

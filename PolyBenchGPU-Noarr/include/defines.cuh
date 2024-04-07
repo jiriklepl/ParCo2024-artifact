@@ -1,5 +1,5 @@
-#ifndef DEFINES_HPP
-#define DEFINES_HPP
+#ifndef NOARR_POLYBENCH_DEFINES_HPP
+#define NOARR_POLYBENCH_DEFINES_HPP
 
 #include <cassert>
 #include <memory>
@@ -92,4 +92,4 @@ private:
     value_type* _data_device;
 };
 
-#endif // DEFINES_HPP
+#endif // NOARR_POLYBENCH_DEFINES_HPP
