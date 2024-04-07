@@ -20,49 +20,55 @@ void init(num_t &alpha, num_t &beta, auto A, auto B, auto C, auto D) {
 	// B: nk x nj
 	// C: nl x nj
 	// D: ni x nl
+	using namespace noarr;
+
 	alpha = 32412;
 	beta = 2123;
 
-	noarr::traverser(A).for_each([=](auto state) {
-		auto [i, k] = noarr::get_indices<'i', 'k'>(state);
+	traverser(A) | [=](auto state) {
+		auto [i, k] = get_indices<'i', 'k'>(state);
 		A[state] = ((num_t) i * k) / NI;
-	});
+	};
 
-	noarr::traverser(B).for_each([=](auto state) {
-		auto [k, j] = noarr::get_indices<'k', 'j'>(state);
+	traverser(B) | [=](auto state) {
+		auto [k, j] = get_indices<'k', 'j'>(state);
 		B[state] = ((num_t) k * (j + 1)) / NJ;
-	});
+	};
 
-	noarr::traverser(C).for_each([=](auto state) {
-		auto [l, j] = noarr::get_indices<'l', 'j'>(state);
+	traverser(C) | [=](auto state) {
+		auto [l, j] = get_indices<'l', 'j'>(state);
 		C[state] = ((num_t) l * (j + 3)) / NL;
-	});
+	};
 
-	noarr::traverser(D).for_each([=](auto state) {
-		auto [i, l] = noarr::get_indices<'i', 'l'>(state);
+	traverser(D) | [=](auto state) {
+		auto [i, l] = get_indices<'i', 'l'>(state);
 		D[state] = ((num_t) i * (l + 2)) / NK;
-	});
+	};
 }
 
 template<class inner_t, class tmp_t, class A_t, class B_t>
 __global__ void kernel_2mm_1(inner_t inner, num_t alpha, [[maybe_unused]] num_t beta, tmp_t tmp, A_t A, B_t B) {
-	inner.template for_dims<'s', 't'>([=](auto inner) {
+	using namespace noarr;
+
+	inner | for_dims<'s', 't'>([=](auto inner) {
 		tmp[inner] = 0;
 
-		inner.template for_each<'k'>([=](auto state) {
+		inner | [=](auto state) {
 			tmp[state] += alpha * A[state] * B[state];
-		});
+		};
 	});
 }
 
 template<class inner_t, class tmp_t, class C_t, class D_t>
 __global__ void kernel_2mm_2(inner_t inner, [[maybe_unused]] num_t alpha, num_t beta, tmp_t tmp, C_t C, D_t D) {
-	inner.template for_dims<'s', 'v'>([=](auto inner) {
+	using namespace noarr;
+
+	inner | for_dims<'s', 'v'>([=](auto inner) {
 		D[inner] *= beta;
 
-		inner.template for_each<'j'>([=](auto state) {
+		inner | [=](auto state) {
 			D[state] += tmp[state] * C[state];
-		});
+		};
 	});
 }
 
@@ -74,13 +80,13 @@ void run_2mm(num_t alpha, num_t beta, auto tmp, auto A, auto B, auto C, auto D) 
 	// C: nl x nj
 	// D: ni x nl
 
-	auto trav1 = noarr::traverser(tmp, A, B)
-		.order(noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_Y))
-		.order(noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X));
+	auto trav1 = noarr::traverser(tmp, A, B) ^
+		noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_Y) ^
+		noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X);
 	
-	auto trav2 = noarr::traverser(tmp, C, D)
-		.order(noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_Y))
-		.order(noarr::into_blocks_dynamic<'l', 'L', 'l', 'v'>(DIM_THREAD_BLOCK_X));
+	auto trav2 = noarr::traverser(tmp, C, D) ^
+		noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_Y) ^
+		noarr::into_blocks_dynamic<'l', 'L', 'l', 'v'>(DIM_THREAD_BLOCK_X);
 
 	noarr::cuda_threads<'J', 'j', 'I', 'i'>(trav1)
 		.simple_run(kernel_2mm_1, 0, alpha, beta, tmp, A, B);

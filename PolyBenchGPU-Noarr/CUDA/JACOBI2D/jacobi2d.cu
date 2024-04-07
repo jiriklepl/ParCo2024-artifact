@@ -19,41 +19,40 @@ namespace {
 void init(auto A, auto B) {
 	// A: i x j
 	// B: i x j
+	using namespace noarr;
 
-	noarr::traverser(A, B).for_each([=](auto state) {
-		auto [i, j] = noarr::get_indices<'i', 'j'>(state);
+	traverser(A, B) | [=](auto state) {
+		auto [i, j] = get_indices<'i', 'j'>(state);
 		A[state] = ((num_t) i * ((int) j + 2) + 10) / N;
 		B[state] = ((num_t) ((int) i - 4) * ((int)j - 1) + 11) / N;
-	});
+	};
 }
 
 template<class inner_t, class A_t, class B_t>
 __global__ void jacobi2d_kernel1(inner_t inner, A_t A, B_t B) {
 	// A: i x j
 	// B: i x j
+	using namespace noarr;
 
-	inner.template for_dims<'s', 't'>([=](auto inner) {
-		inner.for_each([=](auto state) {
-			B[state] = (num_t).2 * (
-				A[state] +
-				A[state - noarr::idx<'j'>(1)] +
-				A[state + noarr::idx<'j'>(1)] +
-				A[state + noarr::idx<'i'>(1)] +
-				A[state - noarr::idx<'i'>(1)]);
-		});
-	});
+	inner ^ hoist<'s', 't'>() | [=](auto state) {
+		B[state] = (num_t).2 * (
+			A[state] +
+			A[state - idx<'j'>(1)] +
+			A[state + idx<'j'>(1)] +
+			A[state + idx<'i'>(1)] +
+			A[state - idx<'i'>(1)]);
+	};
 }
 
 template<class inner_t, class A_t, class B_t>
 __global__ void jacobi2d_kernel2(inner_t inner, A_t A, B_t B) {
 	// A: i x j
 	// B: i x j
+	using namespace noarr;
 
-	inner.template for_dims<'s', 't'>([=](auto inner) {
-		inner.for_each([=](auto state) {
-			A[state] = B[state];
-		});
-	});
+	inner ^ hoist<'s', 't'>() | [=](auto state) {
+		A[state] = B[state];
+	};
 }
 
 // run kernels
@@ -61,13 +60,13 @@ void run_jacobi2d(std::size_t tsteps, auto A, auto B) {
 	// A: i x j
 	// B: i x j
 
-	auto trav = noarr::traverser(A, B)
-		.order(noarr::symmetric_spans<'i', 'j'>(A, 1, 1))
-		.order(noarr::bcast<'T'>(tsteps))
-		.order(noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_Y))
-		.order(noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X));
+	auto trav = noarr::traverser(A, B) ^
+		noarr::symmetric_spans<'i', 'j'>(A, 1, 1) ^
+		noarr::bcast<'T'>(tsteps) ^
+		noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_Y) ^
+		noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X);
 
-	trav.template for_dims<'T'>([A, B](auto inner) {
+	trav | noarr::for_dims<'T'>([A, B](auto inner) {
 		noarr::cuda_threads<'J', 'j', 'I', 'i'>(inner)
 			.simple_run(jacobi2d_kernel1, 0, A, B);
 

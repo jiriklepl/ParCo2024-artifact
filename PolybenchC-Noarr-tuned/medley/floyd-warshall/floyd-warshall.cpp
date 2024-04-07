@@ -35,16 +35,16 @@ struct tuning {
 // initialization function
 void init_array(auto path) {
 	// path: i x j
+	using namespace noarr;
 
-	noarr::traverser(path)
-		.for_each([=](auto state) {
-			auto [i, j] = noarr::get_indices<'i', 'j'>(state);
+	traverser(path) | [=](auto state) {
+		auto [i, j] = get_indices<'i', 'j'>(state);
 
-			path[state] = i * j % 7 + 1;
+		path[state] = i * j % 7 + 1;
 
-			if ((i + j) % 13 == 0 || (i + j) % 7 == 0 || (i + j) % 11 == 0)
-				path[state] = 999;
-		});
+		if ((i + j) % 13 == 0 || (i + j) % 7 == 0 || (i + j) % 11 == 0)
+			path[state] = 999;
+	};
 }
 
 
@@ -53,17 +53,15 @@ template<class Order = noarr::neutral_proto>
 [[gnu::flatten, gnu::noinline]]
 void kernel_floyd_warshall(auto path, Order order = {}) {
 	// path: i x j
+	using namespace noarr;
 
-	auto path_start_k = path ^ noarr::rename<'i', 'k'>();
-	auto path_end_k = path ^ noarr::rename<'j', 'k'>();
+	auto path_start_k = path ^ rename<'i', 'k'>();
+	auto path_end_k = path ^ rename<'j', 'k'>();
 
 	#pragma scop
-	noarr::traverser(path, path_start_k, path_end_k)
-		.order(noarr::hoist<'k'>())
-		.order(order)
-		.for_each([=](auto state) {
-			path[state] = std::min(path_start_k[state] + path_end_k[state], path[state]);
-		});
+	traverser(path, path_start_k, path_end_k) ^ hoist<'k'>() ^ order | [=](auto state) {
+		path[state] = std::min(path_start_k[state] + path_end_k[state], path[state]);
+	};
 	#pragma endscop
 }
 

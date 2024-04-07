@@ -48,9 +48,9 @@ else if constexpr (HISTO_IMPL == histo_foreach) {
 	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	// PAPER 4.0 - First listing
-	noarr::traverser(in).for_each([=](auto state) {
+	noarr::traverser(in) | [=](auto state) {
 		out[noarr::idx<'v'>(in[state])] += 1;
-	});
+	};
 }
 
 #ifdef HISTO_HAVE_TBB

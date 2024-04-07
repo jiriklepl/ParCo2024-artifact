@@ -27,13 +27,14 @@ struct tuning {
 // initialization function
 void init_array(num_t &float_n, auto data) {
 	// data: k x j
+	using namespace noarr;
 
-	float_n = data | noarr::get_length<'k'>();
+	float_n = data | get_length<'k'>();
 
-	noarr::traverser(data).for_each([=](auto state) {
-		auto [k, j] = noarr::get_indices<'k', 'j'>(state);
-		data[state] = (num_t)(k * j) / (data | noarr::get_length<'j'>());
-	});
+	traverser(data) | [=](auto state) {
+		auto [k, j] = get_indices<'k', 'j'>(state);
+		data[state] = (num_t)(k * j) / (data | get_length<'j'>());
+	};
 }
 
 // computation kernel
@@ -42,58 +43,43 @@ void kernel_covariance(num_t float_n, auto data, auto cov, auto mean) {
 	// data: k x j
 	// cov: i x j
 	// mean: j
+	using namespace noarr;
 
-	auto cov_ji = cov ^ noarr::rename<'i', 'j', 'j', 'i'>();
-	auto data_ki = data ^ noarr::rename<'j', 'i'>();
+	auto cov_ji = cov ^ rename<'i', 'j', 'j', 'i'>();
+	auto data_ki = data ^ rename<'j', 'i'>();
 
-	noarr::traverser(mean).for_each([=](auto state) {
+	traverser(mean) | [=](auto state) {
 		mean[state] = 0;
-	});
+	};
 
-	noarr::traverser(data, mean).for_each([=](auto state) {
+	traverser(data, mean) | [=](auto state) {
 		mean[state] += data[state];
-	});
+	};
 
-	noarr::traverser(mean).for_each([=](auto state) {
+	traverser(mean) | [=](auto state) {
 		mean[state] /= float_n;
-	});
+	};
 
-	noarr::traverser(data, mean).for_each([=](auto state) {
+	traverser(data, mean) | [=](auto state) {
 		data[state] -= mean[state];
-	});
+	};
 
-	auto trav = noarr::traverser(data, cov, data_ki, cov_ji);
-	noarr::omp_for_each(
-		trav.order(noarr::reorder<'i'>()),
+	auto trav = traverser(data, cov, data_ki, cov_ji);
+	omp_for_each(
+		trav ^ reorder<'i'>(),
 		[=](auto state) {
-			trav.order(noarr::fix(state))
-			.order(noarr::shift<'j'>(noarr::get_index<'i'>(state)))
-			.template for_dims<'j'>([=](auto inner) {
+			auto inner = trav ^ fix(state) ^ shift<'j'>(get_index<'i'>(state));
+			inner | for_dims<'j'>([=](auto inner) {
 				cov[inner] = 0;
 
-				inner.for_each([=](auto state) {
+				inner | [=](auto state) {
 					cov[state] += data[state] * data_ki[state];
-				});
+				};
 
 				cov[inner] /= float_n - (num_t)1;
 				cov_ji[inner] = cov[inner];
 			});
 		});
-
-	//  for_dims<'i'>([=](auto inner) {
-	// 	inner
-	// 		.order(noarr::shift<'j'>(noarr::get_index<'i'>(inner.state())))
-	// 		.template for_dims<'j'>([=](auto inner) {
-	// 			cov[inner] = 0;
-
-	// 			inner.for_each([=](auto state) {
-	// 				cov[state] += data[state] * data_ki[state];
-	// 			});
-
-	// 			cov[inner] /= float_n - (num_t)1;
-	// 			cov_ji[inner] = cov[inner];
-	// 		});
-	// });
 }
 
 } // namespace

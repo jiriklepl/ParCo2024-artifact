@@ -59,9 +59,9 @@ void run_histogram(value_t *in_ptr, std::size_t size, std::size_t *out_ptr) {
 	auto out_struct = noarr::scalar<std::size_t>() ^ noarr::array<'v', NUM_VALUES>();
 
 	// PAPER: 4.1 - Second listing
-	auto in_blk_struct = in_struct
-		^ noarr::into_blocks<'i', 'B', 't'>(noarr::lit<BLOCK_SIZE>)
-		^ noarr::into_blocks<'B', 'b', 'x'>(noarr::lit<ELEMS_PER_THREAD>);
+	auto in_blk_struct = in_struct ^
+		noarr::into_blocks<'i', 'B', 't'>(noarr::lit<BLOCK_SIZE>) ^
+		noarr::into_blocks<'B', 'b', 'x'>(noarr::lit<ELEMS_PER_THREAD>);
 	auto in = noarr::make_bag(in_blk_struct, in_ptr);
 	auto out = noarr::make_bag(out_struct, out_ptr);
 

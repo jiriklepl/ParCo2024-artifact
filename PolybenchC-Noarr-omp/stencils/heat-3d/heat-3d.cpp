@@ -34,15 +34,15 @@ struct tuning {
 void init_array(auto A, auto B) {
 	// A: i x j x k
 	// B: i x j x k
+	using namespace noarr;
 
-	auto n = A | noarr::get_length<'i'>();
+	auto n = A | get_length<'i'>();
 
-	noarr::traverser(A, B)
-		.for_each([=](auto state) {
-			auto [i, j, k] = noarr::get_indices<'i', 'j', 'k'>(state);
+	traverser(A, B) | [=](auto state) {
+		auto [i, j, k] = get_indices<'i', 'j', 'k'>(state);
 
-			A[state] = B[state] = (num_t) (i + j + (n - k)) * 10 / n;
-		});
+		A[state] = B[state] = (num_t) (i + j + (n - k)) * 10 / n;
+	};
 }
 
 // computation kernel
@@ -51,49 +51,48 @@ template<class Order = noarr::neutral_proto>
 void kernel_heat_3d(std::size_t tsteps, auto A, auto B, Order order = {}) {
 	// A: i x j x k
 	// B: i x j x k
+	using namespace noarr;
 
-	noarr::traverser(A, B).order(noarr::bcast<'t'>(tsteps))
-		.order(noarr::symmetric_spans<'j', 'k'>(A, 1, 1))
-		.order(order)
-		.template for_dims<'t'>([=](auto traverser) {
-			noarr::omp_for_each(
-				traverser.order(noarr::symmetric_span<'i'>(A, 1) ^ noarr::reorder<'i'>()),
+	auto trav = traverser(A, B) ^ bcast<'t'>(tsteps) ^ symmetric_spans<'j', 'k'>(A, 1, 1) ^ order;
+	trav | for_dims<'t'>([=](auto traverser) {
+			omp_for_each(
+				traverser ^ symmetric_span<'i'>(A, 1) ^ reorder<'i'>(),
 				[=](auto state) {
-					auto inner = traverser.order(noarr::fix(state));
+					auto inner = traverser ^ fix(state);
 
-					inner.for_each([=](auto state) {
+					inner | [=](auto state) {
 						B[state] =
-							(num_t).125 * (A[state - noarr::idx<'i'>(1)] -
+							(num_t).125 * (A[state - idx<'i'>(1)] -
 										2 * A[state] +
-										A[state + noarr::idx<'i'>(1)]) +
-							(num_t).125 * (A[state - noarr::idx<'j'>(1)] -
+										A[state + idx<'i'>(1)]) +
+							(num_t).125 * (A[state - idx<'j'>(1)] -
 										2 * A[state] +
-										A[state + noarr::idx<'j'>(1)]) +
-							(num_t).125 * (A[state - noarr::idx<'k'>(1)] -
+										A[state + idx<'j'>(1)]) +
+							(num_t).125 * (A[state - idx<'k'>(1)] -
 										2 * A[state] +
-										A[state + noarr::idx<'k'>(1)]) +
+										A[state + idx<'k'>(1)]) +
 							A[state];
-					});
+					};
 				});
 
-			noarr::omp_for_each(
-				traverser.order(noarr::symmetric_span<'i'>(A, 1) ^ noarr::reorder<'i'>()),
+			omp_for_each(
+				traverser ^ symmetric_span<'i'>(A, 1) ^ reorder<'i'>(),
 				[=](auto state) {
-					auto inner = traverser.order(noarr::fix(state));
+					auto inner = traverser ^ fix(state);
 
-					inner.for_each([=](auto state) {
+					inner | [=](auto state) {
 						A[state] =
-							(num_t).125 * (B[state - noarr::idx<'i'>(1)] -
+							(num_t).125 * (B[state - idx<'i'>(1)] -
 										2 * B[state] +
-										B[state + noarr::idx<'i'>(1)]) +
-							(num_t).125 * (B[state - noarr::idx<'j'>(1)] -
+										B[state + idx<'i'>(1)]) +
+							(num_t).125 * (B[state - idx<'j'>(1)] -
 										2 * B[state] +
-										B[state + noarr::idx<'j'>(1)]) +
-							(num_t).125 * (B[state - noarr::idx<'k'>(1)] -
+										B[state + idx<'j'>(1)]) +
+							(num_t).125 * (B[state - idx<'k'>(1)] -
 										2 * B[state] +
-										B[state + noarr::idx<'k'>(1)]) +
+										B[state + idx<'k'>(1)]) +
 							B[state];
-					});
+					};
 				});
 		});
 }

@@ -20,23 +20,24 @@ void init(auto A, auto R, auto Q) {
 	// A: i x k
 	// R: k x j
 	// Q: i x k
+	using namespace noarr;
 
-	auto ni = A | noarr::get_length<'i'>();
-	auto nj = R | noarr::get_length<'j'>();
+	auto ni = A | get_length<'i'>();
+	auto nj = R | get_length<'j'>();
 
-	noarr::traverser(A, Q).for_each([=](auto state) {
-		auto i = noarr::get_index<'i'>(state);
-		auto k = noarr::get_index<'k'>(state);
+	traverser(A, Q) | [=](auto state) {
+		auto i = get_index<'i'>(state);
+		auto k = get_index<'k'>(state);
 
 		A[state] = ((num_t) i * k) / ni;
 		Q[state] = ((num_t) i * (k + 1)) / nj;
-	});
+	};
 
-	noarr::traverser(R).for_each([=](auto state) {
-		auto [k, j] = noarr::get_indices<'k', 'j'>(state);
+	traverser(R) | [=](auto state) {
+		auto [k, j] = get_indices<'k', 'j'>(state);
 
 		R[state] = ((num_t) k * (j + 2)) / nj;
-	});
+	};
 }
 
 template<class inner_t, class A_t, class R_t, class Q_t>
@@ -44,13 +45,14 @@ __global__ void gramschmidt_kernel1(inner_t inner, A_t A, R_t R_diag, [[maybe_un
 	// A: i x k
 	// R: k x j
 	// Q: i x k
+	using namespace noarr;
 
-	inner.template for_dims<'t'>([=](auto inner) {
+	inner | for_dims<'t'>([=](auto inner) {
 		num_t nrm = 0;
 
-		inner.template for_each<'i'>([=, &nrm](auto state) {
+		inner | [=, &nrm](auto state) {
 			nrm += A[state] * A[state];
-		});
+		};
 
 		R_diag[inner] = sqrt(nrm);
 	});
@@ -61,8 +63,9 @@ __global__ void gramschmidt_kernel2(inner_t inner, A_t A, R_t R_diag, Q_t Q) {
 	// A: i x k
 	// R: k x j
 	// Q: i x k
+	using namespace noarr;
 
-	inner.template for_each<'s'>([=](auto state) {
+	inner | for_each<'s'>([=](auto state) {
 		Q[state] = A[state] / R_diag[state];
 	});
 }
@@ -72,21 +75,21 @@ __global__ void gramschmidt_kernel3(inner_t inner, A_t A_ij, R_t R, Q_t Q) {
 	// A: i x k
 	// R: k x j
 	// Q: i x k
+	using namespace noarr;
 
-	inner.template for_dims<'t'>([=](auto inner) {
-		auto [j, k] = noarr::get_indices<'j', 'k'>(inner);
+	inner | for_dims<'t'>([=](auto inner) {
+		auto [j, k] = get_indices<'j', 'k'>(inner);
 
 		if (j <= k)
 			return;
 
-
 		R[inner] = 0;
 
-		inner.template for_each<'i'>([=](auto state) {
+		inner | for_each<'i'>([=](auto state) {
 			R[state] += Q[state] * A_ij[state];
 		});
 
-		inner.template for_each<'i'>([=](auto state) {
+		inner | for_each<'i'>([=](auto state) {
 			A_ij[state] -= Q[state] * R[state];
 		});
 	});
@@ -103,22 +106,19 @@ void run_gramschmidt(auto A, auto R, auto Q) {
 	// `A_ij = A ^ noarr::rename<'k', 'j'>()` currently triggers a compiler bug, this is a simple workaround
 	auto A_ij = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vectors_like<'j', 'i'>(trav.top_struct()), A.data());
 
-	trav.template for_dims<'k'>([=](auto inner) {
-		auto trav1 = inner
-			.order(noarr::slice<'j'>(0, 1))
-			.order(noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X))
-			.order(noarr::bcast<'Y'>(1) ^ noarr::bcast<'y'>(DIM_THREAD_BLOCK_Y))
-			;
+	trav | noarr::for_dims<'k'>([=](auto inner) {
+		auto trav1 = inner ^
+			noarr::slice<'j'>(0, 1) ^
+			noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X) ^
+			noarr::bcast<'Y'>(1) ^ noarr::bcast<'y'>(DIM_THREAD_BLOCK_Y);
 	
-		auto trav2 = inner
-			.order(noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_X))
-			.order(noarr::bcast<'Y'>(1) ^ noarr::bcast<'y'>(DIM_THREAD_BLOCK_Y))
-			;
+		auto trav2 = inner ^
+			noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_X) ^
+			noarr::bcast<'Y'>(1) ^ noarr::bcast<'y'>(DIM_THREAD_BLOCK_Y);
 
-		auto trav3 = inner
-			.order(noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X))
-			.order(noarr::bcast<'Y'>(1) ^ noarr::bcast<'y'>(DIM_THREAD_BLOCK_Y))
-			;
+		auto trav3 = inner ^
+			noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X) ^
+			noarr::bcast<'Y'>(1) ^ noarr::bcast<'y'>(DIM_THREAD_BLOCK_Y);
 
 		auto R_diag = R ^ noarr::fix<'j'>(noarr::get_index<'k'>(inner.state()));
 

@@ -22,30 +22,25 @@ void init(num_t &alpha, num_t &beta, auto C, auto A, auto B) {
 	// C: i x j
 	// A: i x k
 	// B: k x j
+	using namespace noarr;
 
 	alpha = ALPHA;
 	beta = BETA;
 
-	noarr::traverser(A)
-		.for_each([=](auto state) {
-			auto [i, k] = noarr::get_indices<'i', 'k'>(state);
-
-			A[state] = ((num_t) i * k) / NI;
-		});
+	traverser(A) | [=](auto state) {
+		auto [i, k] = get_indices<'i', 'k'>(state);
+		A[state] = ((num_t) i * k) / NI;
+	};
 		
-	noarr::traverser(B)
-		.for_each([=](auto state) {
-			auto [k, j] = noarr::get_indices<'k', 'j'>(state);
-
-			B[state] = ((num_t) k * j) / NI;
-		});
+	traverser(B) | [=](auto state) {
+		auto [k, j] = get_indices<'k', 'j'>(state);
+		B[state] = ((num_t) k * j) / NI;
+	};
 	
-	noarr::traverser(C)
-		.for_each([=](auto state) {
-			auto [i, j] = noarr::get_indices<'i', 'j'>(state);
-
-			C[state] = ((num_t) i * j) / NI;
-		});
+	traverser(C) | [=](auto state) {
+		auto [i, j] = get_indices<'i', 'j'>(state);
+		C[state] = ((num_t) i * j) / NI;
+	};
 }
 
 template<class inner_t, class C_t, class A_t, class B_t>
@@ -53,13 +48,14 @@ __global__ void kernel_gemm(inner_t inner, num_t alpha, num_t beta, C_t C, A_t A
 	// C: i x j
 	// A: i x k
 	// B: k x j
+	using namespace noarr;
 
-	inner.template for_dims<'s', 't'>([=](auto inner) {
+	inner | for_dims<'s', 't'>([=](auto inner) {
 		C[inner] *= beta;
 
-		inner.template for_each<'k'>([=](auto state) {
+		inner | [=](auto state) {
 			C[state] += alpha * A[state] * B[state];
-		});
+		};
 	});
 }
 
@@ -68,9 +64,9 @@ void run_gemm(num_t alpha, num_t beta, auto C, auto A, auto B) {
 	// C: i x j
 	// A: i x k
 	// B: k x j
-	auto trav = noarr::traverser(C, A, B)
-		.order(noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_Y))
-		.order(noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X));
+	auto trav = noarr::traverser(C, A, B) ^
+		noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_Y) ^
+		noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X);
 
 	noarr::cuda_threads<'J', 'j', 'I', 'i'>(trav)
 		.simple_run(kernel_gemm, 0, alpha, beta, C, A, B);

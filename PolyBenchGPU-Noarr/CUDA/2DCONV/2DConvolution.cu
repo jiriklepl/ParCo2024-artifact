@@ -18,9 +18,9 @@ namespace {
 void init(auto A) {
 	// A: i x j
 
-	noarr::traverser(A).order(noarr::hoist<'i'>()).for_each([=](auto state) {
+	noarr::traverser(A) ^ noarr::hoist<'i'>() | [=](auto state) {
 		A[state] = (float)rand() / (float)RAND_MAX;
-	});
+	};
 }
 
 template<class inner_t, class A_t, class B_t>
@@ -35,7 +35,7 @@ __global__ void kernel_2dconv(inner_t inner, A_t A, B_t B) {
 	c12 = -0.3;  c22 = +0.6;  c32 = -0.9;
 	c13 = +0.4;  c23 = +0.7;  c33 = +0.10;
 
-	inner.template for_each<'s', 't'>([=](auto state) {
+	inner | noarr::for_each<'s', 't'>([=](auto state) {
 		auto [i, j] = noarr::get_indices<'i', 'j'>(state);
 
 		if (i == 0 || j == 0)
@@ -57,12 +57,11 @@ __global__ void kernel_2dconv(inner_t inner, A_t A, B_t B) {
 void run_2dconv(auto A, auto B) {
 	// A: i x j
 	// B: i x j
-	auto trav = noarr::traverser(A, B)
-		.order(noarr::span<'i'>(0, (A | noarr::get_length<'i'>()) - 1))
-		.order(noarr::span<'j'>(0, (A | noarr::get_length<'j'>()) - 1))
-		.order(noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_Y))
-		.order(noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X))
-		;
+	auto trav = noarr::traverser(A, B) ^
+		noarr::span<'i'>(0, (A | noarr::get_length<'i'>()) - 1) ^
+		noarr::span<'j'>(0, (A | noarr::get_length<'j'>()) - 1) ^
+		noarr::into_blocks_dynamic<'i', 'I', 'i', 's'>(DIM_THREAD_BLOCK_Y) ^
+		noarr::into_blocks_dynamic<'j', 'J', 'j', 't'>(DIM_THREAD_BLOCK_X);
 
 	noarr::cuda_threads<'J', 'j', 'I', 'i'>(trav)
 		.simple_run(kernel_2dconv, 0, A, B);

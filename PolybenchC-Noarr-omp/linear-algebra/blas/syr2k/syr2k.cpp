@@ -32,25 +32,24 @@ void init_array(num_t &alpha, num_t &beta, auto C, auto A, auto B) {
 	// C: i x j
 	// A: i x k
 	// B: i x k
+	using namespace noarr;
 
 	alpha = (num_t)1.5;
 	beta = (num_t)1.2;
 
-	auto ni = C | noarr::get_length<'i'>();
-	auto nk = A | noarr::get_length<'k'>();
+	auto ni = C | get_length<'i'>();
+	auto nk = A | get_length<'k'>();
 
-	noarr::traverser(A, B)
-		.for_each([=](auto state) {
-			auto [i, k] = noarr::get_indices<'i', 'k'>(state);
-			A[state] = (num_t)((i * k + 1) % ni) / ni;
-			B[state] = (num_t)((i * k + 2) % nk) / nk;
-		});
+	traverser(A, B) | [=](auto state) {
+		auto [i, k] = get_indices<'i', 'k'>(state);
+		A[state] = (num_t)((i * k + 1) % ni) / ni;
+		B[state] = (num_t)((i * k + 2) % nk) / nk;
+	};
 
-	noarr::traverser(C)
-		.for_each([=](auto state) {
-			auto [i, j] = noarr::get_indices<'i', 'j'>(state);
-			C[state] = (num_t)((i * j + 3) % ni) / nk;
-		});
+	traverser(C) | [=](auto state) {
+		auto [i, j] = get_indices<'i', 'j'>(state);
+		C[state] = (num_t)((i * j + 3) % ni) / nk;
+	};
 }
 
 // computation kernel
@@ -60,28 +59,24 @@ void kernel_syr2k(num_t alpha, num_t beta, auto C, auto A, auto B, Order order =
 	// C: i x j
 	// A: i x k
 	// B: i x k
+	using namespace noarr;
 
-	auto A_renamed = A ^ noarr::rename<'i', 'j'>();
-	auto B_renamed = B ^ noarr::rename<'i', 'j'>();
+	auto A_renamed = A ^ rename<'i', 'j'>();
+	auto B_renamed = B ^ rename<'i', 'j'>();
 
-	auto trav = noarr::traverser(C, A, B, A_renamed, B_renamed);
-	noarr::omp_for_each(
-		trav.order(noarr::reorder<'i'>()),
+	auto trav = traverser(C, A, B, A_renamed, B_renamed);
+	omp_for_each(
+		trav ^ reorder<'i'>(),
 		[=](auto state) {
-			auto inner = trav.order(noarr::fix(state));
+			auto inner = trav ^ fix(state) ^ slice<'j'>(0, get_index<'i'>(state) + 1);
 
-			inner
-				.order(noarr::slice<'j'>(0, noarr::get_index<'i'>(state) + 1))
-				.template for_dims<'j'>([=](auto inner) {
-					C[inner.state()] *= beta;
-				});
+			inner | for_dims<'j'>([=](auto inner) {
+				C[inner.state()] *= beta;
+			});
 
-			inner
-				.order(noarr::slice<'j'>(0, noarr::get_index<'i'>(state) + 1))
-				.order(order)
-				.for_each([=](auto state) {
-					C[state] += A_renamed[state] * alpha * B[state] + B_renamed[state] * alpha * A[state];
-				});
+			(inner ^ order) | [=](auto state) {
+				C[state] += A_renamed[state] * alpha * B[state] + B_renamed[state] * alpha * A[state];
+			};
 		});
 }
 
