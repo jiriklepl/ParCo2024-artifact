@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -eo pipefail
 
 export BUILD_DIR=${BUILD_DIR:-build}
 export DATASET_SIZE=${DATASET_SIZE:-MEDIUM}
@@ -9,24 +10,33 @@ export SKIP_DIFF=${SKIP_DIFF:-0}
 
 POLYBENCH_GPU_DIR="../PolyBenchGPU"
 
-tmpdir=$(mktemp -d)
+dirname=$(mktemp -d)
 
-trap "echo deleting $tmpdir; rm -rf $tmpdir" EXIT
+cleanup() {
+	echo "deleting $dirname" >&2
+	rm -rf "$dirname"
+}
 
-( cd "$POLYBENCH_GPU_DIR/CUDA" && bash compileCodes.sh ) || exit 1
-( cd . && ./build.sh ) || exit 1
+trap cleanup EXIT
+
+( cd "$POLYBENCH_GPU_DIR/CUDA" && bash compileCodes.sh )
+( cd . && ./build.sh )
 
 compare_algorithms() {
 	echo "Running $1" >&2
 
 
 	printf "\tnoarr: " >&2
-    "$BUILD_DIR/runner" "$1" 2>&1 >"$tmpdir/noarr.log" | grep -oE "[0-9]+\.[0-9]{2,}" >&2
+    "$BUILD_DIR/runner" "$1" 2>&1 >"$dirname/noarr.log" | grep -oE "[0-9]+\.[0-9]{2,}" >&2
 
 	printf "\tbaseline: " >&2
-    "$2" 2>"$tmpdir/baseline.log" | grep -oE "[0-9]+\.[0-9]{2,}" >&2
+    "$2" 2>"$dirname/baseline.log" | grep -oE "[0-9]+\.[0-9]{2,}" >&2
 
-	paste <(grep -oE '[0-9]+\.[0-9]+|nan' "$tmpdir/baseline.log") <(grep -oE '[0-9]+(\.[0-9]+)?|nan' "$tmpdir/noarr.log") |
+	if [ "$SKIP_DIFF" -eq 1 ]; then
+		return
+	fi
+
+	paste <(grep -oE '[0-9]+\.[0-9]+|nan' "$dirname/baseline.log") <(grep -oE '[0-9]+(\.[0-9]+)?|nan' "$dirname/noarr.log") |
 	awk "BEGIN {
 		different = 0
 		n = 0
@@ -55,11 +65,11 @@ compare_algorithms() {
 			printf \"Different output on %s \n\", \"$1\"
 			exit 1
 		}
-	}" 1>&2 || exit 1
+	}" 1>&2
 }
 
-compare_algorithms gemm "$POLYBENCH_GPU_DIR/CUDA/GEMM/gemm.exe" || exit 1
-compare_algorithms 2mm "$POLYBENCH_GPU_DIR/CUDA/2MM/2mm.exe" || exit 1
-compare_algorithms 2DConvolution "$POLYBENCH_GPU_DIR/CUDA/2DCONV/2DConvolution.exe" || exit 1
-compare_algorithms gramschmidt "$POLYBENCH_GPU_DIR/CUDA/GRAMSCHM/gramschmidt.exe" || exit 1
-compare_algorithms jacobi2d "$POLYBENCH_GPU_DIR/CUDA/JACOBI2D/jacobi2D.exe" || exit 1
+compare_algorithms gemm "$POLYBENCH_GPU_DIR/CUDA/GEMM/gemm.exe"
+compare_algorithms 2mm "$POLYBENCH_GPU_DIR/CUDA/2MM/2mm.exe"
+compare_algorithms 2DConvolution "$POLYBENCH_GPU_DIR/CUDA/2DCONV/2DConvolution.exe"
+compare_algorithms gramschmidt "$POLYBENCH_GPU_DIR/CUDA/GRAMSCHM/gramschmidt.exe"
+compare_algorithms jacobi2d "$POLYBENCH_GPU_DIR/CUDA/JACOBI2D/jacobi2D.exe"

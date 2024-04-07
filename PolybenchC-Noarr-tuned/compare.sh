@@ -10,7 +10,12 @@ POLYBENCH_C_DIR="../PolybenchC-tuned"
 
 dirname=$(mktemp -d)
 
-trap "echo deleting $dirname; rm -rf $dirname" EXIT
+cleanup() {
+	echo "deleting $dirname" >&2
+	rm -rf "$dirname"
+}
+
+trap cleanup EXIT
 
 ( cd "$POLYBENCH_C_DIR" && ./build.sh ) || exit 1
 ( cd . && ./build.sh ) || exit 1
