@@ -3,7 +3,7 @@ Include(FetchContent)
 
 # set the project name
 project(
-  NoarrPolybenchGPU VERSION 0.0.1
+  NoarrPolybenchGPU VERSION 1.0
   DESCRIPTION "NoarrPolybenchGPU is a GPU implementation of the Polybench benchmark suite."
   LANGUAGES CXX
 )
