@@ -1,5 +1,10 @@
 #!/bin/bash -e
 
+# Set the branch of Noarr Structures to use
+export DATASET_SIZE=${DATASET_SIZE:-MEDIUM}
+export DATA_TYPE=${DATA_TYPE:-FLOAT}
+export NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-main}
+
 export PATH=$PATH:/usr/local/cuda/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib:/usr/local/cuda/lib64
 
@@ -10,7 +15,7 @@ cd build
 # Configure the build
 cmake -DCMAKE_BUILD_TYPE=Release \
     -DNOARR_STRUCTURES_BRANCH="$NOARR_STRUCTURES_BRANCH" \
-	-DCMAKE_CUDA_FLAGS="-DMEDIUM_DATASET -DDATA_TYPE_IS_FLOAT -O3" \
+	-DCMAKE_CUDA_FLAGS="${CMAKE_CUDA_FLAGS} -D${DATASET_SIZE}_DATASET -DDATA_TYPE_IS_$DATA_TYPE -O3" \
 	..
 
 # Build the project

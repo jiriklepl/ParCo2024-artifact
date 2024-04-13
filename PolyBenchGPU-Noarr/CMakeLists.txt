@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.24)
 Include(FetchContent)
 
-# set the project name
+# set the project name and version
 project(
   NoarrPolybenchGPU VERSION 1.0
-  DESCRIPTION "NoarrPolybenchGPU is a GPU implementation of the Polybench benchmark suite."
+  DESCRIPTION "Polybench-GPU kernels implemented using Noarr Structures"
   LANGUAGES CXX
 )
 
@@ -25,7 +25,7 @@ if(NOT DEFINED NOARR_STRUCTURES_BRANCH)
   set(NOARR_STRUCTURES_BRANCH main)
 endif()
 
-# download the Noarr Structures library
+# download Noarr Structures
 FetchContent_Declare(
   Noarr
   GIT_REPOSITORY https://github.com/jiriklepl/noarr-structures.git
@@ -43,3 +43,5 @@ add_executable(runner
   CUDA/JACOBI2D/jacobi2d.cu
   CUDA/GRAMSCHM/gramschmidt.cu
 )
+
+set_target_properties(runner PROPERTIES CUDA_ARCHITECTURES native)

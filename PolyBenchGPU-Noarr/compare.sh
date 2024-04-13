@@ -32,7 +32,7 @@ compare_algorithms() {
 			"$ALGORITHM")
 				;;
 			*)
-				continue
+				return
 				;;
 		esac
 	fi
@@ -47,7 +47,15 @@ compare_algorithms() {
 		return
 	fi
 
-	paste <(grep -oE '[0-9]+\.[0-9]+|nan' "$dirname/baseline.log") <(grep -oE '[0-9]+(\.[0-9]+)?|nan' "$dirname/noarr.log") |
+	grep -woE '[0-9\.]+|nan' "$dirname/baseline.log" > "$dirname/baseline.tmp" && mv "$dirname/baseline.tmp" "$dirname/baseline.log"
+	grep -woE '[0-9\.]+|nan' "$dirname/noarr.log" > "$dirname/noarr.tmp" && mv "$dirname/noarr.tmp" "$dirname/noarr.log"
+
+	# skip files that are exactly the same
+	if cmp -s "$dirname/baseline.log" "$dirname/noarr.log"; then
+		return
+	fi
+
+	paste "$dirname/baseline.log" "$dirname/noarr.log" |
 	awk "BEGIN {
 		different = 0
 		n = 0
