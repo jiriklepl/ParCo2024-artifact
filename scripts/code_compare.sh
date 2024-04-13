@@ -68,8 +68,6 @@ find datamining linear-algebra medley stencils -type f -name "*.cpp" | sort | wh
 		"$(clang -fsyntax-only -Xclang -dump-tokens "$tmpdir/polybench/scop-${filename}pp" 2>&1 | wc -l)" \
 		"$(gzip -c < "$tmpdir/polybench/scop-${filename}pp" | wc -c)" \
 		>> "../$RESULTS_DIR/statistics.csv"
-
-
 done
 
 echo "Comparing noarr and polybench using wc..."
@@ -82,23 +80,21 @@ echo "Comparing noarr and polybench using wc..."
 	printf "\t%s\n" "NOARR LINES: $NOARR_LINES"
 	printf "\t%s\n" "POLYBENCH LINES: $POLYBENCH_LINES"
 
-	printf "\t%s\n" "NOARR/POLYBENCH: $(awk "BEGIN{print($NOARR_LINES / $POLYBENCH_LINES)}" )"
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_LINES / $POLYBENCH_LINES) - 1}" )"
 
-echo ""
+	echo ""
 
 	printf "\t%s\n" "NOARR CHARS: $NOARR_CHARS"
 	printf "\t%s\n" "POLYBENCH CHARS: $POLYBENCH_CHARS"
 
-	printf "\t%s\n" "NOARR/POLYBENCH: $(awk "BEGIN{print($NOARR_CHARS / $POLYBENCH_CHARS)}" )"
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_CHARS / $POLYBENCH_CHARS) - 1}" )"
 
-echo ""
+	echo ""
 
-	printf "\t%s\n" "NOARR AVG LINE LENGTH: $(awk "BEGIN{print($NOARR_CHARS / $NOARR_LINES)}" )"
-	printf "\t%s\n" "POLYBENCH AVG LINE LENGTH: $(awk "BEGIN{print($POLYBENCH_CHARS / $POLYBENCH_LINES)}" )"
+	printf "\t%s\n" "NOARR AVG LINE LENGTH: $(awk "BEGIN{print($NOARR_CHARS / $NOARR_LINES) - 1}" )"
+	printf "\t%s\n" "POLYBENCH AVG LINE LENGTH: $(awk "BEGIN{print($POLYBENCH_CHARS / $POLYBENCH_LINES) - 1}" )"
 
-	printf "\t%s\n" "NOARR/POLYBENCH: $(awk "BEGIN{print(($NOARR_CHARS / $NOARR_LINES) / ($POLYBENCH_CHARS / $POLYBENCH_LINES))}" )"
-
-echo ""
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print(($NOARR_CHARS / $NOARR_LINES) / ($POLYBENCH_CHARS / $POLYBENCH_LINES)) - 1}" )"
 
 echo "Comparing noarr and polybench using C++ tokenization..."
 
@@ -108,7 +104,7 @@ echo "Comparing noarr and polybench using C++ tokenization..."
 	printf "\t%s\n" "NOARR TOKENS: $NOARR_TOKENS"
 	printf "\t%s\n" "POLYBENCH TOKENS: $POLYBENCH_TOKENS"
 
-	printf "\t%s\n" "NOARR/POLYBENCH: $(awk "BEGIN{print($NOARR_TOKENS / $POLYBENCH_TOKENS)}" )"
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_TOKENS / $POLYBENCH_TOKENS) - 1}" )"
 
 echo ""
 
@@ -135,7 +131,7 @@ echo "Comparing noarr and polybench using gzip on single kernels"
 	printf "\t%s\n" "NOARR SIZE: $NOARR_SIZE"
 	printf "\t%s\n" "POLYBENCH SIZE: $POLYBENCH_SIZE"
 
-	printf "\t%s\n" "NOARR/POLYBENCH: $(awk "BEGIN{print($NOARR_SIZE / $POLYBENCH_SIZE)}" )"
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_SIZE / $POLYBENCH_SIZE) - 1}" )"
 
 echo "Comparing noarr and polybench using gzipped tar archive..."
 
@@ -148,5 +144,155 @@ echo "Comparing noarr and polybench using gzipped tar archive..."
 	printf "\t%s\n" "NOARR ARCHIVE SIZE: $NOARR_ARCHIVE_SIZE"
 	printf "\t%s\n" "POLYBENCH ARCHIVE SIZE: $POLYBENCH_ARCHIVE_SIZE"
 
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_ARCHIVE_SIZE / $POLYBENCH_ARCHIVE_SIZE) - 1}" )"
 
-	printf "\t%s\n" "NOARR/POLYBENCH: $(awk "BEGIN{print($NOARR_ARCHIVE_SIZE / $POLYBENCH_ARCHIVE_SIZE)}" )"
+cd ..
+
+echo "Comparing noarr and polybench using the cyclomatic complexity metric..."
+
+	# the script returns csv with columns:"metric,cyclomatic complexity,<value>"
+	NOARR_CYCLOMATIC_COMPLEXITY=$(awk -f scripts/cyclo-analyze.awk "$tmpdir/noarr/scop-"* | awk -F, '$1 == "metric" && $2 == "cyclomatic complexity" {print $3}')
+	POLYBENCH_CYCLOMATIC_COMPLEXITY=$(awk -f scripts/cyclo-analyze.awk "$tmpdir/polybench/scop-"* | awk -F, '$1 == "metric" && $2 == "cyclomatic complexity" {print $3}')
+
+	printf "\t%s\n" "NOARR CYCLOMATIC COMPLEXITY: $NOARR_CYCLOMATIC_COMPLEXITY"
+	printf "\t%s\n" "POLYBENCH CYCLOMATIC COMPLEXITY: $POLYBENCH_CYCLOMATIC_COMPLEXITY"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_CYCLOMATIC_COMPLEXITY / $POLYBENCH_CYCLOMATIC_COMPLEXITY) - 1}" )"
+
+echo "Comparing noarr and polybench using the global halstead complexity measures..."
+
+	# the script returns csv with columns:"metric,<name>,<value>"
+	for file in "$tmpdir/noarr/scop-"*; do
+		outfile="${file/scop-/}"
+		clang -fsyntax-only -Xclang -dump-tokens "$file" 2>"$outfile"
+		noarr_files="$noarr_files $outfile"
+	done
+
+	for file in "$tmpdir/polybench/scop-"*; do
+		outfile="${file/scop-/}"
+		clang -fsyntax-only -Xclang -dump-tokens "$file" 2>"$outfile"
+		polybench_files="$polybench_files $outfile"
+	done
+
+	NOARR_HALSTEAD_ANALYSIS=$(awk -f scripts/halstead-analyze.awk $noarr_files)
+	POLYBENCH_HALSTEAD_ANALYSIS=$(awk -f scripts/halstead-analyze.awk $polybench_files)
+
+	NOARR_HALSTEAD_LENGTH=$(echo "$NOARR_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "total_program_length" {print $3}')
+	POLYBENCH_HALSTEAD_LENGTH=$(echo "$POLYBENCH_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "total_program_length" {print $3}')
+
+	NOARR_HALSTEAD_VOCABULARY=$(echo "$NOARR_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "total_program_vocabulary" {print $3}')
+	POLYBENCH_HALSTEAD_VOCABULARY=$(echo "$POLYBENCH_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "total_program_vocabulary" {print $3}')
+
+	NOARR_HALSTEAD_VOLUME=$(echo "$NOARR_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "total_volume" {print $3}')
+	POLYBENCH_HALSTEAD_VOLUME=$(echo "$POLYBENCH_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "total_volume" {print $3}')
+
+	NOARR_HALSTEAD_DIFFICULTY=$(echo "$NOARR_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "total_difficulty" {print $3}')
+	POLYBENCH_HALSTEAD_DIFFICULTY=$(echo "$POLYBENCH_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "total_difficulty" {print $3}')
+
+	NOARR_HALSTEAD_EFFORT=$(echo "$NOARR_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "total_effort" {print $3}')
+	POLYBENCH_HALSTEAD_EFFORT=$(echo "$POLYBENCH_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "total_effort" {print $3}')
+
+	printf "\t%s\n" "NOARR HALSTEAD LENGTH: $NOARR_HALSTEAD_LENGTH"
+	printf "\t%s\n" "POLYBENCH HALSTEAD LENGTH: $POLYBENCH_HALSTEAD_LENGTH"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_HALSTEAD_LENGTH / $POLYBENCH_HALSTEAD_LENGTH) - 1}" )"
+
+	echo ""
+
+	printf "\t%s\n" "NOARR HALSTEAD VOCABULARY: $NOARR_HALSTEAD_VOCABULARY"
+	printf "\t%s\n" "POLYBENCH HALSTEAD VOCABULARY: $POLYBENCH_HALSTEAD_VOCABULARY"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_HALSTEAD_VOCABULARY / $POLYBENCH_HALSTEAD_VOCABULARY) - 1}" )"
+
+	echo ""
+
+	printf "\t%s\n" "NOARR HALSTEAD VOLUME: $NOARR_HALSTEAD_VOLUME"
+	printf "\t%s\n" "POLYBENCH HALSTEAD VOLUME: $POLYBENCH_HALSTEAD_VOLUME"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_HALSTEAD_VOLUME / $POLYBENCH_HALSTEAD_VOLUME) - 1}" )"
+
+	echo ""
+
+	printf "\t%s\n" "NOARR HALSTEAD DIFFICULTY: $NOARR_HALSTEAD_DIFFICULTY"
+	printf "\t%s\n" "POLYBENCH HALSTEAD DIFFICULTY: $POLYBENCH_HALSTEAD_DIFFICULTY"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_HALSTEAD_DIFFICULTY / $POLYBENCH_HALSTEAD_DIFFICULTY) - 1}" )"\
+
+	echo ""
+
+	printf "\t%s\n" "NOARR HALSTEAD EFFORT: $NOARR_HALSTEAD_EFFORT"
+	printf "\t%s\n" "POLYBENCH HALSTEAD EFFORT: $POLYBENCH_HALSTEAD_EFFORT"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_HALSTEAD_EFFORT / $POLYBENCH_HALSTEAD_EFFORT) - 1}" )"
+
+echo "Comparing noarr and polybench using the mean Halstead complexity measures..."
+
+	NOARR_HALSTEAD_LENGTH=$(echo "$NOARR_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "mean_program_length" {print $3}')
+	POLYBENCH_HALSTEAD_LENGTH=$(echo "$POLYBENCH_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "mean_program_length" {print $3}')
+
+	NOARR_HALSTEAD_VOCABULARY=$(echo "$NOARR_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "mean_program_vocabulary" {print $3}')
+	POLYBENCH_HALSTEAD_VOCABULARY=$(echo "$POLYBENCH_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "mean_program_vocabulary" {print $3}')
+
+	NOARR_HALSTEAD_VOLUME=$(echo "$NOARR_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "mean_volume" {print $3}')
+	POLYBENCH_HALSTEAD_VOLUME=$(echo "$POLYBENCH_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "mean_volume" {print $3}')
+
+	NOARR_HALSTEAD_DIFFICULTY=$(echo "$NOARR_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "mean_difficulty" {print $3}')
+	POLYBENCH_HALSTEAD_DIFFICULTY=$(echo "$POLYBENCH_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "mean_difficulty" {print $3}')
+
+	NOARR_HALSTEAD_EFFORT=$(echo "$NOARR_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "mean_effort" {print $3}')
+	POLYBENCH_HALSTEAD_EFFORT=$(echo "$POLYBENCH_HALSTEAD_ANALYSIS" | awk -F, '$1 == "metric" && $2 == "mean_effort" {print $3}')
+
+	printf "\t%s\n" "NOARR HALSTEAD LENGTH: $NOARR_HALSTEAD_LENGTH"
+	printf "\t%s\n" "POLYBENCH HALSTEAD LENGTH: $POLYBENCH_HALSTEAD_LENGTH"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_HALSTEAD_LENGTH / $POLYBENCH_HALSTEAD_LENGTH) - 1}" )"
+
+	echo ""
+
+	printf "\t%s\n" "NOARR HALSTEAD VOCABULARY: $NOARR_HALSTEAD_VOCABULARY"
+	printf "\t%s\n" "POLYBENCH HALSTEAD VOCABULARY: $POLYBENCH_HALSTEAD_VOCABULARY"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_HALSTEAD_VOCABULARY / $POLYBENCH_HALSTEAD_VOCABULARY) - 1}" )"
+
+	echo ""
+
+	printf "\t%s\n" "NOARR HALSTEAD VOLUME: $NOARR_HALSTEAD_VOLUME"
+	printf "\t%s\n" "POLYBENCH HALSTEAD VOLUME: $POLYBENCH_HALSTEAD_VOLUME"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_HALSTEAD_VOLUME / $POLYBENCH_HALSTEAD_VOLUME) - 1}" )"
+
+	echo ""
+
+	printf "\t%s\n" "NOARR HALSTEAD DIFFICULTY: $NOARR_HALSTEAD_DIFFICULTY"
+	printf "\t%s\n" "POLYBENCH HALSTEAD DIFFICULTY: $POLYBENCH_HALSTEAD_DIFFICULTY"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_HALSTEAD_DIFFICULTY / $POLYBENCH_HALSTEAD_DIFFICULTY) - 1}" )"\
+
+	echo ""
+
+	printf "\t%s\n" "NOARR HALSTEAD EFFORT: $NOARR_HALSTEAD_EFFORT"
+	printf "\t%s\n" "POLYBENCH HALSTEAD EFFORT: $POLYBENCH_HALSTEAD_EFFORT"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_HALSTEAD_EFFORT / $POLYBENCH_HALSTEAD_EFFORT) - 1}" )"
+
+echo "Comparing noarr and polybench using the indexation complexity metric..."
+
+	# the script returns csv with columns:"metric,indexation complexity,<value>"
+	NOARR_INDEXATION_COMPLEXITY=$(./scripts/index-analyze.sh "$tmpdir/noarr/scop-"* | awk -F, '$1 == "metric" && $2 == "indexation complexity" {print $3}')
+	POLYBENCH_INDEXATION_COMPLEXITY=$(./scripts/index-analyze.sh "$tmpdir/polybench/scop-"* | awk -F, '$1 == "metric" && $2 == "indexation complexity" {print $3}')
+
+	printf "\t%s\n" "NOARR INDEXATION COMPLEXITY: $NOARR_INDEXATION_COMPLEXITY"
+	printf "\t%s\n" "POLYBENCH INDEXATION COMPLEXITY: $POLYBENCH_INDEXATION_COMPLEXITY"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_INDEXATION_COMPLEXITY / $POLYBENCH_INDEXATION_COMPLEXITY) - 1}" )"
+
+echo "Comparing noarr and polybench using the subscript complexity metric..."
+
+	# the script returns csv with columns:"metric,subscript complexity,<value>"
+	NOARR_SUBSCRIPT_COMPLEXITY=$(./scripts/index-analyze.sh "$tmpdir/noarr/scop-"* | awk -F, '$1 == "metric" && $2 == "subscript complexity" {print $3}')
+	POLYBENCH_SUBSCRIPT_COMPLEXITY=$(./scripts/index-analyze.sh "$tmpdir/polybench/scop-"* | awk -F, '$1 == "metric" && $2 == "subscript complexity" {print $3}')
+
+	printf "\t%s\n" "NOARR SUBSCRIPT COMPLEXITY: $NOARR_SUBSCRIPT_COMPLEXITY"
+	printf "\t%s\n" "POLYBENCH SUBSCRIPT COMPLEXITY: $POLYBENCH_SUBSCRIPT_COMPLEXITY"
+
+	printf "\t%s\n" "NOARR/POLYBENCH - 1: $(awk "BEGIN{print($NOARR_SUBSCRIPT_COMPLEXITY / $POLYBENCH_SUBSCRIPT_COMPLEXITY) - 1}" )"

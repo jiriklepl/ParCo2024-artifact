@@ -32,6 +32,4 @@ BEGIN {
 END {
     cyclomatic = branches
     printf "metric,cyclomatic complexity,%d\n", cyclomatic
-    printf "metric,lines,%d\n", lines
-    printf "metric,line_length,%f\n", line_sum / lines
 }

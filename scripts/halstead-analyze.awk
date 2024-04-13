@@ -1,9 +1,6 @@
 #!/usr/bin/awk -f
 
-BEGIN {
-    FS = " "
-    OFS = " "
-
+function reset() {
     delete operands
     delete operators
 
@@ -281,47 +278,21 @@ BEGIN {
     operators["'num_t'"] = 0
 }
 
-# Numeric constants are operands
-/^numeric_constant/ {
-    operands[$2] += 1
-    next
-}
+function print_results() {
+    if (use_total == 1) {
+        delete operands
+        for (operand in sum_operands)
+            operands[operand] = sum_operands[operand]
 
-# Character constants are operands
-/^char_constant/ {
-    operands[$2] += 1
-    next
-}
+        delete operators
+        for (operator in sum_operators)
+            operators[operator] = sum_operators[operator]
 
-/^identifier/ {
-    if ($2 in operands) {
-        operands[$2] += 1
-    } else if ($2 in operators) {
-        operators[$2] += 1
+        maybe_total = "total_"
     } else {
-        unknown_identifiers += 1
-        print "Unknown identifier: " $2 > "/dev/stderr"
+        maybe_total = FILENAME  "_"
     }
-    next
-}
 
-# EOF is neither an operand nor an operator
-/^eof/ {
-    next
-}
-
-# Operators
-/^(r_square|r_paren|l_square|l_paren|plus|minus|semi|lessequal|for|equal|star|less|l_brace|r_brace|slash|greaterequal|comma|if|else|question|ampamp|colon|greater|caret|pipe|amp|period|auto|const)/ {
-    operators[$2] += 1
-    next
-}
-
-{
-    unknown_tokens += 1
-    print "Unknown token: " $2 > "/dev/stderr"
-}
-
-END {
     if (verbose == 2) {
         for (operand in operands) {
             if (operands[operand] > 0)
@@ -364,15 +335,36 @@ END {
 
     estimated_length = distinct_operands * log(distinct_operands) / log(2) + distinct_operators * log(distinct_operators) / log(2)
     volume = program_length * log(program_vocabulary) / log(2)
-    difficulty = distinct_operators / 2 * (total_operands / distinct_operands)
+    if (distinct_operands == 0)
+        difficulty = distinct_operators / 2
+    else
+        difficulty = distinct_operators / 2 * (total_operands / distinct_operands)
     effort = difficulty * volume
 
-    printf "metric,program_length,%s\n", program_length
-    printf "metric,program_vocabulary,%s\n", program_vocabulary
-    printf "metric,estimated_length,%s\n", estimated_length
-    printf "metric,volume,%s\n", volume
-    printf "metric,difficulty,%s\n", difficulty
-    printf "metric,effort,%s\n", effort
+    subprogram_count++
+
+    total_program_length += program_length
+    total_program_vocabulary += program_vocabulary
+    total_estimated_length += estimated_length
+    total_volume += volume
+    total_difficulty += difficulty
+    total_effort += effort
+
+    if (use_total == 1) {
+        printf "metric,mean_program_length,%s\n", total_program_length / subprogram_count
+        printf "metric,mean_program_vocabulary,%s\n", total_program_vocabulary / subprogram_count
+        printf "metric,mean_estimated_length,%s\n", total_estimated_length / subprogram_count
+        printf "metric,mean_volume,%s\n", total_volume / subprogram_count
+        printf "metric,mean_difficulty,%s\n", total_difficulty / subprogram_count
+        printf "metric,mean_effort,%s\n", total_effort / subprogram_count
+    }
+
+    printf "metric," maybe_total "program_length,%s\n", program_length
+    printf "metric," maybe_total "program_vocabulary,%s\n", program_vocabulary
+    printf "metric," maybe_total "estimated_length,%s\n", estimated_length
+    printf "metric," maybe_total "volume,%s\n", volume
+    printf "metric," maybe_total "difficulty,%s\n", difficulty
+    printf "metric," maybe_total "effort,%s\n", effort
 
     if (unknown_identifiers > 0)
         print "Unknown identifiers:", unknown_identifiers > "/dev/stderr"
@@ -383,4 +375,68 @@ END {
         print "Error: unknown identifiers or tokens, adjust the script to handle them" > "/dev/stderr"
         exit 1
     }
+    
+    reset()
+}
+
+
+BEGIN {
+    FS = " "
+    OFS = " "
+
+    delete sum_operands
+    delete sum_operators
+
+    reset()
+}
+
+# Numeric constants are operands
+/^numeric_constant/ {
+    operands[$2] += 1
+    sum_operands[$2] += 1
+    next
+}
+
+# Character constants are operands
+/^char_constant/ {
+    operands[$2] += 1
+    sum_operands[$2] += 1
+    next
+}
+
+/^identifier/ {
+    if ($2 in operands) {
+        operands[$2] += 1
+        sum_operands[$2] += 1
+    } else if ($2 in operators) {
+        operators[$2] += 1
+        sum_operators[$2] += 1
+    } else {
+        unknown_identifiers += 1
+        print "Unknown identifier: " $2 > "/dev/stderr"
+    }
+    next
+}
+# EOF is neither an operand nor an operator
+/^eof/ {
+    print_results()
+    next
+}
+
+# Operators
+/^(r_square|r_paren|l_square|l_paren|plus|minus|semi|lessequal|for|equal|star|less|l_brace|r_brace|slash|greaterequal|comma|if|else|question|ampamp|colon|greater|caret|pipe|amp|period|auto|const)/ {
+    operators[$2] += 1
+    sum_operators[$2] += 1
+    next
+}
+
+{
+    unknown_tokens += 1
+    print "Unknown token: " $2 > "/dev/stderr"
+}
+
+END {
+    use_total = 1
+
+    print_results()
 }
