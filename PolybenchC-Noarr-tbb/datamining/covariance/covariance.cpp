@@ -67,11 +67,10 @@ void kernel_covariance(num_t float_n, auto data, auto cov, auto mean) {
 	};
 
 	auto trav = traverser(data, cov, data_ki, cov_ji);
-	tbb_for_each(
-		trav ^ reorder<'i'>(),
-		[=](auto state) {
-			auto inner = trav ^ fix(state) ^ shift<'j'>(get_index<'i'>(state));
-			inner | noarr::for_dims<'j'>([=](auto inner) {
+	tbb_for_sections(
+		trav ^ hoist<'i'>(),
+		[=](auto inner) {
+			(inner ^ shift<'j'>(get_index<'i'>(inner))) | for_dims<'j'>([=](auto inner) {
 				cov[inner] = 0;
 
 				inner | [=](auto state) {

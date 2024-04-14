@@ -55,45 +55,37 @@ void kernel_heat_3d(std::size_t tsteps, auto A, auto B, Order order = {}) {
 
 	auto trav = traverser(A, B) ^ bcast<'t'>(tsteps) ^ symmetric_spans<'j', 'k'>(A, 1, 1) ^ order;
 	trav | for_dims<'t'>([=](auto traverser) {
-			omp_for_each(
-				traverser ^ symmetric_span<'i'>(A, 1) ^ reorder<'i'>(),
-				[=](auto state) {
-					auto inner = traverser ^ fix(state);
+		omp_for_each(
+			traverser ^ symmetric_span<'i'>(A, 1) ^ hoist<'i'>(),
+			[=](auto state) {
+				B[state] =
+					(num_t).125 * (A[state - idx<'i'>(1)] -
+					               2 * A[state] +
+					               A[state + idx<'i'>(1)]) +
+					(num_t).125 * (A[state - idx<'j'>(1)] -
+					               2 * A[state] +
+					               A[state + idx<'j'>(1)]) +
+					(num_t).125 * (A[state - idx<'k'>(1)] -
+					               2 * A[state] +
+					               A[state + idx<'k'>(1)]) +
+					A[state];
+			});
 
-					inner | [=](auto state) {
-						B[state] =
-							(num_t).125 * (A[state - idx<'i'>(1)] -
-							               2 * A[state] +
-							               A[state + idx<'i'>(1)]) +
-							(num_t).125 * (A[state - idx<'j'>(1)] -
-							               2 * A[state] +
-							               A[state + idx<'j'>(1)]) +
-							(num_t).125 * (A[state - idx<'k'>(1)] -
-							               2 * A[state] +
-							               A[state + idx<'k'>(1)]) +
-							A[state];
-					};
-				});
-
-			omp_for_each(
-				traverser ^ symmetric_span<'i'>(A, 1) ^ reorder<'i'>(),
-				[=](auto state) {
-					auto inner = traverser ^ fix(state);
-
-					inner | [=](auto state) {
-						A[state] =
-							(num_t).125 * (B[state - idx<'i'>(1)] -
-							               2 * B[state] +
-							               B[state + idx<'i'>(1)]) +
-							(num_t).125 * (B[state - idx<'j'>(1)] -
-							               2 * B[state] +
-							               B[state + idx<'j'>(1)]) +
-							(num_t).125 * (B[state - idx<'k'>(1)] -
-							               2 * B[state] +
-							               B[state + idx<'k'>(1)]) +
-							B[state];
-					};
-				});
+		omp_for_each(
+			traverser ^ symmetric_span<'i'>(A, 1) ^ hoist<'i'>(),
+			[=](auto state) {
+				A[state] =
+					(num_t).125 * (B[state - idx<'i'>(1)] -
+					               2 * B[state] +
+					               B[state + idx<'i'>(1)]) +
+					(num_t).125 * (B[state - idx<'j'>(1)] -
+					               2 * B[state] +
+					               B[state + idx<'j'>(1)]) +
+					(num_t).125 * (B[state - idx<'k'>(1)] -
+					               2 * B[state] +
+					               B[state + idx<'k'>(1)]) +
+					B[state];
+			});
 		});
 }
 

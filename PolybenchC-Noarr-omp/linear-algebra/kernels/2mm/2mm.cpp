@@ -76,12 +76,9 @@ void kernel_2mm(num_t alpha, num_t beta, auto tmp, auto A, auto B, auto C, auto 
 	using namespace noarr;
 
 	auto trav1 = traverser(tmp, A, B);
-	omp_for_each(
-		trav1 ^ reorder<'i'>(),
-		[=](auto state) {
-			auto inner = trav1 ^ fix(state);
-
-			
+	omp_for_sections(
+		trav1 ^ hoist<'i'>(),
+		[=](auto inner) {
 			inner | for_dims<'j'>([=](auto inner) {
 				tmp[inner] = 0;
 
@@ -92,12 +89,9 @@ void kernel_2mm(num_t alpha, num_t beta, auto tmp, auto A, auto B, auto C, auto 
 		});
 
 	auto trav2 = traverser(D, tmp, C);
-	omp_for_each(
-		trav2 ^ reorder<'i'>(),
-		[=](auto state) {
-			auto inner = trav2 ^ fix(state);
-
-			
+	omp_for_sections(
+		trav2 ^ hoist<'i'>(),
+		[=](auto inner) {
 			inner | for_dims<'l'>([=](auto inner) {
 				D[inner] *= beta;
 

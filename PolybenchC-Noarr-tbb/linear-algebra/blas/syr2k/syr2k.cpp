@@ -67,16 +67,16 @@ void kernel_syr2k(num_t alpha, num_t beta, auto C, auto A, auto B, Order order =
 	auto B_renamed = B ^ rename<'i', 'j'>();
 
 	auto trav = traverser(C, A, B, A_renamed, B_renamed);
-	tbb_for_each(
-		trav ^ reorder<'i'>(),
-		[=](auto state) {
-			auto inner = trav ^ fix(state) ^ slice<'j'>(0, get_index<'i'>(state) + 1);
+	tbb_for_sections(
+		trav ^ hoist<'i'>(),
+		[=](auto inner) {
+			auto sliced = inner ^ slice<'j'>(0, get_index<'i'>(inner) + 1);
 
-			inner | for_dims<'j'>([=](auto inner) {
+			sliced | for_dims<'j'>([=](auto inner) {
 				C[inner.state()] *= beta;
 			});
 
-			(inner ^ order) | [=](auto state) {
+			(sliced ^ order) | [=](auto state) {
 				C[state] += A_renamed[state] * alpha * B[state] + B_renamed[state] * alpha * A[state];
 			};
 		});
