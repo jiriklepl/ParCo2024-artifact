@@ -1,10 +1,7 @@
 #define CPU
 #include "histomain.hpp"
 
-#include <noarr/structures_extended.hpp>
-#include <noarr/structures/extra/traverser.hpp>
-#include <noarr/structures/interop/traverser_iter.hpp>
-#include <noarr/structures/interop/bag.hpp>
+#include <noarr/traversers.hpp>
 
 #ifndef HISTO_IMPL
 #error Add -DHISTO_IMPL=(histo_loop|histo_range|histo_foreach|histo_tbbreduce) to compiler commandline

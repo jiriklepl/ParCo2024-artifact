@@ -22,8 +22,7 @@
 # define DATA_TYPE double
 #endif
 
-#include <noarr/structures_extended.hpp>
-#include <noarr/structures/interop/bag.hpp>
+#include <noarr/traversers.hpp>
 
 inline void cudaInit() {
     cudaDeviceProp prop;

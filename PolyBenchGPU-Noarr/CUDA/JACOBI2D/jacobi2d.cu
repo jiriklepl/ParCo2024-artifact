@@ -1,10 +1,7 @@
 #include <cuda_runtime_api.h>
 #include <memory>
 
-#include <noarr/structures_extended.hpp>
-#include <noarr/structures/extra/traverser.hpp>
-#include <noarr/structures/interop/bag.hpp>
-#include <noarr/structures/interop/serialize_data.hpp>
+#include <noarr/traversers.hpp>
 #include <noarr/structures/interop/cuda_traverser.cuh>
 
 #include "common.hpp"

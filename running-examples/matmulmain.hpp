@@ -5,9 +5,7 @@
 #include <cstring>
 #include <sstream>
 
-#include <noarr/structures_extended.hpp>
-#include <noarr/structures/extra/traverser.hpp>
-#include <noarr/structures/interop/bag.hpp>
+#include <noarr/traversers.hpp>
 
 #ifdef CUDA
 #include <noarr/structures/interop/cuda_traverser.cuh>
