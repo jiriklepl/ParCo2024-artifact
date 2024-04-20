@@ -1,0 +1,128 @@
+srun: job 33111 queued and waiting for resources
+srun: job 33111 has been allocated resources
+2DCONV
+/home/kleplj/ParCo2024-artifact/PolyBenchGPU/CUDA/2DCONV
+rm -f *~ *.exe
+nvcc -D"MEDIUM_DATASET" -D"DATA_TYPE_IS_FLOAT" -O3 2DConvolution.cu -o 2DConvolution.exe 
+2DConvolution.cu: In function ‘void convolution2DCuda(int, int, float (*)[43000], float (*)[43000], float (*)[43000])’:
+2DConvolution.cu:138:29: warning: ‘cudaError_t cudaThreadSynchronize()’ is deprecated [-Wdeprecated-declarations]
+  138 |         cudaThreadSynchronize();
+      |         ~~~~~~~~~~~~~~~~~~~~^~
+/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h:1075:46: note: declared here
+ 1075 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+2MM
+/home/kleplj/ParCo2024-artifact/PolyBenchGPU/CUDA/2MM
+rm -f *~ *.exe
+nvcc -D"MEDIUM_DATASET" -D"DATA_TYPE_IS_FLOAT" -O3 2mm.cu -o 2mm.exe 
+2mm.cu: In function ‘void mm2Cuda(int, int, int, int, float, float, float (*)[5200], float (*)[5300], float (*)[5200], float (*)[5200], float (*)[5600], float (*)[5600])’:
+2mm.cu:225:29: warning: ‘cudaError_t cudaThreadSynchronize()’ is deprecated [-Wdeprecated-declarations]
+  225 |         cudaThreadSynchronize();
+      |         ~~~~~~~~~~~~~~~~~~~~^~
+/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h:1075:46: note: declared here
+ 1075 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+2mm.cu:227:29: warning: ‘cudaError_t cudaThreadSynchronize()’ is deprecated [-Wdeprecated-declarations]
+  227 |         cudaThreadSynchronize();
+      |         ~~~~~~~~~~~~~~~~~~~~^~
+/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h:1075:46: note: declared here
+ 1075 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+common.mk
+compileCodes.sh
+GEMM
+/home/kleplj/ParCo2024-artifact/PolyBenchGPU/CUDA/GEMM
+rm -f *~ *.exe
+nvcc -D"MEDIUM_DATASET" -D"DATA_TYPE_IS_FLOAT" -O3 gemm.cu -o gemm.exe 
+gemm.cu: In function ‘void gemmCuda(int, int, int, float, float, float (*)[5600], float (*)[5300], float (*)[5300], float (*)[5300])’:
+gemm.cu:162:29: warning: ‘cudaError_t cudaThreadSynchronize()’ is deprecated [-Wdeprecated-declarations]
+  162 |         cudaThreadSynchronize();
+      |         ~~~~~~~~~~~~~~~~~~~~^~
+/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h:1075:46: note: declared here
+ 1075 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+GRAMSCHM
+/home/kleplj/ParCo2024-artifact/PolyBenchGPU/CUDA/GRAMSCHM
+rm -f *~ *.exe
+nvcc -D"MEDIUM_DATASET" -D"DATA_TYPE_IS_FLOAT" -O3 gramschmidt.cu -o gramschmidt.exe 
+gramschmidt.cu: In function ‘void gramschmidtCuda(int, int, float (*)[2300], float (*)[2300], float (*)[2300], float (*)[2300])’:
+gramschmidt.cu:196:36: warning: ‘cudaError_t cudaThreadSynchronize()’ is deprecated [-Wdeprecated-declarations]
+  196 |                 cudaThreadSynchronize();
+      |                 ~~~~~~~~~~~~~~~~~~~^~
+/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h:1075:46: note: declared here
+ 1075 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+gramschmidt.cu:198:36: warning: ‘cudaError_t cudaThreadSynchronize()’ is deprecated [-Wdeprecated-declarations]
+  198 |                 cudaThreadSynchronize();
+      |                 ~~~~~~~~~~~~~~~~~~~^~
+/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h:1075:46: note: declared here
+ 1075 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+gramschmidt.cu:200:36: warning: ‘cudaError_t cudaThreadSynchronize()’ is deprecated [-Wdeprecated-declarations]
+  200 |                 cudaThreadSynchronize();
+      |                 ~~~~~~~~~~~~~~~~~~~^~
+/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h:1075:46: note: declared here
+ 1075 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+JACOBI2D
+/home/kleplj/ParCo2024-artifact/PolyBenchGPU/CUDA/JACOBI2D
+rm -f *~ *.exe
+nvcc -D"MEDIUM_DATASET" -D"DATA_TYPE_IS_FLOAT" -O3 jacobi2D.cu -o jacobi2D.exe 
+jacobi2D.cu: In function ‘void runJacobi2DCUDA(int, int, float (*)[10000], float (*)[10000], float (*)[10000], float (*)[10000])’:
+jacobi2D.cu:147:36: warning: ‘cudaError_t cudaThreadSynchronize()’ is deprecated [-Wdeprecated-declarations]
+  147 |                 cudaThreadSynchronize();
+      |                 ~~~~~~~~~~~~~~~~~~~^~
+/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h:1075:46: note: declared here
+ 1075 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+jacobi2D.cu:149:36: warning: ‘cudaError_t cudaThreadSynchronize()’ is deprecated [-Wdeprecated-declarations]
+  149 |                 cudaThreadSynchronize();
+      |                 ~~~~~~~~~~~~~~~~~~~^~
+/usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h:1075:46: note: declared here
+ 1075 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+srun: job 33112 queued and waiting for resources
+srun: job 33112 has been allocated resources
+-- Configuring done (0.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolyBenchGPU-Noarr/build
+[ 14%] Building CUDA object CMakeFiles/runner.dir/CUDA/GEMM/gemm.cu.o
+[ 28%] Building CUDA object CMakeFiles/runner.dir/CUDA/2DCONV/2DConvolution.cu.o
+[ 42%] Building CUDA object CMakeFiles/runner.dir/CUDA/2MM/2mm.cu.o
+[ 71%] Building CUDA object CMakeFiles/runner.dir/CUDA/JACOBI2D/jacobi2d.cu.o
+[ 71%] Building CUDA object CMakeFiles/runner.dir/CUDA/GRAMSCHM/gramschmidt.cu.o
+[ 85%] Linking CXX executable runner
+[100%] Built target runner
+collecting gemm
+srun: job 33113 queued and waiting for resources
+srun: job 33113 has been allocated resources
+srun: job 33114 queued and waiting for resources
+srun: job 33114 has been allocated resources
+done
+collecting 2mm
+srun: job 33115 queued and waiting for resources
+srun: job 33115 has been allocated resources
+srun: job 33116 queued and waiting for resources
+srun: job 33116 has been allocated resources
+done
+collecting 2DConvolution
+srun: job 33117 queued and waiting for resources
+srun: job 33117 has been allocated resources
+srun: job 33118 queued and waiting for resources
+srun: job 33118 has been allocated resources
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 33118.0 ON ampere01 CANCELLED AT 2024-04-18T07:50:11 DUE TO TIME LIMIT ***
+srun: error: ampere01: task 0: Terminated
+done
+collecting gramschmidt
+srun: job 33119 queued and waiting for resources
+srun: job 33119 has been allocated resources
+srun: job 33120 queued and waiting for resources
+srun: job 33120 has been allocated resources
+done
+collecting jacobi2d
+srun: job 33121 queued and waiting for resources
+srun: job 33121 has been allocated resources
+srun: job 33122 queued and waiting for resources
+srun: job 33122 has been allocated resources
+done

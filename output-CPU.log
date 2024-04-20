@@ -1,0 +1,2657 @@
+srun: job 21132 queued and waiting for resources
+srun: job 21132 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=SMALL
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DSMALL_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (16.4s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-4.2.1/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 10%] Building C object CMakeFiles/lu.dir/utilities/polybench.c.o
+[ 10%] Building C object CMakeFiles/syrk.dir/linear-algebra/blas/syrk/syrk.c.o
+[ 10%] Building C object CMakeFiles/lu.dir/linear-algebra/solvers/lu/lu.c.o
+[ 10%] Building C object CMakeFiles/cholesky.dir/utilities/polybench.c.o
+[ 10%] Building C object CMakeFiles/gramschmidt.dir/utilities/polybench.c.o
+[ 10%] Building C object CMakeFiles/gramschmidt.dir/linear-algebra/solvers/gramschmidt/gramschmidt.c.o
+[ 10%] Building C object CMakeFiles/cholesky.dir/linear-algebra/solvers/cholesky/cholesky.c.o
+[ 60%] Building C object CMakeFiles/durbin.dir/utilities/polybench.c.o
+[ 60%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/ludcmp.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/trisolv.dir/linear-algebra/solvers/trisolv/trisolv.c.o
+[ 66%] Building C object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.c.o
+[ 66%] Building C object CMakeFiles/gemver.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gesummv.dir/linear-algebra/blas/gesummv/gesummv.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/ludcmp.dir/linear-algebra/solvers/ludcmp/ludcmp.c.o
+[ 66%] Building C object CMakeFiles/gemver.dir/linear-algebra/blas/gemver/gemver.c.o
+[ 66%] Building C object CMakeFiles/bicg.dir/linear-algebra/kernels/bicg/bicg.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.c.o
+[ 66%] Building C object CMakeFiles/gemm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/durbin.dir/linear-algebra/solvers/durbin/durbin.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 66%] Building C object CMakeFiles/bicg.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/correlation.dir/datamining/correlation/correlation.c.o
+[ 66%] Building C object CMakeFiles/gesummv.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/mvt.dir/linear-algebra/kernels/mvt/mvt.c.o
+[ 66%] Building C object CMakeFiles/atax.dir/linear-algebra/kernels/atax/atax.c.o
+[ 66%] Building C object CMakeFiles/jacobi-1d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/trisolv.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/atax.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/doitgen.dir/linear-algebra/kernels/doitgen/doitgen.c.o
+[ 66%] Building C object CMakeFiles/doitgen.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/correlation.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/jacobi-1d.dir/stencils/jacobi-1d/jacobi-1d.c.o
+[ 66%] Building C object CMakeFiles/trmm.dir/linear-algebra/blas/trmm/trmm.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.c.o
+[ 66%] Building C object CMakeFiles/symm.dir/linear-algebra/blas/symm/symm.c.o
+[ 66%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 66%] Building C object CMakeFiles/nussinov.dir/medley/nussinov/nussinov.c.o
+[ 66%] Building C object CMakeFiles/mvt.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/adi.dir/stencils/adi/adi.c.o
+[ 66%] Building C object CMakeFiles/trmm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/adi.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/symm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.c.o
+[ 66%] Building C object CMakeFiles/nussinov.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/fdtd-2d.dir/stencils/fdtd-2d/fdtd-2d.c.o
+[ 66%] Building C object CMakeFiles/floyd-warshall.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/syrk.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/3mm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/fdtd-2d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/jacobi-2d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/seidel-2d.dir/stencils/seidel-2d/seidel-2d.c.o
+[ 66%] Building C object CMakeFiles/deriche.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/seidel-2d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/deriche.dir/medley/deriche/deriche.c.o
+[ 66%] Building C object CMakeFiles/3mm.dir/linear-algebra/kernels/3mm/3mm.c.o
+[ 66%] Building C object CMakeFiles/jacobi-2d.dir/stencils/jacobi-2d/jacobi-2d.c.o
+[ 67%] Linking C executable cholesky
+[ 91%] Linking C executable deriche
+[100%] Linking C executable floyd-warshall
+[100%] Linking C executable seidel-2d
+[100%] Linking C executable gemver
+[100%] Linking C executable correlation
+[100%] Linking C executable syr2k
+[100%] Linking C executable gemm
+[100%] Linking C executable fdtd-2d
+[100%] Linking C executable gramschmidt
+[100%] Linking C executable mvt
+[100%] Linking C executable bicg
+[100%] Linking C executable gesummv
+[100%] Linking C executable covariance
+[100%] Linking C executable nussinov
+[100%] Linking C executable durbin
+[100%] Linking C executable jacobi-2d
+[100%] Linking C executable 2mm
+[100%] Linking C executable syrk
+[100%] Linking C executable trisolv
+[100%] Linking C executable jacobi-1d
+[100%] Linking C executable trmm
+[100%] Linking C executable lu
+[100%] Linking C executable atax
+[100%] Linking C executable heat-3d
+[100%] Linking C executable 3mm
+[100%] Linking C executable ludcmp
+[100%] Linking C executable symm
+[100%] Linking C executable doitgen
+[100%] Linking C executable adi
+[100%] Built target cholesky
+[100%] Built target syr2k
+[100%] Built target deriche
+[100%] Built target gemm
+[100%] Built target gramschmidt
+[100%] Built target mvt
+[100%] Built target gesummv
+[100%] Built target gemver
+[100%] Built target floyd-warshall
+[100%] Built target seidel-2d
+[100%] Built target fdtd-2d
+[100%] Built target heat-3d
+[100%] Built target lu
+[100%] Built target bicg
+[100%] Built target covariance
+[100%] Built target correlation
+[100%] Built target trmm
+[100%] Built target ludcmp
+[100%] Built target 3mm
+[100%] Built target jacobi-2d
+[100%] Built target jacobi-1d
+[100%] Built target nussinov
+[100%] Built target 2mm
+[100%] Built target symm
+[100%] Built target atax
+[100%] Built target doitgen
+[100%] Built target trisolv
+[100%] Built target durbin
+[100%] Built target syrk
+[100%] Built target adi
+srun: job 21133 queued and waiting for resources
+srun: job 21133 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ export DATASET_SIZE=SMALL
++ DATASET_SIZE=SMALL
++ export DATA_TYPE=FLOAT
++ DATA_TYPE=FLOAT
++ export NOARR_STRUCTURES_BRANCH=main
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DSMALL_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (3.0s)
+-- Generating done (16.0s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 50%] Building CXX object CMakeFiles/correlation.dir/datamining/correlation/correlation.cpp.o
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 50%] Building CXX object CMakeFiles/doitgen.dir/linear-algebra/kernels/doitgen/doitgen.cpp.o
+[ 50%] Building CXX object CMakeFiles/gesummv.dir/linear-algebra/blas/gesummv/gesummv.cpp.o
+[ 50%] Building CXX object CMakeFiles/gemver.dir/linear-algebra/blas/gemver/gemver.cpp.o
+[ 50%] Building CXX object CMakeFiles/fdtd-2d.dir/stencils/fdtd-2d/fdtd-2d.cpp.o
+[ 50%] Building CXX object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.cpp.o
+[ 50%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 50%] Building CXX object CMakeFiles/ludcmp.dir/linear-algebra/solvers/ludcmp/ludcmp.cpp.o
+[ 50%] Building CXX object CMakeFiles/gramschmidt.dir/linear-algebra/solvers/gramschmidt/gramschmidt.cpp.o
+[ 50%] Building CXX object CMakeFiles/lu.dir/linear-algebra/solvers/lu/lu.cpp.o
+[ 50%] Building CXX object CMakeFiles/adi.dir/stencils/adi/adi.cpp.o
+[ 50%] Building CXX object CMakeFiles/trisolv.dir/linear-algebra/solvers/trisolv/trisolv.cpp.o
+[ 50%] Building CXX object CMakeFiles/symm.dir/linear-algebra/blas/symm/symm.cpp.o
+[ 50%] Building CXX object CMakeFiles/bicg.dir/linear-algebra/kernels/bicg/bicg.cpp.o
+[ 50%] Building CXX object CMakeFiles/jacobi-2d.dir/stencils/jacobi-2d/jacobi-2d.cpp.o
+[ 50%] Building CXX object CMakeFiles/nussinov.dir/medley/nussinov/nussinov.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/syrk.dir/linear-algebra/blas/syrk/syrk.cpp.o
+[ 50%] Building CXX object CMakeFiles/durbin.dir/linear-algebra/solvers/durbin/durbin.cpp.o
+[ 50%] Building CXX object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.cpp.o
+[ 50%] Building CXX object CMakeFiles/trmm.dir/linear-algebra/blas/trmm/trmm.cpp.o
+[ 50%] Building CXX object CMakeFiles/atax.dir/linear-algebra/kernels/atax/atax.cpp.o
+[ 50%] Building CXX object CMakeFiles/cholesky.dir/linear-algebra/solvers/cholesky/cholesky.cpp.o
+[ 50%] Building CXX object CMakeFiles/3mm.dir/linear-algebra/kernels/3mm/3mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/jacobi-1d.dir/stencils/jacobi-1d/jacobi-1d.cpp.o
+[ 50%] Building CXX object CMakeFiles/seidel-2d.dir/stencils/seidel-2d/seidel-2d.cpp.o
+[ 50%] Building CXX object CMakeFiles/mvt.dir/linear-algebra/kernels/mvt/mvt.cpp.o
+[ 50%] Building CXX object CMakeFiles/deriche.dir/medley/deriche/deriche.cpp.o
+[ 50%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 53%] Linking CXX executable jacobi-1d
+[ 53%] Linking CXX executable durbin
+[ 56%] Linking CXX executable atax
+[ 56%] Linking CXX executable gesummv
+[ 58%] Linking CXX executable seidel-2d
+[ 61%] Linking CXX executable jacobi-2d
+[ 61%] Linking CXX executable trisolv
+[ 66%] Linking CXX executable floyd-warshall
+[ 66%] Built target atax
+[ 66%] Built target durbin
+[ 66%] Built target gesummv
+[ 66%] Linking CXX executable bicg
+[ 66%] Linking CXX executable mvt
+[ 66%] Built target jacobi-1d
+[ 66%] Built target seidel-2d
+[ 66%] Built target trisolv
+[ 66%] Built target jacobi-2d
+[ 68%] Linking CXX executable syrk
+[ 75%] Linking CXX executable nussinov
+[ 75%] Linking CXX executable gemver
+[ 76%] Linking CXX executable deriche
+[ 76%] Linking CXX executable covariance
+[ 76%] Built target floyd-warshall
+[ 76%] Built target bicg
+[ 80%] Linking CXX executable syr2k
+[ 83%] Linking CXX executable cholesky
+[ 83%] Linking CXX executable correlation
+[ 83%] Linking CXX executable trmm
+[ 85%] Linking CXX executable heat-3d
+[ 86%] Linking CXX executable fdtd-2d
+[ 86%] Linking CXX executable lu
+[ 91%] Linking CXX executable adi
+[ 91%] Built target mvt
+[ 91%] Linking CXX executable gemm
+[ 91%] Linking CXX executable gramschmidt
+[ 91%] Built target correlation
+[ 91%] Built target syr2k
+[ 91%] Built target trmm
+[ 91%] Built target covariance
+[ 91%] Built target cholesky
+[ 91%] Built target heat-3d
+[ 91%] Built target nussinov
+[ 91%] Built target fdtd-2d
+[ 91%] Built target deriche
+[ 91%] Built target gemver
+[ 91%] Built target syrk
+[ 91%] Built target adi
+[ 91%] Built target gemm
+[ 93%] Linking CXX executable symm
+[ 93%] Built target lu
+[ 93%] Built target gramschmidt
+[ 96%] Linking CXX executable ludcmp
+[ 96%] Linking CXX executable doitgen
+[ 96%] Built target symm
+[ 96%] Built target ludcmp
+[ 96%] Built target doitgen
+[ 98%] Linking CXX executable 2mm
+[ 98%] Built target 2mm
+[100%] Linking CXX executable 3mm
+[100%] Built target 3mm
+collecting jacobi-2d
+srun: job 21134 queued and waiting for resources
+srun: job 21134 has been allocated resources
+srun: job 21135 queued and waiting for resources
+srun: job 21135 has been allocated resources
+done
+collecting trisolv
+srun: job 21136 queued and waiting for resources
+srun: job 21136 has been allocated resources
+srun: job 21137 queued and waiting for resources
+srun: job 21137 has been allocated resources
+done
+collecting mvt
+srun: job 21138 queued and waiting for resources
+srun: job 21138 has been allocated resources
+srun: job 21139 queued and waiting for resources
+srun: job 21139 has been allocated resources
+done
+collecting syrk
+srun: job 21140 queued and waiting for resources
+srun: job 21140 has been allocated resources
+srun: job 21141 queued and waiting for resources
+srun: job 21141 has been allocated resources
+done
+collecting gemver
+srun: job 21142 queued and waiting for resources
+srun: job 21142 has been allocated resources
+srun: job 21143 queued and waiting for resources
+srun: job 21143 has been allocated resources
+done
+collecting covariance
+srun: job 21144 queued and waiting for resources
+srun: job 21144 has been allocated resources
+srun: job 21145 queued and waiting for resources
+srun: job 21145 has been allocated resources
+done
+collecting correlation
+srun: job 21146 queued and waiting for resources
+srun: job 21146 has been allocated resources
+srun: job 21147 queued and waiting for resources
+srun: job 21147 has been allocated resources
+done
+collecting heat-3d
+srun: job 21148 queued and waiting for resources
+srun: job 21148 has been allocated resources
+srun: job 21149 queued and waiting for resources
+srun: job 21149 has been allocated resources
+done
+collecting adi
+srun: job 21150 queued and waiting for resources
+srun: job 21150 has been allocated resources
+srun: job 21151 queued and waiting for resources
+srun: job 21151 has been allocated resources
+done
+collecting gemm
+srun: job 21152 queued and waiting for resources
+srun: job 21152 has been allocated resources
+srun: job 21153 queued and waiting for resources
+srun: job 21153 has been allocated resources
+done
+collecting gramschmidt
+srun: job 21154 queued and waiting for resources
+srun: job 21154 has been allocated resources
+srun: job 21155 queued and waiting for resources
+srun: job 21155 has been allocated resources
+done
+collecting symm
+srun: job 21156 queued and waiting for resources
+srun: job 21156 has been allocated resources
+srun: job 21157 queued and waiting for resources
+srun: job 21157 has been allocated resources
+done
+collecting ludcmp
+srun: job 21159 queued and waiting for resources
+srun: job 21159 has been allocated resources
+done
+collecting doitgen
+srun: job 21160 queued and waiting for resources
+srun: job 21160 has been allocated resources
+srun: job 21161 queued and waiting for resources
+srun: job 21161 has been allocated resources
+done
+collecting 2mm
+srun: job 21162 queued and waiting for resources
+srun: job 21162 has been allocated resources
+srun: job 21163 queued and waiting for resources
+srun: job 21163 has been allocated resources
+done
+collecting 3mm
+srun: job 21164 queued and waiting for resources
+srun: job 21164 has been allocated resources
+srun: job 21165 queued and waiting for resources
+srun: job 21165 has been allocated resources
+done
+collecting durbin
+srun: job 21166 queued and waiting for resources
+srun: job 21166 has been allocated resources
+srun: job 21167 queued and waiting for resources
+srun: job 21167 has been allocated resources
+done
+collecting gesummv
+srun: job 21168 queued and waiting for resources
+srun: job 21168 has been allocated resources
+srun: job 21169 queued and waiting for resources
+srun: job 21169 has been allocated resources
+done
+collecting floyd-warshall
+srun: job 21170 queued and waiting for resources
+srun: job 21170 has been allocated resources
+srun: job 21171 queued and waiting for resources
+srun: job 21171 has been allocated resources
+done
+collecting bicg
+srun: job 21172 queued and waiting for resources
+srun: job 21172 has been allocated resources
+srun: job 21173 queued and waiting for resources
+srun: job 21173 has been allocated resources
+done
+collecting nussinov
+srun: job 21174 queued and waiting for resources
+srun: job 21174 has been allocated resources
+srun: job 21175 queued and waiting for resources
+srun: job 21175 has been allocated resources
+done
+collecting deriche
+srun: job 21176 queued and waiting for resources
+srun: job 21176 has been allocated resources
+srun: job 21177 queued and waiting for resources
+srun: job 21177 has been allocated resources
+done
+collecting cholesky
+srun: job 21178 queued and waiting for resources
+srun: job 21178 has been allocated resources
+srun: job 21179 queued and waiting for resources
+srun: job 21179 has been allocated resources
+done
+collecting fdtd-2d
+srun: job 21180 queued and waiting for resources
+srun: job 21180 has been allocated resources
+srun: job 21181 queued and waiting for resources
+srun: job 21181 has been allocated resources
+done
+collecting jacobi-1d
+srun: job 21182 queued and waiting for resources
+srun: job 21182 has been allocated resources
+srun: job 21183 queued and waiting for resources
+srun: job 21183 has been allocated resources
+done
+collecting atax
+srun: job 21184 queued and waiting for resources
+srun: job 21184 has been allocated resources
+srun: job 21185 queued and waiting for resources
+srun: job 21185 has been allocated resources
+done
+collecting seidel-2d
+srun: job 21186 queued and waiting for resources
+srun: job 21186 has been allocated resources
+srun: job 21187 queued and waiting for resources
+srun: job 21187 has been allocated resources
+done
+collecting syr2k
+srun: job 21188 queued and waiting for resources
+srun: job 21188 has been allocated resources
+srun: job 21189 queued and waiting for resources
+srun: job 21189 has been allocated resources
+done
+collecting trmm
+srun: job 21190 queued and waiting for resources
+srun: job 21190 has been allocated resources
+srun: job 21191 queued and waiting for resources
+srun: job 21191 has been allocated resources
+done
+collecting lu
+srun: job 21192 queued and waiting for resources
+srun: job 21192 has been allocated resources
+srun: job 21193 queued and waiting for resources
+srun: job 21193 has been allocated resources
+done
+srun: job 21194 queued and waiting for resources
+srun: job 21194 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=SMALL
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DSMALL_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (1.0s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-tuned/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 50%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 50%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 50%] Building C object CMakeFiles/gemm.dir/utilities/polybench.c.o
+[ 50%] Building C object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.c.o
+[ 50%] Building C object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.c.o
+[ 50%] Building C object CMakeFiles/floyd-warshall.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 75%] Linking C executable floyd-warshall
+[ 83%] Linking C executable covariance
+[ 91%] Linking C executable 2mm
+[ 91%] Built target floyd-warshall
+[ 91%] Built target covariance
+[100%] Linking C executable gemm
+[100%] Built target 2mm
+[100%] Built target gemm
+srun: job 21195 queued and waiting for resources
+srun: job 21195 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=SMALL
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DSMALL_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (3.3s)
+-- Generating done (3.9s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuned/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 50%] Building CXX object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.cpp.o
+[ 50%] Building CXX object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 62%] Linking CXX executable floyd-warshall
+[ 75%] Linking CXX executable gemm
+[ 75%] Built target floyd-warshall
+[ 75%] Built target gemm
+[ 87%] Linking CXX executable covariance
+[ 87%] Built target covariance
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting floyd-warshall
+srun: job 21196 queued and waiting for resources
+srun: job 21196 has been allocated resources
+srun: job 21197 queued and waiting for resources
+srun: job 21197 has been allocated resources
+done
+collecting gemm
+srun: job 21198 queued and waiting for resources
+srun: job 21198 has been allocated resources
+srun: job 21199 queued and waiting for resources
+srun: job 21199 has been allocated resources
+done
+collecting covariance
+srun: job 21200 queued and waiting for resources
+srun: job 21200 has been allocated resources
+srun: job 21201 queued and waiting for resources
+srun: job 21201 has been allocated resources
+done
+collecting 2mm
+srun: job 21202 queued and waiting for resources
+srun: job 21202 has been allocated resources
+srun: job 21203 queued and waiting for resources
+srun: job 21203 has been allocated resources
+done
+srun: job 21204 queued and waiting for resources
+srun: job 21204 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=SMALL
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DSMALL_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' '-DCMAKE_CXX_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DSMALL_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (0.5s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-tbb/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 50%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 66%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 66%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 75%] Linking CXX executable covariance
+[ 83%] Linking CXX executable 2mm
+[ 83%] Built target covariance
+[ 91%] Linking CXX executable syr2k
+[100%] Linking CXX executable heat-3d
+[100%] Built target 2mm
+[100%] Built target syr2k
+[100%] Built target heat-3d
+srun: job 21205 queued and waiting for resources
+srun: job 21205 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=SMALL
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DSMALL_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (3.3s)
+-- Generating done (1.5s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tbb/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 25%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 37%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 37%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 75%] Linking CXX executable covariance
+[ 75%] Linking CXX executable syr2k
+[ 87%] Built target syr2k
+[ 87%] Built target covariance
+[ 87%] Linking CXX executable heat-3d
+[ 87%] Built target heat-3d
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting covariance
+srun: job 21206 queued and waiting for resources
+srun: job 21206 has been allocated resources
+srun: job 21207 queued and waiting for resources
+srun: job 21207 has been allocated resources
+done
+collecting syr2k
+srun: job 21208 queued and waiting for resources
+srun: job 21208 has been allocated resources
+srun: job 21209 queued and waiting for resources
+srun: job 21209 has been allocated resources
+done
+collecting heat-3d
+srun: job 21210 queued and waiting for resources
+srun: job 21210 has been allocated resources
+srun: job 21211 queued and waiting for resources
+srun: job 21211 has been allocated resources
+done
+collecting 2mm
+srun: job 21212 queued and waiting for resources
+srun: job 21212 has been allocated resources
+srun: job 21213 queued and waiting for resources
+srun: job 21213 has been allocated resources
+done
+srun: job 21214 queued and waiting for resources
+srun: job 21214 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=SMALL
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DSMALL_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (4.4s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-omp/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 58%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.c.o
+[ 66%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.c.o
+[ 66%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 75%] Linking C executable covariance
+[ 83%] Linking C executable syr2k
+[100%] Linking C executable heat-3d
+[100%] Linking C executable 2mm
+[100%] Built target covariance
+[100%] Built target syr2k
+[100%] Built target heat-3d
+[100%] Built target 2mm
+srun: job 21215 queued and waiting for resources
+srun: job 21215 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=SMALL
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DSMALL_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (20.4s)
+-- Generating done (2.9s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-omp/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 50%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 50%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 75%] Linking CXX executable syr2k
+[ 75%] Linking CXX executable covariance
+[ 87%] Linking CXX executable heat-3d
+[ 87%] Built target syr2k
+[ 87%] Built target covariance
+[ 87%] Built target heat-3d
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting syr2k
+srun: job 21216 queued and waiting for resources
+srun: job 21216 has been allocated resources
+srun: job 21217 queued and waiting for resources
+srun: job 21217 has been allocated resources
+done
+collecting covariance
+srun: job 21218 queued and waiting for resources
+srun: job 21218 has been allocated resources
+srun: job 21219 queued and waiting for resources
+srun: job 21219 has been allocated resources
+done
+collecting heat-3d
+srun: job 21220 queued and waiting for resources
+srun: job 21220 has been allocated resources
+srun: job 21221 queued and waiting for resources
+srun: job 21221 has been allocated resources
+done
+collecting 2mm
+srun: job 21222 queued and waiting for resources
+srun: job 21222 has been allocated resources
+srun: job 21223 queued and waiting for resources
+srun: job 21223 has been allocated resources
+done
+srun: job 21224 queued and waiting for resources
+srun: job 21224 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=MEDIUM
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DMEDIUM_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (15.1s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-4.2.1/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 66%] Building C object CMakeFiles/cholesky.dir/linear-algebra/solvers/cholesky/cholesky.c.o
+[ 66%] Building C object CMakeFiles/correlation.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/lu.dir/linear-algebra/solvers/lu/lu.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/durbin.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gemver.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/adi.dir/stencils/adi/adi.c.o
+[ 66%] Building C object CMakeFiles/syrk.dir/linear-algebra/blas/syrk/syrk.c.o
+[ 66%] Building C object CMakeFiles/symm.dir/linear-algebra/blas/symm/symm.c.o
+[ 66%] Building C object CMakeFiles/mvt.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gemver.dir/linear-algebra/blas/gemver/gemver.c.o
+[ 66%] Building C object CMakeFiles/bicg.dir/linear-algebra/kernels/bicg/bicg.c.o
+[ 66%] Building C object CMakeFiles/jacobi-1d.dir/stencils/jacobi-1d/jacobi-1d.c.o
+[ 66%] Building C object CMakeFiles/trmm.dir/linear-algebra/blas/trmm/trmm.c.o
+[ 66%] Building C object CMakeFiles/adi.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/symm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gemm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/trmm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gramschmidt.dir/linear-algebra/solvers/gramschmidt/gramschmidt.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.c.o
+[ 66%] Building C object CMakeFiles/seidel-2d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/seidel-2d.dir/stencils/seidel-2d/seidel-2d.c.o
+[ 66%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/fdtd-2d.dir/stencils/fdtd-2d/fdtd-2d.c.o
+[ 66%] Building C object CMakeFiles/deriche.dir/medley/deriche/deriche.c.o
+[ 66%] Building C object CMakeFiles/trisolv.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 66%] Building C object CMakeFiles/ludcmp.dir/linear-algebra/solvers/ludcmp/ludcmp.c.o
+[ 66%] Building C object CMakeFiles/ludcmp.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gesummv.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/doitgen.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gramschmidt.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/nussinov.dir/medley/nussinov/nussinov.c.o
+[ 66%] Building C object CMakeFiles/3mm.dir/linear-algebra/kernels/3mm/3mm.c.o
+[ 66%] Building C object CMakeFiles/jacobi-1d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/3mm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/floyd-warshall.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/jacobi-2d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/jacobi-2d.dir/stencils/jacobi-2d/jacobi-2d.c.o
+[ 66%] Building C object CMakeFiles/nussinov.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/trisolv.dir/linear-algebra/solvers/trisolv/trisolv.c.o
+[ 66%] Building C object CMakeFiles/cholesky.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.c.o
+[ 66%] Building C object CMakeFiles/syrk.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/mvt.dir/linear-algebra/kernels/mvt/mvt.c.o
+[ 66%] Building C object CMakeFiles/lu.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/atax.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/fdtd-2d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/correlation.dir/datamining/correlation/correlation.c.o
+[ 66%] Building C object CMakeFiles/gesummv.dir/linear-algebra/blas/gesummv/gesummv.c.o
+[ 66%] Building C object CMakeFiles/doitgen.dir/linear-algebra/kernels/doitgen/doitgen.c.o
+[ 66%] Building C object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.c.o
+[ 66%] Building C object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.c.o
+[ 66%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 66%] Building C object CMakeFiles/bicg.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/atax.dir/linear-algebra/kernels/atax/atax.c.o
+[ 66%] Building C object CMakeFiles/durbin.dir/linear-algebra/solvers/durbin/durbin.c.o
+[ 66%] Building C object CMakeFiles/deriche.dir/utilities/polybench.c.o
+[100%] Linking C executable deriche
+[100%] Linking C executable trmm
+[100%] Linking C executable jacobi-2d
+[100%] Linking C executable syrk
+[100%] Linking C executable atax
+[100%] Linking C executable adi
+[100%] Linking C executable bicg
+[100%] Linking C executable gesummv
+[100%] Linking C executable seidel-2d
+[100%] Linking C executable floyd-warshall
+[100%] Linking C executable jacobi-1d
+[100%] Linking C executable mvt
+[100%] Linking C executable trisolv
+[100%] Linking C executable covariance
+[100%] Linking C executable gemver
+[100%] Linking C executable correlation
+[100%] Linking C executable symm
+[100%] Linking C executable durbin
+[100%] Linking C executable 3mm
+[100%] Linking C executable syr2k
+[100%] Linking C executable lu
+[100%] Linking C executable gemm
+[100%] Linking C executable ludcmp
+[100%] Linking C executable nussinov
+[100%] Linking C executable fdtd-2d
+[100%] Linking C executable heat-3d
+[100%] Linking C executable doitgen
+[100%] Linking C executable gramschmidt
+[100%] Linking C executable cholesky
+[100%] Linking C executable 2mm
+[100%] Built target syrk
+[100%] Built target bicg
+[100%] Built target atax
+[100%] Built target jacobi-2d
+[100%] Built target trmm
+[100%] Built target seidel-2d
+[100%] Built target jacobi-1d
+[100%] Built target deriche
+[100%] Built target gesummv
+[100%] Built target durbin
+[100%] Built target adi
+[100%] Built target covariance
+[100%] Built target gemver
+[100%] Built target lu
+[100%] Built target 3mm
+[100%] Built target ludcmp
+[100%] Built target fdtd-2d
+[100%] Built target doitgen
+[100%] Built target heat-3d
+[100%] Built target gemm
+[100%] Built target gramschmidt
+[100%] Built target cholesky
+[100%] Built target trisolv
+[100%] Built target mvt
+[100%] Built target symm
+[100%] Built target 2mm
+[100%] Built target nussinov
+[100%] Built target floyd-warshall
+[100%] Built target correlation
+[100%] Built target syr2k
+srun: job 21225 queued and waiting for resources
+srun: job 21225 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ export DATASET_SIZE=MEDIUM
++ DATASET_SIZE=MEDIUM
++ export DATA_TYPE=FLOAT
++ DATA_TYPE=FLOAT
++ export NOARR_STRUCTURES_BRANCH=main
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DMEDIUM_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (3.8s)
+-- Generating done (14.7s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 25%] Building CXX object CMakeFiles/syrk.dir/linear-algebra/blas/syrk/syrk.cpp.o
+[ 25%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 25%] Building CXX object CMakeFiles/atax.dir/linear-algebra/kernels/atax/atax.cpp.o
+[ 25%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 25%] Building CXX object CMakeFiles/symm.dir/linear-algebra/blas/symm/symm.cpp.o
+[ 40%] Building CXX object CMakeFiles/ludcmp.dir/linear-algebra/solvers/ludcmp/ludcmp.cpp.o
+[ 50%] Building CXX object CMakeFiles/3mm.dir/linear-algebra/kernels/3mm/3mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/gesummv.dir/linear-algebra/blas/gesummv/gesummv.cpp.o
+[ 50%] Building CXX object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.cpp.o
+[ 50%] Building CXX object CMakeFiles/durbin.dir/linear-algebra/solvers/durbin/durbin.cpp.o
+[ 50%] Building CXX object CMakeFiles/gemver.dir/linear-algebra/blas/gemver/gemver.cpp.o
+[ 50%] Building CXX object CMakeFiles/jacobi-1d.dir/stencils/jacobi-1d/jacobi-1d.cpp.o
+[ 50%] Building CXX object CMakeFiles/trmm.dir/linear-algebra/blas/trmm/trmm.cpp.o
+[ 50%] Building CXX object CMakeFiles/gramschmidt.dir/linear-algebra/solvers/gramschmidt/gramschmidt.cpp.o
+[ 50%] Building CXX object CMakeFiles/nussinov.dir/medley/nussinov/nussinov.cpp.o
+[ 50%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 50%] Building CXX object CMakeFiles/trisolv.dir/linear-algebra/solvers/trisolv/trisolv.cpp.o
+[ 50%] Building CXX object CMakeFiles/deriche.dir/medley/deriche/deriche.cpp.o
+[ 50%] Building CXX object CMakeFiles/correlation.dir/datamining/correlation/correlation.cpp.o
+[ 50%] Building CXX object CMakeFiles/doitgen.dir/linear-algebra/kernels/doitgen/doitgen.cpp.o
+[ 50%] Building CXX object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.cpp.o
+[ 50%] Building CXX object CMakeFiles/lu.dir/linear-algebra/solvers/lu/lu.cpp.o
+[ 50%] Building CXX object CMakeFiles/mvt.dir/linear-algebra/kernels/mvt/mvt.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/bicg.dir/linear-algebra/kernels/bicg/bicg.cpp.o
+[ 50%] Building CXX object CMakeFiles/adi.dir/stencils/adi/adi.cpp.o
+[ 50%] Building CXX object CMakeFiles/fdtd-2d.dir/stencils/fdtd-2d/fdtd-2d.cpp.o
+[ 50%] Building CXX object CMakeFiles/cholesky.dir/linear-algebra/solvers/cholesky/cholesky.cpp.o
+[ 50%] Building CXX object CMakeFiles/jacobi-2d.dir/stencils/jacobi-2d/jacobi-2d.cpp.o
+[ 50%] Building CXX object CMakeFiles/seidel-2d.dir/stencils/seidel-2d/seidel-2d.cpp.o
+[ 58%] Linking CXX executable gesummv
+[ 60%] Linking CXX executable durbin
+[ 60%] Linking CXX executable atax
+[ 60%] Linking CXX executable jacobi-1d
+[ 60%] Linking CXX executable trisolv
+[ 60%] Linking CXX executable seidel-2d
+[ 61%] Linking CXX executable floyd-warshall
+[ 63%] Linking CXX executable mvt
+[ 66%] Linking CXX executable bicg
+[ 66%] Linking CXX executable jacobi-2d
+[ 68%] Linking CXX executable syrk
+[ 71%] Built target trisolv
+[ 71%] Built target gesummv
+[ 71%] Built target atax
+[ 71%] Built target durbin
+[ 71%] Built target jacobi-1d
+[ 71%] Linking CXX executable gemver
+[ 71%] Built target mvt
+[ 71%] Linking CXX executable deriche
+[ 71%] Built target seidel-2d
+[ 71%] Built target floyd-warshall
+[ 75%] Built target jacobi-2d
+[ 81%] Linking CXX executable covariance
+[ 81%] Linking CXX executable syr2k
+[ 81%] Linking CXX executable gemm
+[ 81%] Linking CXX executable nussinov
+[ 81%] Linking CXX executable gramschmidt
+[ 86%] Linking CXX executable adi
+[ 86%] Linking CXX executable correlation
+[ 86%] Linking CXX executable lu
+[ 91%] Linking CXX executable cholesky
+[ 91%] Linking CXX executable heat-3d
+[ 91%] Linking CXX executable fdtd-2d
+[ 93%] Linking CXX executable trmm
+[ 93%] Built target syrk
+[ 93%] Linking CXX executable symm
+[ 93%] Built target bicg
+[ 93%] Built target deriche
+[ 93%] Built target gemver
+[ 96%] Linking CXX executable ludcmp
+[ 96%] Linking CXX executable doitgen
+[ 96%] Built target syr2k
+[ 96%] Built target nussinov
+[ 96%] Built target covariance
+[ 96%] Built target gramschmidt
+[ 96%] Built target gemm
+[ 96%] Built target adi
+[ 96%] Built target cholesky
+[ 96%] Built target fdtd-2d
+[ 96%] Built target heat-3d
+[ 96%] Built target trmm
+[ 96%] Built target correlation
+[ 96%] Built target symm
+[ 96%] Built target lu
+[ 96%] Built target ludcmp
+[ 96%] Built target doitgen
+[ 98%] Linking CXX executable 2mm
+[ 98%] Built target 2mm
+[100%] Linking CXX executable 3mm
+[100%] Built target 3mm
+collecting atax
+srun: job 21226 queued and waiting for resources
+srun: job 21226 has been allocated resources
+srun: job 21227 queued and waiting for resources
+srun: job 21227 has been allocated resources
+done
+collecting durbin
+srun: job 21228 queued and waiting for resources
+srun: job 21228 has been allocated resources
+srun: job 21229 queued and waiting for resources
+srun: job 21229 has been allocated resources
+done
+collecting gesummv
+srun: job 21230 queued and waiting for resources
+srun: job 21230 has been allocated resources
+srun: job 21231 queued and waiting for resources
+srun: job 21231 has been allocated resources
+done
+collecting floyd-warshall
+srun: job 21232 queued and waiting for resources
+srun: job 21232 has been allocated resources
+srun: job 21233 queued and waiting for resources
+srun: job 21233 has been allocated resources
+done
+collecting jacobi-2d
+srun: job 21234 queued and waiting for resources
+srun: job 21234 has been allocated resources
+srun: job 21235 queued and waiting for resources
+srun: job 21235 has been allocated resources
+done
+collecting bicg
+srun: job 21236 queued and waiting for resources
+srun: job 21236 has been allocated resources
+srun: job 21237 queued and waiting for resources
+srun: job 21237 has been allocated resources
+done
+collecting deriche
+srun: job 21238 queued and waiting for resources
+srun: job 21238 has been allocated resources
+srun: job 21239 queued and waiting for resources
+srun: job 21239 has been allocated resources
+done
+collecting gramschmidt
+srun: job 21240 queued and waiting for resources
+srun: job 21240 has been allocated resources
+srun: job 21241 queued and waiting for resources
+srun: job 21241 has been allocated resources
+done
+collecting covariance
+srun: job 21242 queued and waiting for resources
+srun: job 21242 has been allocated resources
+srun: job 21243 queued and waiting for resources
+srun: job 21243 has been allocated resources
+done
+collecting nussinov
+srun: job 21244 queued and waiting for resources
+srun: job 21244 has been allocated resources
+srun: job 21245 queued and waiting for resources
+srun: job 21245 has been allocated resources
+done
+collecting cholesky
+srun: job 21246 queued and waiting for resources
+srun: job 21246 has been allocated resources
+srun: job 21247 queued and waiting for resources
+srun: job 21247 has been allocated resources
+done
+collecting jacobi-1d
+srun: job 21248 queued and waiting for resources
+srun: job 21248 has been allocated resources
+srun: job 21249 queued and waiting for resources
+srun: job 21249 has been allocated resources
+done
+collecting trisolv
+srun: job 21250 queued and waiting for resources
+srun: job 21250 has been allocated resources
+srun: job 21251 queued and waiting for resources
+srun: job 21251 has been allocated resources
+done
+collecting seidel-2d
+srun: job 21252 queued and waiting for resources
+srun: job 21252 has been allocated resources
+srun: job 21253 queued and waiting for resources
+srun: job 21253 has been allocated resources
+done
+collecting mvt
+srun: job 21254 queued and waiting for resources
+srun: job 21254 has been allocated resources
+srun: job 21255 queued and waiting for resources
+srun: job 21255 has been allocated resources
+done
+collecting syrk
+srun: job 21256 queued and waiting for resources
+srun: job 21256 has been allocated resources
+srun: job 21257 queued and waiting for resources
+srun: job 21257 has been allocated resources
+done
+collecting gemver
+srun: job 21258 queued and waiting for resources
+srun: job 21258 has been allocated resources
+srun: job 21259 queued and waiting for resources
+srun: job 21259 has been allocated resources
+done
+collecting syr2k
+srun: job 21260 queued and waiting for resources
+srun: job 21260 has been allocated resources
+srun: job 21261 queued and waiting for resources
+srun: job 21261 has been allocated resources
+done
+collecting gemm
+srun: job 21262 queued and waiting for resources
+srun: job 21262 has been allocated resources
+srun: job 21263 queued and waiting for resources
+srun: job 21263 has been allocated resources
+done
+collecting adi
+srun: job 21264 queued and waiting for resources
+srun: job 21264 has been allocated resources
+srun: job 21265 queued and waiting for resources
+srun: job 21265 has been allocated resources
+done
+collecting correlation
+srun: job 21266 queued and waiting for resources
+srun: job 21266 has been allocated resources
+srun: job 21267 queued and waiting for resources
+srun: job 21267 has been allocated resources
+done
+collecting lu
+srun: job 21268 queued and waiting for resources
+srun: job 21268 has been allocated resources
+srun: job 21269 queued and waiting for resources
+srun: job 21269 has been allocated resources
+done
+collecting fdtd-2d
+srun: job 21270 queued and waiting for resources
+srun: job 21270 has been allocated resources
+srun: job 21271 queued and waiting for resources
+srun: job 21271 has been allocated resources
+done
+collecting heat-3d
+srun: job 21272 queued and waiting for resources
+srun: job 21272 has been allocated resources
+srun: job 21273 queued and waiting for resources
+srun: job 21273 has been allocated resources
+done
+collecting trmm
+srun: job 21274 queued and waiting for resources
+srun: job 21274 has been allocated resources
+srun: job 21275 queued and waiting for resources
+srun: job 21275 has been allocated resources
+done
+collecting symm
+srun: job 21276 queued and waiting for resources
+srun: job 21276 has been allocated resources
+srun: job 21277 queued and waiting for resources
+srun: job 21277 has been allocated resources
+done
+collecting ludcmp
+srun: job 21278 queued and waiting for resources
+srun: job 21278 has been allocated resources
+srun: job 21279 queued and waiting for resources
+srun: job 21279 has been allocated resources
+done
+collecting doitgen
+srun: job 21280 queued and waiting for resources
+srun: job 21280 has been allocated resources
+srun: job 21281 queued and waiting for resources
+srun: job 21281 has been allocated resources
+done
+collecting 2mm
+srun: job 21282 queued and waiting for resources
+srun: job 21282 has been allocated resources
+srun: job 21283 queued and waiting for resources
+srun: job 21283 has been allocated resources
+done
+collecting 3mm
+srun: job 21284 queued and waiting for resources
+srun: job 21284 has been allocated resources
+srun: job 21285 queued and waiting for resources
+srun: job 21285 has been allocated resources
+done
+srun: job 21286 queued and waiting for resources
+srun: job 21286 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=MEDIUM
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DMEDIUM_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (1.2s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-tuned/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 66%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 66%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 66%] Building C object CMakeFiles/floyd-warshall.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.c.o
+[ 66%] Building C object CMakeFiles/gemm.dir/utilities/polybench.c.o
+[ 83%] Linking C executable floyd-warshall
+[ 91%] Linking C executable 2mm
+[ 91%] Linking C executable covariance
+[100%] Linking C executable gemm
+[100%] Built target floyd-warshall
+[100%] Built target 2mm
+[100%] Built target covariance
+[100%] Built target gemm
+srun: job 21287 queued and waiting for resources
+srun: job 21287 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=MEDIUM
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DMEDIUM_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (4.6s)
+-- Generating done (0.8s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuned/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.cpp.o
+[ 50%] Building CXX object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.cpp.o
+[ 62%] Linking CXX executable floyd-warshall
+[ 62%] Built target floyd-warshall
+[ 75%] Linking CXX executable gemm
+[ 75%] Built target gemm
+[ 87%] Linking CXX executable covariance
+[ 87%] Built target covariance
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting floyd-warshall
+srun: job 21288 queued and waiting for resources
+srun: job 21288 has been allocated resources
+srun: job 21289 queued and waiting for resources
+srun: job 21289 has been allocated resources
+done
+collecting gemm
+srun: job 21290 queued and waiting for resources
+srun: job 21290 has been allocated resources
+srun: job 21291 queued and waiting for resources
+srun: job 21291 has been allocated resources
+done
+collecting covariance
+srun: job 21292 queued and waiting for resources
+srun: job 21292 has been allocated resources
+srun: job 21293 queued and waiting for resources
+srun: job 21293 has been allocated resources
+done
+collecting 2mm
+srun: job 21294 queued and waiting for resources
+srun: job 21294 has been allocated resources
+srun: job 21295 queued and waiting for resources
+srun: job 21295 has been allocated resources
+done
+srun: job 21296 queued and waiting for resources
+srun: job 21296 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=MEDIUM
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DMEDIUM_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' '-DCMAKE_CXX_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DMEDIUM_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (0.7s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-tbb/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 50%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 50%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 50%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 50%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 66%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 66%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 75%] Linking CXX executable covariance
+[ 83%] Linking CXX executable syr2k
+[ 83%] Built target covariance
+[ 91%] Linking CXX executable 2mm
+[ 91%] Built target syr2k
+[ 91%] Built target 2mm
+[100%] Linking CXX executable heat-3d
+[100%] Built target heat-3d
+srun: job 21297 queued and waiting for resources
+srun: job 21297 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=MEDIUM
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DMEDIUM_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (0.9s)
+-- Generating done (0.6s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tbb/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 50%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 62%] Linking CXX executable covariance
+[ 62%] Built target covariance
+[ 87%] Linking CXX executable syr2k
+[ 87%] Linking CXX executable heat-3d
+[ 87%] Built target syr2k
+[ 87%] Built target heat-3d
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting covariance
+srun: job 21298 queued and waiting for resources
+srun: job 21298 has been allocated resources
+srun: job 21299 queued and waiting for resources
+srun: job 21299 has been allocated resources
+done
+collecting syr2k
+srun: job 21300 queued and waiting for resources
+srun: job 21300 has been allocated resources
+srun: job 21301 queued and waiting for resources
+srun: job 21301 has been allocated resources
+done
+collecting heat-3d
+srun: job 21302 queued and waiting for resources
+srun: job 21302 has been allocated resources
+srun: job 21303 queued and waiting for resources
+srun: job 21303 has been allocated resources
+done
+collecting 2mm
+srun: job 21304 queued and waiting for resources
+srun: job 21304 has been allocated resources
+srun: job 21305 queued and waiting for resources
+srun: job 21305 has been allocated resources
+done
+srun: job 21306 queued and waiting for resources
+srun: job 21306 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=MEDIUM
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DMEDIUM_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (4.5s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-omp/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 33%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 33%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 50%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 50%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 75%] Linking C executable covariance
+[ 83%] Linking C executable 2mm
+[ 91%] Linking C executable syr2k
+[ 91%] Built target covariance
+[100%] Linking C executable heat-3d
+[100%] Built target syr2k
+[100%] Built target 2mm
+[100%] Built target heat-3d
+srun: job 21307 queued and waiting for resources
+srun: job 21307 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=MEDIUM
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DMEDIUM_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (7.0s)
+-- Generating done (6.0s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-omp/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 37%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 50%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 75%] Linking CXX executable syr2k
+[ 87%] Linking CXX executable covariance
+[ 87%] Linking CXX executable heat-3d
+[ 87%] Built target syr2k
+[ 87%] Built target covariance
+[ 87%] Built target heat-3d
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting syr2k
+srun: job 21308 queued and waiting for resources
+srun: job 21308 has been allocated resources
+srun: job 21309 queued and waiting for resources
+srun: job 21309 has been allocated resources
+done
+collecting covariance
+srun: job 21310 queued and waiting for resources
+srun: job 21310 has been allocated resources
+srun: job 21311 queued and waiting for resources
+srun: job 21311 has been allocated resources
+done
+collecting heat-3d
+srun: job 21312 queued and waiting for resources
+srun: job 21312 has been allocated resources
+srun: job 21313 queued and waiting for resources
+srun: job 21313 has been allocated resources
+done
+collecting 2mm
+srun: job 21314 queued and waiting for resources
+srun: job 21314 has been allocated resources
+srun: job 21315 queued and waiting for resources
+srun: job 21315 has been allocated resources
+done
+srun: job 21316 queued and waiting for resources
+srun: job 21316 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=LARGE
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DLARGE_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (14.1s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-4.2.1/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 15%] Building C object CMakeFiles/durbin.dir/utilities/polybench.c.o
+[ 15%] Building C object CMakeFiles/3mm.dir/linear-algebra/kernels/3mm/3mm.c.o
+[ 15%] Building C object CMakeFiles/ludcmp.dir/linear-algebra/solvers/ludcmp/ludcmp.c.o
+[ 15%] Building C object CMakeFiles/trisolv.dir/linear-algebra/solvers/trisolv/trisolv.c.o
+[ 15%] Building C object CMakeFiles/lu.dir/utilities/polybench.c.o
+[ 15%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 15%] Building C object CMakeFiles/durbin.dir/linear-algebra/solvers/durbin/durbin.c.o
+[ 15%] Building C object CMakeFiles/lu.dir/linear-algebra/solvers/lu/lu.c.o
+[ 15%] Building C object CMakeFiles/trisolv.dir/utilities/polybench.c.o
+[ 15%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 15%] Building C object CMakeFiles/cholesky.dir/utilities/polybench.c.o
+[ 53%] Building C object CMakeFiles/trmm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/doitgen.dir/linear-algebra/kernels/doitgen/doitgen.c.o
+[ 66%] Building C object CMakeFiles/gemm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gemver.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/fdtd-2d.dir/stencils/fdtd-2d/fdtd-2d.c.o
+[ 66%] Building C object CMakeFiles/atax.dir/linear-algebra/kernels/atax/atax.c.o
+[ 66%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 66%] Building C object CMakeFiles/gemver.dir/linear-algebra/blas/gemver/gemver.c.o
+[ 66%] Building C object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.c.o
+[ 66%] Building C object CMakeFiles/ludcmp.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/cholesky.dir/linear-algebra/solvers/cholesky/cholesky.c.o
+[ 66%] Building C object CMakeFiles/symm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/syrk.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gesummv.dir/linear-algebra/blas/gesummv/gesummv.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gesummv.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.c.o
+[ 66%] Building C object CMakeFiles/seidel-2d.dir/stencils/seidel-2d/seidel-2d.c.o
+[ 66%] Building C object CMakeFiles/mvt.dir/linear-algebra/kernels/mvt/mvt.c.o
+[ 66%] Building C object CMakeFiles/symm.dir/linear-algebra/blas/symm/symm.c.o
+[ 66%] Building C object CMakeFiles/deriche.dir/medley/deriche/deriche.c.o
+[ 66%] Building C object CMakeFiles/bicg.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/adi.dir/stencils/adi/adi.c.o
+[ 66%] Building C object CMakeFiles/deriche.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/fdtd-2d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.c.o
+[ 66%] Building C object CMakeFiles/seidel-2d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.c.o
+[ 66%] Building C object CMakeFiles/nussinov.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gramschmidt.dir/linear-algebra/solvers/gramschmidt/gramschmidt.c.o
+[ 66%] Building C object CMakeFiles/bicg.dir/linear-algebra/kernels/bicg/bicg.c.o
+[ 66%] Building C object CMakeFiles/mvt.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/syrk.dir/linear-algebra/blas/syrk/syrk.c.o
+[ 66%] Building C object CMakeFiles/jacobi-2d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/nussinov.dir/medley/nussinov/nussinov.c.o
+[ 66%] Building C object CMakeFiles/correlation.dir/datamining/correlation/correlation.c.o
+[ 66%] Building C object CMakeFiles/trmm.dir/linear-algebra/blas/trmm/trmm.c.o
+[ 66%] Building C object CMakeFiles/doitgen.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/3mm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/atax.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/jacobi-1d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gramschmidt.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/correlation.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/adi.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/jacobi-1d.dir/stencils/jacobi-1d/jacobi-1d.c.o
+[ 66%] Building C object CMakeFiles/jacobi-2d.dir/stencils/jacobi-2d/jacobi-2d.c.o
+[ 66%] Building C object CMakeFiles/floyd-warshall.dir/utilities/polybench.c.o
+[ 67%] Linking C executable durbin
+[ 68%] Linking C executable gesummv
+[ 96%] Linking C executable nussinov
+[100%] Linking C executable cholesky
+[100%] Linking C executable trisolv
+[100%] Linking C executable heat-3d
+[100%] Linking C executable 3mm
+[100%] Linking C executable gemver
+[100%] Linking C executable fdtd-2d
+[100%] Linking C executable lu
+[100%] Linking C executable 2mm
+[100%] Linking C executable deriche
+[100%] Linking C executable atax
+[100%] Linking C executable gemm
+[100%] Linking C executable adi
+[100%] Linking C executable floyd-warshall
+[100%] Linking C executable doitgen
+[100%] Linking C executable symm
+[100%] Linking C executable gramschmidt
+[100%] Linking C executable jacobi-1d
+[100%] Linking C executable syr2k
+[100%] Linking C executable jacobi-2d
+[100%] Linking C executable syrk
+[100%] Linking C executable covariance
+[100%] Linking C executable correlation
+[100%] Linking C executable ludcmp
+[100%] Linking C executable seidel-2d
+[100%] Linking C executable mvt
+[100%] Built target gesummv
+[100%] Linking C executable bicg
+[100%] Built target durbin
+[100%] Linking C executable trmm
+[100%] Built target nussinov
+[100%] Built target 2mm
+[100%] Built target correlation
+[100%] Built target mvt
+[100%] Built target syrk
+[100%] Built target gemm
+[100%] Built target adi
+[100%] Built target jacobi-2d
+[100%] Built target covariance
+[100%] Built target 3mm
+[100%] Built target ludcmp
+[100%] Built target lu
+[100%] Built target cholesky
+[100%] Built target syr2k
+[100%] Built target gemver
+[100%] Built target fdtd-2d
+[100%] Built target seidel-2d
+[100%] Built target gramschmidt
+[100%] Built target symm
+[100%] Built target trisolv
+[100%] Built target heat-3d
+[100%] Built target bicg
+[100%] Built target trmm
+[100%] Built target doitgen
+[100%] Built target floyd-warshall
+[100%] Built target deriche
+[100%] Built target jacobi-1d
+[100%] Built target atax
+srun: job 21317 queued and waiting for resources
+srun: job 21317 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ export DATASET_SIZE=LARGE
++ DATASET_SIZE=LARGE
++ export DATA_TYPE=FLOAT
++ DATA_TYPE=FLOAT
++ export NOARR_STRUCTURES_BRANCH=main
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DLARGE_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (0.9s)
+-- Generating done (2.8s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 11%] Building CXX object CMakeFiles/gemver.dir/linear-algebra/blas/gemver/gemver.cpp.o
+[ 40%] Building CXX object CMakeFiles/ludcmp.dir/linear-algebra/solvers/ludcmp/ludcmp.cpp.o
+[ 50%] Building CXX object CMakeFiles/correlation.dir/datamining/correlation/correlation.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/cholesky.dir/linear-algebra/solvers/cholesky/cholesky.cpp.o
+[ 50%] Building CXX object CMakeFiles/bicg.dir/linear-algebra/kernels/bicg/bicg.cpp.o
+[ 50%] Building CXX object CMakeFiles/lu.dir/linear-algebra/solvers/lu/lu.cpp.o
+[ 50%] Building CXX object CMakeFiles/3mm.dir/linear-algebra/kernels/3mm/3mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 50%] Building CXX object CMakeFiles/mvt.dir/linear-algebra/kernels/mvt/mvt.cpp.o
+[ 50%] Building CXX object CMakeFiles/atax.dir/linear-algebra/kernels/atax/atax.cpp.o
+[ 50%] Building CXX object CMakeFiles/syrk.dir/linear-algebra/blas/syrk/syrk.cpp.o
+[ 50%] Building CXX object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.cpp.o
+[ 50%] Building CXX object CMakeFiles/gramschmidt.dir/linear-algebra/solvers/gramschmidt/gramschmidt.cpp.o
+[ 50%] Building CXX object CMakeFiles/gesummv.dir/linear-algebra/blas/gesummv/gesummv.cpp.o
+[ 50%] Building CXX object CMakeFiles/jacobi-2d.dir/stencils/jacobi-2d/jacobi-2d.cpp.o
+[ 50%] Building CXX object CMakeFiles/doitgen.dir/linear-algebra/kernels/doitgen/doitgen.cpp.o
+[ 50%] Building CXX object CMakeFiles/trmm.dir/linear-algebra/blas/trmm/trmm.cpp.o
+[ 50%] Building CXX object CMakeFiles/symm.dir/linear-algebra/blas/symm/symm.cpp.o
+[ 50%] Building CXX object CMakeFiles/nussinov.dir/medley/nussinov/nussinov.cpp.o
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 50%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 50%] Building CXX object CMakeFiles/trisolv.dir/linear-algebra/solvers/trisolv/trisolv.cpp.o
+[ 50%] Building CXX object CMakeFiles/seidel-2d.dir/stencils/seidel-2d/seidel-2d.cpp.o
+[ 50%] Building CXX object CMakeFiles/deriche.dir/medley/deriche/deriche.cpp.o
+[ 50%] Building CXX object CMakeFiles/adi.dir/stencils/adi/adi.cpp.o
+[ 50%] Building CXX object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.cpp.o
+[ 50%] Building CXX object CMakeFiles/fdtd-2d.dir/stencils/fdtd-2d/fdtd-2d.cpp.o
+[ 50%] Building CXX object CMakeFiles/durbin.dir/linear-algebra/solvers/durbin/durbin.cpp.o
+[ 50%] Building CXX object CMakeFiles/jacobi-1d.dir/stencils/jacobi-1d/jacobi-1d.cpp.o
+[ 51%] Linking CXX executable jacobi-1d
+[ 65%] Linking CXX executable seidel-2d
+[ 65%] Linking CXX executable atax
+[ 65%] Linking CXX executable gesummv
+[ 65%] Linking CXX executable jacobi-2d
+[ 65%] Linking CXX executable mvt
+[ 65%] Linking CXX executable durbin
+[ 65%] Linking CXX executable floyd-warshall
+[ 65%] Linking CXX executable bicg
+[ 68%] Linking CXX executable gemver
+[ 68%] Linking CXX executable nussinov
+[ 71%] Linking CXX executable syrk
+[ 73%] Linking CXX executable trisolv
+[ 80%] Built target jacobi-1d
+[ 83%] Linking CXX executable deriche
+[ 83%] Linking CXX executable gemm
+[ 86%] Linking CXX executable syr2k
+[ 86%] Linking CXX executable fdtd-2d
+[ 86%] Linking CXX executable gramschmidt
+[ 86%] Linking CXX executable heat-3d
+[ 86%] Linking CXX executable covariance
+[ 86%] Linking CXX executable adi
+[ 86%] Linking CXX executable lu
+[ 86%] Built target jacobi-2d
+[ 91%] Linking CXX executable trmm
+[ 91%] Linking CXX executable cholesky
+[ 91%] Linking CXX executable symm
+[ 93%] Built target gesummv
+[ 93%] Built target seidel-2d
+[ 93%] Linking CXX executable correlation
+[ 93%] Built target atax
+[ 93%] Built target durbin
+[ 93%] Built target floyd-warshall
+[ 96%] Built target bicg
+[ 96%] Linking CXX executable ludcmp
+[ 96%] Built target nussinov
+[ 96%] Built target gemver
+[ 96%] Built target mvt
+[ 96%] Linking CXX executable doitgen
+[ 96%] Built target trisolv
+[ 96%] Built target syrk
+[ 96%] Built target deriche
+[ 96%] Built target gemm
+[ 96%] Built target syr2k
+[ 96%] Built target heat-3d
+[ 96%] Built target cholesky
+[ 96%] Built target covariance
+[ 96%] Built target lu
+[ 96%] Built target fdtd-2d
+[ 96%] Built target gramschmidt
+[ 96%] Built target adi
+[ 96%] Built target correlation
+[ 96%] Built target trmm
+[ 98%] Built target symm
+[ 98%] Linking CXX executable 2mm
+[ 98%] Built target doitgen
+[ 98%] Built target ludcmp
+[ 98%] Built target 2mm
+[100%] Linking CXX executable 3mm
+[100%] Built target 3mm
+collecting fdtd-2d
+srun: job 21318 queued and waiting for resources
+srun: job 21318 has been allocated resources
+srun: job 21319 queued and waiting for resources
+srun: job 21319 has been allocated resources
+done
+collecting syr2k
+srun: job 21320 queued and waiting for resources
+srun: job 21320 has been allocated resources
+srun: job 21321 queued and waiting for resources
+srun: job 21321 has been allocated resources
+done
+collecting gramschmidt
+srun: job 21322 queued and waiting for resources
+srun: job 21322 has been allocated resources
+srun: job 21323 queued and waiting for resources
+srun: job 21323 has been allocated resources
+done
+collecting covariance
+srun: job 21324 queued and waiting for resources
+srun: job 21324 has been allocated resources
+srun: job 21325 queued and waiting for resources
+srun: job 21325 has been allocated resources
+done
+collecting heat-3d
+srun: job 21329 queued and waiting for resources
+srun: job 21329 has been allocated resources
+srun: job 21330 queued and waiting for resources
+srun: job 21330 has been allocated resources
+done
+collecting adi
+srun: job 21331 queued and waiting for resources
+srun: job 21331 has been allocated resources
+srun: job 21332 queued and waiting for resources
+srun: job 21332 has been allocated resources
+done
+collecting lu
+srun: job 21333 queued and waiting for resources
+srun: job 21333 has been allocated resources
+srun: job 21334 queued and waiting for resources
+srun: job 21334 has been allocated resources
+done
+collecting symm
+srun: job 21338 queued and waiting for resources
+srun: job 21338 has been allocated resources
+srun: job 21339 queued and waiting for resources
+srun: job 21339 has been allocated resources
+done
+collecting cholesky
+srun: job 21340 queued and waiting for resources
+srun: job 21340 has been allocated resources
+srun: job 21341 queued and waiting for resources
+srun: job 21341 has been allocated resources
+done
+collecting trmm
+srun: job 21342 queued and waiting for resources
+srun: job 21342 has been allocated resources
+srun: job 21343 queued and waiting for resources
+srun: job 21343 has been allocated resources
+done
+collecting correlation
+srun: job 21344 queued and waiting for resources
+srun: job 21344 has been allocated resources
+srun: job 21345 queued and waiting for resources
+srun: job 21345 has been allocated resources
+done
+collecting ludcmp
+srun: job 21346 queued and waiting for resources
+srun: job 21346 has been allocated resources
+srun: job 21347 queued and waiting for resources
+srun: job 21347 has been allocated resources
+done
+collecting doitgen
+srun: job 21348 queued and waiting for resources
+srun: job 21348 has been allocated resources
+srun: job 21349 queued and waiting for resources
+srun: job 21349 has been allocated resources
+done
+collecting 2mm
+srun: job 21353 queued and waiting for resources
+srun: job 21353 has been allocated resources
+srun: job 21354 queued and waiting for resources
+srun: job 21354 has been allocated resources
+done
+collecting 3mm
+srun: job 21355 queued and waiting for resources
+srun: job 21355 has been allocated resources
+srun: job 21356 queued and waiting for resources
+srun: job 21356 has been allocated resources
+done
+collecting jacobi-1d
+srun: job 21357 queued and waiting for resources
+srun: job 21357 has been allocated resources
+srun: job 21358 queued and waiting for resources
+srun: job 21358 has been allocated resources
+done
+collecting jacobi-2d
+srun: job 21359 queued and waiting for resources
+srun: job 21359 has been allocated resources
+srun: job 21360 queued and waiting for resources
+srun: job 21360 has been allocated resources
+done
+collecting seidel-2d
+srun: job 21361 queued and waiting for resources
+srun: job 21361 has been allocated resources
+srun: job 21365 queued and waiting for resources
+srun: job 21365 has been allocated resources
+done
+collecting atax
+srun: job 21366 queued and waiting for resources
+srun: job 21366 has been allocated resources
+srun: job 21367 queued and waiting for resources
+srun: job 21367 has been allocated resources
+done
+collecting durbin
+srun: job 21368 queued and waiting for resources
+srun: job 21368 has been allocated resources
+srun: job 21369 queued and waiting for resources
+srun: job 21369 has been allocated resources
+done
+collecting gesummv
+srun: job 21370 queued and waiting for resources
+srun: job 21370 has been allocated resources
+srun: job 21371 queued and waiting for resources
+srun: job 21371 has been allocated resources
+done
+collecting floyd-warshall
+srun: job 21372 queued and waiting for resources
+srun: job 21372 has been allocated resources
+srun: job 21374 queued and waiting for resources
+srun: job 21374 has been allocated resources
+done
+collecting bicg
+srun: job 21377 queued and waiting for resources
+srun: job 21377 has been allocated resources
+srun: job 21378 queued and waiting for resources
+srun: job 21378 has been allocated resources
+done
+collecting mvt
+srun: job 21379 queued and waiting for resources
+srun: job 21379 has been allocated resources
+srun: job 21380 queued and waiting for resources
+srun: job 21380 has been allocated resources
+done
+collecting gemver
+srun: job 21381 queued and waiting for resources
+srun: job 21381 has been allocated resources
+srun: job 21382 queued and waiting for resources
+srun: job 21382 has been allocated resources
+done
+collecting nussinov
+srun: job 21384 queued and waiting for resources
+srun: job 21384 has been allocated resources
+done
+collecting syrk
+srun: job 21385 queued and waiting for resources
+srun: job 21385 has been allocated resources
+srun: job 21386 queued and waiting for resources
+srun: job 21386 has been allocated resources
+done
+collecting trisolv
+srun: job 21387 queued and waiting for resources
+srun: job 21387 has been allocated resources
+srun: job 21388 queued and waiting for resources
+srun: job 21388 has been allocated resources
+done
+collecting deriche
+srun: job 21389 queued and waiting for resources
+srun: job 21389 has been allocated resources
+srun: job 21393 queued and waiting for resources
+srun: job 21393 has been allocated resources
+done
+collecting gemm
+srun: job 21394 queued and waiting for resources
+srun: job 21394 has been allocated resources
+srun: job 21395 queued and waiting for resources
+srun: job 21395 has been allocated resources
+done
+srun: job 21396 queued and waiting for resources
+srun: job 21396 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=LARGE
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DLARGE_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (0.7s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-tuned/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 16%] Building C object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.c.o
+[ 50%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 50%] Building C object CMakeFiles/gemm.dir/utilities/polybench.c.o
+[ 50%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 50%] Building C object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.c.o
+[ 66%] Building C object CMakeFiles/floyd-warshall.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 75%] Linking C executable floyd-warshall
+[100%] Linking C executable 2mm
+[100%] Linking C executable gemm
+[100%] Linking C executable covariance
+[100%] Built target floyd-warshall
+[100%] Built target 2mm
+[100%] Built target covariance
+[100%] Built target gemm
+srun: job 21397 queued and waiting for resources
+srun: job 21397 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=LARGE
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DLARGE_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (2.6s)
+-- Generating done (1.4s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuned/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 12%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 25%] Building CXX object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.cpp.o
+[ 37%] Building CXX object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 62%] Linking CXX executable floyd-warshall
+[ 62%] Built target floyd-warshall
+[ 75%] Linking CXX executable gemm
+[ 75%] Built target gemm
+[ 87%] Linking CXX executable covariance
+[ 87%] Built target covariance
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting floyd-warshall
+srun: job 21398 queued and waiting for resources
+srun: job 21398 has been allocated resources
+srun: job 21399 queued and waiting for resources
+srun: job 21399 has been allocated resources
+done
+collecting gemm
+srun: job 21403 queued and waiting for resources
+srun: job 21403 has been allocated resources
+srun: job 21404 queued and waiting for resources
+srun: job 21404 has been allocated resources
+done
+collecting covariance
+srun: job 21405 queued and waiting for resources
+srun: job 21405 has been allocated resources
+srun: job 21406 queued and waiting for resources
+srun: job 21406 has been allocated resources
+done
+collecting 2mm
+srun: job 21408 queued and waiting for resources
+srun: job 21408 has been allocated resources
+done
+srun: job 21409 queued and waiting for resources
+srun: job 21409 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=LARGE
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DLARGE_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' '-DCMAKE_CXX_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DLARGE_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (4.3s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-tbb/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 16%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 16%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 33%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 33%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 50%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 50%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 66%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 83%] Linking CXX executable covariance
+[ 83%] Linking CXX executable syr2k
+[ 91%] Linking CXX executable 2mm
+[100%] Built target covariance
+[100%] Linking CXX executable heat-3d
+[100%] Built target 2mm
+[100%] Built target syr2k
+[100%] Built target heat-3d
+srun: job 21410 queued and waiting for resources
+srun: job 21410 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=LARGE
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DLARGE_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (5.4s)
+-- Generating done (1.8s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tbb/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 25%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 37%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 62%] Linking CXX executable syr2k
+[ 75%] Linking CXX executable covariance
+[ 87%] Linking CXX executable heat-3d
+[ 87%] Built target syr2k
+[ 87%] Built target covariance
+[ 87%] Built target heat-3d
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting syr2k
+srun: job 21411 queued and waiting for resources
+srun: job 21411 has been allocated resources
+srun: job 21412 queued and waiting for resources
+srun: job 21412 has been allocated resources
+done
+collecting covariance
+srun: job 21413 queued and waiting for resources
+srun: job 21413 has been allocated resources
+srun: job 21414 queued and waiting for resources
+srun: job 21414 has been allocated resources
+done
+collecting heat-3d
+srun: job 21415 queued and waiting for resources
+srun: job 21415 has been allocated resources
+srun: job 21416 queued and waiting for resources
+srun: job 21416 has been allocated resources
+done
+collecting 2mm
+srun: job 21417 queued and waiting for resources
+srun: job 21417 has been allocated resources
+srun: job 21418 queued and waiting for resources
+srun: job 21418 has been allocated resources
+done
+srun: job 21419 queued and waiting for resources
+srun: job 21419 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=LARGE
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DLARGE_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (0.8s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-omp/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 50%] Building C object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.c.o
+[ 50%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 50%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 50%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 50%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 50%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 75%] Linking C executable 2mm
+[ 83%] Linking C executable heat-3d
+[100%] Linking C executable covariance
+[100%] Linking C executable syr2k
+[100%] Built target 2mm
+[100%] Built target heat-3d
+[100%] Built target syr2k
+[100%] Built target covariance
+srun: job 21420 queued and waiting for resources
+srun: job 21420 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=LARGE
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DLARGE_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (3.2s)
+-- Generating done (3.0s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-omp/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 25%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 25%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 62%] Linking CXX executable syr2k
+[ 62%] Built target syr2k
+[ 75%] Linking CXX executable heat-3d
+[ 87%] Linking CXX executable covariance
+[ 87%] Built target heat-3d
+[ 87%] Built target covariance
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting syr2k
+srun: job 21421 queued and waiting for resources
+srun: job 21421 has been allocated resources
+srun: job 21422 queued and waiting for resources
+srun: job 21422 has been allocated resources
+done
+collecting heat-3d
+srun: job 21423 queued and waiting for resources
+srun: job 21423 has been allocated resources
+srun: job 21424 queued and waiting for resources
+srun: job 21424 has been allocated resources
+done
+collecting covariance
+srun: job 21425 queued and waiting for resources
+srun: job 21425 has been allocated resources
+srun: job 21427 queued and waiting for resources
+srun: job 21427 has been allocated resources
+done
+collecting 2mm
+srun: job 21430 queued and waiting for resources
+srun: job 21430 has been allocated resources
+srun: job 21431 queued and waiting for resources
+srun: job 21431 has been allocated resources
+done
+srun: job 21432 queued and waiting for resources
+srun: job 21432 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=EXTRALARGE
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (19.1s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-4.2.1/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 21%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.c.o
+[ 55%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/gramschmidt.dir/linear-algebra/solvers/gramschmidt/gramschmidt.c.o
+[ 55%] Building C object CMakeFiles/correlation.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/ludcmp.dir/linear-algebra/solvers/ludcmp/ludcmp.c.o
+[ 55%] Building C object CMakeFiles/cholesky.dir/linear-algebra/solvers/cholesky/cholesky.c.o
+[ 55%] Building C object CMakeFiles/adi.dir/stencils/adi/adi.c.o
+[ 55%] Building C object CMakeFiles/bicg.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/floyd-warshall.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.c.o
+[ 55%] Building C object CMakeFiles/ludcmp.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/3mm.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/doitgen.dir/linear-algebra/kernels/doitgen/doitgen.c.o
+[ 55%] Building C object CMakeFiles/atax.dir/linear-algebra/kernels/atax/atax.c.o
+[ 55%] Building C object CMakeFiles/bicg.dir/linear-algebra/kernels/bicg/bicg.c.o
+[ 55%] Building C object CMakeFiles/correlation.dir/datamining/correlation/correlation.c.o
+[ 55%] Building C object CMakeFiles/doitgen.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.c.o
+[ 55%] Building C object CMakeFiles/3mm.dir/linear-algebra/kernels/3mm/3mm.c.o
+[ 55%] Building C object CMakeFiles/jacobi-1d.dir/stencils/jacobi-1d/jacobi-1d.c.o
+[ 55%] Building C object CMakeFiles/syrk.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/cholesky.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/symm.dir/linear-algebra/blas/symm/symm.c.o
+[ 55%] Building C object CMakeFiles/gemm.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/trisolv.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/mvt.dir/linear-algebra/kernels/mvt/mvt.c.o
+[ 55%] Building C object CMakeFiles/syrk.dir/linear-algebra/blas/syrk/syrk.c.o
+[ 55%] Building C object CMakeFiles/symm.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/jacobi-1d.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/durbin.dir/linear-algebra/solvers/durbin/durbin.c.o
+[ 55%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 55%] Building C object CMakeFiles/adi.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/seidel-2d.dir/stencils/seidel-2d/seidel-2d.c.o
+[ 55%] Building C object CMakeFiles/lu.dir/linear-algebra/solvers/lu/lu.c.o
+[ 55%] Building C object CMakeFiles/mvt.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/trmm.dir/linear-algebra/blas/trmm/trmm.c.o
+[ 55%] Building C object CMakeFiles/atax.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/gesummv.dir/linear-algebra/blas/gesummv/gesummv.c.o
+[ 55%] Building C object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.c.o
+[ 55%] Building C object CMakeFiles/trmm.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/gesummv.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/gramschmidt.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/durbin.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/trisolv.dir/linear-algebra/solvers/trisolv/trisolv.c.o
+[ 55%] Building C object CMakeFiles/seidel-2d.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/gemver.dir/linear-algebra/blas/gemver/gemver.c.o
+[ 55%] Building C object CMakeFiles/gemver.dir/utilities/polybench.c.o
+[ 55%] Building C object CMakeFiles/lu.dir/utilities/polybench.c.o
+[ 75%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 90%] Linking C executable doitgen
+[ 90%] Linking C executable mvt
+[ 90%] Linking C executable trisolv
+[ 90%] Linking C executable 3mm
+[ 90%] Linking C executable lu
+[ 90%] Linking C executable syrk
+[ 90%] Linking C executable gemm
+[ 90%] Linking C executable jacobi-1d
+[ 90%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 90%] Linking C executable durbin
+[ 90%] Building C object CMakeFiles/deriche.dir/utilities/polybench.c.o
+[ 90%] Linking C executable cholesky
+[ 90%] Linking C executable seidel-2d
+[ 90%] Linking C executable gemver
+[ 90%] Linking C executable bicg
+[ 90%] Building C object CMakeFiles/fdtd-2d.dir/stencils/fdtd-2d/fdtd-2d.c.o
+[ 90%] Building C object CMakeFiles/jacobi-2d.dir/utilities/polybench.c.o
+[ 90%] Linking C executable covariance
+[ 90%] Building C object CMakeFiles/deriche.dir/medley/deriche/deriche.c.o
+[ 90%] Linking C executable syr2k
+[ 90%] Linking C executable atax
+[ 90%] Building C object CMakeFiles/jacobi-2d.dir/stencils/jacobi-2d/jacobi-2d.c.o
+[ 90%] Linking C executable gesummv
+[ 90%] Building C object CMakeFiles/fdtd-2d.dir/utilities/polybench.c.o
+[ 90%] Linking C executable gramschmidt
+[ 90%] Linking C executable floyd-warshall
+[ 90%] Linking C executable symm
+[ 90%] Building C object CMakeFiles/nussinov.dir/medley/nussinov/nussinov.c.o
+[ 90%] Building C object CMakeFiles/nussinov.dir/utilities/polybench.c.o
+[ 90%] Linking C executable correlation
+[ 91%] Linking C executable ludcmp
+[ 94%] Linking C executable trmm
+[ 94%] Linking C executable adi
+[ 94%] Linking C executable heat-3d
+[ 94%] Built target trisolv
+[ 94%] Built target 3mm
+[ 94%] Built target cholesky
+[ 94%] Built target doitgen
+[ 94%] Built target bicg
+[ 94%] Built target gesummv
+[ 94%] Built target seidel-2d
+[ 94%] Built target covariance
+[ 94%] Built target jacobi-1d
+[ 94%] Built target mvt
+[ 94%] Built target lu
+[ 94%] Built target syr2k
+[ 94%] Built target gemm
+[ 94%] Built target syrk
+[ 94%] Built target atax
+[ 94%] Built target gemver
+[ 94%] Built target floyd-warshall
+[ 94%] Built target heat-3d
+[ 94%] Built target durbin
+[ 94%] Built target symm
+[ 94%] Built target gramschmidt
+[ 94%] Built target adi
+[ 94%] Built target ludcmp
+[ 94%] Built target correlation
+[ 94%] Built target trmm
+[ 96%] Linking C executable jacobi-2d
+[ 96%] Linking C executable deriche
+[ 98%] Linking C executable 2mm
+[ 98%] Linking C executable nussinov
+[100%] Linking C executable fdtd-2d
+[100%] Built target jacobi-2d
+[100%] Built target 2mm
+[100%] Built target deriche
+[100%] Built target nussinov
+[100%] Built target fdtd-2d
+srun: job 21433 queued and waiting for resources
+srun: job 21433 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ export DATASET_SIZE=EXTRALARGE
++ DATASET_SIZE=EXTRALARGE
++ export DATA_TYPE=FLOAT
++ DATA_TYPE=FLOAT
++ export NOARR_STRUCTURES_BRANCH=main
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (1.6s)
+-- Generating done (12.1s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 26%] Building CXX object CMakeFiles/bicg.dir/linear-algebra/kernels/bicg/bicg.cpp.o
+[ 26%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 26%] Building CXX object CMakeFiles/durbin.dir/linear-algebra/solvers/durbin/durbin.cpp.o
+[ 26%] Building CXX object CMakeFiles/3mm.dir/linear-algebra/kernels/3mm/3mm.cpp.o
+[ 26%] Building CXX object CMakeFiles/syrk.dir/linear-algebra/blas/syrk/syrk.cpp.o
+[ 26%] Building CXX object CMakeFiles/correlation.dir/datamining/correlation/correlation.cpp.o
+[ 26%] Building CXX object CMakeFiles/atax.dir/linear-algebra/kernels/atax/atax.cpp.o
+[ 26%] Building CXX object CMakeFiles/doitgen.dir/linear-algebra/kernels/doitgen/doitgen.cpp.o
+[ 26%] Building CXX object CMakeFiles/symm.dir/linear-algebra/blas/symm/symm.cpp.o
+[ 26%] Building CXX object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.cpp.o
+[ 26%] Building CXX object CMakeFiles/gesummv.dir/linear-algebra/blas/gesummv/gesummv.cpp.o
+[ 26%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 26%] Building CXX object CMakeFiles/gemver.dir/linear-algebra/blas/gemver/gemver.cpp.o
+[ 50%] Building CXX object CMakeFiles/cholesky.dir/linear-algebra/solvers/cholesky/cholesky.cpp.o
+[ 50%] Building CXX object CMakeFiles/trisolv.dir/linear-algebra/solvers/trisolv/trisolv.cpp.o
+[ 50%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 50%] Building CXX object CMakeFiles/nussinov.dir/medley/nussinov/nussinov.cpp.o
+[ 50%] Building CXX object CMakeFiles/lu.dir/linear-algebra/solvers/lu/lu.cpp.o
+[ 50%] Building CXX object CMakeFiles/adi.dir/stencils/adi/adi.cpp.o
+[ 50%] Building CXX object CMakeFiles/seidel-2d.dir/stencils/seidel-2d/seidel-2d.cpp.o
+[ 50%] Building CXX object CMakeFiles/jacobi-2d.dir/stencils/jacobi-2d/jacobi-2d.cpp.o
+[ 50%] Building CXX object CMakeFiles/jacobi-1d.dir/stencils/jacobi-1d/jacobi-1d.cpp.o
+[ 50%] Building CXX object CMakeFiles/mvt.dir/linear-algebra/kernels/mvt/mvt.cpp.o
+[ 50%] Building CXX object CMakeFiles/ludcmp.dir/linear-algebra/solvers/ludcmp/ludcmp.cpp.o
+[ 50%] Building CXX object CMakeFiles/fdtd-2d.dir/stencils/fdtd-2d/fdtd-2d.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/trmm.dir/linear-algebra/blas/trmm/trmm.cpp.o
+[ 50%] Building CXX object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.cpp.o
+[ 50%] Building CXX object CMakeFiles/deriche.dir/medley/deriche/deriche.cpp.o
+[ 50%] Building CXX object CMakeFiles/gramschmidt.dir/linear-algebra/solvers/gramschmidt/gramschmidt.cpp.o
+[ 66%] Linking CXX executable bicg
+[ 66%] Linking CXX executable jacobi-2d
+[ 66%] Linking CXX executable jacobi-1d
+[ 66%] Linking CXX executable durbin
+[ 66%] Linking CXX executable gesummv
+[ 66%] Linking CXX executable trisolv
+[ 66%] Linking CXX executable mvt
+[ 66%] Linking CXX executable seidel-2d
+[ 66%] Linking CXX executable atax
+[ 66%] Linking CXX executable floyd-warshall
+[ 85%] Linking CXX executable deriche
+[ 93%] Linking CXX executable syrk
+[ 93%] Linking CXX executable syr2k
+[ 93%] Linking CXX executable covariance
+[ 93%] Linking CXX executable gramschmidt
+[ 93%] Linking CXX executable heat-3d
+[ 93%] Linking CXX executable doitgen
+[ 93%] Linking CXX executable correlation
+[ 93%] Linking CXX executable nussinov
+[ 93%] Linking CXX executable fdtd-2d
+[ 93%] Linking CXX executable gemm
+[ 93%] Linking CXX executable gemver
+[ 93%] Linking CXX executable trmm
+[ 93%] Linking CXX executable adi
+[ 93%] Linking CXX executable ludcmp
+[ 93%] Linking CXX executable lu
+[100%] Linking CXX executable 3mm
+[100%] Linking CXX executable 2mm
+[100%] Linking CXX executable cholesky
+[100%] Linking CXX executable symm
+[100%] Built target durbin
+[100%] Built target bicg
+[100%] Built target trisolv
+[100%] Built target mvt
+[100%] Built target jacobi-2d
+[100%] Built target atax
+[100%] Built target seidel-2d
+[100%] Built target jacobi-1d
+[100%] Built target nussinov
+[100%] Built target syrk
+[100%] Built target correlation
+[100%] Built target trmm
+[100%] Built target doitgen
+[100%] Built target floyd-warshall
+[100%] Built target fdtd-2d
+[100%] Built target gramschmidt
+[100%] Built target gesummv
+[100%] Built target syr2k
+[100%] Built target heat-3d
+[100%] Built target deriche
+[100%] Built target 3mm
+[100%] Built target ludcmp
+[100%] Built target adi
+[100%] Built target 2mm
+[100%] Built target cholesky
+[100%] Built target symm
+[100%] Built target covariance
+[100%] Built target gemver
+[100%] Built target lu
+[100%] Built target gemm
+collecting bicg
+srun: job 21434 queued and waiting for resources
+srun: job 21434 has been allocated resources
+srun: job 21435 queued and waiting for resources
+srun: job 21435 has been allocated resources
+done
+collecting jacobi-2d
+srun: job 21436 queued and waiting for resources
+srun: job 21436 has been allocated resources
+srun: job 21437 queued and waiting for resources
+srun: job 21437 has been allocated resources
+done
+collecting trisolv
+srun: job 21438 queued and waiting for resources
+srun: job 21438 has been allocated resources
+srun: job 21439 queued and waiting for resources
+srun: job 21439 has been allocated resources
+done
+collecting durbin
+srun: job 21440 queued and waiting for resources
+srun: job 21440 has been allocated resources
+srun: job 21441 queued and waiting for resources
+srun: job 21441 has been allocated resources
+done
+collecting atax
+srun: job 21442 queued and waiting for resources
+srun: job 21442 has been allocated resources
+srun: job 21443 queued and waiting for resources
+srun: job 21443 has been allocated resources
+done
+collecting mvt
+srun: job 21444 queued and waiting for resources
+srun: job 21444 has been allocated resources
+srun: job 21445 queued and waiting for resources
+srun: job 21445 has been allocated resources
+done
+collecting seidel-2d
+srun: job 21446 queued and waiting for resources
+srun: job 21446 has been allocated resources
+srun: job 21459 queued and waiting for resources
+srun: job 21459 has been allocated resources
+done
+collecting jacobi-1d
+srun: job 21469 queued and waiting for resources
+srun: job 21469 has been allocated resources
+srun: job 21470 queued and waiting for resources
+srun: job 21470 has been allocated resources
+done
+collecting gesummv
+srun: job 21471 queued and waiting for resources
+srun: job 21471 has been allocated resources
+srun: job 21472 queued and waiting for resources
+srun: job 21472 has been allocated resources
+done
+collecting floyd-warshall
+srun: job 21473 queued and waiting for resources
+srun: job 21473 has been allocated resources
+srun: job 21483 queued and waiting for resources
+srun: job 21483 has been allocated resources
+done
+collecting syrk
+srun: job 21493 queued and waiting for resources
+srun: job 21493 has been allocated resources
+srun: job 21494 queued and waiting for resources
+srun: job 21494 has been allocated resources
+done
+collecting deriche
+srun: job 21498 queued and waiting for resources
+srun: job 21498 has been allocated resources
+srun: job 21499 queued and waiting for resources
+srun: job 21499 has been allocated resources
+done
+collecting syr2k
+srun: job 21503 queued and waiting for resources
+srun: job 21503 has been allocated resources
+srun: job 21504 queued and waiting for resources
+srun: job 21504 has been allocated resources
+done
+collecting nussinov
+srun: job 21505 queued and waiting for resources
+srun: job 21505 has been allocated resources
+srun: job 21519 queued and waiting for resources
+srun: job 21519 has been allocated resources
+slurmstepd: error: *** STEP 21519.0 ON w201 CANCELLED AT 2024-04-18T09:57:58 DUE TO PREEMPTION ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: w201: task 0: Terminated
+done
+collecting correlation
+srun: job 21522 queued and waiting for resources
+srun: job 21522 has been allocated resources
+srun: job 21524 queued and waiting for resources
+srun: job 21524 has been allocated resources
+done
+collecting doitgen
+srun: job 21525 queued and waiting for resources
+srun: job 21525 has been allocated resources
+srun: job 21526 queued and waiting for resources
+srun: job 21526 has been allocated resources
+done
+collecting heat-3d
+srun: job 21527 queued and waiting for resources
+srun: job 21527 has been allocated resources
+srun: job 21528 queued and waiting for resources
+srun: job 21528 has been allocated resources
+done
+collecting covariance
+srun: job 21529 queued and waiting for resources
+srun: job 21529 has been allocated resources
+srun: job 21530 queued and waiting for resources
+srun: job 21530 has been allocated resources
+done
+collecting fdtd-2d
+srun: job 21531 queued and waiting for resources
+srun: job 21531 has been allocated resources
+srun: job 21532 queued and waiting for resources
+srun: job 21532 has been allocated resources
+done
+collecting gramschmidt
+srun: job 21535 queued and waiting for resources
+srun: job 21535 has been allocated resources
+srun: job 21541 queued and waiting for resources
+srun: job 21541 has been allocated resources
+done
+collecting trmm
+srun: job 21549 queued and waiting for resources
+srun: job 21549 has been allocated resources
+srun: job 21551 queued and waiting for resources
+srun: job 21551 has been allocated resources
+done
+collecting adi
+srun: job 21554 queued and waiting for resources
+srun: job 21554 has been allocated resources
+srun: job 21567 queued and waiting for resources
+srun: job 21567 has been allocated resources
+done
+collecting ludcmp
+srun: job 21576 queued and waiting for resources
+srun: job 21576 has been allocated resources
+srun: job 21578 queued and waiting for resources
+srun: job 21578 has been allocated resources
+done
+collecting gemver
+srun: job 21579 queued and waiting for resources
+srun: job 21579 has been allocated resources
+srun: job 21580 queued and waiting for resources
+srun: job 21580 has been allocated resources
+done
+collecting gemm
+srun: job 21581 queued and waiting for resources
+srun: job 21581 has been allocated resources
+srun: job 21582 queued and waiting for resources
+srun: job 21582 has been allocated resources
+done
+collecting lu
+srun: job 21583 queued and waiting for resources
+srun: job 21583 has been allocated resources
+srun: job 21598 queued and waiting for resources
+srun: job 21598 has been allocated resources
+done
+collecting 3mm
+srun: job 21600 queued and waiting for resources
+srun: job 21600 has been allocated resources
+srun: job 21601 queued and waiting for resources
+srun: job 21601 has been allocated resources
+done
+collecting 2mm
+srun: job 21610 queued and waiting for resources
+srun: job 21610 has been allocated resources
+srun: job 21611 queued and waiting for resources
+srun: job 21611 has been allocated resources
+done
+collecting cholesky
+srun: job 21613 queued and waiting for resources
+srun: job 21613 has been allocated resources
+srun: job 21624 queued and waiting for resources
+srun: job 21624 has been allocated resources
+done
+collecting symm
+srun: job 21637 queued and waiting for resources
+srun: job 21637 has been allocated resources
+srun: job 21639 queued and waiting for resources
+srun: job 21639 has been allocated resources
+done
+srun: job 21643 queued and waiting for resources
+srun: job 21643 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=EXTRALARGE
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (0.5s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-tuned/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 33%] Building C object CMakeFiles/floyd-warshall.dir/utilities/polybench.c.o
+[ 33%] Building C object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.c.o
+[ 50%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 50%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 50%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 50%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.c.o
+[ 66%] Building C object CMakeFiles/gemm.dir/utilities/polybench.c.o
+[ 75%] Linking C executable floyd-warshall
+[ 83%] Linking C executable covariance
+[ 83%] Built target floyd-warshall
+[100%] Linking C executable 2mm
+[100%] Linking C executable gemm
+[100%] Built target covariance
+[100%] Built target 2mm
+[100%] Built target gemm
+srun: job 21644 queued and waiting for resources
+srun: job 21644 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=EXTRALARGE
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (1.4s)
+-- Generating done (0.8s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuned/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/floyd-warshall.dir/medley/floyd-warshall/floyd-warshall.cpp.o
+[ 50%] Building CXX object CMakeFiles/gemm.dir/linear-algebra/blas/gemm/gemm.cpp.o
+[ 62%] Linking CXX executable floyd-warshall
+[ 62%] Built target floyd-warshall
+[ 75%] Linking CXX executable gemm
+[ 75%] Built target gemm
+[ 87%] Linking CXX executable covariance
+[ 87%] Built target covariance
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting floyd-warshall
+srun: job 21645 queued and waiting for resources
+srun: job 21645 has been allocated resources
+srun: job 21678 queued and waiting for resources
+srun: job 21678 has been allocated resources
+done
+collecting gemm
+srun: job 21706 queued and waiting for resources
+srun: job 21706 has been allocated resources
+srun: job 21708 queued and waiting for resources
+srun: job 21708 has been allocated resources
+done
+collecting covariance
+srun: job 21711 queued and waiting for resources
+srun: job 21711 has been allocated resources
+srun: job 21714 queued and waiting for resources
+srun: job 21714 has been allocated resources
+done
+collecting 2mm
+srun: job 21716 queued and waiting for resources
+srun: job 21716 has been allocated resources
+srun: job 21720 queued and waiting for resources
+srun: job 21720 has been allocated resources
+done
+srun: job 21725 queued and waiting for resources
+srun: job 21725 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=EXTRALARGE
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' '-DCMAKE_CXX_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (1.6s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-tbb/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 41%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 41%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 41%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 66%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 66%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 66%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 75%] Linking CXX executable covariance
+[ 83%] Linking CXX executable syr2k
+[ 83%] Built target covariance
+[ 91%] Linking CXX executable 2mm
+[ 91%] Built target syr2k
+[ 91%] Built target 2mm
+[100%] Linking CXX executable heat-3d
+[100%] Built target heat-3d
+srun: job 21726 queued and waiting for resources
+srun: job 21726 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=EXTRALARGE
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (4.0s)
+-- Generating done (0.8s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tbb/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 50%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 50%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 50%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 62%] Linking CXX executable covariance
+[ 75%] Linking CXX executable syr2k
+[ 75%] Built target covariance
+[ 87%] Built target syr2k
+[ 87%] Linking CXX executable heat-3d
+[ 87%] Built target heat-3d
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting covariance
+srun: job 21727 queued and waiting for resources
+srun: job 21727 has been allocated resources
+srun: job 21729 queued and waiting for resources
+srun: job 21729 has been allocated resources
+done
+collecting syr2k
+srun: job 21731 queued and waiting for resources
+srun: job 21731 has been allocated resources
+srun: job 21732 queued and waiting for resources
+srun: job 21732 has been allocated resources
+done
+collecting heat-3d
+srun: job 21733 queued and waiting for resources
+srun: job 21733 has been allocated resources
+srun: job 21734 queued and waiting for resources
+srun: job 21734 has been allocated resources
+done
+collecting 2mm
+srun: job 21736 queued and waiting for resources
+srun: job 21736 has been allocated resources
+srun: job 21737 queued and waiting for resources
+srun: job 21737 has been allocated resources
+done
+srun: job 21738 queued and waiting for resources
+srun: job 21738 has been allocated resources
++ BUILD_DIR=build
++ DATASET_SIZE=EXTRALARGE
++ DATA_TYPE=FLOAT
++ cmake -E make_directory build
++ '[' -f build/.gitignore ']'
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_C_FLAGS=-DPOLYBENCH_TIME -DPOLYBENCH_DUMP_ARRAYS -DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT -D_POSIX_C_SOURCE=200809L ' ..
+-- Configuring done (0.0s)
+-- Generating done (1.4s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-omp/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 33%] Building C object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.c.o
+[ 33%] Building C object CMakeFiles/2mm.dir/utilities/polybench.c.o
+[ 33%] Building C object CMakeFiles/covariance.dir/datamining/covariance/covariance.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.c.o
+[ 66%] Building C object CMakeFiles/syr2k.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/covariance.dir/utilities/polybench.c.o
+[ 66%] Building C object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.c.o
+[ 75%] Linking C executable syr2k
+[100%] Linking C executable 2mm
+[100%] Linking C executable covariance
+[100%] Linking C executable heat-3d
+[100%] Built target heat-3d
+[100%] Built target 2mm
+[100%] Built target syr2k
+[100%] Built target covariance
+srun: job 21739 queued and waiting for resources
+srun: job 21739 has been allocated resources
++ cmake -E make_directory build
++ cd build
++ DATASET_SIZE=EXTRALARGE
++ DATA_TYPE=FLOAT
++ NOARR_STRUCTURES_BRANCH=main
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main '-DCMAKE_CXX_FLAGS= -DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT' ..
+-- Configuring done (1.9s)
+-- Generating done (0.3s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-omp/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64
+[ 25%] Building CXX object CMakeFiles/syr2k.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 25%] Building CXX object CMakeFiles/heat-3d.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 37%] Building CXX object CMakeFiles/covariance.dir/datamining/covariance/covariance.cpp.o
+[ 50%] Building CXX object CMakeFiles/2mm.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 62%] Linking CXX executable syr2k
+[ 75%] Linking CXX executable covariance
+[ 75%] Built target syr2k
+[ 75%] Built target covariance
+[ 87%] Linking CXX executable heat-3d
+[ 87%] Built target heat-3d
+[100%] Linking CXX executable 2mm
+[100%] Built target 2mm
+collecting syr2k
+srun: job 21740 queued and waiting for resources
+srun: job 21740 has been allocated resources
+srun: job 21742 queued and waiting for resources
+srun: job 21742 has been allocated resources
+done
+collecting covariance
+srun: job 21747 queued and waiting for resources
+srun: job 21747 has been allocated resources
+srun: job 21748 queued and waiting for resources
+srun: job 21748 has been allocated resources
+done
+collecting heat-3d
+srun: job 21751 queued and waiting for resources
+srun: job 21751 has been allocated resources
+srun: job 21753 queued and waiting for resources
+srun: job 21753 has been allocated resources
+done
+collecting 2mm
+srun: job 21755 queued and waiting for resources
+srun: job 21755 has been allocated resources
+srun: job 21756 queued and waiting for resources
+srun: job 21756 has been allocated resources
+done
