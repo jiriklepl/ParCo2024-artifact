@@ -2,6 +2,8 @@
 
 # Run the examples
 
+NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-main}
+
 if [ "$(basename "$(pwd)")" = "scripts" ]; then
     cd ..
 fi
