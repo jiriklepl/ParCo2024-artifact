@@ -23,7 +23,7 @@ enum {
 void run_histogram(value_t *in_ptr, std::size_t size, std::size_t *out_ptr) {
 
 if constexpr (HISTO_IMPL == histo_loop) {
-	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::sized_vector<'i'>(size), in_ptr);
+	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
 	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	for(std::size_t i = 0; i < size; ++i) {
@@ -32,7 +32,7 @@ if constexpr (HISTO_IMPL == histo_loop) {
 }
 
 else if constexpr (HISTO_IMPL == histo_range) {
-	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::sized_vector<'i'>(size), in_ptr);
+	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
 	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	for(auto elem : noarr::traverser(in)) {
@@ -41,7 +41,7 @@ else if constexpr (HISTO_IMPL == histo_range) {
 }
 
 else if constexpr (HISTO_IMPL == histo_foreach) {
-	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::sized_vector<'i'>(size), in_ptr);
+	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
 	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	// PAPER 4.0 - First listing
@@ -52,7 +52,7 @@ else if constexpr (HISTO_IMPL == histo_foreach) {
 
 #ifdef HISTO_HAVE_TBB
 else if constexpr (HISTO_IMPL == histo_tbbreduce) {
-	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::sized_vector<'i'>(size), in_ptr);
+	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
 	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	// PAPER 4.0 - Second listing

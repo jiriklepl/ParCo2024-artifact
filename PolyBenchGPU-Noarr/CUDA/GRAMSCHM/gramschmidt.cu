@@ -168,9 +168,9 @@ public:
 
 		// data
 		experiment_data new_data{
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'k', 'i'>(nj, ni)),
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'j', 'k'>(nj, nj)),
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'k', 'i'>(nj, ni))
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'k', 'i'>(nj, ni)),
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'j', 'k'>(nj, nj)),
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'k', 'i'>(nj, ni))
 		};
 
 		init(new_data.a.get_host_ref(), new_data.r.get_host_ref(), new_data.q.get_host_ref());
