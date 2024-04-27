@@ -109,8 +109,8 @@ public:
 		// data
 		experiment_data new_data{
 			tsteps,
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'j', 'i'>(n, n)),
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'j', 'i'>(n, n))
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'j', 'i'>(n, n)),
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'j', 'i'>(n, n))
 		};
 
 		init(new_data.a.get_host_ref(), new_data.b.get_host_ref());

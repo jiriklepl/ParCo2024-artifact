@@ -53,7 +53,7 @@ __global__ void histogram(InT in_trav, In in, ShmS shm_s, Out out) {
 }
 
 void run_histogram(value_t *in_ptr, std::size_t size, std::size_t *out_ptr) {
-	auto in_struct = noarr::scalar<value_t>() ^ noarr::sized_vector<'i'>(size);
+	auto in_struct = noarr::scalar<value_t>() ^ noarr::vector<'i'>(size);
 	auto out_struct = noarr::scalar<std::size_t>() ^ noarr::array<'v', NUM_VALUES>();
 
 	// PAPER: 4.1 - Second listing

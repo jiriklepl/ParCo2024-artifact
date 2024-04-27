@@ -103,9 +103,9 @@ public:
 		cudaInit();
 
 		experiment_data new_data{
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'j', 'i'>(nj, ni)),
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'k', 'i'>(nk, ni)),
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'j', 'k'>(nj, nk)),
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'j', 'i'>(nj, ni)),
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'k', 'i'>(nk, ni)),
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'j', 'k'>(nj, nk)),
 		};
 
 		// initialize data

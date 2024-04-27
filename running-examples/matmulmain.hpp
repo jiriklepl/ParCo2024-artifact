@@ -42,9 +42,9 @@ int main(int argc, char **argv) {
 	}
 #endif
 
-	auto i_st = noarr::sized_vector<'i'>(size);
-	auto j_st = noarr::sized_vector<'j'>(size);
-	auto k_st = noarr::sized_vector<'k'>(size);
+	auto i_st = noarr::vector<'i'>(size);
+	auto j_st = noarr::vector<'j'>(size);
+	auto k_st = noarr::vector<'k'>(size);
 
 	auto ta = noarr::scalar<num_t>() ^ i_st ^ k_st;
 	auto tb = noarr::scalar<num_t>() ^ k_st ^ j_st;

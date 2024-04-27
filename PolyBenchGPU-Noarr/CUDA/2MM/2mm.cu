@@ -134,11 +134,11 @@ public:
 
 		// data
 		experiment_data new_data{
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'j', 'i'>(nj, ni)),
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'k', 'i'>(nk, ni)),
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'j', 'k'>(nj, nk)),
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'j', 'l'>(nj, nl)),
-			managed_bag(noarr::scalar<num_t>() ^ noarr::sized_vectors<'l', 'i'>(nl, ni))
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'j', 'i'>(nj, ni)),
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'k', 'i'>(nk, ni)),
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'j', 'k'>(nj, nk)),
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'j', 'l'>(nj, nl)),
+			managed_bag(noarr::scalar<num_t>() ^ noarr::vectors<'l', 'i'>(nl, ni))
 		};
 
 		init(new_data.alpha, new_data.beta, new_data.a.get_host_ref(), new_data.b.get_host_ref(), new_data.c.get_host_ref(), new_data.d.get_host_ref());
