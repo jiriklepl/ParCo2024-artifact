@@ -60,7 +60,7 @@ while read -r file; do
 		continue
 	fi
 
-	if [ -f "autotuned/$filename" ]; then
+	if [ -f "$BUILD_DIR/${filename}d" ]; then
 		paste <(grep -oE '[0-9]+\.[0-9]+' "$dirname/c") <(grep -oE '[0-9]+(\.[0-9]+)?' "$dirname/cpp") <(grep -oE '[0-9]+(\.[0-9]+)?' "$dirname/cpp-autotuned")
 	else 
 		paste <(grep -oE '[0-9]+\.[0-9]+' "$dirname/c") <(grep -oE '[0-9]+(\.[0-9]+)?' "$dirname/cpp")
@@ -69,7 +69,7 @@ while read -r file; do
 		n = 0
 		changes = 0
 		autotune_changes = 0
-		outputs = \"$([ -f "autotuned/$filename" ] && echo 3 || echo 2)\"
+		outputs = \"$([ -f "$BUILD_DIR/${filename}d" ] && echo 3 || echo 2)\"
 	}
 
 	NF == outputs {
