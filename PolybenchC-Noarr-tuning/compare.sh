@@ -28,7 +28,7 @@ while read -r file; do
 	filename=$(basename "$file")
 
 	case "$filename" in
-		*_autotune)
+		*_autotune*)
 			continue
 			;;
 	esac
