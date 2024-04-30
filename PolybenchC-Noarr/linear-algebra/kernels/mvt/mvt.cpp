@@ -91,13 +91,13 @@ int main(int argc, char *argv[]) {
 	std::size_t n = N;
 
 	// data
-	auto x1 = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vector<'i'>(n));
-	auto x2 = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vector<'i'>(n));
+	auto x1 = noarr::bag(noarr::scalar<num_t>() ^ noarr::vector<'i'>(n));
+	auto x2 = noarr::bag(noarr::scalar<num_t>() ^ noarr::vector<'i'>(n));
 
-	auto y1 = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vector<'j'>(n));
-	auto y2 = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vector<'j'>(n));
+	auto y1 = noarr::bag(noarr::scalar<num_t>() ^ noarr::vector<'j'>(n));
+	auto y2 = noarr::bag(noarr::scalar<num_t>() ^ noarr::vector<'j'>(n));
 
-	auto A = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.a_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
+	auto A = noarr::bag(noarr::scalar<num_t>() ^ tuning.a_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
 
 	// initialize data
 	init_array(x1.get_ref(), x2.get_ref(), y1.get_ref(), y2.get_ref(), A.get_ref());

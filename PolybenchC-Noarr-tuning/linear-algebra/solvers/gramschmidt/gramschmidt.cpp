@@ -108,9 +108,9 @@ int main(int argc, char *argv[]) {
 	std::size_t nj = NJ;
 
 	// data
-	auto A = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.a_layout ^ noarr::set_length<'i'>(ni) ^ noarr::set_length<'k'>(nj));
-	auto R = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.r_layout ^ noarr::set_length<'k'>(nj) ^ noarr::set_length<'j'>(nj));
-	auto Q = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.q_layout ^ noarr::set_length<'i'>(ni) ^ noarr::set_length<'k'>(nj));
+	auto A = noarr::bag(noarr::scalar<num_t>() ^ *tuning.a_layout ^ noarr::set_length<'i'>(ni) ^ noarr::set_length<'k'>(nj));
+	auto R = noarr::bag(noarr::scalar<num_t>() ^ *tuning.r_layout ^ noarr::set_length<'k'>(nj) ^ noarr::set_length<'j'>(nj));
+	auto Q = noarr::bag(noarr::scalar<num_t>() ^ *tuning.q_layout ^ noarr::set_length<'i'>(ni) ^ noarr::set_length<'k'>(nj));
 
 	// initialize data
 	init_array(A.get_ref(), R.get_ref(), Q.get_ref());

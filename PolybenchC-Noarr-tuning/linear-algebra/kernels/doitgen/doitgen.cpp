@@ -104,9 +104,9 @@ int main(int argc, char *argv[]) {
 	auto set_lengths = noarr::set_length<'r'>(nr) ^ noarr::set_length<'q'>(nq) ^ noarr::set_length<'s'>(np) ^ noarr::set_length<'p'>(np);
 
 	// data
-	auto A = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.a_layout ^ set_lengths);
-	auto sum = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vector<'p'>(np));
-	auto C4 = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.c4_layout ^ set_lengths);
+	auto A = noarr::bag(noarr::scalar<num_t>() ^ *tuning.a_layout ^ set_lengths);
+	auto sum = noarr::bag(noarr::scalar<num_t>() ^ noarr::vector<'p'>(np));
+	auto C4 = noarr::bag(noarr::scalar<num_t>() ^ *tuning.c4_layout ^ set_lengths);
 
 	// initialize data
 	init_array(A.get_ref(), C4.get_ref());

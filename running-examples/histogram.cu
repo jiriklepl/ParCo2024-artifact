@@ -10,7 +10,7 @@
 template<class InT, class In, class ShmS, class Out>
 __global__ void histogram(InT in_trav, In in, ShmS shm_s, Out out) {
 	extern __shared__ char shm_ptr[];
-	auto shm_bag = make_bag(shm_s, shm_ptr);
+	auto shm_bag = bag(shm_s, shm_ptr);
 
 	// PAPER: 4.2 - Third listing
 	// A private copy will usually be shared by multiple threads (whenever NUM_COPIES < blockDim.x).
@@ -60,8 +60,8 @@ void run_histogram(value_t *in_ptr, std::size_t size, std::size_t *out_ptr) {
 	auto in_blk_struct = in_struct ^
 		noarr::into_blocks<'i', 'B', 't'>(noarr::lit<BLOCK_SIZE>) ^
 		noarr::into_blocks<'B', 'b', 'x'>(noarr::lit<ELEMS_PER_THREAD>);
-	auto in = noarr::make_bag(in_blk_struct, in_ptr);
-	auto out = noarr::make_bag(out_struct, out_ptr);
+	auto in = noarr::bag(in_blk_struct, in_ptr);
+	auto out = noarr::bag(out_struct, out_ptr);
 
 	// PAPER: 4.2 - Second listing
 	auto ct = noarr::cuda_threads<'b', 't'>(noarr::traverser(in));

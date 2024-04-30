@@ -100,7 +100,7 @@ void run_gramschmidt(auto A, auto R, auto Q) {
 	auto trav = noarr::traverser(A, R, Q);
 
 	// `A_ij = A ^ noarr::rename<'k', 'j'>()` currently triggers a compiler bug, this is a simple workaround
-	auto A_ij = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vectors_like<'j', 'i'>(trav.top_struct()), A.data());
+	auto A_ij = noarr::bag(noarr::scalar<num_t>() ^ noarr::vectors_like<'j', 'i'>(trav.top_struct()), A.data());
 
 	trav | noarr::for_dims<'k'>([=](auto inner) {
 		auto trav1 = inner ^

@@ -151,15 +151,15 @@ int main(int argc, char *argv[]) {
 	auto set_lengths = noarr::set_length<'i'>(ni) ^ noarr::set_length<'j'>(nj) ^ noarr::set_length<'k'>(nk) ^ noarr::set_length<'l'>(nl) ^ noarr::set_length<'m'>(nm);
 
 	// data
-	auto E = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.e_layout ^ set_lengths);
-	auto A = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.a_layout ^ set_lengths);
-	auto B = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.b_layout ^ set_lengths);
+	auto E = noarr::bag(noarr::scalar<num_t>() ^ *tuning.e_layout ^ set_lengths);
+	auto A = noarr::bag(noarr::scalar<num_t>() ^ *tuning.a_layout ^ set_lengths);
+	auto B = noarr::bag(noarr::scalar<num_t>() ^ *tuning.b_layout ^ set_lengths);
 
-	auto F = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.f_layout ^ set_lengths);
-	auto C = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.c_layout ^ set_lengths);
-	auto D = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.d_layout ^ set_lengths);
+	auto F = noarr::bag(noarr::scalar<num_t>() ^ *tuning.f_layout ^ set_lengths);
+	auto C = noarr::bag(noarr::scalar<num_t>() ^ *tuning.c_layout ^ set_lengths);
+	auto D = noarr::bag(noarr::scalar<num_t>() ^ *tuning.d_layout ^ set_lengths);
 
-	auto G = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.g_layout ^ set_lengths);
+	auto G = noarr::bag(noarr::scalar<num_t>() ^ *tuning.g_layout ^ set_lengths);
 
 	// initialize data
 	init_array(A.get_ref(), B.get_ref(), C.get_ref(), D.get_ref());

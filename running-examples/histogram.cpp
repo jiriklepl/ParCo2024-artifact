@@ -23,8 +23,8 @@ enum {
 void run_histogram(value_t *in_ptr, std::size_t size, std::size_t *out_ptr) {
 
 if constexpr (HISTO_IMPL == histo_loop) {
-	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
-	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
+	auto in = noarr::bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
+	auto out = noarr::bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	for(std::size_t i = 0; i < size; ++i) {
 		out[noarr::idx<'v'>(in[noarr::idx<'i'>(i)])] += 1;
@@ -32,8 +32,8 @@ if constexpr (HISTO_IMPL == histo_loop) {
 }
 
 else if constexpr (HISTO_IMPL == histo_range) {
-	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
-	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
+	auto in = noarr::bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
+	auto out = noarr::bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	for(auto elem : noarr::traverser(in)) {
 		out[noarr::idx<'v'>(in[elem.state()])] += 1;
@@ -41,8 +41,8 @@ else if constexpr (HISTO_IMPL == histo_range) {
 }
 
 else if constexpr (HISTO_IMPL == histo_foreach) {
-	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
-	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
+	auto in = noarr::bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
+	auto out = noarr::bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	// PAPER 4.0 - First listing
 	noarr::traverser(in) | [=](auto state) {
@@ -52,8 +52,8 @@ else if constexpr (HISTO_IMPL == histo_foreach) {
 
 #ifdef HISTO_HAVE_TBB
 else if constexpr (HISTO_IMPL == histo_tbbreduce) {
-	auto in = noarr::make_bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
-	auto out = noarr::make_bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
+	auto in = noarr::bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
+	auto out = noarr::bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
 
 	// PAPER 4.0 - Second listing
 	noarr::tbb_reduce(

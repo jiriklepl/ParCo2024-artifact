@@ -31,7 +31,7 @@ void kernel_durbin(auto r, auto y) {
 	// y: i
 	using namespace noarr;
 
-	auto z = make_bag(r.structure());
+	auto z = bag(r.structure());
 
 	auto r_k = r ^ rename<'i', 'k'>();
 	auto y_k = y ^ rename<'i', 'k'>();
@@ -81,8 +81,8 @@ int main(int argc, char *argv[]) {
 	std::size_t n = N;
 
 	// data
-	auto r = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vector<'i'>(n));
-	auto y = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vector<'i'>(n));
+	auto r = noarr::bag(noarr::scalar<num_t>() ^ noarr::vector<'i'>(n));
+	auto y = noarr::bag(noarr::scalar<num_t>() ^ noarr::vector<'i'>(n));
 
 	// initialize data
 	init_array(r.get_ref());

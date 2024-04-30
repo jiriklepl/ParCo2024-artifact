@@ -43,7 +43,7 @@ void init_array(auto A) {
 	});
 
 	// make A positive semi-definite
-	auto B = make_bag(A.structure());
+	auto B = bag(A.structure());
 	auto B_ref = B.get_ref();
 
 	auto A_ik = A ^ rename<'j', 'k'>();
@@ -105,7 +105,7 @@ int main(int argc, char *argv[]) {
 	std::size_t n = N;
 
 	// data
-	auto A = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.a_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
+	auto A = noarr::bag(noarr::scalar<num_t>() ^ tuning.a_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
 
 	// initialize data
 	init_array(A.get_ref());

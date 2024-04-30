@@ -3,9 +3,9 @@
 
 template<class A, class B, class C>
 void run_matmul(A ta, B tb, C tc, num_t *pa, num_t *pb, num_t *pc) {
-	auto a = noarr::make_bag(ta, pa);
-	auto b = noarr::make_bag(tb, pb);
-	auto c = noarr::make_bag(tc, pc);
+	auto a = noarr::bag(ta, pa);
+	auto b = noarr::bag(tb, pb);
+	auto c = noarr::bag(tc, pc);
 
 	// PAPER: 3.1 - First listing
 	noarr::traverser(c) | [=](auto state) { c[state] = 0; };

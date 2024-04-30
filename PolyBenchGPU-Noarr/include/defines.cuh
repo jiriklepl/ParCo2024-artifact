@@ -78,11 +78,11 @@ public:
     }
 
     auto get_host_ref() const {
-        return noarr::make_bag(_layout, _data.get());
+        return noarr::bag(_layout, _data.get());
     }
 
     auto get_device_ref() const {
-        return noarr::make_bag(_layout, _data_device);
+        return noarr::bag(_layout, _data_device);
     }
 
 private:

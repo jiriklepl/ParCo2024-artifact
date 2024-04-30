@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 	std::size_t n = N;
 
 	// data
-	auto path = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.path_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
+	auto path = noarr::bag(noarr::scalar<num_t>() ^ tuning.path_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
 
 	// initialize data
 	init_array(path.get_ref());

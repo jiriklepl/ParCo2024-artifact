@@ -137,11 +137,11 @@ int main(int argc, char *argv[]) {
 
 	// data
 	num_t alpha;
-	auto imgIn = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.img_in_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
-	auto imgOut = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.img_out_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
+	auto imgIn = noarr::bag(noarr::scalar<num_t>() ^ tuning.img_in_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
+	auto imgOut = noarr::bag(noarr::scalar<num_t>() ^ tuning.img_out_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
 
-	auto y1 = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.y1_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
-	auto y2 = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.y2_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
+	auto y1 = noarr::bag(noarr::scalar<num_t>() ^ tuning.y1_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
+	auto y2 = noarr::bag(noarr::scalar<num_t>() ^ tuning.y2_layout ^ noarr::set_length<'w'>(nw) ^ noarr::set_length<'h'>(nh));
 
 	// initialize data
 	init_array(alpha, imgIn.get_ref(), imgOut.get_ref());

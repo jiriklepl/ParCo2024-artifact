@@ -108,12 +108,12 @@ int main(int argc, char *argv[]) {
 	std::size_t nj = NJ;
 
 	// data
-	auto A = noarr::make_bag(noarr::scalar<num_t>() ^ *tuning.c_layout ^ noarr::set_length<'i'>(ni) ^ noarr::set_length<'j'>(nj));
+	auto A = noarr::bag(noarr::scalar<num_t>() ^ *tuning.c_layout ^ noarr::set_length<'i'>(ni) ^ noarr::set_length<'j'>(nj));
 
-	auto x = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vector<'j'>(nj));
-	auto y = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vector<'j'>(nj));
+	auto x = noarr::bag(noarr::scalar<num_t>() ^ noarr::vector<'j'>(nj));
+	auto y = noarr::bag(noarr::scalar<num_t>() ^ noarr::vector<'j'>(nj));
 
-	auto tmp = noarr::make_bag(noarr::scalar<num_t>() ^ noarr::vector<'i'>(ni));
+	auto tmp = noarr::bag(noarr::scalar<num_t>() ^ noarr::vector<'i'>(ni));
 
 	// initialize data
 	init_array(A.get_ref(), x.get_ref());

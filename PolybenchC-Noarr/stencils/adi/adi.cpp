@@ -128,10 +128,10 @@ int main(int argc, char *argv[]) {
 	std::size_t t = TSTEPS;
 
 	// data
-	auto u = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.u_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n)); 
-	auto v = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.v_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
-	auto p = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.p_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
-	auto q = noarr::make_bag(noarr::scalar<num_t>() ^ tuning.q_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
+	auto u = noarr::bag(noarr::scalar<num_t>() ^ tuning.u_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
+	auto v = noarr::bag(noarr::scalar<num_t>() ^ tuning.v_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
+	auto p = noarr::bag(noarr::scalar<num_t>() ^ tuning.p_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
+	auto q = noarr::bag(noarr::scalar<num_t>() ^ tuning.q_layout ^ noarr::set_length<'i'>(n) ^ noarr::set_length<'j'>(n));
 
 	// initialize data
 	init_array(u.get_ref());
