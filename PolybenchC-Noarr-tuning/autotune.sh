@@ -17,8 +17,6 @@ export SLURM_TIMEOUT=${SLURM_TIMEOUT:-"2:00:00"}
 
 export ALGORITHM=${ALGORITHM:-}
 
-export CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS:-"-DNOARR_TUNING_VERBOSE=1"}
-
 run_script() {
     if [ "$USE_SLURM" -eq 1 ]; then
         srun -A "$SLURM_ACCOUNT" -p "$SLURM_PARTITION" --exclusive -w"$SLURM_WORKER" -t "$SLURM_TIMEOUT" --mem=0 "$@"
