@@ -87,6 +87,15 @@ message("\tmedian on only layout-tuned algorithms: ", 100 * median(onlylayout_su
 
 message("")
 
+total_unmodified_summary <- rbind(unmodified_summary, onlylayout_summary)
+
+message("\tmin (algorithm) on unmodified algorithms: ", 100 * min(total_unmodified_summary$compiles_overhead), "% (", total_unmodified_summary$algorithm[which.min(total_unmodified_summary$compiles_overhead)], ")")
+message("\tmax (algorithm) on unmodified algorithms: ", 100 * max(total_unmodified_summary$compiles_overhead), "% (", total_unmodified_summary$algorithm[which.max(total_unmodified_summary$compiles_overhead)], ")")
+message("\tmean on unmodified algorithms: ", 100 * mean(total_unmodified_summary$compiles_overhead), "%")
+message("\tmedian on unmodified algorithms: ", 100 * median(total_unmodified_summary$compiles_overhead), "%")
+
+message("")
+
 modified_summary <- summary %>%
   filter(algorithm == "atax" | algorithm == "covariance" | algorithm == "gemm" | algorithm == "gesummv" |
            algorithm == "syrk" | algorithm == "syr2k")
@@ -148,6 +157,15 @@ message("\tmedian on only layout-tuned algorithms: ", 100 * median(onlylayout_su
 
 message("")
 
+total_unmodified_summary_baseline <- rbind(unmodified_summary_baseline, onlylayout_summary_baseline)
+
+message("\tmin (algorithm) on unmodified algorithms: ", 100 * min(total_unmodified_summary_baseline$compiles_overhead), "% (", total_unmodified_summary_baseline$algorithm[which.min(total_unmodified_summary_baseline$compiles_overhead)], ")")
+message("\tmax (algorithm) on unmodified algorithms: ", 100 * max(total_unmodified_summary_baseline$compiles_overhead), "% (", total_unmodified_summary_baseline$algorithm[which.max(total_unmodified_summary_baseline$compiles_overhead)], ")")
+message("\tmean on unmodified algorithms: ", 100 * mean(total_unmodified_summary_baseline$compiles_overhead), "%")
+message("\tmedian on unmodified algorithms: ", 100 * median(total_unmodified_summary_baseline$compiles_overhead), "%")
+
+message("")
+
 modified_summary_baseline <- summary_baseline %>%
   filter(algorithm == "atax" | algorithm == "covariance" | algorithm == "gemm" | algorithm == "gesummv" |
            algorithm == "syrk" | algorithm == "syr2k")
@@ -199,11 +217,11 @@ data <- data %>%
 plot <-
   ggplot(data,
          aes(x = algorithm, y = slowdown, fill = implementation)) +
-  geom_hline(yintercept = 1, linetype = "solid", color = "gray") +
   geom_bar(stat = "identity", position = "dodge") +
+  geom_hline(yintercept = 1, linetype = "dotted", color = "black") +
   xlab(x_label) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  ylab("compilation slowdown") +
+  ylab("slowdown") +
   theme(legend.position = "bottom", legend.title = element_blank())
 
 # if (y_lim)
