@@ -6,9 +6,6 @@ fi
 
 mkdir -p results
 
-
-source ./prepare-env.sh
-
 if [ -d results/PolybenchC-tbb ] && scripts/parse_data.sh results/PolybenchC-tbb/extralarge-data > results/polybench-c-tbb.csv; then
     echo Plotting polybench-c-tbb
     scripts/plot-para.R results/polybench-c-tbb.csv 1.3 2.5 TBB
