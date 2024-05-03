@@ -151,8 +151,10 @@ cd ..
 echo "Comparing noarr and polybench using the cyclomatic complexity metric..."
 
 	# the script returns csv with columns:"metric,cyclomatic complexity,<value>"
-	NOARR_CYCLOMATIC_COMPLEXITY=$(awk -f scripts/cyclo-analyze.awk "$tmpdir/noarr/scop-"* | awk -F, '$1 == "metric" && $2 == "cyclomatic complexity" {print $3}')
-	POLYBENCH_CYCLOMATIC_COMPLEXITY=$(awk -f scripts/cyclo-analyze.awk "$tmpdir/polybench/scop-"* | awk -F, '$1 == "metric" && $2 == "cyclomatic complexity" {print $3}')
+	num_files=$(find "$tmpdir/noarr/scop-"* | wc -l)
+	NOARR_CYCLOMATIC_COMPLEXITY=$(awk -f scripts/cyclo-analyze.awk "$tmpdir/noarr/scop-"* | awk -F, '$1 == "metric" && $2 == "cyclomatic complexity" {print $3 + '"$num_files"'}')
+	num_files=$(find "$tmpdir/polybench/scop-"* | wc -l)
+	POLYBENCH_CYCLOMATIC_COMPLEXITY=$(awk -f scripts/cyclo-analyze.awk "$tmpdir/polybench/scop-"* | awk -F, '$1 == "metric" && $2 == "cyclomatic complexity" {print $3 + '"$num_files"'}')
 
 	printf "\t%s\n" "NOARR CYCLOMATIC COMPLEXITY: $NOARR_CYCLOMATIC_COMPLEXITY"
 	printf "\t%s\n" "POLYBENCH CYCLOMATIC COMPLEXITY: $POLYBENCH_CYCLOMATIC_COMPLEXITY"
