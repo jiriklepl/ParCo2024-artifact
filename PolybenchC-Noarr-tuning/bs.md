@@ -1,45 +1,5 @@
 # Benchmark algorithm analysiS
 
-- **TODO**: renames for pure lower triangles?
-- **TODO**: special order for empty `for_sections`
-
-  ```cpp
-  .for_sections<dim>([=](auto inner) {
-    inner.order(some_transformation)();
-  })
-  ```
-
-  This pattern is used in the following benchmarks:
-
-  - covariance
-  - correlation
-  - syr2k
-  - syrk
-
-- **TODO**: enter-leave `for_sections`
-
-  before:
-
-  ```cpp
-  .for_sections<dim>([=](auto inner) {
-    /* enter code */
-
-    inner();
-
-    /* leave code */
-  })
-  ```
-
-  after:
-
-  ```cpp
-  .for_sections<dim>([=](auto state) {
-    /* enter code */
-  }, [=](auto state) {
-    /* leave code */
-  })
-  ```
-
 ## Creates temporary variables dependent on traversal order or caches such values into arrays
 
 **These require a slight reimplementation to support tiling:**
