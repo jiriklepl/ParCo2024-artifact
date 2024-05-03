@@ -20,7 +20,7 @@ if (length(args) >= 4) {
 if (length(args) >= 5) {
   x_label <- args[5]
 } else {
-  x_label <- "algorithm"
+  x_label <- ""
 }
 
 if (length(args) >= 6 && args[6] == "no") {
@@ -59,7 +59,7 @@ data <- compiles %>%
   mutate(slowdown = time)
 
 special_mean <- function(x) {
-  mean(x, na.rm = TRUE)
+  mean(x)
 }
 
 # add a mean algorithm

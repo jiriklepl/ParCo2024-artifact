@@ -9,7 +9,11 @@ fi
 tmpdir=$(mktemp -d)
 base=$(pwd -P)
 
-trap "rm -rf $tmpdir" EXIT
+cleanup() {
+    rm -rf "$tmpdir"
+}
+
+trap cleanup EXIT
 
 cd "$tmpdir" || exit 1
 
@@ -37,25 +41,25 @@ mkdir -p results
 
 ( cd "$base" && scripts/code_compare.sh > "$tmpdir/results/code_overall.log" )
 
-"$base/scripts/plot-tbb.R" results/extralarge-polybench-c-tbb.csv 1.3 2.5 TBB no
+"$base/scripts/plot-para.R" results/extralarge-polybench-c-tbb.csv 1.3 2.5 TBB no
 "$base/scripts/plot-polybench.R" results/extralarge-polybench-c.csv 4 2.5
 "$base/scripts/plot-others.R" results/extralarge-polybench-c-tuned.csv 1.3 2.5 serial no
-"$base/scripts/plot-others.R" results/extralarge-polybench-c-omp.csv 1.3 2.5 OpenMP no
+"$base/scripts/plot-para.R" results/extralarge-polybench-c-omp.csv 1.3 2.5 OpenMP no
 
-"$base/scripts/plot-tbb.R" results/large-polybench-c-tbb.csv 1.3 2.5 TBB no
+"$base/scripts/plot-para.R" results/large-polybench-c-tbb.csv 1.3 2.5 TBB no
 "$base/scripts/plot-polybench.R" results/large-polybench-c.csv 4 2.5
 "$base/scripts/plot-others.R" results/large-polybench-c-tuned.csv 1.3 2.5 serial no
-"$base/scripts/plot-others.R" results/large-polybench-c-omp.csv 1.3 2.5 OpenMP no
+"$base/scripts/plot-para.R" results/large-polybench-c-omp.csv 1.3 2.5 OpenMP no
 
-"$base/scripts/plot-tbb.R" results/medium-polybench-c-tbb.csv 1.3 2.5 TBB no
+"$base/scripts/plot-para.R" results/medium-polybench-c-tbb.csv 1.3 2.5 TBB no
 "$base/scripts/plot-polybench.R" results/medium-polybench-c.csv 4 2.5
 "$base/scripts/plot-others.R" results/medium-polybench-c-tuned.csv 1.3 2.5 serial no
-"$base/scripts/plot-others.R" results/medium-polybench-c-omp.csv 1.3 2.5 OpenMP no
+"$base/scripts/plot-para.R" results/medium-polybench-c-omp.csv 1.3 2.5 OpenMP no
 
-"$base/scripts/plot-tbb.R" results/small-polybench-c-tbb.csv 1.3 2.5 TBB no
+"$base/scripts/plot-para.R" results/small-polybench-c-tbb.csv 1.3 2.5 TBB no
 "$base/scripts/plot-polybench.R" results/small-polybench-c.csv 4 2.5
 "$base/scripts/plot-others.R" results/small-polybench-c-tuned.csv 1.3 2.5 serial no
-"$base/scripts/plot-others.R" results/small-polybench-c-omp.csv 1.3 2.5 OpenMP no
+"$base/scripts/plot-para.R" results/small-polybench-c-omp.csv 1.3 2.5 OpenMP no
 
 "$base/scripts/plot-statistics.R" "$base/results/statistics.csv"
 

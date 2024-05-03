@@ -25,7 +25,7 @@ if(NOT DEFINED NOARR_STRUCTURES_BRANCH)
   set(NOARR_STRUCTURES_BRANCH main)
 endif()
 
-# download Noarr
+# download Noarr Structures
 FetchContent_Declare(
   Noarr
   GIT_REPOSITORY https://github.com/jiriklepl/noarr-structures.git
@@ -39,12 +39,17 @@ if (DEFINED ENV{TBBROOT})
 endif ()
 
 add_executable(matmul matmul.cpp)
+
 add_executable(matmul-blocked matmul.cpp)
 target_compile_definitions(matmul-blocked PRIVATE MATMUL_BLOCKED=1)
+
 add_executable(matmul-factored matmul_factored.cpp)
+
 add_executable(histogram-cu histogram.cu)
+
 add_executable(histogram-cpp histogram.cpp)
 target_compile_definitions(histogram-cpp PRIVATE HISTO_IMPL=histo_foreach)
+
 add_executable(histogram-cpp-parallel histogram.cpp)
 target_compile_definitions(histogram-cpp-parallel PRIVATE HISTO_IMPL=histo_tbbreduce HISTO_HAVE_TBB=1)
 target_link_libraries(histogram-cpp-parallel tbb)

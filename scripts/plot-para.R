@@ -43,7 +43,7 @@ data <- data %>%
   mutate(speedup = 1 / time)
 
 mean_algorithm <- data %>%
-  reframe(time = mean(time), speedup = 1 / mean(time), name = "\rMEAN", implementation)
+  reframe(time = time, speedup = 1 / time, name = "\rMEAN", implementation)
 
 data <- rbind(data, mean_algorithm)
 
