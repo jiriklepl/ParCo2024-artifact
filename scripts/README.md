@@ -7,7 +7,7 @@ This directory contains scripts to run the experiment, validate the implementati
 
 - [run-measurements-CPU.sh](run-measurements-CPU.sh): Script for running the measurements on CPU.
 
-  This script runs the measurements of Polybench/C and the tuned/TBB-parallelized/OpenMP-parallelized versions in 10 repetitions with an unmeasured warm-up run. The measured wall-clock times are stored in the `medium-data`, `large-data`, and `extralarge-data` directories in the respective benchmark directories (always in the ones ending with `-Noarr`). The measured wall-clock times are stored in `<algorithm>.log` files in the following format:
+  This script runs the measurements of Polybench/C and the tuned/TBB-parallelized/OpenMP-parallelized versions in 10 repetitions with an unmeasured warm-up run. The measured wall-clock times are stored in the `small-data`, `medium-data`, `large-data`, and `extralarge-data` directories in the corresponding benchmark directories [results/PolybenchC](../results/PolybenchC), [results/PolybenchC-tbb](../results/PolybenchC-tbb), and [results/PolybenchC-omp](../results/PolybenchC-omp), [results/PolybenchC-tuned](../results/PolybenchC-tuned), and [results/PolyBenchGPU](../results/PolyBenchGPU) (this one contains just `data`). The measured wall-clock times are stored in `<algorithm>.log` files in the following format:
 
   ```log
   <implementation>: <wall-clock time>
@@ -17,7 +17,7 @@ This directory contains scripts to run the experiment, validate the implementati
 
 - [run-measurements-GPU.sh](run-measurements-GPU.sh): Script for running the measurements on GPU.
 
-  This script runs the measurements of Polybench/GPU in 10 repetitions with a warm-up run. The measured wall-clock times are stored in the `data` directory in the `PolyBenchGPU-Noarr` directory. The log files are stored in the same format as in [run-measurements-CPU.sh](run-measurements-CPU.sh).
+  This script runs the measurements of Polybench/GPU in 10 repetitions with a warm-up run. The measured wall-clock times are stored in the [results/PolyBenchGPU/data](../results/PolyBenchGPU/data) directory. The log files are stored in the same format as in [run-measurements-CPU.sh](run-measurements-CPU.sh).
 
 - [validate-CPU.sh](validate-CPU.sh): Script for validating the implementations of the algorithms for CPU.
 
@@ -41,13 +41,13 @@ This directory contains scripts to run the experiment, validate the implementati
 
   Where `<name>` is the name of the algorithm, `<implementation>` is either `noarr` or `baseline`. `<wall-clock time>` is the measured wall-clock time in seconds with six decimal places.
 
-- [generate_plots.sh](generate_plots.sh): Script for generating the plots from the measured wall-clock times using `parse_data.sh` and R scripts in the root directory.
+- [generate_plots.sh](generate_plots.sh): Script for generating the plots from the measured wall-clock times using [parse_data.sh](parse_data.sh) and R scripts.
 
   This script generates the plots from the measured wall-clock times presented in the paper.
 
 - [code_compare.sh](code_compare.sh): Script for comparing the code of the original Polybench/C benchmark and the Noarr implementation.
 
-  This script compares the code of the original Polybench/C benchmark and the Noarr implementation and outputs the differences in the following comma-separated format (CSV) into the file `statistics.csv` in the `PolybenchC-Noarr` directory:
+  This script compares the code of the original Polybench/C benchmark and the Noarr implementation and outputs the differences in the following comma-separated format (CSV) into the file [statistics.csv](../results/statistics.csv) in the [results](../results) directory:
 
   ```csv
   <implementation>,<algorithm>,<lines>,<characters>,<tokens>,<gzip-size>
@@ -55,9 +55,9 @@ This directory contains scripts to run the experiment, validate the implementati
   
   Where `<implementation>` is either `noarr` or `baseline`, `<algorithm>` is the name of the algorithm, `<lines>` is the number of lines enclosed within SCOP regions after stripping any comments and applying clang-format, `<characters>` is then the number of characters, `<tokens>` is the number of single C/C++ tokens, and `<gzip-size>` is the preprocessed SCOP region compressed using gzip.
 
-  On the standard output, it outputs the summarized statistics (as shown in `code_overall.log` in the `PolybenchC-Noarr` directory), comparing the number of lines, characters, and tokens of the original Polybench/C benchmark and the Noarr implementation after the same preprocessing. It also outputs the total size of the preprocessed SCOP regions compressed using gzip as single files and as a tar archive.
+  On the standard output, it outputs the summarized statistics (as shown in [code_overall.log](../results/code_overall.log) in the [results](../results) directory), comparing the number of lines, characters, and tokens of the original Polybench/C benchmark and the Noarr implementation after the same preprocessing. It also outputs the total size of the preprocessed SCOP regions compressed using gzip as single files and as a tar archive.
 
-  It also outputs files `noarr.cpp` and `c.cpp` that contain the concatenated SCOP regions of the respective implementations for inspection.
+  It also outputs files [noarr.cpp](../results/noarr.cpp) and [c.cpp](../results/c.cpp) that contain the concatenated SCOP regions of the respective implementations for inspection.
 
   The script then runs [cyclo-analyze.awk](cyclo-analyze.awk) on the extracted SCOP regions to calculate the McCabe cyclomatic complexity of the SCOP regions and outputs the metric.
 
@@ -79,11 +79,9 @@ This directory contains scripts to run the experiment, validate the implementati
 
 - [autotuning-test.sh](autotuning-test.sh): Script for running the autotuning of the Noarr implementations of the Polybench/C benchmarks (in [PolybenchC-Noarr-tuning](PolybenchC-Noarr-tuning)). It contains source files with the Noarr Tuning abstraction used to autotune the Noarr implementations of the Polybench/C benchmarks.
 
-  It generates two files in the `results` directory: compare_compiles.log and autotuning.log that contain the compile times for the untuned, tuned, and baseline C implementations of the Polybench/C benchmarks and the autotuning compile/run times of the Noarr implementations of the Polybench/C benchmarks in the PolybenchC-Noarr-tuning directory.
+  It generates two files in the [results](../results) directory: [compare_compiles.log](../results/compare_compiles.log) and [autotuning.log](../results/autotuning.log) that contain the compile times for the untuned, tuned, and baseline C implementations of the Polybench/C benchmarks and the autotuning compile/run times of the Noarr implementations of the Polybench/C benchmarks in the [PolybenchC-Noarr-tuning](../PolybenchC-Noarr-tuning/) directory.
 
-- [visualize-autotuning.sh](visualize-autotuning.sh): Script for generating the plots for the compile time and autotuning compile/run time of the Noarr implementations of the Polybench/C benchmarks for untuned, tuning, and tuned versions created by [autotuning-test.sh](autotuning-test.sh).
-
-  This script generates the plots for autotuning experiments presented in the paper.
+- [visualize-autotuning.sh](visualize-autotuning.sh): Script for generating the plots for the compile time and autotuning compile/run time of the Noarr implementations of the Polybench/C benchmarks for untuned, tuning, and tuned versions created by [autotuning-test.sh](autotuning-test.sh). Also generates [results/autotuning-report.log](results/autotuning-report.log) that summarizes the measured compile-time overheads during autotuning compared to the respective runtimes of the tuned algorithms (and their changes compared to the baseline C implementation compile times).
 
 
 ## R scripts

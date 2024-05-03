@@ -10,4 +10,4 @@ cat results/compare_compiles.log >> results/compare_compiles.csv
 echo "record_type,algorithm,order,value" > results/autotuning.csv
 ./scripts/parse_autotune_log.awk results/autotuning.log >> results/autotuning.csv
 
-./scripts/plot-compiles.R results/compare_compiles.csv results/autotuning.csv
+./scripts/plot-compiles.R results/compare_compiles.csv results/autotuning.csv 2> results/autotuning-report.log
