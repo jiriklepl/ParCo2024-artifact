@@ -1,0 +1,2526 @@
++ export DATASET_SIZE=EXTRALARGE
++ DATASET_SIZE=EXTRALARGE
++ export DATA_TYPE=FLOAT
++ DATA_TYPE=FLOAT
++ export NOARR_STRUCTURES_BRANCH=main
++ NOARR_STRUCTURES_BRANCH=main
++ export NOARR_TUNING_BRANCH=main
++ NOARR_TUNING_BRANCH=main
++ export NUM_RUNS=10
++ NUM_RUNS=10
++ export USE_SLURM=1
++ USE_SLURM=1
++ export VENV_DIR=env
++ VENV_DIR=env
++ export BUILD_DIR=build
++ BUILD_DIR=build
++ export SLURM_ACCOUNT=kdss
++ SLURM_ACCOUNT=kdss
++ export SLURM_PARTITION=mpi-homo-short
++ SLURM_PARTITION=mpi-homo-short
++ export SLURM_WORKER=w207
++ SLURM_WORKER=w207
++ export SLURM_TIMEOUT=2:00:00
++ SLURM_TIMEOUT=2:00:00
++ export ALGORITHM=
++ ALGORITHM=
++ cd .
++ run_script ./build.sh
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./build.sh
+srun: job 37629 queued and waiting for resources
+srun: job 37629 has been allocated resources
+srun: Job 37629 step creation temporarily disabled, retrying (Requested operation is presently disabled)
+srun: Step created for StepId=37629.0
++ export DATASET_SIZE=EXTRALARGE
++ DATASET_SIZE=EXTRALARGE
++ export DATA_TYPE=FLOAT
++ DATA_TYPE=FLOAT
++ export NOARR_STRUCTURES_BRANCH=main
++ NOARR_STRUCTURES_BRANCH=main
++ export NOARR_TUNING_BRANCH=main
++ NOARR_TUNING_BRANCH=main
++ export BUILD_DIR=build
++ BUILD_DIR=build
++ cmake -E make_directory build
++ cd build
++ cmake -DCMAKE_BUILD_TYPE=Release -DNOARR_STRUCTURES_BRANCH=main -DNOARR_TUNING_BRANCH=main '-DCMAKE_CXX_FLAGS=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT -DNOARR_TUNING_VERBOSE=1 ' ..
+-- Configuring done (6.1s)
+-- Generating done (15.8s)
+-- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/build
+++ nproc
++ NPROC=64
++ cmake --build . --config Release -j64 --target autotune
+[  3%] Building CXX object CMakeFiles/seidel-2d_autotune.dir/stencils/seidel-2d/seidel-2d.cpp.o
+[  3%] Building CXX object CMakeFiles/gemver_autotune.dir/linear-algebra/blas/gemver/gemver.cpp.o
+[  6%] Building CXX object CMakeFiles/covariance_autotune.dir/datamining/covariance/covariance.cpp.o
+[  6%] Building CXX object CMakeFiles/3mm_autotune.dir/linear-algebra/kernels/3mm/3mm.cpp.o
+[ 17%] Building CXX object CMakeFiles/doitgen_autotune.dir/linear-algebra/kernels/doitgen/doitgen.cpp.o
+[ 17%] Building CXX object CMakeFiles/cholesky_autotune.dir/linear-algebra/solvers/cholesky/cholesky.cpp.o
+[ 17%] Building CXX object CMakeFiles/gesummv_autotune.dir/linear-algebra/blas/gesummv/gesummv.cpp.o
+[ 17%] Building CXX object CMakeFiles/gramschmidt_autotune.dir/linear-algebra/solvers/gramschmidt/gramschmidt.cpp.o
+[ 17%] Building CXX object CMakeFiles/syrk_autotune.dir/linear-algebra/blas/syrk/syrk.cpp.o
+[ 17%] Building CXX object CMakeFiles/bicg_autotune.dir/linear-algebra/kernels/bicg/bicg.cpp.o
+[ 20%] Building CXX object CMakeFiles/symm_autotune.dir/linear-algebra/blas/symm/symm.cpp.o
+[ 20%] Building CXX object CMakeFiles/syr2k_autotune.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[ 20%] Building CXX object CMakeFiles/trisolv_autotune.dir/linear-algebra/solvers/trisolv/trisolv.cpp.o
+[ 34%] Building CXX object CMakeFiles/deriche_autotune.dir/medley/deriche/deriche.cpp.o
+[ 34%] Building CXX object CMakeFiles/mvt_autotune.dir/linear-algebra/kernels/mvt/mvt.cpp.o
+[ 34%] Building CXX object CMakeFiles/lu_autotune.dir/linear-algebra/solvers/lu/lu.cpp.o
+[ 34%] Building CXX object CMakeFiles/heat-3d_autotune.dir/stencils/heat-3d/heat-3d.cpp.o
+[ 34%] Building CXX object CMakeFiles/atax_autotune.dir/linear-algebra/kernels/atax/atax.cpp.o
+[ 44%] Building CXX object CMakeFiles/nussinov_autotune.dir/medley/nussinov/nussinov.cpp.o
+[ 44%] Building CXX object CMakeFiles/adi_autotune.dir/stencils/adi/adi.cpp.o
+[ 44%] Building CXX object CMakeFiles/trmm_autotune.dir/linear-algebra/blas/trmm/trmm.cpp.o
+[ 44%] Building CXX object CMakeFiles/jacobi-2d_autotune.dir/stencils/jacobi-2d/jacobi-2d.cpp.o
+[ 44%] Building CXX object CMakeFiles/gemm_autotune.dir/linear-algebra/blas/gemm/gemm.cpp.o
+[ 48%] Building CXX object CMakeFiles/fdtd-2d_autotune.dir/stencils/fdtd-2d/fdtd-2d.cpp.o
+[ 51%] Building CXX object CMakeFiles/2mm_autotune.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[ 51%] Building CXX object CMakeFiles/ludcmp_autotune.dir/linear-algebra/solvers/ludcmp/ludcmp.cpp.o
+[ 51%] Building CXX object CMakeFiles/floyd-warshall_autotune.dir/medley/floyd-warshall/floyd-warshall.cpp.o
+[ 55%] Linking CXX executable trisolv_autotune
+[ 55%] Built target trisolv_autotune
+[ 58%] Linking CXX executable seidel-2d_autotune
+[ 58%] Linking CXX executable nussinov_autotune
+[ 62%] Linking CXX executable bicg_autotune
+[ 62%] Linking CXX executable deriche_autotune
+[ 62%] Built target seidel-2d_autotune
+[ 62%] Built target nussinov_autotune
+[ 62%] Built target deriche_autotune
+[ 62%] Built target bicg_autotune
+[ 65%] Linking CXX executable gesummv_autotune
+[ 65%] Linking CXX executable adi_autotune
+[ 65%] Linking CXX executable fdtd-2d_autotune
+[ 68%] Linking CXX executable jacobi-2d_autotune
+[ 72%] Linking CXX executable atax_autotune
+[ 75%] Linking CXX executable mvt_autotune
+[ 75%] Linking CXX executable gramschmidt_autotune
+[ 75%] Built target gesummv_autotune
+[ 75%] Linking CXX executable cholesky_autotune
+[ 75%] Built target fdtd-2d_autotune
+[ 75%] Linking CXX executable lu_autotune
+[ 75%] Built target jacobi-2d_autotune
+[ 75%] Built target adi_autotune
+[ 75%] Built target cholesky_autotune
+[ 75%] Built target atax_autotune
+[ 75%] Built target lu_autotune
+[ 75%] Built target gramschmidt_autotune
+[ 75%] Built target mvt_autotune
+[ 79%] Linking CXX executable gemver_autotune
+[ 82%] Linking CXX executable ludcmp_autotune
+[ 82%] Linking CXX executable covariance_autotune
+[ 82%] Linking CXX executable floyd-warshall_autotune
+[ 82%] Built target gemver_autotune
+[ 82%] Built target ludcmp_autotune
+[ 82%] Linking CXX executable syr2k_autotune
+[ 82%] Built target covariance_autotune
+[ 82%] Built target floyd-warshall_autotune
+[ 82%] Linking CXX executable syrk_autotune
+[ 82%] Linking CXX executable trmm_autotune
+[ 86%] Linking CXX executable symm_autotune
+[ 86%] Built target syr2k_autotune
+[ 86%] Built target syrk_autotune
+[ 86%] Built target trmm_autotune
+[ 86%] Built target symm_autotune
+[ 89%] Linking CXX executable gemm_autotune
+[ 89%] Built target gemm_autotune
+[ 93%] Linking CXX executable heat-3d_autotune
+[ 93%] Built target heat-3d_autotune
+[ 96%] Linking CXX executable doitgen_autotune
+[ 96%] Built target doitgen_autotune
+[ 96%] Linking CXX executable 2mm_autotune
+[ 96%] Built target 2mm_autotune
+[100%] Linking CXX executable 3mm_autotune
+[100%] Built target 3mm_autotune
+[100%] Built target autotune
++ cd .
++ run_script ./prepare_env.sh
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./prepare_env.sh
+srun: job 37697 queued and waiting for resources
+srun: job 37697 has been allocated resources
+Requirement already satisfied: opentuner in ./env/lib/python3.9/site-packages (from -r requirements.txt (line 1)) (0.8.8)
+Collecting argparse>=1.2.1
+  Using cached argparse-1.4.0-py2.py3-none-any.whl (23 kB)
+Requirement already satisfied: future in ./env/lib/python3.9/site-packages (from opentuner->-r requirements.txt (line 1)) (1.0.0)
+Requirement already satisfied: numpy>=1.8.0 in ./env/lib/python3.9/site-packages (from opentuner->-r requirements.txt (line 1)) (1.26.4)
+Requirement already satisfied: SQLAlchemy>=0.8.2 in ./env/lib/python3.9/site-packages (from opentuner->-r requirements.txt (line 1)) (2.0.29)
+Requirement already satisfied: typing-extensions>=4.6.0 in ./env/lib/python3.9/site-packages (from SQLAlchemy>=0.8.2->opentuner->-r requirements.txt (line 1)) (4.11.0)
+Requirement already satisfied: greenlet!=0.4.17 in ./env/lib/python3.9/site-packages (from SQLAlchemy>=0.8.2->opentuner->-r requirements.txt (line 1)) (3.0.3)
+Installing collected packages: argparse
+Successfully installed argparse-1.4.0
+WARNING: You are using pip version 21.2.3; however, version 24.0 is available.
+You should consider upgrading via the '/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/bin/python3 -m pip install --upgrade pip' command.
++ mkdir -p build
++ cd build
++ for file in ./*_autotune
+++ basename ./2mm_autotune
++ filename=2mm_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning 2mm'
+Autotuning 2mm
++ run_script ./2mm_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./2mm_autotune
+srun: job 37698 queued and waiting for resources
+srun: job 37698 has been allocated resources
++ run_script ../env/bin/python3 2mm_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee 2mm_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 2mm_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37699 queued and waiting for resources
+srun: job 37699 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    16s]    INFO __main__: Compile time: 14.00315809249878
+[    16s]    INFO __main__: Compile returncode: 0
+[    40s]    INFO __main__: Run time: 24.83235740661621
+[    40s]    INFO __main__: Run returncode: 0
+[    41s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best #1864, cost time=19.9074, found by DifferentialEvolutionAlt
+[    48s]    INFO __main__: Compile time: 7.429381608963013
+[    48s]    INFO __main__: Compile returncode: 0
+[    73s]    INFO __main__: Run time: 25.040743589401245
+[    73s]    INFO __main__: Run returncode: 0
+[    73s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best #1864, cost time=19.9074, found by DifferentialEvolutionAlt
+[    80s]    INFO __main__: Compile time: 7.015454053878784
+[    80s]    INFO __main__: Compile returncode: 0
+[   104s]    INFO __main__: Run time: 23.86123299598694
+[   104s]    INFO __main__: Run returncode: 0
+[   104s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best #1895, cost time=18.9327, found by RandomNelderMead
+[   112s]    INFO __main__: Compile time: 7.832628011703491
+[   112s]    INFO __main__: Compile returncode: 0
+[   136s]    INFO __main__: Run time: 23.933621883392334
+[   136s]    INFO __main__: Run returncode: 0
+[   136s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best #1895, cost time=18.9327, found by RandomNelderMead
+[   143s]    INFO __main__: Compile time: 6.819674730300903
+[   143s]    INFO __main__: Compile returncode: 0
+[   168s]    INFO __main__: Run time: 24.425485372543335
+[   168s]    INFO __main__: Run returncode: 0
+[   169s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best #1895, cost time=18.9327, found by RandomNelderMead
+[   176s]    INFO __main__: Compile time: 6.320473670959473
+[   176s]    INFO __main__: Compile returncode: 0
+[   200s]    INFO __main__: Run time: 24.165838956832886
+[   200s]    INFO __main__: Run returncode: 0
+[   201s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best #1895, cost time=18.9327, found by RandomNelderMead
+[   225s]    INFO __main__: Compile time: 23.157838106155396
+[   225s]    INFO __main__: Compile returncode: 0
+[   249s]    INFO __main__: Run time: 24.011862993240356
+[   249s]    INFO __main__: Run returncode: 0
+[   249s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best #1895, cost time=18.9327, found by RandomNelderMead
+[   256s]    INFO __main__: Compile time: 7.121553897857666
+[   256s]    INFO __main__: Compile returncode: 0
+[   280s]    INFO __main__: Run time: 24.493136882781982
+[   280s]    INFO __main__: Run returncode: 0
+[   280s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best #1895, cost time=18.9327, found by RandomNelderMead
+[   287s]    INFO __main__: Compile time: 6.590760231018066
+[   287s]    INFO __main__: Compile returncode: 0
+[   311s]    INFO __main__: Run time: 23.934602737426758
+[   311s]    INFO __main__: Run returncode: 0
+[   311s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best #1895, cost time=18.9327, found by RandomNelderMead
+[   318s]    INFO __main__: Compile time: 7.067105293273926
+[   318s]    INFO __main__: Compile returncode: 0
+[   343s]    INFO __main__: Run time: 24.649599075317383
+[   343s]    INFO __main__: Run returncode: 0
+[   343s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #1895, cost time=18.9327, found by RandomNelderMead
+[   343s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #1895, cost time=18.9327, found by RandomNelderMead
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_d_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=5 -DNOARR_TUNING_PARAMETER_VALUE_block_l2=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=0 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_tmp_layout=0 '
++ mv mmm_final_config.json 2mm_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_d_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=5 -DNOARR_TUNING_PARAMETER_VALUE_block_l2=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=0 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_tmp_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t 2mm_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_d_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=5 -DNOARR_TUNING_PARAMETER_VALUE_block_l2=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=0 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_tmp_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t 2mm_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_d_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=5 -DNOARR_TUNING_PARAMETER_VALUE_block_l2=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=0 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_tmp_layout=0 '
+srun: job 37784 queued and waiting for resources
+srun: job 37784 has been allocated resources
+[100%] Building CXX object CMakeFiles/2mm_autotuned.dir/linear-algebra/kernels/2mm/2mm.cpp.o
+[100%] Linking CXX executable 2mm_autotuned
+[100%] Built target 2mm_autotuned
++ for file in ./*_autotune
+++ basename ./3mm_autotune
++ filename=3mm_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning 3mm'
+Autotuning 3mm
++ run_script ./3mm_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./3mm_autotune
+srun: job 37790 queued and waiting for resources
+srun: job 37790 has been allocated resources
++ run_script ../env/bin/python3 3mm_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee 3mm_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 3mm_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37792 queued and waiting for resources
+srun: job 37792 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    19s]    INFO __main__: Compile time: 17.699738025665283
+[    19s]    INFO __main__: Compile returncode: 0
+[    55s]    INFO __main__: Run time: 35.93930745124817
+[    55s]    INFO __main__: Run returncode: 0
+[    55s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best #1901, cost time=31.4127, found by UniformGreedyMutation
+[    70s]    INFO __main__: Compile time: 14.606065034866333
+[    70s]    INFO __main__: Compile returncode: 0
+[   106s]    INFO __main__: Run time: 35.86175489425659
+[   106s]    INFO __main__: Run returncode: 0
+[   106s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best #1902, cost time=31.3191, found by RandomNelderMead
+[   121s]    INFO __main__: Compile time: 15.244117975234985
+[   121s]    INFO __main__: Compile returncode: 0
+[   158s]    INFO __main__: Run time: 36.297061920166016
+[   158s]    INFO __main__: Run returncode: 0
+[   158s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best #1902, cost time=31.3191, found by RandomNelderMead
+[   172s]    INFO __main__: Compile time: 14.03252363204956
+[   172s]    INFO __main__: Compile returncode: 0
+[   209s]    INFO __main__: Run time: 36.61837077140808
+[   209s]    INFO __main__: Run returncode: 0
+[   210s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best #1902, cost time=31.3191, found by RandomNelderMead
+[   224s]    INFO __main__: Compile time: 14.374121904373169
+[   224s]    INFO __main__: Compile returncode: 0
+[   260s]    INFO __main__: Run time: 35.710214376449585
+[   260s]    INFO __main__: Run returncode: 0
+[   261s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best #1903, cost time=31.1814, found by RandomNelderMead
+[   276s]    INFO __main__: Compile time: 14.761802673339844
+[   276s]    INFO __main__: Compile returncode: 0
+[   312s]    INFO __main__: Run time: 35.90326380729675
+[   312s]    INFO __main__: Run returncode: 0
+[   316s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best #1903, cost time=31.1814, found by RandomNelderMead
+[   333s]    INFO __main__: Compile time: 16.368563175201416
+[   333s]    INFO __main__: Compile returncode: 0
+[   368s]    INFO __main__: Run time: 35.586782455444336
+[   368s]    INFO __main__: Run returncode: 0
+[   369s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best #1904, cost time=31.0715, found by RandomNelderMead
+[   382s]    INFO __main__: Compile time: 13.392581701278687
+[   382s]    INFO __main__: Compile returncode: 0
+[   418s]    INFO __main__: Run time: 35.467697620391846
+[   418s]    INFO __main__: Run returncode: 0
+[   418s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best #1905, cost time=30.9461, found by RandomNelderMead
+[   430s]    INFO __main__: Compile time: 12.453963041305542
+[   430s]    INFO __main__: Compile returncode: 0
+[   467s]    INFO __main__: Run time: 36.45779871940613
+[   467s]    INFO __main__: Run returncode: 0
+[   468s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best #1905, cost time=30.9461, found by RandomNelderMead
+[   482s]    INFO __main__: Compile time: 13.277227401733398
+[   482s]    INFO __main__: Compile returncode: 0
+[   518s]    INFO __main__: Run time: 35.87165403366089
+[   518s]    INFO __main__: Run returncode: 0
+[   518s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #1905, cost time=30.9461, found by RandomNelderMead
+[   518s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #1905, cost time=30.9461, found by RandomNelderMead
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_order3=0 -DNOARR_TUNING_PARAMETER_VALUE_g_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_f_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_l3=5 -DNOARR_TUNING_PARAMETER_VALUE_block_l2=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=6 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_e_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=5 -DNOARR_TUNING_PARAMETER_VALUE_block_i3=2 -DNOARR_TUNING_PARAMETER_VALUE_d_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order3=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
++ mv mmm_final_config.json 3mm_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_order3=0 -DNOARR_TUNING_PARAMETER_VALUE_g_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_f_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_l3=5 -DNOARR_TUNING_PARAMETER_VALUE_block_l2=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=6 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_e_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=5 -DNOARR_TUNING_PARAMETER_VALUE_block_i3=2 -DNOARR_TUNING_PARAMETER_VALUE_d_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order3=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t 3mm_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_order3=0 -DNOARR_TUNING_PARAMETER_VALUE_g_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_f_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_l3=5 -DNOARR_TUNING_PARAMETER_VALUE_block_l2=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=6 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_e_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=5 -DNOARR_TUNING_PARAMETER_VALUE_block_i3=2 -DNOARR_TUNING_PARAMETER_VALUE_d_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order3=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t 3mm_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_order3=0 -DNOARR_TUNING_PARAMETER_VALUE_g_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_f_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_l3=5 -DNOARR_TUNING_PARAMETER_VALUE_block_l2=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=6 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_e_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=5 -DNOARR_TUNING_PARAMETER_VALUE_block_i3=2 -DNOARR_TUNING_PARAMETER_VALUE_d_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order3=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
+srun: job 37836 queued and waiting for resources
+srun: job 37836 has been allocated resources
+[  0%] Building CXX object CMakeFiles/3mm_autotuned.dir/linear-algebra/kernels/3mm/3mm.cpp.o
+[100%] Linking CXX executable 3mm_autotuned
+[100%] Built target 3mm_autotuned
++ for file in ./*_autotune
+++ basename ./adi_autotune
++ filename=adi_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning adi'
+Autotuning adi
++ run_script ./adi_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./adi_autotune
+srun: job 37837 queued and waiting for resources
+srun: job 37837 has been allocated resources
++ run_script ../env/bin/python3 adi_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee adi_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 adi_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37838 queued and waiting for resources
+srun: job 37838 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[     9s]    INFO __main__: Compile time: 8.240948677062988
+[     9s]    INFO __main__: Compile returncode: 0
+[   124s]    INFO __main__: Run time: 114.39434385299683
+[   124s]    INFO __main__: Run returncode: 0
+[   124s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'u_layout': 1, 'v_layout': 1, 'p_layout': 1, 'q_layout': 1}, cost time=111.4405, found by UniformGreedyMutation
+[   124s] WARNING opentuner.search.simplextechniques: only 1 point in simplex, will not use RandomNelderMead
+[   143s]    INFO __main__: Compile time: 18.904547929763794
+[   143s]    INFO __main__: Compile returncode: 0
+[   257s]    INFO __main__: Run time: 114.40835046768188
+[   257s]    INFO __main__: Run returncode: 0
+[   258s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'u_layout': 1, 'v_layout': 1, 'p_layout': 1, 'q_layout': 1}, cost time=111.4405, found by UniformGreedyMutation
+[   261s]    INFO __main__: Compile time: 2.9759361743927
+[   261s]    INFO __main__: Compile returncode: 0
+[   362s]    INFO __main__: Run time: 101.53861975669861
+[   362s]    INFO __main__: Run returncode: 0
+[   362s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'u_layout': 0, 'v_layout': 1, 'p_layout': 0, 'q_layout': 1}, cost time=98.5929, found by NormalGreedyMutation
+[   365s]    INFO __main__: Compile time: 2.678006649017334
+[   365s]    INFO __main__: Compile returncode: 0
+[   466s]    INFO __main__: Run time: 100.36490631103516
+[   466s]    INFO __main__: Run returncode: 0
+[   466s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'u_layout': 0, 'v_layout': 1, 'p_layout': 0, 'q_layout': 0}, cost time=97.4062, found by UniformGreedyMutation
+[   468s]    INFO __main__: Compile time: 2.3392930030822754
+[   468s]    INFO __main__: Compile returncode: 0
+[   573s]    INFO __main__: Run time: 105.5488634109497
+[   573s]    INFO __main__: Run returncode: 0
+[   582s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'u_layout': 0, 'v_layout': 1, 'p_layout': 0, 'q_layout': 0}, cost time=97.4062, found by UniformGreedyMutation
+[   589s]    INFO __main__: Compile time: 5.9904608726501465
+[   589s]    INFO __main__: Compile returncode: 0
+[   696s]    INFO __main__: Run time: 107.33360648155212
+[   696s]    INFO __main__: Run returncode: 0
+[   697s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'u_layout': 0, 'v_layout': 1, 'p_layout': 0, 'q_layout': 0}, cost time=97.4062, found by UniformGreedyMutation
+[   705s]    INFO __main__: Compile time: 7.4176905155181885
+[   705s]    INFO __main__: Compile returncode: 0
+[   813s]    INFO __main__: Run time: 107.30184268951416
+[   813s]    INFO __main__: Run returncode: 0
+[   815s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'u_layout': 0, 'v_layout': 1, 'p_layout': 0, 'q_layout': 0}, cost time=97.4062, found by UniformGreedyMutation
+[   827s]    INFO __main__: Compile time: 10.676773071289062
+[   827s]    INFO __main__: Compile returncode: 0
+[   933s]    INFO __main__: Run time: 106.70228123664856
+[   933s]    INFO __main__: Run returncode: 0
+[   936s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'u_layout': 0, 'v_layout': 1, 'p_layout': 0, 'q_layout': 0}, cost time=97.4062, found by UniformGreedyMutation
+[   946s]    INFO __main__: Compile time: 9.620214462280273
+[   946s]    INFO __main__: Compile returncode: 0
+[  1052s]    INFO __main__: Run time: 105.58662533760071
+[  1052s]    INFO __main__: Run returncode: 0
+[  1054s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'u_layout': 0, 'v_layout': 1, 'p_layout': 0, 'q_layout': 0}, cost time=97.4062, found by UniformGreedyMutation
+[  1063s]    INFO __main__: Compile time: 8.186721801757812
+[  1063s]    INFO __main__: Compile returncode: 0
+[  1170s]    INFO __main__: Run time: 107.21270537376404
+[  1170s]    INFO __main__: Run returncode: 0
+[  1170s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'u_layout': 0, 'v_layout': 1, 'p_layout': 0, 'q_layout': 0}, cost time=97.4062, found by UniformGreedyMutation
+[  1170s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'u_layout': 0, 'v_layout': 1, 'p_layout': 0, 'q_layout': 0}, cost time=97.4062, found by UniformGreedyMutation
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_u_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_v_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_p_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_q_layout=0 '
++ mv mmm_final_config.json adi_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_u_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_v_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_p_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_q_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t adi_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_u_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_v_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_p_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_q_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t adi_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_u_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_v_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_p_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_q_layout=0 '
+srun: job 37846 queued and waiting for resources
+srun: job 37846 has been allocated resources
+[  0%] Building CXX object CMakeFiles/adi_autotuned.dir/stencils/adi/adi.cpp.o
+[100%] Linking CXX executable adi_autotuned
+[100%] Built target adi_autotuned
++ for file in ./*_autotune
+++ basename ./atax_autotune
++ filename=atax_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning atax'
+Autotuning atax
++ run_script ./atax_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./atax_autotune
+srun: job 37847 queued and waiting for resources
+srun: job 37847 has been allocated resources
++ run_script ../env/bin/python3 atax_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee atax_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 atax_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37848 queued and waiting for resources
+srun: job 37848 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[     9s]    INFO __main__: Compile time: 7.655903339385986
+[     9s]    INFO __main__: Compile returncode: 0
+[     9s]    INFO __main__: Run time: 0.030406713485717773
+[     9s]    INFO __main__: Run returncode: 0
+[    13s]    INFO __main__: Compile time: 4.165666818618774
+[    13s]    INFO __main__: Compile returncode: 0
+[    13s]    INFO __main__: Run time: 0.03184080123901367
+[    13s]    INFO __main__: Run returncode: 0
+[    13s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best #1941, cost time=0.0077, found by DifferentialEvolutionAlt
+[    17s]    INFO __main__: Compile time: 3.671257734298706
+[    17s]    INFO __main__: Compile returncode: 0
+[    17s]    INFO __main__: Run time: 0.030864715576171875
+[    17s]    INFO __main__: Run returncode: 0
+[    22s]    INFO __main__: Compile time: 4.819267749786377
+[    22s]    INFO __main__: Compile returncode: 0
+[    22s]    INFO __main__: Run time: 0.03229856491088867
+[    22s]    INFO __main__: Run returncode: 0
+[    36s]    INFO __main__: Compile time: 13.721394777297974
+[    36s]    INFO __main__: Compile returncode: 0
+[    36s]    INFO __main__: Run time: 0.034036874771118164
+[    36s]    INFO __main__: Run returncode: 0
+[    36s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best #1941, cost time=0.0077, found by DifferentialEvolutionAlt
+[    40s]    INFO __main__: Compile time: 4.230144500732422
+[    40s]    INFO __main__: Compile returncode: 0
+[    40s]    INFO __main__: Run time: 0.03578925132751465
+[    40s]    INFO __main__: Run returncode: 0
+[    44s]    INFO __main__: Compile time: 3.9484214782714844
+[    44s]    INFO __main__: Compile returncode: 0
+[    44s]    INFO __main__: Run time: 0.0331728458404541
+[    44s]    INFO __main__: Run returncode: 0
+[    49s]    INFO __main__: Compile time: 4.439211368560791
+[    49s]    INFO __main__: Compile returncode: 0
+[    49s]    INFO __main__: Run time: 0.03447437286376953
+[    49s]    INFO __main__: Run returncode: 0
+[    49s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best #1941, cost time=0.0077, found by DifferentialEvolutionAlt
+[    52s]    INFO __main__: Compile time: 3.3841912746429443
+[    52s]    INFO __main__: Compile returncode: 0
+[    52s]    INFO __main__: Run time: 0.03179454803466797
+[    52s]    INFO __main__: Run returncode: 0
+[    56s]    INFO __main__: Compile time: 3.556135654449463
+[    56s]    INFO __main__: Compile returncode: 0
+[    56s]    INFO __main__: Run time: 0.0333404541015625
+[    56s]    INFO __main__: Run returncode: 0
+[    56s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #1941, cost time=0.0077, found by DifferentialEvolutionAlt
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_block_i1=3 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=6 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=5 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_order1=0 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 '
++ mv mmm_final_config.json atax_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_block_i1=3 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=6 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=5 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_order1=0 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 '
+++ nproc
++ run_script cmake --build . -j64 -t atax_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i1=3 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=6 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=5 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_order1=0 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t atax_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i1=3 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=6 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=5 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_order1=0 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 '
+srun: job 37849 queued and waiting for resources
+srun: job 37849 has been allocated resources
+[100%] Building CXX object CMakeFiles/atax_autotuned.dir/linear-algebra/kernels/atax/atax.cpp.o
+[100%] Linking CXX executable atax_autotuned
+[100%] Built target atax_autotuned
++ for file in ./*_autotune
+++ basename ./bicg_autotune
++ filename=bicg_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning bicg'
+Autotuning bicg
++ run_script ./bicg_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./bicg_autotune
+srun: job 37850 queued and waiting for resources
+srun: job 37850 has been allocated resources
++ run_script ../env/bin/python3 bicg_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee bicg_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 bicg_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37851 queued and waiting for resources
+srun: job 37851 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    10s]    INFO __main__: Compile time: 8.478333234786987
+[    10s]    INFO __main__: Compile returncode: 0
+[    10s]    INFO __main__: Run time: 0.03915548324584961
+[    10s]    INFO __main__: Run returncode: 0
+[    12s]    INFO __main__: Compile time: 2.321605682373047
+[    12s]    INFO __main__: Compile returncode: 0
+[    12s]    INFO __main__: Run time: 0.03601217269897461
+[    12s]    INFO __main__: Run returncode: 0
+[    12s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'a_layout': 0}, cost time=0.0128, found by UniformGreedyMutation
+[    12s] WARNING opentuner.search.simplextechniques: only 1 point in simplex, will not use RandomNelderMead
+[    15s]    INFO __main__: Compile time: 2.437486171722412
+[    15s]    INFO __main__: Compile returncode: 0
+[    15s]    INFO __main__: Run time: 0.03898501396179199
+[    15s]    INFO __main__: Run returncode: 0
+[    18s]    INFO __main__: Compile time: 3.0931179523468018
+[    18s]    INFO __main__: Compile returncode: 0
+[    18s]    INFO __main__: Run time: 0.03894782066345215
+[    18s]    INFO __main__: Run returncode: 0
+[    20s]    INFO __main__: Compile time: 2.324493885040283
+[    20s]    INFO __main__: Compile returncode: 0
+[    20s]    INFO __main__: Run time: 0.03916740417480469
+[    20s]    INFO __main__: Run returncode: 0
+[    24s]    INFO __main__: Compile time: 3.4922540187835693
+[    24s]    INFO __main__: Compile returncode: 0
+[    24s]    INFO __main__: Run time: 0.03658294677734375
+[    24s]    INFO __main__: Run returncode: 0
+[    24s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'a_layout': 0}, cost time=0.0128, found by UniformGreedyMutation
+[    26s]    INFO __main__: Compile time: 2.171889543533325
+[    26s]    INFO __main__: Compile returncode: 0
+[    26s]    INFO __main__: Run time: 0.03904414176940918
+[    26s]    INFO __main__: Run returncode: 0
+[    37s]    INFO __main__: Compile time: 11.16518259048462
+[    37s]    INFO __main__: Compile returncode: 0
+[    37s]    INFO __main__: Run time: 0.03642749786376953
+[    37s]    INFO __main__: Run returncode: 0
+[    37s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'a_layout': 0}, cost time=0.0128, found by DifferentialEvolutionAlt
+[    40s]    INFO __main__: Compile time: 2.706991195678711
+[    40s]    INFO __main__: Compile returncode: 0
+[    40s]    INFO __main__: Run time: 0.036452293395996094
+[    40s]    INFO __main__: Run returncode: 0
+[    43s]    INFO __main__: Compile time: 2.2767112255096436
+[    43s]    INFO __main__: Compile returncode: 0
+[    43s]    INFO __main__: Run time: 0.03667449951171875
+[    43s]    INFO __main__: Run returncode: 0
+[    43s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': 0}, cost time=0.0128, found by DifferentialEvolutionAlt
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
++ mv mmm_final_config.json bicg_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t bicg_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t bicg_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
+srun: job 37853 queued and waiting for resources
+srun: job 37853 has been allocated resources
+[  0%] Building CXX object CMakeFiles/bicg_autotuned.dir/linear-algebra/kernels/bicg/bicg.cpp.o
+[100%] Linking CXX executable bicg_autotuned
+[100%] Built target bicg_autotuned
++ for file in ./*_autotune
+++ basename ./cholesky_autotune
++ filename=cholesky_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning cholesky'
+Autotuning cholesky
++ run_script ./cholesky_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./cholesky_autotune
+srun: job 37855 queued and waiting for resources
+srun: job 37855 has been allocated resources
++ run_script ../env/bin/python3 cholesky_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee cholesky_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 cholesky_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37856 queued and waiting for resources
+srun: job 37856 has been allocated resources
+[     1s] WARNING opentuner.search.simplextechniques: only 1 point in simplex, will not use RandomNelderMead
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    24s]    INFO __main__: Compile time: 22.14426851272583
+[    24s]    INFO __main__: Compile returncode: 0
+[    69s]    INFO __main__: Run time: 45.68288493156433
+[    69s]    INFO __main__: Run returncode: 0
+[    69s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'a_layout': 1}, cost time=17.1017, found by NormalGreedyMutation
+[    73s]    INFO __main__: Compile time: 2.987281084060669
+[    73s]    INFO __main__: Compile returncode: 0
+[   157s]    INFO __main__: Run time: 84.48380327224731
+[   157s]    INFO __main__: Run returncode: 0
+[   157s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'a_layout': 0}, cost time=15.4878, found by UniformGreedyMutation
+[   164s]    INFO __main__: Compile time: 6.630765914916992
+[   164s]    INFO __main__: Compile returncode: 0
+[   210s]    INFO __main__: Run time: 46.08515524864197
+[   210s]    INFO __main__: Run returncode: 0
+[   210s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'a_layout': 0}, cost time=15.4878, found by UniformGreedyMutation
+[   214s]    INFO __main__: Compile time: 3.184368371963501
+[   214s]    INFO __main__: Compile returncode: 0
+[   260s]    INFO __main__: Run time: 46.096946239471436
+[   260s]    INFO __main__: Run returncode: 0
+[   260s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'a_layout': 0}, cost time=15.4878, found by UniformGreedyMutation
+[   263s]    INFO __main__: Compile time: 3.270982503890991
+[   263s]    INFO __main__: Compile returncode: 0
+[   309s]    INFO __main__: Run time: 45.796260356903076
+[   309s]    INFO __main__: Run returncode: 0
+[   309s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'a_layout': 0}, cost time=15.4878, found by UniformGreedyMutation
+[   312s]    INFO __main__: Compile time: 3.0629682540893555
+[   312s]    INFO __main__: Compile returncode: 0
+[   358s]    INFO __main__: Run time: 45.83836340904236
+[   358s]    INFO __main__: Run returncode: 0
+[   358s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'a_layout': 0}, cost time=15.4878, found by UniformGreedyMutation
+[   362s]    INFO __main__: Compile time: 3.5125863552093506
+[   362s]    INFO __main__: Compile returncode: 0
+[   408s]    INFO __main__: Run time: 45.77004861831665
+[   408s]    INFO __main__: Run returncode: 0
+[   408s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'a_layout': 0}, cost time=15.4878, found by UniformGreedyMutation
+[   411s]    INFO __main__: Compile time: 3.0715863704681396
+[   411s]    INFO __main__: Compile returncode: 0
+[   457s]    INFO __main__: Run time: 46.07882761955261
+[   457s]    INFO __main__: Run returncode: 0
+[   458s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'a_layout': 0}, cost time=15.4878, found by UniformGreedyMutation
+[   461s]    INFO __main__: Compile time: 3.6732966899871826
+[   461s]    INFO __main__: Compile returncode: 0
+[   507s]    INFO __main__: Run time: 45.79296660423279
+[   507s]    INFO __main__: Run returncode: 0
+[   507s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'a_layout': 0}, cost time=15.4878, found by UniformGreedyMutation
+[   510s]    INFO __main__: Compile time: 2.661299467086792
+[   510s]    INFO __main__: Compile returncode: 0
+[   556s]    INFO __main__: Run time: 45.99184513092041
+[   556s]    INFO __main__: Run returncode: 0
+[   556s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': 0}, cost time=15.4878, found by UniformGreedyMutation
+[   556s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': 0}, cost time=15.4878, found by UniformGreedyMutation
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
++ mv mmm_final_config.json cholesky_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t cholesky_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t cholesky_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
+srun: job 37866 queued and waiting for resources
+srun: job 37866 has been allocated resources
+[  0%] Building CXX object CMakeFiles/cholesky_autotuned.dir/linear-algebra/solvers/cholesky/cholesky.cpp.o
+[100%] Linking CXX executable cholesky_autotuned
+[100%] Built target cholesky_autotuned
++ for file in ./*_autotune
+++ basename ./covariance_autotune
++ filename=covariance_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning covariance'
+Autotuning covariance
++ run_script ./covariance_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./covariance_autotune
+srun: job 37868 queued and waiting for resources
+srun: job 37868 has been allocated resources
++ run_script ../env/bin/python3 covariance_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee covariance_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 covariance_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37869 queued and waiting for resources
+srun: job 37869 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[     9s]    INFO __main__: Compile time: 7.875866413116455
+[     9s]    INFO __main__: Compile returncode: 0
+[    32s]    INFO __main__: Run time: 23.05025053024292
+[    32s]    INFO __main__: Run returncode: 0
+[    32s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'block_i': 4, 'block_k': 6, 'order': 0, 'data_layout': 1, 'cov_layout': 1}, cost time=14.6889, found by DifferentialEvolutionAlt
+[    35s]    INFO __main__: Compile time: 3.1818618774414062
+[    35s]    INFO __main__: Compile returncode: 0
+[    60s]    INFO __main__: Run time: 24.781902313232422
+[    60s]    INFO __main__: Run returncode: 0
+[    60s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'block_i': 4, 'block_k': 6, 'order': 0, 'data_layout': 1, 'cov_layout': 1}, cost time=14.6889, found by DifferentialEvolutionAlt
+[    64s]    INFO __main__: Compile time: 3.44333815574646
+[    64s]    INFO __main__: Compile returncode: 0
+[    89s]    INFO __main__: Run time: 24.869566917419434
+[    89s]    INFO __main__: Run returncode: 0
+[    89s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'block_i': 4, 'block_k': 6, 'order': 0, 'data_layout': 1, 'cov_layout': 1}, cost time=14.6889, found by DifferentialEvolutionAlt
+[    92s]    INFO __main__: Compile time: 3.22611403465271
+[    92s]    INFO __main__: Compile returncode: 0
+[   115s]    INFO __main__: Run time: 23.136382818222046
+[   115s]    INFO __main__: Run returncode: 0
+[   115s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'block_i': 4, 'block_k': 6, 'order': 0, 'data_layout': 1, 'cov_layout': 1}, cost time=14.6889, found by DifferentialEvolutionAlt
+[   119s]    INFO __main__: Compile time: 3.2624263763427734
+[   119s]    INFO __main__: Compile returncode: 0
+[   142s]    INFO __main__: Run time: 23.018974542617798
+[   142s]    INFO __main__: Run returncode: 0
+[   142s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'block_k': 1, 'order': 1, 'block_i': 4, 'cov_layout': 0, 'data_layout': 1}, cost time=14.6086, found by DifferentialEvolutionAlt
+[   145s]    INFO __main__: Compile time: 3.4927215576171875
+[   145s]    INFO __main__: Compile returncode: 0
+[   170s]    INFO __main__: Run time: 24.912145614624023
+[   170s]    INFO __main__: Run returncode: 0
+[   170s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'block_k': 1, 'order': 1, 'block_i': 4, 'cov_layout': 0, 'data_layout': 1}, cost time=14.6086, found by DifferentialEvolutionAlt
+[   174s]    INFO __main__: Compile time: 3.476586103439331
+[   174s]    INFO __main__: Compile returncode: 0
+[   197s]    INFO __main__: Run time: 23.04918384552002
+[   197s]    INFO __main__: Run returncode: 0
+[   197s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'block_i': 4, 'block_k': 0, 'order': 0, 'data_layout': 1, 'cov_layout': 0}, cost time=14.6076, found by DifferentialEvolutionAlt
+[   201s]    INFO __main__: Compile time: 3.3443591594696045
+[   201s]    INFO __main__: Compile returncode: 0
+[   225s]    INFO __main__: Run time: 24.753281831741333
+[   225s]    INFO __main__: Run returncode: 0
+[   225s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'block_i': 4, 'block_k': 0, 'order': 0, 'data_layout': 1, 'cov_layout': 0}, cost time=14.6076, found by DifferentialEvolutionAlt
+[   229s]    INFO __main__: Compile time: 3.2537553310394287
+[   229s]    INFO __main__: Compile returncode: 0
+[   254s]    INFO __main__: Run time: 24.764995336532593
+[   254s]    INFO __main__: Run returncode: 0
+[   254s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'block_i': 4, 'block_k': 0, 'order': 0, 'data_layout': 1, 'cov_layout': 0}, cost time=14.6076, found by DifferentialEvolutionAlt
+[   257s]    INFO __main__: Compile time: 3.160109281539917
+[   257s]    INFO __main__: Compile returncode: 0
+[   280s]    INFO __main__: Run time: 23.09056806564331
+[   280s]    INFO __main__: Run returncode: 0
+[   280s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'block_i': 4, 'block_k': 0, 'order': 0, 'data_layout': 1, 'cov_layout': 0}, cost time=14.6076, found by DifferentialEvolutionAlt
+[   280s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'block_i': 4, 'block_k': 0, 'order': 0, 'data_layout': 1, 'cov_layout': 0}, cost time=14.6076, found by DifferentialEvolutionAlt
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_block_i=4 -DNOARR_TUNING_PARAMETER_VALUE_block_k=0 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_data_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_cov_layout=0 '
++ mv mmm_final_config.json covariance_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_block_i=4 -DNOARR_TUNING_PARAMETER_VALUE_block_k=0 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_data_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_cov_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t covariance_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=4 -DNOARR_TUNING_PARAMETER_VALUE_block_k=0 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_data_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_cov_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t covariance_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=4 -DNOARR_TUNING_PARAMETER_VALUE_block_k=0 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_data_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_cov_layout=0 '
+srun: job 37872 queued and waiting for resources
+srun: job 37872 has been allocated resources
+[100%] Building CXX object CMakeFiles/covariance_autotuned.dir/datamining/covariance/covariance.cpp.o
+[100%] Linking CXX executable covariance_autotuned
+[100%] Built target covariance_autotuned
++ for file in ./*_autotune
+++ basename ./deriche_autotune
++ filename=deriche_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning deriche'
+Autotuning deriche
++ run_script ./deriche_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./deriche_autotune
+srun: job 37873 queued and waiting for resources
+srun: job 37873 has been allocated resources
++ run_script ../env/bin/python3 deriche_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee deriche_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 deriche_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37874 queued and waiting for resources
+srun: job 37874 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    15s]    INFO __main__: Compile time: 13.612654685974121
+[    15s]    INFO __main__: Compile returncode: 0
+[    44s]    INFO __main__: Run time: 28.70392394065857
+[    44s]    INFO __main__: Run returncode: 0
+[    44s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'img_in_layout': 0, 'img_out_layout': 1, 'y1_layout': 0, 'y2_layout': 1}, cost time=4.1231, found by DifferentialEvolutionAlt
+[    44s] WARNING opentuner.search.simplextechniques: only 1 point in simplex, will not use RandomNelderMead
+[    47s]    INFO __main__: Compile time: 2.8738853931427
+[    47s]    INFO __main__: Compile returncode: 0
+[    73s]    INFO __main__: Run time: 25.97573447227478
+[    73s]    INFO __main__: Run returncode: 0
+[    73s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'img_in_layout': 0, 'img_out_layout': 1, 'y1_layout': 0, 'y2_layout': 0}, cost time=1.3622, found by UniformGreedyMutation
+[    76s]    INFO __main__: Compile time: 3.124591112136841
+[    76s]    INFO __main__: Compile returncode: 0
+[   102s]    INFO __main__: Run time: 25.489246129989624
+[   102s]    INFO __main__: Run returncode: 0
+[   102s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'img_in_layout': 0, 'img_out_layout': 0, 'y1_layout': 0, 'y2_layout': 0}, cost time=0.9299, found by NormalGreedyMutation
+[   105s]    INFO __main__: Compile time: 2.8942601680755615
+[   105s]    INFO __main__: Compile returncode: 0
+[   136s]    INFO __main__: Run time: 30.12554621696472
+[   136s]    INFO __main__: Run returncode: 0
+[   143s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'img_in_layout': 0, 'img_out_layout': 0, 'y1_layout': 0, 'y2_layout': 0}, cost time=0.9299, found by NormalGreedyMutation
+[   169s]    INFO __main__: Compile time: 26.153391361236572
+[   169s]    INFO __main__: Compile returncode: 0
+[   195s]    INFO __main__: Run time: 25.676963329315186
+[   195s]    INFO __main__: Run returncode: 0
+[   197s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'img_in_layout': 0, 'img_out_layout': 0, 'y1_layout': 0, 'y2_layout': 0}, cost time=0.9299, found by NormalGreedyMutation
+[   201s]    INFO __main__: Compile time: 3.0853824615478516
+[   201s]    INFO __main__: Compile returncode: 0
+[   226s]    INFO __main__: Run time: 25.603102207183838
+[   226s]    INFO __main__: Run returncode: 0
+[   226s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'img_in_layout': 0, 'img_out_layout': 0, 'y1_layout': 0, 'y2_layout': 0}, cost time=0.9299, found by NormalGreedyMutation
+[   229s]    INFO __main__: Compile time: 2.3012239933013916
+[   229s]    INFO __main__: Compile returncode: 0
+[   259s]    INFO __main__: Run time: 30.04118013381958
+[   259s]    INFO __main__: Run returncode: 0
+[   259s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'img_in_layout': 0, 'img_out_layout': 0, 'y1_layout': 0, 'y2_layout': 0}, cost time=0.9299, found by NormalGreedyMutation
+[   261s]    INFO __main__: Compile time: 2.637584686279297
+[   261s]    INFO __main__: Compile returncode: 0
+[   287s]    INFO __main__: Run time: 26.045796871185303
+[   287s]    INFO __main__: Run returncode: 0
+[   287s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'img_in_layout': 0, 'img_out_layout': 0, 'y1_layout': 0, 'y2_layout': 0}, cost time=0.9299, found by NormalGreedyMutation
+[   290s]    INFO __main__: Compile time: 2.462848424911499
+[   290s]    INFO __main__: Compile returncode: 0
+[   316s]    INFO __main__: Run time: 26.056747674942017
+[   316s]    INFO __main__: Run returncode: 0
+[   316s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'img_in_layout': 0, 'img_out_layout': 0, 'y1_layout': 0, 'y2_layout': 0}, cost time=0.9299, found by NormalGreedyMutation
+[   319s]    INFO __main__: Compile time: 2.6116318702697754
+[   319s]    INFO __main__: Compile returncode: 0
+[   345s]    INFO __main__: Run time: 25.7455415725708
+[   345s]    INFO __main__: Run returncode: 0
+[   345s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'img_in_layout': 0, 'img_out_layout': 0, 'y1_layout': 0, 'y2_layout': 0}, cost time=0.9299, found by NormalGreedyMutation
+[   345s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'img_in_layout': 0, 'img_out_layout': 0, 'y1_layout': 0, 'y2_layout': 0}, cost time=0.9299, found by NormalGreedyMutation
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_img_in_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_img_out_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_y1_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_y2_layout=0 '
++ mv mmm_final_config.json deriche_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_img_in_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_img_out_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_y1_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_y2_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t deriche_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_img_in_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_img_out_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_y1_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_y2_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t deriche_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_img_in_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_img_out_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_y1_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_y2_layout=0 '
+srun: job 37875 queued and waiting for resources
+srun: job 37875 has been allocated resources
+[100%] Building CXX object CMakeFiles/deriche_autotuned.dir/medley/deriche/deriche.cpp.o
+[100%] Linking CXX executable deriche_autotuned
+[100%] Built target deriche_autotuned
++ for file in ./*_autotune
+++ basename ./doitgen_autotune
++ filename=doitgen_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning doitgen'
+Autotuning doitgen
++ run_script ./doitgen_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./doitgen_autotune
+srun: job 37876 queued and waiting for resources
+srun: job 37876 has been allocated resources
++ run_script ../env/bin/python3 doitgen_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee doitgen_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 doitgen_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37877 queued and waiting for resources
+srun: job 37877 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    11s]    INFO __main__: Compile time: 10.009943008422852
+[    11s]    INFO __main__: Compile returncode: 0
+[    32s]    INFO __main__: Run time: 20.710602283477783
+[    32s]    INFO __main__: Run returncode: 0
+[    32s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'block_r': 5, 'block_q': 0, 'loop_order': 1, 'order': 1, 'a_layout': [0, 2, 1], 'c4_layout': 0}, cost time=5.7202, found by NormalGreedyMutation
+[    37s]    INFO __main__: Compile time: 5.228675365447998
+[    37s]    INFO __main__: Compile returncode: 0
+[    58s]    INFO __main__: Run time: 20.426286458969116
+[    58s]    INFO __main__: Run returncode: 0
+[    58s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'a_layout': [2, 0, 1], 'order': 0, 'c4_layout': 1, 'block_q': 5, 'loop_order': 1, 'block_r': 6}, cost time=5.4258, found by RandomNelderMead
+[    63s]    INFO __main__: Compile time: 5.310299396514893
+[    63s]    INFO __main__: Compile returncode: 0
+[    84s]    INFO __main__: Run time: 20.562864780426025
+[    84s]    INFO __main__: Run returncode: 0
+[    84s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'a_layout': [2, 0, 1], 'order': 0, 'c4_layout': 1, 'block_q': 5, 'loop_order': 1, 'block_r': 6}, cost time=5.4258, found by RandomNelderMead
+[    89s]    INFO __main__: Compile time: 5.238211393356323
+[    89s]    INFO __main__: Compile returncode: 0
+[   110s]    INFO __main__: Run time: 20.439334869384766
+[   110s]    INFO __main__: Run returncode: 0
+[   110s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'a_layout': [0, 1, 2], 'order': 0, 'c4_layout': 1, 'block_q': 5, 'loop_order': 1, 'block_r': 6}, cost time=5.4230, found by UniformGreedyMutation
+[   115s]    INFO __main__: Compile time: 4.9594950675964355
+[   115s]    INFO __main__: Compile returncode: 0
+[   135s]    INFO __main__: Run time: 20.451786994934082
+[   135s]    INFO __main__: Run returncode: 0
+[   135s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'a_layout': [0, 1, 2], 'order': 0, 'c4_layout': 1, 'block_q': 5, 'loop_order': 1, 'block_r': 6}, cost time=5.4230, found by UniformGreedyMutation
+[   141s]    INFO __main__: Compile time: 5.585192680358887
+[   141s]    INFO __main__: Compile returncode: 0
+[   162s]    INFO __main__: Run time: 20.734634160995483
+[   162s]    INFO __main__: Run returncode: 0
+[   162s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'a_layout': [0, 1, 2], 'order': 0, 'c4_layout': 1, 'block_q': 5, 'loop_order': 1, 'block_r': 6}, cost time=5.4230, found by UniformGreedyMutation
+[   167s]    INFO __main__: Compile time: 4.806175231933594
+[   167s]    INFO __main__: Compile returncode: 0
+[   187s]    INFO __main__: Run time: 20.85576295852661
+[   187s]    INFO __main__: Run returncode: 0
+[   187s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'a_layout': [0, 1, 2], 'order': 0, 'c4_layout': 1, 'block_q': 5, 'loop_order': 1, 'block_r': 6}, cost time=5.4230, found by UniformGreedyMutation
+[   196s]    INFO __main__: Compile time: 8.622148275375366
+[   196s]    INFO __main__: Compile returncode: 0
+[   217s]    INFO __main__: Run time: 20.44896101951599
+[   217s]    INFO __main__: Run returncode: 0
+[   217s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'a_layout': [0, 1, 2], 'order': 0, 'c4_layout': 1, 'block_q': 5, 'loop_order': 1, 'block_r': 6}, cost time=5.4230, found by UniformGreedyMutation
+[   222s]    INFO __main__: Compile time: 5.816669940948486
+[   222s]    INFO __main__: Compile returncode: 0
+[   243s]    INFO __main__: Run time: 20.462796211242676
+[   243s]    INFO __main__: Run returncode: 0
+[   243s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'a_layout': [0, 1, 2], 'order': 0, 'c4_layout': 1, 'block_q': 5, 'loop_order': 1, 'block_r': 6}, cost time=5.4230, found by UniformGreedyMutation
+[   248s]    INFO __main__: Compile time: 4.927402973175049
+[   248s]    INFO __main__: Compile returncode: 0
+[   268s]    INFO __main__: Run time: 20.449281454086304
+[   268s]    INFO __main__: Run returncode: 0
+[   268s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': [0, 2, 1], 'order': 0, 'c4_layout': 1, 'block_q': 5, 'loop_order': 1, 'block_r': 6}, cost time=5.4223, found by NormalGreedyMutation
+[   268s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': [0, 2, 1], 'order': 0, 'c4_layout': 1, 'block_q': 5, 'loop_order': 1, 'block_r': 6}, cost time=5.4223, found by NormalGreedyMutation
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_a_layout=0,2,1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_c4_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_q=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_block_r=6 '
++ mv mmm_final_config.json doitgen_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_a_layout=0,2,1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_c4_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_q=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_block_r=6 '
+++ nproc
++ run_script cmake --build . -j64 -t doitgen_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0,2,1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_c4_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_q=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_block_r=6 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t doitgen_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0,2,1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_c4_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_q=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_block_r=6 '
+srun: job 37883 queued and waiting for resources
+srun: job 37883 has been allocated resources
+[  0%] Building CXX object CMakeFiles/doitgen_autotuned.dir/linear-algebra/kernels/doitgen/doitgen.cpp.o
+[100%] Linking CXX executable doitgen_autotuned
+[100%] Built target doitgen_autotuned
++ for file in ./*_autotune
+++ basename ./fdtd-2d_autotune
++ filename=fdtd-2d_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning fdtd-2d'
+Autotuning fdtd-2d
++ run_script ./fdtd-2d_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./fdtd-2d_autotune
+srun: job 37884 queued and waiting for resources
+srun: job 37884 has been allocated resources
++ run_script ../env/bin/python3 fdtd-2d_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee fdtd-2d_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 fdtd-2d_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37885 queued and waiting for resources
+srun: job 37885 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[     8s]    INFO __main__: Compile time: 7.000309467315674
+[     8s]    INFO __main__: Compile returncode: 0
+[    35s]    INFO __main__: Run time: 27.284176349639893
+[    35s]    INFO __main__: Run returncode: 0
+[    35s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'ex_layout': 1, 'ey_layout': 1, 'hz_layout': 1}, cost time=10.7372, found by DifferentialEvolutionAlt
+[    35s] WARNING opentuner.search.simplextechniques: only 1 point in simplex, will not use RandomNelderMead
+[    39s]    INFO __main__: Compile time: 3.1858601570129395
+[    39s]    INFO __main__: Compile returncode: 0
+[    78s]    INFO __main__: Run time: 39.26077675819397
+[    78s]    INFO __main__: Run returncode: 0
+[    78s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'ex_layout': 1, 'ey_layout': 1, 'hz_layout': 1}, cost time=10.7372, found by DifferentialEvolutionAlt
+[    81s]    INFO __main__: Compile time: 3.1522514820098877
+[    81s]    INFO __main__: Compile returncode: 0
+[   125s]    INFO __main__: Run time: 43.978708267211914
+[   125s]    INFO __main__: Run returncode: 0
+[   125s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'ex_layout': 1, 'ey_layout': 1, 'hz_layout': 1}, cost time=10.7372, found by DifferentialEvolutionAlt
+[   129s]    INFO __main__: Compile time: 3.4921157360076904
+[   129s]    INFO __main__: Compile returncode: 0
+[   156s]    INFO __main__: Run time: 26.93735384941101
+[   156s]    INFO __main__: Run returncode: 0
+[   157s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'ex_layout': 0, 'ey_layout': 0, 'hz_layout': 0}, cost time=10.3928, found by DifferentialEvolutionAlt
+[   204s]    INFO __main__: Compile time: 47.37505745887756
+[   204s]    INFO __main__: Compile returncode: 0
+[   232s]    INFO __main__: Run time: 27.20772409439087
+[   232s]    INFO __main__: Run returncode: 0
+[   233s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'ex_layout': 0, 'ey_layout': 0, 'hz_layout': 0}, cost time=10.3928, found by DifferentialEvolutionAlt
+[   248s]    INFO __main__: Compile time: 14.910919904708862
+[   248s]    INFO __main__: Compile returncode: 0
+[   300s]    INFO __main__: Run time: 52.717369079589844
+[   300s]    INFO __main__: Run returncode: 0
+[   301s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'ex_layout': 0, 'ey_layout': 0, 'hz_layout': 0}, cost time=10.3928, found by DifferentialEvolutionAlt
+[   303s]    INFO __main__: Compile time: 2.6116037368774414
+[   303s]    INFO __main__: Compile returncode: 0
+[   330s]    INFO __main__: Run time: 27.065712213516235
+[   330s]    INFO __main__: Run returncode: 0
+[   330s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'ex_layout': 0, 'ey_layout': 0, 'hz_layout': 0}, cost time=10.3928, found by DifferentialEvolutionAlt
+[   333s]    INFO __main__: Compile time: 2.7223258018493652
+[   333s]    INFO __main__: Compile returncode: 0
+[   360s]    INFO __main__: Run time: 27.10109305381775
+[   360s]    INFO __main__: Run returncode: 0
+[   361s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'ex_layout': 0, 'ey_layout': 0, 'hz_layout': 0}, cost time=10.3928, found by DifferentialEvolutionAlt
+[   365s]    INFO __main__: Compile time: 4.665632486343384
+[   365s]    INFO __main__: Compile returncode: 0
+[   427s]    INFO __main__: Run time: 61.04604482650757
+[   427s]    INFO __main__: Run returncode: 0
+[   432s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'ex_layout': 0, 'ey_layout': 0, 'hz_layout': 0}, cost time=10.3928, found by DifferentialEvolutionAlt
+[   435s]    INFO __main__: Compile time: 3.165828227996826
+[   435s]    INFO __main__: Compile returncode: 0
+[   463s]    INFO __main__: Run time: 27.16853356361389
+[   463s]    INFO __main__: Run returncode: 0
+[   463s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'ex_layout': 0, 'ey_layout': 0, 'hz_layout': 0}, cost time=10.3928, found by DifferentialEvolutionAlt
+[   463s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'ex_layout': 0, 'ey_layout': 0, 'hz_layout': 0}, cost time=10.3928, found by DifferentialEvolutionAlt
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_ex_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_ey_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_hz_layout=0 '
++ mv mmm_final_config.json fdtd-2d_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_ex_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_ey_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_hz_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t fdtd-2d_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_ex_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_ey_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_hz_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t fdtd-2d_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_ex_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_ey_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_hz_layout=0 '
+srun: job 37894 queued and waiting for resources
+srun: job 37894 has been allocated resources
+[ 50%] Building CXX object CMakeFiles/fdtd-2d_autotuned.dir/stencils/fdtd-2d/fdtd-2d.cpp.o
+[100%] Linking CXX executable fdtd-2d_autotuned
+[100%] Built target fdtd-2d_autotuned
++ for file in ./*_autotune
+++ basename ./floyd-warshall_autotune
++ filename=floyd-warshall_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning floyd-warshall'
+Autotuning floyd-warshall
++ run_script ./floyd-warshall_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./floyd-warshall_autotune
+srun: job 37895 queued and waiting for resources
+srun: job 37895 has been allocated resources
++ run_script ../env/bin/python3 floyd-warshall_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee floyd-warshall_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 floyd-warshall_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37896 queued and waiting for resources
+srun: job 37896 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    10s]    INFO __main__: Compile time: 9.247630834579468
+[    10s]    INFO __main__: Compile returncode: 0
+[   227s]    INFO __main__: Run time: 216.57147908210754
+[   227s]    INFO __main__: Run returncode: 0
+[   227s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best #2036, cost time=194.3868, found by RandomNelderMead
+[   232s]    INFO __main__: Compile time: 4.138351202011108
+[   232s]    INFO __main__: Compile returncode: 0
+[   516s]    INFO __main__: Run time: 283.84211111068726
+[   516s]    INFO __main__: Run returncode: 0
+[   516s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best #2036, cost time=194.3868, found by RandomNelderMead
+[   521s]    INFO __main__: Compile time: 5.1603052616119385
+[   521s]    INFO __main__: Compile returncode: 0
+[   743s]    INFO __main__: Run time: 221.86477160453796
+[   743s]    INFO __main__: Run returncode: 0
+[   743s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best #2036, cost time=194.3868, found by RandomNelderMead
+[   747s]    INFO __main__: Compile time: 3.996854543685913
+[   747s]    INFO __main__: Compile returncode: 0
+[   964s]    INFO __main__: Run time: 216.7353641986847
+[   964s]    INFO __main__: Run returncode: 0
+[   964s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best #2036, cost time=194.3868, found by RandomNelderMead
+[   969s]    INFO __main__: Compile time: 4.38934326171875
+[   969s]    INFO __main__: Compile returncode: 0
+[  1137s]    INFO __main__: Run time: 168.59358835220337
+[  1137s]    INFO __main__: Run returncode: 0
+[  1137s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best #2037, cost time=146.0867, found by RandomNelderMead
+[  1141s]    INFO __main__: Compile time: 3.68403697013855
+[  1141s]    INFO __main__: Compile returncode: 0
+[  1853s]    INFO __main__: Run time: 712.0373952388763
+[  1853s]    INFO __main__: Run returncode: 0
+[  1853s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best #2037, cost time=146.0867, found by RandomNelderMead
+[  1858s]    INFO __main__: Compile time: 4.1456239223480225
+[  1858s]    INFO __main__: Compile returncode: 0
+[  2017s]    INFO __main__: Run time: 158.94548439979553
+[  2017s]    INFO __main__: Run returncode: 0
+[  2017s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best #2039, cost time=136.7722, found by RandomNelderMead
+[  2020s]    INFO __main__: Compile time: 3.7923173904418945
+[  2020s]    INFO __main__: Compile returncode: 0
+[  2243s]    INFO __main__: Run time: 222.32508516311646
+[  2243s]    INFO __main__: Run returncode: 0
+[  2243s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best #2039, cost time=136.7722, found by RandomNelderMead
+[  2248s]    INFO __main__: Compile time: 4.8982093334198
+[  2248s]    INFO __main__: Compile returncode: 0
+[  2438s]    INFO __main__: Run time: 189.98826432228088
+[  2438s]    INFO __main__: Run returncode: 0
+[  2438s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best #2039, cost time=136.7722, found by RandomNelderMead
+[  2442s]    INFO __main__: Compile time: 4.364557266235352
+[  2442s]    INFO __main__: Compile returncode: 0
+[  2606s]    INFO __main__: Run time: 163.51540184020996
+[  2606s]    INFO __main__: Run returncode: 0
+[  2606s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2039, cost time=136.7722, found by RandomNelderMead
+[  2606s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2039, cost time=136.7722, found by RandomNelderMead
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=5 -DNOARR_TUNING_PARAMETER_VALUE_block_k=4 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1,2,0 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=2,1,0 -DNOARR_TUNING_PARAMETER_VALUE_path_layout=0 '
++ mv mmm_final_config.json floyd-warshall_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=5 -DNOARR_TUNING_PARAMETER_VALUE_block_k=4 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1,2,0 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=2,1,0 -DNOARR_TUNING_PARAMETER_VALUE_path_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t floyd-warshall_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=5 -DNOARR_TUNING_PARAMETER_VALUE_block_k=4 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1,2,0 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=2,1,0 -DNOARR_TUNING_PARAMETER_VALUE_path_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t floyd-warshall_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=5 -DNOARR_TUNING_PARAMETER_VALUE_block_k=4 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1,2,0 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=2,1,0 -DNOARR_TUNING_PARAMETER_VALUE_path_layout=0 '
+srun: job 37931 queued and waiting for resources
+srun: job 37931 has been allocated resources
+[100%] Building CXX object CMakeFiles/floyd-warshall_autotuned.dir/medley/floyd-warshall/floyd-warshall.cpp.o
+[100%] Linking CXX executable floyd-warshall_autotuned
+[100%] Built target floyd-warshall_autotuned
++ for file in ./*_autotune
+++ basename ./gemm_autotune
++ filename=gemm_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning gemm'
+Autotuning gemm
++ run_script ./gemm_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./gemm_autotune
+srun: job 37932 queued and waiting for resources
+srun: job 37932 has been allocated resources
++ run_script ../env/bin/python3 gemm_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee gemm_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 gemm_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37933 queued and waiting for resources
+srun: job 37933 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    11s]    INFO __main__: Compile time: 9.93165111541748
+[    11s]    INFO __main__: Compile returncode: 0
+[    32s]    INFO __main__: Run time: 20.714019298553467
+[    32s]    INFO __main__: Run returncode: 0
+[    32s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best #2075, cost time=15.7140, found by RandomNelderMead
+[    37s]    INFO __main__: Compile time: 4.766422271728516
+[    37s]    INFO __main__: Compile returncode: 0
+[    54s]    INFO __main__: Run time: 16.650870323181152
+[    54s]    INFO __main__: Run returncode: 0
+[    54s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best #2079, cost time=11.6472, found by DifferentialEvolutionAlt
+[    58s]    INFO __main__: Compile time: 4.499827146530151
+[    58s]    INFO __main__: Compile returncode: 0
+[    77s]    INFO __main__: Run time: 18.390342235565186
+[    77s]    INFO __main__: Run returncode: 0
+[    77s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best #2079, cost time=11.6472, found by DifferentialEvolutionAlt
+[    82s]    INFO __main__: Compile time: 5.020235061645508
+[    82s]    INFO __main__: Compile returncode: 0
+[    99s]    INFO __main__: Run time: 16.300488710403442
+[    99s]    INFO __main__: Run returncode: 0
+[    99s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best #2110, cost time=11.2872, found by UniformGreedyMutation
+[   103s]    INFO __main__: Compile time: 4.317760705947876
+[   103s]    INFO __main__: Compile returncode: 0
+[   121s]    INFO __main__: Run time: 18.0053288936615
+[   121s]    INFO __main__: Run returncode: 0
+[   126s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best #2110, cost time=11.2872, found by UniformGreedyMutation
+[   131s]    INFO __main__: Compile time: 5.074586868286133
+[   131s]    INFO __main__: Compile returncode: 0
+[   148s]    INFO __main__: Run time: 16.344696521759033
+[   148s]    INFO __main__: Run returncode: 0
+[   148s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best #2110, cost time=11.2872, found by UniformGreedyMutation
+[   152s]    INFO __main__: Compile time: 4.596524238586426
+[   152s]    INFO __main__: Compile returncode: 0
+[   169s]    INFO __main__: Run time: 16.87222194671631
+[   169s]    INFO __main__: Run returncode: 0
+[   169s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best #2110, cost time=11.2872, found by UniformGreedyMutation
+[   174s]    INFO __main__: Compile time: 4.462036371231079
+[   174s]    INFO __main__: Compile returncode: 0
+[   194s]    INFO __main__: Run time: 19.811572551727295
+[   194s]    INFO __main__: Run returncode: 0
+[   194s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best #2110, cost time=11.2872, found by UniformGreedyMutation
+[   199s]    INFO __main__: Compile time: 4.746933937072754
+[   199s]    INFO __main__: Compile returncode: 0
+[   215s]    INFO __main__: Run time: 16.66088843345642
+[   215s]    INFO __main__: Run returncode: 0
+[   215s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best #2110, cost time=11.2872, found by UniformGreedyMutation
+[   220s]    INFO __main__: Compile time: 4.411381483078003
+[   220s]    INFO __main__: Compile returncode: 0
+[   235s]    INFO __main__: Run time: 15.181065082550049
+[   235s]    INFO __main__: Run returncode: 0
+[   235s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2081, cost time=10.1813, found by DifferentialEvolutionAlt
+[   235s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2081, cost time=10.1813, found by DifferentialEvolutionAlt
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=3 -DNOARR_TUNING_PARAMETER_VALUE_block_k=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1,0,2 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=0,1,2 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
++ mv mmm_final_config.json gemm_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=3 -DNOARR_TUNING_PARAMETER_VALUE_block_k=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1,0,2 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=0,1,2 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t gemm_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=3 -DNOARR_TUNING_PARAMETER_VALUE_block_k=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1,0,2 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=0,1,2 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t gemm_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=3 -DNOARR_TUNING_PARAMETER_VALUE_block_k=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1,0,2 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=0,1,2 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
+srun: job 37939 queued and waiting for resources
+srun: job 37939 has been allocated resources
+[  0%] Building CXX object CMakeFiles/gemm_autotuned.dir/linear-algebra/blas/gemm/gemm.cpp.o
+[100%] Linking CXX executable gemm_autotuned
+[100%] Built target gemm_autotuned
++ for file in ./*_autotune
+++ basename ./gemver_autotune
++ filename=gemver_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning gemver'
+Autotuning gemver
++ run_script ./gemver_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./gemver_autotune
+srun: job 37940 queued and waiting for resources
+srun: job 37940 has been allocated resources
++ run_script ../env/bin/python3 gemver_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee gemver_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 gemver_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37941 queued and waiting for resources
+srun: job 37941 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    10s]    INFO __main__: Compile time: 9.023058414459229
+[    10s]    INFO __main__: Compile returncode: 0
+[    10s]    INFO __main__: Run time: 0.14445257186889648
+[    10s]    INFO __main__: Run returncode: 0
+[    15s]    INFO __main__: Compile time: 4.71233868598938
+[    15s]    INFO __main__: Compile returncode: 0
+[    15s]    INFO __main__: Run time: 0.12579846382141113
+[    15s]    INFO __main__: Run returncode: 0
+[    15s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best #2113, cost time=0.0709, found by DifferentialEvolutionAlt
+[    20s]    INFO __main__: Compile time: 4.512834310531616
+[    20s]    INFO __main__: Compile returncode: 0
+[    20s]    INFO __main__: Run time: 0.1274871826171875
+[    20s]    INFO __main__: Run returncode: 0
+[    24s]    INFO __main__: Compile time: 4.346100568771362
+[    24s]    INFO __main__: Compile returncode: 0
+[    24s]    INFO __main__: Run time: 0.13940167427062988
+[    24s]    INFO __main__: Run returncode: 0
+[    29s]    INFO __main__: Compile time: 4.341611385345459
+[    29s]    INFO __main__: Compile returncode: 0
+[    29s]    INFO __main__: Run time: 0.14135384559631348
+[    29s]    INFO __main__: Run returncode: 0
+[    29s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best #2113, cost time=0.0709, found by DifferentialEvolutionAlt
+[    34s]    INFO __main__: Compile time: 4.577837705612183
+[    34s]    INFO __main__: Compile returncode: 0
+[    34s]    INFO __main__: Run time: 0.12861013412475586
+[    34s]    INFO __main__: Run returncode: 0
+[    38s]    INFO __main__: Compile time: 4.451165437698364
+[    38s]    INFO __main__: Compile returncode: 0
+[    39s]    INFO __main__: Run time: 0.1365976333618164
+[    39s]    INFO __main__: Run returncode: 0
+[    44s]    INFO __main__: Compile time: 4.897325038909912
+[    44s]    INFO __main__: Compile returncode: 0
+[    44s]    INFO __main__: Run time: 0.1548457145690918
+[    44s]    INFO __main__: Run returncode: 0
+[    44s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best #2113, cost time=0.0709, found by DifferentialEvolutionAlt
+[    48s]    INFO __main__: Compile time: 4.436794996261597
+[    48s]    INFO __main__: Compile returncode: 0
+[    48s]    INFO __main__: Run time: 0.1277625560760498
+[    48s]    INFO __main__: Run returncode: 0
+[    53s]    INFO __main__: Compile time: 4.430809736251831
+[    53s]    INFO __main__: Compile returncode: 0
+[    53s]    INFO __main__: Run time: 0.14754033088684082
+[    53s]    INFO __main__: Run returncode: 0
+[    53s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2113, cost time=0.0709, found by DifferentialEvolutionAlt
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_block_j1=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_order3=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=2 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j3=6 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i3=3 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=0 -DNOARR_TUNING_PARAMETER_VALUE_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order3=1 '
++ mv mmm_final_config.json gemver_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_block_j1=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_order3=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=2 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j3=6 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i3=3 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=0 -DNOARR_TUNING_PARAMETER_VALUE_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order3=1 '
+++ nproc
++ run_script cmake --build . -j64 -t gemver_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_j1=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_order3=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=2 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j3=6 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i3=3 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=0 -DNOARR_TUNING_PARAMETER_VALUE_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order3=1 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t gemver_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_j1=5 -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_order3=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=2 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j3=6 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=0 -DNOARR_TUNING_PARAMETER_VALUE_block_i3=3 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=0 -DNOARR_TUNING_PARAMETER_VALUE_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order3=1 '
+srun: job 37943 queued and waiting for resources
+srun: job 37943 has been allocated resources
+[  0%] Building CXX object CMakeFiles/gemver_autotuned.dir/linear-algebra/blas/gemver/gemver.cpp.o
+[100%] Linking CXX executable gemver_autotuned
+[100%] Built target gemver_autotuned
++ for file in ./*_autotune
+++ basename ./gesummv_autotune
++ filename=gesummv_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning gesummv'
+Autotuning gesummv
++ run_script ./gesummv_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./gesummv_autotune
+srun: job 37944 queued and waiting for resources
+srun: job 37944 has been allocated resources
++ run_script ../env/bin/python3 gesummv_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee gesummv_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 gesummv_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37945 queued and waiting for resources
+srun: job 37945 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[     9s]    INFO __main__: Compile time: 7.765166759490967
+[     9s]    INFO __main__: Compile returncode: 0
+[     9s]    INFO __main__: Run time: 0.07674288749694824
+[     9s]    INFO __main__: Run returncode: 0
+[    12s]    INFO __main__: Compile time: 2.875157356262207
+[    12s]    INFO __main__: Compile returncode: 0
+[    12s]    INFO __main__: Run time: 0.09081268310546875
+[    12s]    INFO __main__: Run returncode: 0
+[    12s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'block_i': 5, 'block_j': 4, 'loop_order': 0, 'order': 1, 'a_layout': 0, 'b_layout': 0}, cost time=0.0250, found by UniformGreedyMutation
+[    15s]    INFO __main__: Compile time: 2.4035208225250244
+[    15s]    INFO __main__: Compile returncode: 0
+[    15s]    INFO __main__: Run time: 0.07876968383789062
+[    15s]    INFO __main__: Run returncode: 0
+[    18s]    INFO __main__: Compile time: 2.944983720779419
+[    18s]    INFO __main__: Compile returncode: 0
+[    18s]    INFO __main__: Run time: 0.07895016670227051
+[    18s]    INFO __main__: Run returncode: 0
+[    21s]    INFO __main__: Compile time: 2.8694403171539307
+[    21s]    INFO __main__: Compile returncode: 0
+[    21s]    INFO __main__: Run time: 0.08511161804199219
+[    21s]    INFO __main__: Run returncode: 0
+[    24s]    INFO __main__: Compile time: 2.811777114868164
+[    24s]    INFO __main__: Compile returncode: 0
+[    24s]    INFO __main__: Run time: 0.09116792678833008
+[    24s]    INFO __main__: Run returncode: 0
+[    24s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'block_i': 4, 'block_j': 2, 'loop_order': 1, 'order': 0, 'a_layout': 0, 'b_layout': 1}, cost time=0.0196, found by RandomNelderMead
+[    27s]    INFO __main__: Compile time: 2.689624071121216
+[    27s]    INFO __main__: Compile returncode: 0
+[    27s]    INFO __main__: Run time: 0.08442854881286621
+[    27s]    INFO __main__: Run returncode: 0
+[    29s]    INFO __main__: Compile time: 2.7638823986053467
+[    29s]    INFO __main__: Compile returncode: 0
+[    30s]    INFO __main__: Run time: 0.08415937423706055
+[    30s]    INFO __main__: Run returncode: 0
+[    32s]    INFO __main__: Compile time: 2.7914371490478516
+[    32s]    INFO __main__: Compile returncode: 0
+[    32s]    INFO __main__: Run time: 0.0735926628112793
+[    32s]    INFO __main__: Run returncode: 0
+[    36s]    INFO __main__: Compile time: 2.828296184539795
+[    36s]    INFO __main__: Compile returncode: 0
+[    36s]    INFO __main__: Run time: 0.08351778984069824
+[    36s]    INFO __main__: Run returncode: 0
+[    36s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'block_i': 5, 'block_j': 2, 'loop_order': 0, 'order': 1, 'a_layout': 1, 'b_layout': 0}, cost time=0.0185, found by UniformGreedyMutation
+[    36s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'block_i': 5, 'block_j': 2, 'loop_order': 0, 'order': 1, 'a_layout': 1, 'b_layout': 0}, cost time=0.0185, found by UniformGreedyMutation
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_block_i=5 -DNOARR_TUNING_PARAMETER_VALUE_block_j=2 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
++ mv mmm_final_config.json gesummv_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_block_i=5 -DNOARR_TUNING_PARAMETER_VALUE_block_j=2 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t gesummv_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=5 -DNOARR_TUNING_PARAMETER_VALUE_block_j=2 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t gesummv_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=5 -DNOARR_TUNING_PARAMETER_VALUE_block_j=2 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
+srun: job 37946 queued and waiting for resources
+srun: job 37946 has been allocated resources
+[100%] Building CXX object CMakeFiles/gesummv_autotuned.dir/linear-algebra/blas/gesummv/gesummv.cpp.o
+[100%] Linking CXX executable gesummv_autotuned
+[100%] Built target gesummv_autotuned
++ for file in ./*_autotune
+++ basename ./gramschmidt_autotune
++ filename=gramschmidt_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning gramschmidt'
+Autotuning gramschmidt
++ run_script ./gramschmidt_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./gramschmidt_autotune
+srun: job 37947 queued and waiting for resources
+srun: job 37947 has been allocated resources
++ run_script ../env/bin/python3 gramschmidt_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee gramschmidt_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 gramschmidt_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37948 queued and waiting for resources
+srun: job 37948 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[     9s]    INFO __main__: Compile time: 7.744990825653076
+[     9s]    INFO __main__: Compile returncode: 0
+[    35s]    INFO __main__: Run time: 26.48915433883667
+[    35s]    INFO __main__: Run returncode: 0
+[    37s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'a_layout': 0, 'r_layout': 0, 'q_layout': 1}, cost time=17.6235, found by UniformGreedyMutation
+[    37s] WARNING opentuner.search.simplextechniques: only 1 point in simplex, will not use RandomNelderMead
+[    41s]    INFO __main__: Compile time: 4.2128424644470215
+[    41s]    INFO __main__: Compile returncode: 0
+[    64s]    INFO __main__: Run time: 22.559771060943604
+[    64s]    INFO __main__: Run returncode: 0
+[    64s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'a_layout': 1, 'r_layout': 0, 'q_layout': 0}, cost time=13.7005, found by DifferentialEvolutionAlt
+[    67s]    INFO __main__: Compile time: 2.754465341567993
+[    67s]    INFO __main__: Compile returncode: 0
+[    89s]    INFO __main__: Run time: 22.564684867858887
+[    89s]    INFO __main__: Run returncode: 0
+[    90s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'a_layout': 1, 'r_layout': 1, 'q_layout': 0}, cost time=13.7003, found by NormalGreedyMutation
+[    93s]    INFO __main__: Compile time: 2.6210715770721436
+[    93s]    INFO __main__: Compile returncode: 0
+[   115s]    INFO __main__: Run time: 22.570069313049316
+[   115s]    INFO __main__: Run returncode: 0
+[   115s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'a_layout': 1, 'r_layout': 1, 'q_layout': 0}, cost time=13.7003, found by NormalGreedyMutation
+[   118s]    INFO __main__: Compile time: 2.2326271533966064
+[   118s]    INFO __main__: Compile returncode: 0
+[   147s]    INFO __main__: Run time: 29.437598705291748
+[   147s]    INFO __main__: Run returncode: 0
+[   147s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'a_layout': 1, 'r_layout': 1, 'q_layout': 0}, cost time=13.7003, found by NormalGreedyMutation
+[   150s]    INFO __main__: Compile time: 2.505491018295288
+[   150s]    INFO __main__: Compile returncode: 0
+[   176s]    INFO __main__: Run time: 26.586947202682495
+[   176s]    INFO __main__: Run returncode: 0
+[   176s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'a_layout': 1, 'r_layout': 1, 'q_layout': 0}, cost time=13.7003, found by NormalGreedyMutation
+[   179s]    INFO __main__: Compile time: 2.6816537380218506
+[   179s]    INFO __main__: Compile returncode: 0
+[   206s]    INFO __main__: Run time: 26.51739001274109
+[   206s]    INFO __main__: Run returncode: 0
+[   206s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'a_layout': 1, 'r_layout': 1, 'q_layout': 0}, cost time=13.7003, found by NormalGreedyMutation
+[   209s]    INFO __main__: Compile time: 2.577739715576172
+[   209s]    INFO __main__: Compile returncode: 0
+[   238s]    INFO __main__: Run time: 29.391685247421265
+[   238s]    INFO __main__: Run returncode: 0
+[   238s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'a_layout': 1, 'r_layout': 1, 'q_layout': 0}, cost time=13.7003, found by NormalGreedyMutation
+[   241s]    INFO __main__: Compile time: 2.402726888656616
+[   241s]    INFO __main__: Compile returncode: 0
+[   260s]    INFO __main__: Run time: 19.911303997039795
+[   260s]    INFO __main__: Run returncode: 0
+[   260s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'a_layout': 1, 'r_layout': 0, 'q_layout': 1}, cost time=10.9780, found by UniformGreedyMutation
+[   263s]    INFO __main__: Compile time: 2.438706159591675
+[   263s]    INFO __main__: Compile returncode: 0
+[   283s]    INFO __main__: Run time: 19.79155945777893
+[   283s]    INFO __main__: Run returncode: 0
+[   283s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': 1, 'r_layout': 1, 'q_layout': 1}, cost time=10.9081, found by UniformGreedyMutation
+[   283s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': 1, 'r_layout': 1, 'q_layout': 1}, cost time=10.9081, found by UniformGreedyMutation
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_r_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_q_layout=1 '
++ mv mmm_final_config.json gramschmidt_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_r_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_q_layout=1 '
+++ nproc
++ run_script cmake --build . -j64 -t gramschmidt_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_r_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_q_layout=1 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t gramschmidt_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_r_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_q_layout=1 '
+srun: job 37951 queued and waiting for resources
+srun: job 37951 has been allocated resources
+[100%] Building CXX object CMakeFiles/gramschmidt_autotuned.dir/linear-algebra/solvers/gramschmidt/gramschmidt.cpp.o
+[100%] Linking CXX executable gramschmidt_autotuned
+[100%] Built target gramschmidt_autotuned
++ for file in ./*_autotune
+++ basename ./heat-3d_autotune
++ filename=heat-3d_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning heat-3d'
+Autotuning heat-3d
++ run_script ./heat-3d_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./heat-3d_autotune
+srun: job 37952 queued and waiting for resources
+srun: job 37952 has been allocated resources
++ run_script ../env/bin/python3 heat-3d_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee heat-3d_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 heat-3d_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37953 queued and waiting for resources
+srun: job 37953 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    27s]    INFO __main__: Compile time: 25.27790093421936
+[    27s]    INFO __main__: Compile returncode: 0
+[   111s]    INFO __main__: Run time: 83.9900553226471
+[   111s]    INFO __main__: Run returncode: 0
+[   111s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best #2180, cost time=76.6499, found by RandomNelderMead
+[   116s]    INFO __main__: Compile time: 4.975786447525024
+[   116s]    INFO __main__: Compile returncode: 0
+[   257s]    INFO __main__: Run time: 140.9151873588562
+[   257s]    INFO __main__: Run returncode: 0
+[   257s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best #2180, cost time=76.6499, found by RandomNelderMead
+[   262s]    INFO __main__: Compile time: 4.846765995025635
+[   262s]    INFO __main__: Compile returncode: 0
+[   357s]    INFO __main__: Run time: 94.40693712234497
+[   357s]    INFO __main__: Run returncode: 0
+[   358s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best #2180, cost time=76.6499, found by RandomNelderMead
+[   363s]    INFO __main__: Compile time: 5.03804874420166
+[   363s]    INFO __main__: Compile returncode: 0
+[   446s]    INFO __main__: Run time: 82.83062767982483
+[   446s]    INFO __main__: Run returncode: 0
+[   446s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best #2215, cost time=75.4663, found by UniformGreedyMutation
+[   451s]    INFO __main__: Compile time: 5.155346393585205
+[   451s]    INFO __main__: Compile returncode: 0
+[   535s]    INFO __main__: Run time: 83.93441319465637
+[   535s]    INFO __main__: Run returncode: 0
+[   535s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best #2215, cost time=75.4663, found by UniformGreedyMutation
+[   542s]    INFO __main__: Compile time: 6.082293510437012
+[   542s]    INFO __main__: Compile returncode: 0
+[   611s]    INFO __main__: Run time: 69.01268458366394
+[   611s]    INFO __main__: Run returncode: 0
+[   611s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best #2181, cost time=61.6873, found by RandomNelderMead
+[   616s]    INFO __main__: Compile time: 5.583280563354492
+[   616s]    INFO __main__: Compile returncode: 0
+[   678s]    INFO __main__: Run time: 61.475839138031006
+[   678s]    INFO __main__: Run returncode: 0
+[   678s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best #2182, cost time=54.1104, found by RandomNelderMead
+[   684s]    INFO __main__: Compile time: 5.548396587371826
+[   684s]    INFO __main__: Compile returncode: 0
+[   749s]    INFO __main__: Run time: 65.81100749969482
+[   749s]    INFO __main__: Run returncode: 0
+[   749s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best #2182, cost time=54.1104, found by RandomNelderMead
+[   755s]    INFO __main__: Compile time: 5.487501382827759
+[   755s]    INFO __main__: Compile returncode: 0
+[   820s]    INFO __main__: Run time: 64.59360408782959
+[   820s]    INFO __main__: Run returncode: 0
+[   820s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best #2182, cost time=54.1104, found by RandomNelderMead
+[   825s]    INFO __main__: Compile time: 5.4469568729400635
+[   825s]    INFO __main__: Compile returncode: 0
+[   894s]    INFO __main__: Run time: 69.14191222190857
+[   894s]    INFO __main__: Run returncode: 0
+[   895s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2182, cost time=54.1104, found by RandomNelderMead
+[   895s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2182, cost time=54.1104, found by RandomNelderMead
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_block_i=2 -DNOARR_TUNING_PARAMETER_VALUE_block_j=1 -DNOARR_TUNING_PARAMETER_VALUE_block_k=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0,1,2 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=2,1,0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1,0,2 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0,1,2 '
++ mv mmm_final_config.json heat-3d_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_block_i=2 -DNOARR_TUNING_PARAMETER_VALUE_block_j=1 -DNOARR_TUNING_PARAMETER_VALUE_block_k=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0,1,2 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=2,1,0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1,0,2 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0,1,2 '
+++ nproc
++ run_script cmake --build . -j64 -t heat-3d_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=2 -DNOARR_TUNING_PARAMETER_VALUE_block_j=1 -DNOARR_TUNING_PARAMETER_VALUE_block_k=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0,1,2 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=2,1,0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1,0,2 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0,1,2 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t heat-3d_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=2 -DNOARR_TUNING_PARAMETER_VALUE_block_j=1 -DNOARR_TUNING_PARAMETER_VALUE_block_k=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0,1,2 -DNOARR_TUNING_PARAMETER_VALUE_grid_order=2,1,0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1,0,2 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0,1,2 '
+srun: job 37983 queued and waiting for resources
+srun: job 37983 has been allocated resources
+[  0%] Building CXX object CMakeFiles/heat-3d_autotuned.dir/stencils/heat-3d/heat-3d.cpp.o
+[100%] Linking CXX executable heat-3d_autotuned
+[100%] Built target heat-3d_autotuned
++ for file in ./*_autotune
+++ basename ./jacobi-2d_autotune
++ filename=jacobi-2d_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning jacobi-2d'
+Autotuning jacobi-2d
++ run_script ./jacobi-2d_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./jacobi-2d_autotune
+srun: job 37985 queued and waiting for resources
+srun: job 37985 has been allocated resources
++ run_script ../env/bin/python3 jacobi-2d_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee jacobi-2d_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 jacobi-2d_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 37986 queued and waiting for resources
+srun: job 37986 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    13s]    INFO __main__: Compile time: 12.181453704833984
+[    13s]    INFO __main__: Compile returncode: 0
+[    58s]    INFO __main__: Run time: 44.499258518218994
+[    58s]    INFO __main__: Run returncode: 0
+[    59s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'block_i': 2, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 0, 'block_j': 6}, cost time=36.0078, found by DifferentialEvolutionAlt
+[    63s]    INFO __main__: Compile time: 4.608494281768799
+[    63s]    INFO __main__: Compile returncode: 0
+[   109s]    INFO __main__: Run time: 45.42498564720154
+[   109s]    INFO __main__: Run returncode: 0
+[   109s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'block_i': 2, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 0, 'block_j': 6}, cost time=36.0078, found by DifferentialEvolutionAlt
+[   112s]    INFO __main__: Compile time: 3.011457920074463
+[   112s]    INFO __main__: Compile returncode: 0
+[   160s]    INFO __main__: Run time: 48.22961401939392
+[   160s]    INFO __main__: Run returncode: 0
+[   160s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'block_i': 2, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 0, 'block_j': 6}, cost time=36.0078, found by DifferentialEvolutionAlt
+[   163s]    INFO __main__: Compile time: 3.063687562942505
+[   163s]    INFO __main__: Compile returncode: 0
+[   213s]    INFO __main__: Run time: 50.274247884750366
+[   213s]    INFO __main__: Run returncode: 0
+[   213s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'block_i': 2, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 0, 'block_j': 6}, cost time=36.0078, found by DifferentialEvolutionAlt
+[   217s]    INFO __main__: Compile time: 3.05861234664917
+[   217s]    INFO __main__: Compile returncode: 0
+[   264s]    INFO __main__: Run time: 47.56392693519592
+[   264s]    INFO __main__: Run returncode: 0
+[   264s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'block_i': 2, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 0, 'block_j': 6}, cost time=36.0078, found by DifferentialEvolutionAlt
+[   267s]    INFO __main__: Compile time: 2.880192279815674
+[   267s]    INFO __main__: Compile returncode: 0
+[   312s]    INFO __main__: Run time: 44.89462876319885
+[   312s]    INFO __main__: Run returncode: 0
+[   312s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'block_i': 2, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 0, 'block_j': 6}, cost time=36.0078, found by DifferentialEvolutionAlt
+[   315s]    INFO __main__: Compile time: 3.038212537765503
+[   315s]    INFO __main__: Compile returncode: 0
+[   358s]    INFO __main__: Run time: 42.4321084022522
+[   358s]    INFO __main__: Run returncode: 0
+[   364s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'block_i': 2, 'block_j': 6, 'loop_order': 0, 'order': 0, 'a_layout': 0, 'b_layout': 1}, cost time=33.9775, found by DifferentialEvolutionAlt
+[   367s]    INFO __main__: Compile time: 3.7104830741882324
+[   367s]    INFO __main__: Compile returncode: 0
+[   409s]    INFO __main__: Run time: 42.12739419937134
+[   409s]    INFO __main__: Run returncode: 0
+[   410s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'block_i': 0, 'block_j': 1, 'loop_order': 0, 'order': 0, 'a_layout': 1, 'b_layout': 0}, cost time=33.6106, found by DifferentialEvolutionAlt
+[   413s]    INFO __main__: Compile time: 2.5761642456054688
+[   413s]    INFO __main__: Compile returncode: 0
+[   444s]    INFO __main__: Run time: 31.13746190071106
+[   444s]    INFO __main__: Run returncode: 0
+[   444s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'block_i': 0, 'block_j': 1, 'loop_order': 0, 'order': 1, 'a_layout': 1, 'b_layout': 1}, cost time=22.7215, found by DifferentialEvolutionAlt
+[   447s]    INFO __main__: Compile time: 3.0115067958831787
+[   447s]    INFO __main__: Compile returncode: 0
+[   483s]    INFO __main__: Run time: 35.52178478240967
+[   483s]    INFO __main__: Run returncode: 0
+[   483s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'block_i': 0, 'block_j': 1, 'loop_order': 0, 'order': 1, 'a_layout': 1, 'b_layout': 1}, cost time=22.7215, found by DifferentialEvolutionAlt
+[   483s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'block_i': 0, 'block_j': 1, 'loop_order': 0, 'order': 1, 'a_layout': 1, 'b_layout': 1}, cost time=22.7215, found by DifferentialEvolutionAlt
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_block_i=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
++ mv mmm_final_config.json jacobi-2d_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_block_i=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
+++ nproc
++ run_script cmake --build . -j64 -t jacobi-2d_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t jacobi-2d_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=0 -DNOARR_TUNING_PARAMETER_VALUE_block_j=1 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
+srun: job 37994 queued and waiting for resources
+srun: job 37994 has been allocated resources
+[100%] Building CXX object CMakeFiles/jacobi-2d_autotuned.dir/stencils/jacobi-2d/jacobi-2d.cpp.o
+[100%] Linking CXX executable jacobi-2d_autotuned
+[100%] Built target jacobi-2d_autotuned
++ for file in ./*_autotune
+++ basename ./lu_autotune
++ filename=lu_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning lu'
+Autotuning lu
++ run_script ./lu_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./lu_autotune
+srun: job 38002 queued and waiting for resources
+srun: job 38002 has been allocated resources
++ run_script ../env/bin/python3 lu_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee lu_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 lu_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 38003 queued and waiting for resources
+srun: job 38003 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[     9s]    INFO __main__: Compile time: 7.9155027866363525
+[     9s]    INFO __main__: Compile returncode: 0
+[   105s]    INFO __main__: Run time: 96.00771689414978
+[   105s]    INFO __main__: Run returncode: 0
+[   105s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'order': 1, 'a_layout': 0}, cost time=21.1553, found by NormalGreedyMutation
+[   109s]    INFO __main__: Compile time: 4.3521363735198975
+[   109s]    INFO __main__: Compile returncode: 0
+[   181s]    INFO __main__: Run time: 72.0302631855011
+[   181s]    INFO __main__: Run returncode: 0
+[   182s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'order': 1, 'a_layout': 0}, cost time=21.1553, found by NormalGreedyMutation
+[   182s] WARNING opentuner.search.simplextechniques: only 1 point in simplex, will not use RandomNelderMead
+[   185s]    INFO __main__: Compile time: 3.0431439876556396
+[   185s]    INFO __main__: Compile returncode: 0
+[   295s]    INFO __main__: Run time: 109.87323594093323
+[   295s]    INFO __main__: Run returncode: 0
+[   300s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'order': 1, 'a_layout': 0}, cost time=21.1553, found by NormalGreedyMutation
+[   325s]    INFO __main__: Compile time: 24.17223286628723
+[   325s]    INFO __main__: Compile returncode: 0
+[   397s]    INFO __main__: Run time: 72.36991119384766
+[   397s]    INFO __main__: Run returncode: 0
+[   397s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'order': 1, 'a_layout': 0}, cost time=21.1553, found by NormalGreedyMutation
+[   400s]    INFO __main__: Compile time: 2.8499817848205566
+[   400s]    INFO __main__: Compile returncode: 0
+[   509s]    INFO __main__: Run time: 109.4479660987854
+[   509s]    INFO __main__: Run returncode: 0
+[   510s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'order': 1, 'a_layout': 0}, cost time=21.1553, found by NormalGreedyMutation
+[   513s]    INFO __main__: Compile time: 3.4404726028442383
+[   513s]    INFO __main__: Compile returncode: 0
+[   623s]    INFO __main__: Run time: 109.57717180252075
+[   623s]    INFO __main__: Run returncode: 0
+[   623s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'order': 1, 'a_layout': 0}, cost time=21.1553, found by NormalGreedyMutation
+[   626s]    INFO __main__: Compile time: 2.902775764465332
+[   626s]    INFO __main__: Compile returncode: 0
+[   692s]    INFO __main__: Run time: 66.1498510837555
+[   692s]    INFO __main__: Run returncode: 0
+[   692s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'order': 1, 'a_layout': 0}, cost time=21.1553, found by NormalGreedyMutation
+[   696s]    INFO __main__: Compile time: 3.457785129547119
+[   696s]    INFO __main__: Compile returncode: 0
+[   805s]    INFO __main__: Run time: 109.08715677261353
+[   805s]    INFO __main__: Run returncode: 0
+[   806s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'order': 1, 'a_layout': 0}, cost time=21.1553, found by NormalGreedyMutation
+[   829s]    INFO __main__: Compile time: 22.958369493484497
+[   829s]    INFO __main__: Compile returncode: 0
+[   925s]    INFO __main__: Run time: 96.03234672546387
+[   925s]    INFO __main__: Run returncode: 0
+[   925s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'order': 1, 'a_layout': 0}, cost time=21.1553, found by NormalGreedyMutation
+[   928s]    INFO __main__: Compile time: 3.0991933345794678
+[   928s]    INFO __main__: Compile returncode: 0
+[  1001s]    INFO __main__: Run time: 72.35263299942017
+[  1001s]    INFO __main__: Run returncode: 0
+[  1001s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'order': 1, 'a_layout': 0}, cost time=21.1553, found by NormalGreedyMutation
+[  1001s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'order': 1, 'a_layout': 0}, cost time=21.1553, found by NormalGreedyMutation
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
++ mv mmm_final_config.json lu_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t lu_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t lu_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
+srun: job 38005 queued and waiting for resources
+srun: job 38005 has been allocated resources
+[100%] Building CXX object CMakeFiles/lu_autotuned.dir/linear-algebra/solvers/lu/lu.cpp.o
+[100%] Linking CXX executable lu_autotuned
+[100%] Built target lu_autotuned
++ for file in ./*_autotune
+++ basename ./ludcmp_autotune
++ filename=ludcmp_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning ludcmp'
+Autotuning ludcmp
++ run_script ./ludcmp_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./ludcmp_autotune
+srun: job 38006 queued and waiting for resources
+srun: job 38006 has been allocated resources
++ run_script ../env/bin/python3 ludcmp_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee ludcmp_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 ludcmp_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 38007 queued and waiting for resources
+srun: job 38007 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[     9s]    INFO __main__: Compile time: 7.923725366592407
+[     9s]    INFO __main__: Compile returncode: 0
+[   109s]    INFO __main__: Run time: 99.82342958450317
+[   109s]    INFO __main__: Run returncode: 0
+[   109s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'a_layout': 0}, cost time=36.5559, found by UniformGreedyMutation
+[   109s] WARNING opentuner.search.simplextechniques: only 1 point in simplex, will not use RandomNelderMead
+[   112s]    INFO __main__: Compile time: 3.167987108230591
+[   112s]    INFO __main__: Compile returncode: 0
+[   166s]    INFO __main__: Run time: 54.1087863445282
+[   166s]    INFO __main__: Run returncode: 0
+[   169s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'a_layout': 1}, cost time=31.9542, found by NormalGreedyMutation
+[   175s]    INFO __main__: Compile time: 5.724215984344482
+[   175s]    INFO __main__: Compile returncode: 0
+[   275s]    INFO __main__: Run time: 99.31529402732849
+[   275s]    INFO __main__: Run returncode: 0
+[   275s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'a_layout': 1}, cost time=31.9542, found by NormalGreedyMutation
+[   278s]    INFO __main__: Compile time: 3.1591756343841553
+[   278s]    INFO __main__: Compile returncode: 0
+[   377s]    INFO __main__: Run time: 99.4275267124176
+[   377s]    INFO __main__: Run returncode: 0
+[   377s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'a_layout': 1}, cost time=31.9542, found by NormalGreedyMutation
+[   380s]    INFO __main__: Compile time: 3.0479984283447266
+[   380s]    INFO __main__: Compile returncode: 0
+[   480s]    INFO __main__: Run time: 99.31235718727112
+[   480s]    INFO __main__: Run returncode: 0
+[   480s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'a_layout': 1}, cost time=31.9542, found by NormalGreedyMutation
+[   484s]    INFO __main__: Compile time: 3.6351046562194824
+[   484s]    INFO __main__: Compile returncode: 0
+[   583s]    INFO __main__: Run time: 99.43677139282227
+[   583s]    INFO __main__: Run returncode: 0
+[   583s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'a_layout': 1}, cost time=31.9542, found by NormalGreedyMutation
+[   586s]    INFO __main__: Compile time: 3.0912747383117676
+[   586s]    INFO __main__: Compile returncode: 0
+[   686s]    INFO __main__: Run time: 99.49326801300049
+[   686s]    INFO __main__: Run returncode: 0
+[   686s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'a_layout': 1}, cost time=31.9542, found by NormalGreedyMutation
+[   691s]    INFO __main__: Compile time: 4.76827335357666
+[   691s]    INFO __main__: Compile returncode: 0
+[   790s]    INFO __main__: Run time: 99.54323983192444
+[   790s]    INFO __main__: Run returncode: 0
+[   790s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'a_layout': 1}, cost time=31.9542, found by NormalGreedyMutation
+[   794s]    INFO __main__: Compile time: 3.1156275272369385
+[   794s]    INFO __main__: Compile returncode: 0
+[   893s]    INFO __main__: Run time: 99.5277795791626
+[   893s]    INFO __main__: Run returncode: 0
+[   894s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'a_layout': 1}, cost time=31.9542, found by NormalGreedyMutation
+[   902s]    INFO __main__: Compile time: 7.648748159408569
+[   902s]    INFO __main__: Compile returncode: 0
+[  1002s]    INFO __main__: Run time: 99.5327582359314
+[  1002s]    INFO __main__: Run returncode: 0
+[  1002s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': 1}, cost time=31.9542, found by NormalGreedyMutation
+[  1002s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': 1}, cost time=31.9542, found by NormalGreedyMutation
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 '
++ mv mmm_final_config.json ludcmp_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 '
+++ nproc
++ run_script cmake --build . -j64 -t ludcmp_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t ludcmp_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 '
+srun: job 38009 queued and waiting for resources
+srun: job 38009 has been allocated resources
+[  0%] Building CXX object CMakeFiles/ludcmp_autotuned.dir/linear-algebra/solvers/ludcmp/ludcmp.cpp.o
+[100%] Linking CXX executable ludcmp_autotuned
+[100%] Built target ludcmp_autotuned
++ for file in ./*_autotune
+++ basename ./mvt_autotune
++ filename=mvt_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning mvt'
+Autotuning mvt
++ run_script ./mvt_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./mvt_autotune
+srun: job 38010 queued and waiting for resources
+srun: job 38010 has been allocated resources
++ run_script ../env/bin/python3 mvt_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee mvt_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 mvt_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 38011 queued and waiting for resources
+srun: job 38011 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    15s]    INFO __main__: Compile time: 10.527573347091675
+[    15s]    INFO __main__: Compile returncode: 0
+[    15s]    INFO __main__: Run time: 0.11675262451171875
+[    15s]    INFO __main__: Run returncode: 0
+[    15s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best #2238, cost time=0.0498, found by UniformGreedyMutation
+[    22s]    INFO __main__: Compile time: 6.18391227722168
+[    22s]    INFO __main__: Compile returncode: 0
+[    22s]    INFO __main__: Run time: 0.12365317344665527
+[    22s]    INFO __main__: Run returncode: 0
+[    25s]    INFO __main__: Compile time: 3.221615791320801
+[    25s]    INFO __main__: Compile returncode: 0
+[    25s]    INFO __main__: Run time: 0.15424633026123047
+[    25s]    INFO __main__: Run returncode: 0
+[    29s]    INFO __main__: Compile time: 3.3358218669891357
+[    29s]    INFO __main__: Compile returncode: 0
+[    29s]    INFO __main__: Run time: 0.1063070297241211
+[    29s]    INFO __main__: Run returncode: 0
+[    29s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best #2245, cost time=0.0392, found by DifferentialEvolutionAlt
+[    32s]    INFO __main__: Compile time: 3.340636730194092
+[    32s]    INFO __main__: Compile returncode: 0
+[    32s]    INFO __main__: Run time: 0.1275644302368164
+[    32s]    INFO __main__: Run returncode: 0
+[    35s]    INFO __main__: Compile time: 3.2387678623199463
+[    35s]    INFO __main__: Compile returncode: 0
+[    35s]    INFO __main__: Run time: 0.09965801239013672
+[    35s]    INFO __main__: Run returncode: 0
+[    39s]    INFO __main__: Compile time: 3.2613487243652344
+[    39s]    INFO __main__: Compile returncode: 0
+[    39s]    INFO __main__: Run time: 0.12652850151062012
+[    39s]    INFO __main__: Run returncode: 0
+[    39s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best #2246, cost time=0.0302, found by DifferentialEvolutionAlt
+[    42s]    INFO __main__: Compile time: 3.3965368270874023
+[    42s]    INFO __main__: Compile returncode: 0
+[    43s]    INFO __main__: Run time: 0.1124870777130127
+[    43s]    INFO __main__: Run returncode: 0
+[    46s]    INFO __main__: Compile time: 3.2583234310150146
+[    46s]    INFO __main__: Compile returncode: 0
+[    46s]    INFO __main__: Run time: 0.1367795467376709
+[    46s]    INFO __main__: Run returncode: 0
+[    49s]    INFO __main__: Compile time: 2.884279251098633
+[    49s]    INFO __main__: Compile returncode: 0
+[    49s]    INFO __main__: Run time: 0.10842704772949219
+[    49s]    INFO __main__: Run returncode: 0
+[    49s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2246, cost time=0.0302, found by DifferentialEvolutionAlt
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=3 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=6 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=4 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 '
++ mv mmm_final_config.json mvt_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=3 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=6 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=4 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 '
+++ nproc
++ run_script cmake --build . -j64 -t mvt_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=3 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=6 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=4 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t mvt_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_loop_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_block_j1=3 -DNOARR_TUNING_PARAMETER_VALUE_block_i1=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j2=6 -DNOARR_TUNING_PARAMETER_VALUE_block_i2=4 -DNOARR_TUNING_PARAMETER_VALUE_loop_order2=1 -DNOARR_TUNING_PARAMETER_VALUE_order1=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_order2=0 '
+srun: job 38012 queued and waiting for resources
+srun: job 38012 has been allocated resources
+[  0%] Building CXX object CMakeFiles/mvt_autotuned.dir/linear-algebra/kernels/mvt/mvt.cpp.o
+[100%] Linking CXX executable mvt_autotuned
+[100%] Built target mvt_autotuned
++ for file in ./*_autotune
+++ basename ./nussinov_autotune
++ filename=nussinov_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning nussinov'
+Autotuning nussinov
++ run_script ./nussinov_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./nussinov_autotune
+srun: job 38013 queued and waiting for resources
+srun: job 38013 has been allocated resources
++ run_script ../env/bin/python3 nussinov_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee nussinov_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 nussinov_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 38014 queued and waiting for resources
+srun: job 38014 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[     8s]    INFO __main__: Compile time: 7.096269369125366
+[     8s]    INFO __main__: Compile returncode: 0
+[   100s]    INFO __main__: Run time: 92.2761583328247
+[   100s]    INFO __main__: Run returncode: 0
+[   101s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'table_layout': 1}, cost time=76.7489, found by DifferentialEvolutionAlt
+[   103s]    INFO __main__: Compile time: 2.334292411804199
+[   103s]    INFO __main__: Compile returncode: 0
+[   215s]    INFO __main__: Run time: 112.11988282203674
+[   215s]    INFO __main__: Run returncode: 0
+[   215s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'table_layout': 1}, cost time=76.7489, found by DifferentialEvolutionAlt
+[   218s]    INFO __main__: Compile time: 2.364107131958008
+[   218s]    INFO __main__: Compile returncode: 0
+[   329s]    INFO __main__: Run time: 111.66873478889465
+[   329s]    INFO __main__: Run returncode: 0
+[   329s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'table_layout': 1}, cost time=76.7489, found by DifferentialEvolutionAlt
+[   329s] WARNING opentuner.search.simplextechniques: only 1 point in simplex, will not use RandomNelderMead
+[   332s]    INFO __main__: Compile time: 2.379833459854126
+[   332s]    INFO __main__: Compile returncode: 0
+[   424s]    INFO __main__: Run time: 92.24759483337402
+[   424s]    INFO __main__: Run returncode: 0
+[   424s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'table_layout': 1}, cost time=76.7309, found by DifferentialEvolutionAlt
+[   427s]    INFO __main__: Compile time: 2.5156733989715576
+[   427s]    INFO __main__: Compile returncode: 0
+[   519s]    INFO __main__: Run time: 92.47582530975342
+[   519s]    INFO __main__: Run returncode: 0
+[   523s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'table_layout': 1}, cost time=76.7309, found by DifferentialEvolutionAlt
+[   529s]    INFO __main__: Compile time: 5.783174514770508
+[   529s]    INFO __main__: Compile returncode: 0
+[   622s]    INFO __main__: Run time: 92.2924256324768
+[   622s]    INFO __main__: Run returncode: 0
+[   622s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'table_layout': 1}, cost time=76.7103, found by DifferentialEvolutionAlt
+[   624s]    INFO __main__: Compile time: 2.3442718982696533
+[   624s]    INFO __main__: Compile returncode: 0
+[   736s]    INFO __main__: Run time: 111.56265544891357
+[   736s]    INFO __main__: Run returncode: 0
+[   737s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'table_layout': 1}, cost time=76.7103, found by DifferentialEvolutionAlt
+[   741s]    INFO __main__: Compile time: 3.8350536823272705
+[   741s]    INFO __main__: Compile returncode: 0
+[   833s]    INFO __main__: Run time: 92.27804660797119
+[   833s]    INFO __main__: Run returncode: 0
+[   834s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'table_layout': 1}, cost time=76.7103, found by DifferentialEvolutionAlt
+[   837s]    INFO __main__: Compile time: 3.096184492111206
+[   837s]    INFO __main__: Compile returncode: 0
+[   929s]    INFO __main__: Run time: 92.26223039627075
+[   929s]    INFO __main__: Run returncode: 0
+[   933s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'table_layout': 1}, cost time=76.7103, found by DifferentialEvolutionAlt
+[   962s]    INFO __main__: Compile time: 28.399311065673828
+[   962s]    INFO __main__: Compile returncode: 0
+[  1054s]    INFO __main__: Run time: 92.22104930877686
+[  1054s]    INFO __main__: Run returncode: 0
+[  1055s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'table_layout': 1}, cost time=76.7103, found by DifferentialEvolutionAlt
+[  1055s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'table_layout': 1}, cost time=76.7103, found by DifferentialEvolutionAlt
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_table_layout=1 '
++ mv mmm_final_config.json nussinov_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_table_layout=1 '
+++ nproc
++ run_script cmake --build . -j64 -t nussinov_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_table_layout=1 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t nussinov_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_table_layout=1 '
+srun: job 38018 queued and waiting for resources
+srun: job 38018 has been allocated resources
+[100%] Building CXX object CMakeFiles/nussinov_autotuned.dir/medley/nussinov/nussinov.cpp.o
+[100%] Linking CXX executable nussinov_autotuned
+[100%] Built target nussinov_autotuned
++ for file in ./*_autotune
+++ basename ./seidel-2d_autotune
++ filename=seidel-2d_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning seidel-2d'
+Autotuning seidel-2d
++ run_script ./seidel-2d_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./seidel-2d_autotune
+srun: job 38019 queued and waiting for resources
+srun: job 38019 has been allocated resources
++ tee seidel-2d_autotune-log.json
++ run_script ../env/bin/python3 seidel-2d_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 seidel-2d_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 38020 queued and waiting for resources
+srun: job 38020 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    13s]    INFO __main__: Compile time: 11.451658248901367
+[    13s]    INFO __main__: Compile returncode: 0
+[   261s]    INFO __main__: Run time: 248.08450984954834
+[   261s]    INFO __main__: Run returncode: 0
+[   261s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'a_layout': 1}, cost time=230.6028, found by UniformGreedyMutation
+[   261s] WARNING opentuner.search.simplextechniques: only 1 point in simplex, will not use RandomNelderMead
+[   263s]    INFO __main__: Compile time: 2.071671962738037
+[   263s]    INFO __main__: Compile returncode: 0
+[   481s]    INFO __main__: Run time: 218.10729503631592
+[   481s]    INFO __main__: Run returncode: 0
+[   481s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'a_layout': 0}, cost time=200.6259, found by NormalGreedyMutation
+[   483s]    INFO __main__: Compile time: 1.953895092010498
+[   483s]    INFO __main__: Compile returncode: 0
+[   731s]    INFO __main__: Run time: 248.01872944831848
+[   731s]    INFO __main__: Run returncode: 0
+[   731s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'a_layout': 0}, cost time=200.6259, found by NormalGreedyMutation
+[   733s]    INFO __main__: Compile time: 1.9240314960479736
+[   733s]    INFO __main__: Compile returncode: 0
+[   981s]    INFO __main__: Run time: 247.9367208480835
+[   981s]    INFO __main__: Run returncode: 0
+[   981s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'a_layout': 0}, cost time=200.6259, found by NormalGreedyMutation
+[   984s]    INFO __main__: Compile time: 2.0488407611846924
+[   984s]    INFO __main__: Compile returncode: 0
+[  1232s]    INFO __main__: Run time: 247.97902178764343
+[  1232s]    INFO __main__: Run returncode: 0
+[  1232s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'a_layout': 0}, cost time=200.6259, found by NormalGreedyMutation
+[  1234s]    INFO __main__: Compile time: 2.0251917839050293
+[  1234s]    INFO __main__: Compile returncode: 0
+[  1482s]    INFO __main__: Run time: 247.9384582042694
+[  1482s]    INFO __main__: Run returncode: 0
+[  1482s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'a_layout': 0}, cost time=200.6259, found by NormalGreedyMutation
+[  1484s]    INFO __main__: Compile time: 1.756133794784546
+[  1484s]    INFO __main__: Compile returncode: 0
+[  1732s]    INFO __main__: Run time: 248.0813970565796
+[  1732s]    INFO __main__: Run returncode: 0
+[  1732s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'a_layout': 0}, cost time=200.6259, found by NormalGreedyMutation
+[  1734s]    INFO __main__: Compile time: 1.9376869201660156
+[  1734s]    INFO __main__: Compile returncode: 0
+[  1982s]    INFO __main__: Run time: 248.02399110794067
+[  1982s]    INFO __main__: Run returncode: 0
+[  1982s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'a_layout': 0}, cost time=200.6259, found by NormalGreedyMutation
+[  1984s]    INFO __main__: Compile time: 1.7737133502960205
+[  1984s]    INFO __main__: Compile returncode: 0
+[  2232s]    INFO __main__: Run time: 247.96678233146667
+[  2232s]    INFO __main__: Run returncode: 0
+[  2232s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'a_layout': 0}, cost time=200.6259, found by NormalGreedyMutation
+[  2234s]    INFO __main__: Compile time: 1.9807944297790527
+[  2234s]    INFO __main__: Compile returncode: 0
+[  2482s]    INFO __main__: Run time: 247.95555925369263
+[  2482s]    INFO __main__: Run returncode: 0
+[  2495s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': 0}, cost time=200.6259, found by NormalGreedyMutation
+[  2495s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': 0}, cost time=200.6259, found by NormalGreedyMutation
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
++ mv mmm_final_config.json seidel-2d_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t seidel-2d_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t seidel-2d_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=0 '
+srun: job 38029 queued and waiting for resources
+srun: job 38029 has been allocated resources
+[  0%] Building CXX object CMakeFiles/seidel-2d_autotuned.dir/stencils/seidel-2d/seidel-2d.cpp.o
+[100%] Linking CXX executable seidel-2d_autotuned
+[100%] Built target seidel-2d_autotuned
++ for file in ./*_autotune
+++ basename ./symm_autotune
++ filename=symm_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning symm'
+Autotuning symm
++ run_script ./symm_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./symm_autotune
+srun: job 38030 queued and waiting for resources
+srun: job 38030 has been allocated resources
++ run_script ../env/bin/python3 symm_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee symm_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 symm_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 38031 queued and waiting for resources
+srun: job 38031 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    12s]    INFO __main__: Compile time: 10.344502687454224
+[    12s]    INFO __main__: Compile returncode: 0
+[    26s]    INFO __main__: Run time: 13.895373106002808
+[    26s]    INFO __main__: Run returncode: 0
+[    26s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best #2277, cost time=10.1408, found by DifferentialEvolutionAlt
+[    30s]    INFO __main__: Compile time: 3.8698296546936035
+[    30s]    INFO __main__: Compile returncode: 0
+[    46s]    INFO __main__: Run time: 16.10967469215393
+[    46s]    INFO __main__: Run returncode: 0
+[    46s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best #2277, cost time=10.1408, found by DifferentialEvolutionAlt
+[    50s]    INFO __main__: Compile time: 4.0044660568237305
+[    50s]    INFO __main__: Compile returncode: 0
+[    67s]    INFO __main__: Run time: 16.442360401153564
+[    67s]    INFO __main__: Run returncode: 0
+[    67s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best #2277, cost time=10.1408, found by DifferentialEvolutionAlt
+[    73s]    INFO __main__: Compile time: 5.798859596252441
+[    73s]    INFO __main__: Compile returncode: 0
+[    86s]    INFO __main__: Run time: 13.654086351394653
+[    86s]    INFO __main__: Run returncode: 0
+[    87s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best #2309, cost time=9.8980, found by UniformGreedyMutation
+[    92s]    INFO __main__: Compile time: 5.663559198379517
+[    92s]    INFO __main__: Compile returncode: 0
+[   106s]    INFO __main__: Run time: 13.86280870437622
+[   106s]    INFO __main__: Run returncode: 0
+[   106s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best #2309, cost time=9.8980, found by UniformGreedyMutation
+[   111s]    INFO __main__: Compile time: 4.929773807525635
+[   111s]    INFO __main__: Compile returncode: 0
+[   125s]    INFO __main__: Run time: 13.42253851890564
+[   125s]    INFO __main__: Run returncode: 0
+[   125s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best #2278, cost time=9.6772, found by DifferentialEvolutionAlt
+[   129s]    INFO __main__: Compile time: 4.4919562339782715
+[   129s]    INFO __main__: Compile returncode: 0
+[   142s]    INFO __main__: Run time: 13.038758993148804
+[   142s]    INFO __main__: Run returncode: 0
+[   142s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best #2279, cost time=9.2888, found by DifferentialEvolutionAlt
+[   146s]    INFO __main__: Compile time: 4.2502992153167725
+[   146s]    INFO __main__: Compile returncode: 0
+[   163s]    INFO __main__: Run time: 16.15054488182068
+[   163s]    INFO __main__: Run returncode: 0
+[   163s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best #2279, cost time=9.2888, found by DifferentialEvolutionAlt
+[   166s]    INFO __main__: Compile time: 3.6668009757995605
+[   166s]    INFO __main__: Compile returncode: 0
+[   183s]    INFO __main__: Run time: 16.477708101272583
+[   183s]    INFO __main__: Run returncode: 0
+[   183s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best #2279, cost time=9.2888, found by DifferentialEvolutionAlt
+[   187s]    INFO __main__: Compile time: 4.376845836639404
+[   187s]    INFO __main__: Compile returncode: 0
+[   201s]    INFO __main__: Run time: 13.32159972190857
+[   201s]    INFO __main__: Run returncode: 0
+[   201s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2279, cost time=9.2888, found by DifferentialEvolutionAlt
+[   201s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2279, cost time=9.2888, found by DifferentialEvolutionAlt
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
++ mv mmm_final_config.json symm_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t symm_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t symm_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_j=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=0 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=0 '
+srun: job 38032 queued and waiting for resources
+srun: job 38032 has been allocated resources
+[  0%] Building CXX object CMakeFiles/symm_autotuned.dir/linear-algebra/blas/symm/symm.cpp.o
+[100%] Linking CXX executable symm_autotuned
+[100%] Built target symm_autotuned
++ for file in ./*_autotune
+++ basename ./syr2k_autotune
++ filename=syr2k_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning syr2k'
+Autotuning syr2k
++ run_script ./syr2k_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./syr2k_autotune
+srun: job 38033 queued and waiting for resources
+srun: job 38033 has been allocated resources
++ run_script ../env/bin/python3 syr2k_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee syr2k_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 syr2k_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 38034 queued and waiting for resources
+srun: job 38034 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    10s]    INFO __main__: Compile time: 9.308146476745605
+[    10s]    INFO __main__: Compile returncode: 0
+[    28s]    INFO __main__: Run time: 17.665531635284424
+[    28s]    INFO __main__: Run returncode: 0
+[    28s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best #2310, cost time=11.2491, found by UniformGreedyMutation
+[    32s]    INFO __main__: Compile time: 4.034679651260376
+[    32s]    INFO __main__: Compile returncode: 0
+[    47s]    INFO __main__: Run time: 15.012956142425537
+[    47s]    INFO __main__: Run returncode: 0
+[    47s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best #2311, cost time=8.6354, found by NormalGreedyMutation
+[    51s]    INFO __main__: Compile time: 3.384096145629883
+[    51s]    INFO __main__: Compile returncode: 0
+[    67s]    INFO __main__: Run time: 16.45542597770691
+[    67s]    INFO __main__: Run returncode: 0
+[    67s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best #2311, cost time=8.6354, found by NormalGreedyMutation
+[    71s]    INFO __main__: Compile time: 3.4477851390838623
+[    71s]    INFO __main__: Compile returncode: 0
+[    87s]    INFO __main__: Run time: 16.32896637916565
+[    87s]    INFO __main__: Run returncode: 0
+[    87s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best #2311, cost time=8.6354, found by NormalGreedyMutation
+[    91s]    INFO __main__: Compile time: 3.9547016620635986
+[    91s]    INFO __main__: Compile returncode: 0
+[   100s]    INFO __main__: Run time: 8.712924480438232
+[   100s]    INFO __main__: Run returncode: 0
+[   100s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best #2341, cost time=2.3229, found by NormalGreedyMutation
+[   104s]    INFO __main__: Compile time: 4.218364715576172
+[   104s]    INFO __main__: Compile returncode: 0
+[   116s]    INFO __main__: Run time: 11.77509593963623
+[   116s]    INFO __main__: Run returncode: 0
+[   116s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best #2341, cost time=2.3229, found by NormalGreedyMutation
+[   120s]    INFO __main__: Compile time: 3.884385824203491
+[   120s]    INFO __main__: Compile returncode: 0
+[   128s]    INFO __main__: Run time: 8.650519132614136
+[   128s]    INFO __main__: Run returncode: 0
+[   129s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best #2343, cost time=2.2550, found by NormalGreedyMutation
+[   133s]    INFO __main__: Compile time: 4.336373567581177
+[   133s]    INFO __main__: Compile returncode: 0
+[   145s]    INFO __main__: Run time: 11.668462038040161
+[   145s]    INFO __main__: Run returncode: 0
+[   145s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best #2343, cost time=2.2550, found by NormalGreedyMutation
+[   149s]    INFO __main__: Compile time: 4.252495765686035
+[   149s]    INFO __main__: Compile returncode: 0
+[   167s]    INFO __main__: Run time: 17.66107439994812
+[   167s]    INFO __main__: Run returncode: 0
+[   167s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best #2343, cost time=2.2550, found by NormalGreedyMutation
+[   173s]    INFO __main__: Compile time: 5.890604019165039
+[   173s]    INFO __main__: Compile returncode: 0
+[   190s]    INFO __main__: Run time: 17.62909245491028
+[   190s]    INFO __main__: Run returncode: 0
+[   190s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2343, cost time=2.2550, found by NormalGreedyMutation
+[   190s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best #2343, cost time=2.2550, found by NormalGreedyMutation
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_k=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
++ mv mmm_final_config.json syr2k_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_k=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
+++ nproc
++ run_script cmake --build . -j64 -t syr2k_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_k=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t syr2k_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_block_k=3 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
+srun: job 38035 queued and waiting for resources
+srun: job 38035 has been allocated resources
+[100%] Building CXX object CMakeFiles/syr2k_autotuned.dir/linear-algebra/blas/syr2k/syr2k.cpp.o
+[100%] Linking CXX executable syr2k_autotuned
+[100%] Built target syr2k_autotuned
++ for file in ./*_autotune
+++ basename ./syrk_autotune
++ filename=syrk_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning syrk'
+Autotuning syrk
++ run_script ./syrk_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./syrk_autotune
+srun: job 38036 queued and waiting for resources
+srun: job 38036 has been allocated resources
++ run_script ../env/bin/python3 syrk_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee syrk_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 syrk_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 38037 queued and waiting for resources
+srun: job 38037 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[     9s]    INFO __main__: Compile time: 8.228342533111572
+[     9s]    INFO __main__: Compile returncode: 0
+[    26s]    INFO __main__: Run time: 16.89646053314209
+[    26s]    INFO __main__: Run returncode: 0
+[    26s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'block_i': 2, 'block_k': 3, 'loop_order': 0, 'order': 0, 'c_layout': 1, 'a_layout': 0}, cost time=10.7354, found by NormalGreedyMutation
+[    32s]    INFO __main__: Compile time: 5.4800615310668945
+[    32s]    INFO __main__: Compile returncode: 0
+[    49s]    INFO __main__: Run time: 16.842424392700195
+[    49s]    INFO __main__: Run returncode: 0
+[    49s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'block_i': 2, 'block_k': 3, 'loop_order': 0, 'order': 1, 'c_layout': 1, 'a_layout': 0}, cost time=10.6772, found by UniformGreedyMutation
+[    53s]    INFO __main__: Compile time: 4.395911931991577
+[    53s]    INFO __main__: Compile returncode: 0
+[    61s]    INFO __main__: Run time: 7.5331690311431885
+[    61s]    INFO __main__: Run returncode: 0
+[    61s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'a_layout': 1, 'block_i': 6, 'loop_order': 1, 'order': 1, 'c_layout': 0, 'block_k': 2}, cost time=1.3694, found by RandomNelderMead
+[    66s]    INFO __main__: Compile time: 4.655695915222168
+[    66s]    INFO __main__: Compile returncode: 0
+[    73s]    INFO __main__: Run time: 7.5539326667785645
+[    73s]    INFO __main__: Run returncode: 0
+[    73s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'a_layout': 1, 'block_i': 6, 'loop_order': 1, 'order': 1, 'c_layout': 0, 'block_k': 2}, cost time=1.3694, found by RandomNelderMead
+[    78s]    INFO __main__: Compile time: 4.303224325180054
+[    78s]    INFO __main__: Compile returncode: 0
+[    85s]    INFO __main__: Run time: 7.580209493637085
+[    85s]    INFO __main__: Run returncode: 0
+[    85s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'a_layout': 1, 'block_i': 6, 'loop_order': 1, 'order': 1, 'c_layout': 0, 'block_k': 2}, cost time=1.3694, found by RandomNelderMead
+[    90s]    INFO __main__: Compile time: 4.157148361206055
+[    90s]    INFO __main__: Compile returncode: 0
+[   104s]    INFO __main__: Run time: 14.59156584739685
+[   104s]    INFO __main__: Run returncode: 0
+[   104s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'a_layout': 1, 'block_i': 6, 'loop_order': 1, 'order': 1, 'c_layout': 0, 'block_k': 2}, cost time=1.3694, found by RandomNelderMead
+[   109s]    INFO __main__: Compile time: 4.714687347412109
+[   109s]    INFO __main__: Compile returncode: 0
+[   117s]    INFO __main__: Run time: 8.128157377243042
+[   117s]    INFO __main__: Run returncode: 0
+[   117s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'a_layout': 1, 'block_i': 6, 'loop_order': 1, 'order': 1, 'c_layout': 0, 'block_k': 2}, cost time=1.3694, found by RandomNelderMead
+[   121s]    INFO __main__: Compile time: 3.9391350746154785
+[   121s]    INFO __main__: Compile returncode: 0
+[   136s]    INFO __main__: Run time: 14.57839584350586
+[   136s]    INFO __main__: Run returncode: 0
+[   136s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'a_layout': 1, 'block_i': 6, 'loop_order': 1, 'order': 1, 'c_layout': 0, 'block_k': 2}, cost time=1.3694, found by RandomNelderMead
+[   140s]    INFO __main__: Compile time: 3.9508845806121826
+[   140s]    INFO __main__: Compile returncode: 0
+[   148s]    INFO __main__: Run time: 8.084189414978027
+[   148s]    INFO __main__: Run returncode: 0
+[   148s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'a_layout': 1, 'block_i': 6, 'loop_order': 1, 'order': 1, 'c_layout': 0, 'block_k': 2}, cost time=1.3694, found by RandomNelderMead
+[   152s]    INFO __main__: Compile time: 4.288450002670288
+[   152s]    INFO __main__: Compile returncode: 0
+[   169s]    INFO __main__: Run time: 16.800901174545288
+[   169s]    INFO __main__: Run returncode: 0
+[   169s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': 1, 'block_i': 6, 'loop_order': 1, 'order': 1, 'c_layout': 0, 'block_k': 2}, cost time=1.3694, found by RandomNelderMead
+[   169s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'a_layout': 1, 'block_i': 6, 'loop_order': 1, 'order': 1, 'c_layout': 0, 'block_k': 2}, cost time=1.3694, found by RandomNelderMead
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_k=2 '
++ mv mmm_final_config.json syrk_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_k=2 '
+++ nproc
++ run_script cmake --build . -j64 -t syrk_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_k=2 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t syrk_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_block_i=6 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=1 -DNOARR_TUNING_PARAMETER_VALUE_c_layout=0 -DNOARR_TUNING_PARAMETER_VALUE_block_k=2 '
+srun: job 38038 queued and waiting for resources
+srun: job 38038 has been allocated resources
+[100%] Building CXX object CMakeFiles/syrk_autotuned.dir/linear-algebra/blas/syrk/syrk.cpp.o
+[100%] Linking CXX executable syrk_autotuned
+[100%] Built target syrk_autotuned
++ for file in ./*_autotune
+++ basename ./trisolv_autotune
++ filename=trisolv_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning trisolv'
+Autotuning trisolv
++ run_script ./trisolv_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./trisolv_autotune
+srun: job 38039 queued and waiting for resources
+srun: job 38039 has been allocated resources
++ run_script ../env/bin/python3 trisolv_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee trisolv_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 trisolv_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 38040 queued and waiting for resources
+srun: job 38040 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[     8s]    INFO __main__: Compile time: 6.929935932159424
+[     8s]    INFO __main__: Compile returncode: 0
+[     8s]    INFO __main__: Run time: 0.06008195877075195
+[     8s]    INFO __main__: Run returncode: 0
+[     8s] WARNING opentuner.search.simplextechniques: only 1 point in simplex, will not use RandomNelderMead
+[    10s]    INFO __main__: Compile time: 1.869333028793335
+[    10s]    INFO __main__: Compile returncode: 0
+[    10s]    INFO __main__: Run time: 0.05318498611450195
+[    10s]    INFO __main__: Run returncode: 0
+[    12s]    INFO __main__: Compile time: 1.6344680786132812
+[    12s]    INFO __main__: Compile returncode: 0
+[    12s]    INFO __main__: Run time: 0.060549020767211914
+[    12s]    INFO __main__: Run returncode: 0
+[    12s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'l_layout': 0}, cost time=0.0119, found by DifferentialEvolutionAlt
+[    13s]    INFO __main__: Compile time: 1.7543303966522217
+[    13s]    INFO __main__: Compile returncode: 0
+[    14s]    INFO __main__: Run time: 0.060257673263549805
+[    14s]    INFO __main__: Run returncode: 0
+[    15s]    INFO __main__: Compile time: 1.6676702499389648
+[    15s]    INFO __main__: Compile returncode: 0
+[    15s]    INFO __main__: Run time: 0.06006622314453125
+[    15s]    INFO __main__: Run returncode: 0
+[    17s]    INFO __main__: Compile time: 1.762399435043335
+[    17s]    INFO __main__: Compile returncode: 0
+[    17s]    INFO __main__: Run time: 0.05345582962036133
+[    17s]    INFO __main__: Run returncode: 0
+[    19s]    INFO __main__: Compile time: 1.7894680500030518
+[    19s]    INFO __main__: Compile returncode: 0
+[    19s]    INFO __main__: Run time: 0.06084585189819336
+[    19s]    INFO __main__: Run returncode: 0
+[    21s]    INFO __main__: Compile time: 1.6950397491455078
+[    21s]    INFO __main__: Compile returncode: 0
+[    21s]    INFO __main__: Run time: 0.06008148193359375
+[    21s]    INFO __main__: Run returncode: 0
+[    23s]    INFO __main__: Compile time: 1.6937246322631836
+[    23s]    INFO __main__: Compile returncode: 0
+[    23s]    INFO __main__: Run time: 0.06037497520446777
+[    23s]    INFO __main__: Run returncode: 0
+[    23s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'l_layout': 0}, cost time=0.0119, found by DifferentialEvolutionAlt
+[    24s]    INFO __main__: Compile time: 1.6346967220306396
+[    24s]    INFO __main__: Compile returncode: 0
+[    24s]    INFO __main__: Run time: 0.06024312973022461
+[    24s]    INFO __main__: Run returncode: 0
+[    24s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'l_layout': 0}, cost time=0.0119, found by DifferentialEvolutionAlt
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_l_layout=0 '
++ mv mmm_final_config.json trisolv_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_l_layout=0 '
+++ nproc
++ run_script cmake --build . -j64 -t trisolv_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_l_layout=0 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t trisolv_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_l_layout=0 '
+srun: job 38041 queued and waiting for resources
+srun: job 38041 has been allocated resources
+[  0%] Building CXX object CMakeFiles/trisolv_autotuned.dir/linear-algebra/solvers/trisolv/trisolv.cpp.o
+[100%] Linking CXX executable trisolv_autotuned
+[100%] Built target trisolv_autotuned
++ for file in ./*_autotune
+++ basename ./trmm_autotune
++ filename=trmm_autotune
++ '[' -n '' ']'
+++ sed -E 's/_autotune$//'
++ echo 'Autotuning trmm'
+Autotuning trmm
++ run_script ./trmm_autotune
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ./trmm_autotune
+srun: job 38042 queued and waiting for resources
+srun: job 38042 has been allocated resources
++ run_script ../env/bin/python3 trmm_autotune-script.py --test-limit=10 --no-dups --parallelism 1
++ tee trmm_autotune-log.json
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 ../env/bin/python3 trmm_autotune-script.py --test-limit=10 --no-dups --parallelism 1
+srun: job 38043 queued and waiting for resources
+srun: job 38043 has been allocated resources
+/home/kleplj/ParCo2024-artifact/PolybenchC-Noarr-tuning/env/lib64/python3.9/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    10s]    INFO __main__: Compile time: 9.462313175201416
+[    10s]    INFO __main__: Compile returncode: 0
+[    23s]    INFO __main__: Run time: 12.98950481414795
+[    23s]    INFO __main__: Run returncode: 0
+[    23s]    INFO opentuner.search.plugin.DisplayPlugin: tests=1, best {'block_i': 4, 'block_j': 1, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 0}, cost time=7.4282, found by RandomNelderMead
+[    36s]    INFO __main__: Compile time: 12.528486490249634
+[    36s]    INFO __main__: Compile returncode: 0
+[    49s]    INFO __main__: Run time: 12.932215690612793
+[    49s]    INFO __main__: Run returncode: 0
+[    49s]    INFO opentuner.search.plugin.DisplayPlugin: tests=2, best {'block_i': 4, 'block_j': 1, 'loop_order': 0, 'order': 0, 'a_layout': 1, 'b_layout': 1}, cost time=7.3942, found by UniformGreedyMutation
+[    53s]    INFO __main__: Compile time: 4.248398303985596
+[    53s]    INFO __main__: Compile returncode: 0
+[    66s]    INFO __main__: Run time: 12.955069303512573
+[    66s]    INFO __main__: Run returncode: 0
+[    66s]    INFO opentuner.search.plugin.DisplayPlugin: tests=3, best {'block_i': 4, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 1, 'block_j': 1}, cost time=7.3740, found by NormalGreedyMutation
+[    71s]    INFO __main__: Compile time: 4.2744972705841064
+[    71s]    INFO __main__: Compile returncode: 0
+[    84s]    INFO __main__: Run time: 13.065503120422363
+[    84s]    INFO __main__: Run returncode: 0
+[    84s]    INFO opentuner.search.plugin.DisplayPlugin: tests=4, best {'block_i': 4, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 1, 'block_j': 1}, cost time=7.3740, found by NormalGreedyMutation
+[    88s]    INFO __main__: Compile time: 4.178226709365845
+[    88s]    INFO __main__: Compile returncode: 0
+[   101s]    INFO __main__: Run time: 12.940258979797363
+[   101s]    INFO __main__: Run returncode: 0
+[   101s]    INFO opentuner.search.plugin.DisplayPlugin: tests=5, best {'block_i': 4, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 1, 'block_j': 1}, cost time=7.3740, found by NormalGreedyMutation
+[   110s]    INFO __main__: Compile time: 9.047175645828247
+[   110s]    INFO __main__: Compile returncode: 0
+[   123s]    INFO __main__: Run time: 12.984757661819458
+[   123s]    INFO __main__: Run returncode: 0
+[   124s]    INFO opentuner.search.plugin.DisplayPlugin: tests=6, best {'block_i': 4, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 1, 'block_j': 1}, cost time=7.3740, found by NormalGreedyMutation
+[   128s]    INFO __main__: Compile time: 3.835073947906494
+[   128s]    INFO __main__: Compile returncode: 0
+[   140s]    INFO __main__: Run time: 12.93167781829834
+[   140s]    INFO __main__: Run returncode: 0
+[   140s]    INFO opentuner.search.plugin.DisplayPlugin: tests=7, best {'block_i': 4, 'block_j': 0, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 1}, cost time=7.3691, found by UniformGreedyMutation
+[   147s]    INFO __main__: Compile time: 5.239890098571777
+[   147s]    INFO __main__: Compile returncode: 0
+[   160s]    INFO __main__: Run time: 12.921382188796997
+[   160s]    INFO __main__: Run returncode: 0
+[   160s]    INFO opentuner.search.plugin.DisplayPlugin: tests=8, best {'block_i': 4, 'block_j': 0, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 1}, cost time=7.3691, found by UniformGreedyMutation
+[   163s]    INFO __main__: Compile time: 3.823929786682129
+[   163s]    INFO __main__: Compile returncode: 0
+[   176s]    INFO __main__: Run time: 12.921384811401367
+[   176s]    INFO __main__: Run returncode: 0
+[   176s]    INFO opentuner.search.plugin.DisplayPlugin: tests=9, best {'block_i': 4, 'block_j': 0, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 1}, cost time=7.3691, found by UniformGreedyMutation
+[   180s]    INFO __main__: Compile time: 3.4797346591949463
+[   180s]    INFO __main__: Compile returncode: 0
+[   193s]    INFO __main__: Run time: 12.956117153167725
+[   193s]    INFO __main__: Run returncode: 0
+[   193s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'block_i': 4, 'block_j': 0, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 1}, cost time=7.3691, found by UniformGreedyMutation
+[   193s]    INFO opentuner.search.plugin.DisplayPlugin: tests=10, best {'block_i': 4, 'block_j': 0, 'loop_order': 1, 'order': 0, 'a_layout': 1, 'b_layout': 1}, cost time=7.3691, found by UniformGreedyMutation
++ '[' '!' -f mmm_final_config.json ']'
+++ sed -E 's/, "/; "/g' mmm_final_config.json
+++ grep -oE '"\w+"\s*:\s*[^;}]+'
+++ tr -d '":[]'
+++ sed -E 's/, /,/g'
+++ awk '{printf("%s", "-DNOARR_TUNING_PARAMETER_VALUE_" $1 "=" $2 " ")}END{print ""}'
++ config='-DNOARR_TUNING_PARAMETER_VALUE_block_i=4 -DNOARR_TUNING_PARAMETER_VALUE_block_j=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
++ mv mmm_final_config.json trmm_autotune.config.json
++ echo '-DNOARR_TUNING_PARAMETER_VALUE_block_i=4 -DNOARR_TUNING_PARAMETER_VALUE_block_j=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
+++ nproc
++ run_script cmake --build . -j64 -t trmm_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=4 -DNOARR_TUNING_PARAMETER_VALUE_block_j=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
++ '[' 1 -eq 1 ']'
++ srun -A kdss -p mpi-homo-short --exclusive -ww207 -t 2:00:00 --mem=0 cmake --build . -j64 -t trmm_autotuned -- -B 'CXX_DEFINES=-DEXTRALARGE_DATASET -DDATA_TYPE_IS_FLOAT  -DNOARR_TUNING_PARAMETER_VALUE_block_i=4 -DNOARR_TUNING_PARAMETER_VALUE_block_j=0 -DNOARR_TUNING_PARAMETER_VALUE_loop_order=1 -DNOARR_TUNING_PARAMETER_VALUE_order=0 -DNOARR_TUNING_PARAMETER_VALUE_a_layout=1 -DNOARR_TUNING_PARAMETER_VALUE_b_layout=1 '
+srun: job 38045 queued and waiting for resources
+srun: job 38045 has been allocated resources
+[ 50%] Building CXX object CMakeFiles/trmm_autotuned.dir/linear-algebra/blas/trmm/trmm.cpp.o
+[100%] Linking CXX executable trmm_autotuned
+[100%] Built target trmm_autotuned
