@@ -7,7 +7,12 @@ The paper presents a continuation of the work on the Noarr library, which can be
 The abstractions extending the Noarr library are implemented in the following two repositories:
 
 - Noarr Traversers: [https://github.com/jiriklepl/noarr-structures](https://github.com/jiriklepl/noarr-structures)
+
+  [![DOI](https://zenodo.org/badge/430242022.svg)](https://zenodo.org/doi/10.5281/zenodo.11112979)
+
 - Noarr Tuning: [https://github.com/jiriklepl/noarr-tuning](https://github.com/jiriklepl/noarr-tuning)
+
+  [![DOI](https://zenodo.org/badge/769593117.svg)](https://zenodo.org/doi/10.5281/zenodo.11112949)
 
 
 ## Table of contents
