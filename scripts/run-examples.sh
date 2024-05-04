@@ -2,7 +2,7 @@
 
 # Run the examples
 
-NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-main}
+NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-ParCo2024}
 
 if [ "$(basename "$(pwd)")" = "scripts" ]; then
     cd ..

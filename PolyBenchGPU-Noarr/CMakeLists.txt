@@ -22,7 +22,7 @@ set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -allow-unsupported-compiler --expt-rel
 enable_language(CUDA)
 
 if(NOT DEFINED NOARR_STRUCTURES_BRANCH)
-  set(NOARR_STRUCTURES_BRANCH main)
+  set(NOARR_STRUCTURES_BRANCH ParCo2024)
 endif()
 
 # download Noarr Structures
