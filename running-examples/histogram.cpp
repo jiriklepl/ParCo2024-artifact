@@ -41,10 +41,11 @@ else if constexpr (HISTO_IMPL == histo_range) {
 }
 
 else if constexpr (HISTO_IMPL == histo_foreach) {
-	auto in = noarr::bag(noarr::scalar<value_t>() ^ noarr::vector<'i'>(size), in_ptr);
-	auto out = noarr::bag(noarr::scalar<std::size_t>() ^ noarr::array<'v', 256>(), out_ptr);
-
+	using namespace noarr;
 	// PAPER 4.0 - First listing
+	auto in = bag(scalar<value_t>() ^ vector<'i'>(size), in_ptr);
+	auto out = bag(scalar<std::size_t>() ^ array<'v', 256>(), out_ptr);
+
 	noarr::traverser(in) | [=](auto state) {
 		out[noarr::idx<'v'>(in[state])] += 1;
 	};

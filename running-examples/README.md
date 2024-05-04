@@ -9,17 +9,20 @@ Each code position beginning a code snippet presented in the paper as a listing 
 
 - Section 3.1
 
-  - First, second, and third listing: [running-examples/matmul.cpp](running-examples/matmul.cpp)
-  - Fourth listing: [running-examples/matmul_factored.cpp](running-examples/matmul_factored.cpp)
+  - First, second, and third C++ listing: [matmul.cpp](matmul.cpp)
+
+- Section 3.2
+
+  - First listing: [matmul_factored.cpp](matmul_factored.cpp)
 
 - Section 4.0
 
-  - First and second listing: [running-examples/histogram.cpp](running-examples/histogram.cpp)
+  - First and second listing: [histogram.cpp](histogram.cpp)
 
 - Section 4.1
 
-  - First and second listing: [running-examples/histogram.cu](running-examples/histogram.cu)
+  - First and second listing: [histogram.cu](histogram.cu)
 
 - Section 4.2
 
-  - First, second, third, and fourth listing: [running-examples/histogram.cu](running-examples/histogram.cu)
+  - First, second, third, and fourth listing: [histogram.cu](histogram.cu)

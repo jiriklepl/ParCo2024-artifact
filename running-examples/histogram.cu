@@ -7,8 +7,8 @@
 #include <noarr/structures/interop/cuda_step.cuh>
 
 // PAPER: 4.1 - First listing, 4.2 - First listing
-template<class InT, class In, class ShmS, class Out>
-__global__ void histogram(InT in_trav, In in, ShmS shm_s, Out out) {
+template<class InT, class I, class Shm, class O>
+__global__ void histogram(InT in_t, I in, Shm shm_s, O out) {
 	extern __shared__ char shm_ptr[];
 	auto shm_bag = bag(shm_s, shm_ptr);
 
@@ -23,25 +23,24 @@ __global__ void histogram(InT in_trav, In in, ShmS shm_s, Out out) {
 
 	// Zero out shared memory. In this particular case, the access pattern happens
 	// to be the same as with the `for(i = threadIdx; i < ...; i += blockDim)` idiom.
-	noarr::traverser(shm_bag).order(subset).for_each([=](auto state) {
+	noarr::traverser(shm_bag) ^ subset | [=](auto state) {
 		shm_bag[state] = 0;
-	});
+	};
 
 	__syncthreads();
 
 	// Count the elements into the histogram copies in shared memory.
-	in_trav.for_each([=](auto state) {
+	in_t | [=](auto state) {
 		auto value = in[state];
 		atomicAdd(&shm_bag[noarr::idx<'v'>(value)], 1);
-	});
+	};
 
 	__syncthreads();
 
 	// PAPER: 4.2 - Fourth listing
 	// Reduce the bins in shared memory into global memory.
-	noarr::traverser(out)
-		.order(noarr::cuda_step_block())
-		.for_each([=](auto state) {
+	noarr::traverser(out) ^ noarr::cuda_step_block() |
+		[=](auto state) {
 			std::size_t sum = 0;
 
 			for(std::size_t i = 0; i < shm_s.num_stripes(); i++) {
@@ -49,7 +48,7 @@ __global__ void histogram(InT in_trav, In in, ShmS shm_s, Out out) {
 			}
 
 			atomicAdd(&out[state], sum);
-	});
+		};
 }
 
 void run_histogram(value_t *in_ptr, std::size_t size, std::size_t *out_ptr) {

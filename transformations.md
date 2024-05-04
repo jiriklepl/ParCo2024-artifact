@@ -2,7 +2,7 @@
 
 This information can also be found in Noarr documentation, but we have compiled a crash-course readme for a quick introduction to transformations used in our experiments.
 
-The traversals performed by Noarr Traversers can be transformed by applying the `.order()` method with an argument that specifies the desired transformation, these transformations include: (the list is non-exhaustive; also, the Noarr library defines many shortcuts for various transformation combinations)
+The traversals performed by Noarr Traversers can be transformed by applying `^ TRANSFORMATION` to the traverser, these transformations include: (the list is non-exhaustive; also, the Noarr library defines many shortcuts for various transformation combinations)
 
 - `into_blocks<OldDim, NewMajorDim, NewMinorDim>(block_size)` - Separates the specified dimension into blocks according to the given block size; each index from the original index space is then uniquely associated with the cartesian product of a major index(block index) and a minor index. The dimension does not have to be contiguous. However, the transformation always assumes the dimension length is divisible by the block size; otherwise, some of the data are associated with indices outside the accessible index space and thus they cannot be traversed.
 

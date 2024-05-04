@@ -12,11 +12,12 @@ void run_matmul(A ta, B tb, C tc, num_t *pa, num_t *pb, num_t *pc) {
 
 #ifdef MATMUL_BLOCKED
 	// PAPER: 3.1 - Third listing
-	auto blocks = noarr::strip_mine<'i', 'I', 'i'>(noarr::lit<16>) ^
-		noarr::strip_mine<'k', 'K', 'k'>(noarr::lit<16>) ^
-		noarr::strip_mine<'j', 'J', 'j'>(noarr::lit<16>);
+	auto tiles = noarr::into_blocks<'i', 'I'>(noarr::lit<16>) ^
+		noarr::into_blocks<'k', 'K'>(noarr::lit<16>) ^
+		noarr::into_blocks<'j', 'J'>(noarr::lit<16>) ^
+		noarr::hoist<'I', 'J', 'K'>();
 
-	noarr::traverser(a, b, c) ^ blocks | [=](auto state) {
+	noarr::traverser(a, b, c) ^ tiles | [=](auto state) {
 		c[state] += a[state] * b[state];
 	};
 #else
