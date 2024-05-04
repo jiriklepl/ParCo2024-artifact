@@ -144,11 +144,12 @@ The validation scripts check whether the outputs of the implementations are the 
 git clone "https://github.com/jiriklepl/ParCo2024-artifact.git"
 cd ParCo2024-artifact
 
+mkdir -p results
+
 # for the Polybench/C benchmark and the Noarr implementation:
 scripts/code_compare.sh > "results/code_overall.log"
 
 # for the tuning transformations related to PolybenchC-Noarr-tuned and PolybenchC-tuned:
-mkdir -p results
 scripts/compare_transformations.sh > "results/compare_transformations.log"
 ```
 

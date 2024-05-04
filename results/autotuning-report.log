@@ -1,0 +1,68 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Reading results/compare_compiles.csv
+Reading results/autotuning.csv
+Compiles overhead
+	min (algorithm): 1.18051124294222% (seidel-2d)
+	max (algorithm): 16337.9047009329% (atax)
+	mean: 1570.07547213375%
+	median: 29.4363783300869%
+
+	min (algorithm) on unmodified algorithms with traversal tuning: 1.87194152753668% (floyd-warshall)
+	max (algorithm) on unmodified algorithms with traversal tuning: 3619.74304345959% (gemver)
+	mean on unmodified algorithms with traversal tuning: 734.778919205708%
+	median on unmodified algorithms with traversal tuning: 36.7384898821245%
+
+	min (algorithm) on only layout-tuned algorithms: 1.18051124294222% (seidel-2d)
+	max (algorithm) on only layout-tuned algorithms: 10721.5227568374% (bicg)
+	mean on only layout-tuned algorithms: 1329.93908610845%
+	median on only layout-tuned algorithms: 10.8917886646343%
+
+	min (algorithm) on unmodified algorithms: 1.18051124294222% (seidel-2d)
+	max (algorithm) on unmodified algorithms: 10721.5227568374% (bicg)
+	mean on unmodified algorithms: 1046.52948282143%
+	median on unmodified algorithms: 22.9186470039228%
+
+	min (algorithm) on algorithms modified to allow traversal transformations: 15.7530675925184% (covariance)
+	max (algorithm) on algorithms modified to allow traversal transformations: 16337.9047009329% (atax)
+	mean on algorithms modified to allow traversal transformations: 3402.48643472688%
+	median on algorithms modified to allow traversal transformations: 36.7846437869942%
+
+	Algorithms not in any category: 0
+Compiles overhead change from baseline
+	min (algorithm): -6.70469330406593% (covariance)
+	max (algorithm): 12664.348210475% (atax)
+	mean: 997.662816345992%
+	median: 23.224724759968%
+
+	min (algorithm) on unmodified algorithms with traversal tuning: 1.64410106253894% (floyd-warshall)
+	max (algorithm) on unmodified algorithms with traversal tuning: 3076.74383903349% (gemver)
+	mean on unmodified algorithms with traversal tuning: 534.719450324874%
+	median on unmodified algorithms with traversal tuning: 31.3250965708133%
+
+	min (algorithm) on only layout-tuned algorithms: 0.937255117405234% (seidel-2d)
+	max (algorithm) on only layout-tuned algorithms: 6331.50243610361% (bicg)
+	mean on only layout-tuned algorithms: 685.295388621983%
+	median on only layout-tuned algorithms: 8.40795119699875%
+
+	min (algorithm) on unmodified algorithms: 0.937255117405234% (seidel-2d)
+	max (algorithm) on unmodified algorithms: 6331.50243610361% (bicg)
+	mean on unmodified algorithms: 613.592560861455%
+	median on unmodified algorithms: 18.1573392301011%
+
+	min (algorithm) on algorithms modified to allow traversal transformations: -6.70469330406593% (covariance)
+	max (algorithm) on algorithms modified to allow traversal transformations: 12664.348210475% (atax)
+	mean on algorithms modified to allow traversal transformations: 2341.90871054187%
+	median on algorithms modified to allow traversal transformations: 25.4586540529445%
+
+	Algorithms not in any category: 0
+There were 14 warnings (use warnings() to see them)
