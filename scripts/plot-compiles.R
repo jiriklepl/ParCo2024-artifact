@@ -40,7 +40,7 @@ autotuning <- read.csv(autotuning_file, header = TRUE)
 
 autotuning_compiles <- autotuning %>%
   filter(record_type == "compile_time") %>%
-  reframe(algorithm, implementation = "autotuning", time = value)
+  reframe(algorithm, implementation = "autotuned", time = value)
 
 autotuning_run <- autotuning %>%
   filter(record_type == "run_time") %>%
@@ -50,7 +50,7 @@ compiles <- rbind(compiles, autotuning_compiles)
 
 summary <- rbind(autotuning_compiles, autotuning_run) %>%
   group_by(algorithm) %>%
-  summarise(compiles_overhead = mean(time[implementation == "autotuning"]) / mean(time[implementation == "runtime"]))
+  summarise(compiles_overhead = mean(time[implementation == "autotuned"]) / mean(time[implementation == "runtime"]))
 
 message("Compiles overhead")
 
@@ -122,7 +122,7 @@ message("Compiles overhead change from baseline")
 
 summary_baseline <- rbind(compiles, autotuning_run) %>%
   group_by(algorithm) %>%
-  summarise(compiles_overhead = mean(time[implementation == "autotuning"] - time[implementation == "baseline"]) / mean(time[implementation == "runtime"]))
+  summarise(compiles_overhead = mean(time[implementation == "autotuned"] - time[implementation == "baseline"]) / mean(time[implementation == "runtime"]))
 
 message("\tmin (algorithm): ", 100 * min(summary_baseline$compiles_overhead), "% (", summary_baseline$algorithm[which.min(summary_baseline$compiles_overhead)], ")")
 message("\tmax (algorithm): ", 100 * max(summary_baseline$compiles_overhead), "% (", summary_baseline$algorithm[which.max(summary_baseline$compiles_overhead)], ")")
@@ -192,7 +192,8 @@ data <- compiles %>%
   group_by(algorithm) %>%
   reframe(time = time / mean(time[(implementation == "baseline")]),
           implementation) %>%
-  mutate(implementation = ifelse(implementation == "noarr-autotuned", "autotuned", implementation)) %>%
+  mutate(implementation = ifelse(implementation == "noarr", "untuned", implementation)) %>%
+  filter(implementation != "noarr-autotuned") %>%
   group_by(algorithm, implementation) %>%
   filter(implementation != "baseline") %>%
   mutate(slowdown = time)
