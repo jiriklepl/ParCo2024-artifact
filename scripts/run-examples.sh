@@ -2,7 +2,7 @@
 
 # Run the examples
 
-NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-ParCo2024}
+NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-multimerge}
 
 if [ "$(basename "$(pwd)")" = "scripts" ]; then
     cd ..
