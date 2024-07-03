@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 BUILD_DIR=${BUILD_DIR:-build}
-NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-ParCo2024}
+NOARR_STRUCTURES_BRANCH=${NOARR_STRUCTURES_BRANCH:-ParCo2024-revision}
 
 export PATH=$PATH:/usr/local/cuda/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib:/usr/local/cuda/lib64
