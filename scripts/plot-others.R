@@ -40,11 +40,13 @@ data <- data %>%
   reframe(time = time / mean(time[(implementation == "c") | (implementation == "baseline")]), implementation) %>%
   group_by(name, implementation) %>%
   filter(implementation != "baseline" & implementation != "c") %>%
-  reframe(time = mean(time)) %>%
-  mutate(speedup = 1 / time)
+  summarize(time = mean(time), speedup = 1 / mean(time))
 
 mean_algorithm <- data %>%
-  reframe(time = mean(time), speedup = 1 / time, name = "\rMEAN", implementation)
+  group_by(implementation) %>%
+  summarize(time = 1 / exp(mean(log(speedup))),
+            speedup = exp(mean(log(speedup))),
+            name = "\rMEAN")
 
 data <- rbind(data, mean_algorithm)
 

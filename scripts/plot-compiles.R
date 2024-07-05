@@ -52,7 +52,7 @@ summary <- rbind(autotuning_compiles, autotuning_run) %>%
   group_by(algorithm) %>%
   summarise(compiles_overhead = mean(time[implementation == "autotuned"]) / mean(time[implementation == "runtime"]))
 
-message("Compiles overhead")
+message("Compilation overhead")
 
 message("\tmin (algorithm): ", 100 * min(summary$compiles_overhead), "% (", summary$algorithm[which.min(summary$compiles_overhead)], ")")
 message("\tmax (algorithm): ", 100 * max(summary$compiles_overhead), "% (", summary$algorithm[which.max(summary$compiles_overhead)], ")")
@@ -118,7 +118,7 @@ if (rest > 0) {
   message(rest_summary)
 }
 
-message("Compiles overhead change from baseline")
+message("Compilation overhead change from baseline")
 
 summary_baseline <- rbind(compiles, autotuning_run) %>%
   group_by(algorithm) %>%
@@ -196,24 +196,16 @@ data <- compiles %>%
   filter(implementation != "noarr-autotuned") %>%
   group_by(algorithm, implementation) %>%
   filter(implementation != "baseline") %>%
-  mutate(slowdown = time)
-
-special_mean <- function(x) {
-  mean(x)
-}
+  mutate(slowdown = time) %>%
+  summarize(slowdown = mean(slowdown))
 
 # add a mean algorithm
 mean_algorithm <- data %>%
   group_by(implementation) %>%
-  mutate(slowdown = special_mean(slowdown)) %>%
-  mutate(algorithm = "\rMEAN")
+  summarize(slowdown = exp(mean(log(slowdown))),
+            algorithm = "\rMEAN")
 
 data <- rbind(data, mean_algorithm)
-
-data <- data %>%
-  group_by(algorithm, implementation) %>%
-  mutate(slowdown = special_mean(slowdown)) %>%
-  unique()
 
 plot <-
   ggplot(data,

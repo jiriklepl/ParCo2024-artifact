@@ -43,7 +43,15 @@ data <- data %>%
   mutate(speedup = 1 / time)
 
 mean_algorithm <- data %>%
-  reframe(time = time, speedup = 1 / time, name = "\rMEAN", implementation)
+  group_by(name) %>%
+  summarize(time = mean(time),
+            speedup = 1 / mean(time),
+            name = "\rMEAN", implementation = "mean") %>%
+  ungroup() %>%
+  group_by(implementation) %>%
+  summarize(time = 1 / exp(mean(log(speedup))),
+            speedup = exp(mean(log(speedup))),
+            name = "\rMEAN")
 
 data <- rbind(data, mean_algorithm)
 
