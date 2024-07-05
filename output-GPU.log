@@ -1,5 +1,5 @@
-srun: job 49607 queued and waiting for resources
-srun: job 49607 has been allocated resources
+srun: job 91568 queued and waiting for resources
+srun: job 91568 has been allocated resources
 2DCONV
 /home/kleplj/ParCo2024-artifact/PolyBenchGPU/CUDA/2DCONV
 rm -f *~ *.exe
@@ -81,48 +81,42 @@ jacobi2D.cu:149:36: warning: ‘cudaError_t cudaThreadSynchronize()’ is deprec
 /usr/local/cuda/bin/../targets/x86_64-linux/include/cuda_runtime_api.h:1075:46: note: declared here
  1075 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
       |                                              ^~~~~~~~~~~~~~~~~~~~~
-srun: job 49608 queued and waiting for resources
-srun: job 49608 has been allocated resources
--- Configuring done (39.0s)
--- Generating done (0.2s)
+srun: job 91569 queued and waiting for resources
+srun: job 91569 has been allocated resources
+-- Configuring done (18.8s)
+-- Generating done (2.0s)
 -- Build files have been written to: /home/kleplj/ParCo2024-artifact/PolyBenchGPU-Noarr/build
-[ 14%] Building CUDA object CMakeFiles/runner.dir/CUDA/GEMM/gemm.cu.o
-[ 28%] Building CUDA object CMakeFiles/runner.dir/CUDA/2DCONV/2DConvolution.cu.o
-[ 42%] Building CUDA object CMakeFiles/runner.dir/CUDA/2MM/2mm.cu.o
-[ 57%] Building CUDA object CMakeFiles/runner.dir/CUDA/JACOBI2D/jacobi2d.cu.o
-[ 71%] Building CUDA object CMakeFiles/runner.dir/CUDA/GRAMSCHM/gramschmidt.cu.o
-[ 85%] Linking CXX executable runner
 [100%] Built target runner
 collecting gemm
-srun: job 49609 queued and waiting for resources
-srun: job 49609 has been allocated resources
-srun: job 49610 queued and waiting for resources
-srun: job 49610 has been allocated resources
+srun: job 91570 queued and waiting for resources
+srun: job 91570 has been allocated resources
+srun: job 91571 queued and waiting for resources
+srun: job 91571 has been allocated resources
 done
 collecting 2mm
-srun: job 49612 queued and waiting for resources
-srun: job 49612 has been allocated resources
-srun: job 49613 queued and waiting for resources
-srun: job 49613 has been allocated resources
+srun: job 91572 queued and waiting for resources
+srun: job 91572 has been allocated resources
+srun: job 91573 queued and waiting for resources
+srun: job 91573 has been allocated resources
 done
 collecting 2DConvolution
-srun: job 49614 queued and waiting for resources
-srun: job 49614 has been allocated resources
-srun: job 49615 queued and waiting for resources
-srun: job 49615 has been allocated resources
+srun: job 91579 queued and waiting for resources
+srun: job 91579 has been allocated resources
+srun: job 91599 queued and waiting for resources
+srun: job 91599 has been allocated resources
 srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
-slurmstepd: error: *** STEP 49615.0 ON ampere01 CANCELLED AT 2024-05-03T23:59:41 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 91599.0 ON ampere01 CANCELLED AT 2024-07-03T20:14:23 DUE TO TIME LIMIT ***
 srun: error: ampere01: task 0: Terminated
 done
 collecting gramschmidt
-srun: job 49649 queued and waiting for resources
-srun: job 49649 has been allocated resources
-srun: job 49650 queued and waiting for resources
-srun: job 49650 has been allocated resources
+srun: job 91650 queued and waiting for resources
+srun: job 91650 has been allocated resources
+srun: job 91651 queued and waiting for resources
+srun: job 91651 has been allocated resources
 done
 collecting jacobi2d
-srun: job 49651 queued and waiting for resources
-srun: job 49651 has been allocated resources
-srun: job 49652 queued and waiting for resources
-srun: job 49652 has been allocated resources
+srun: job 91652 queued and waiting for resources
+srun: job 91652 has been allocated resources
+srun: job 91653 queued and waiting for resources
+srun: job 91653 has been allocated resources
 done
