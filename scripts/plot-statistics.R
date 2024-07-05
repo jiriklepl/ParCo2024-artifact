@@ -7,7 +7,7 @@ library("stringr")
 args <- commandArgs(trailingOnly=TRUE)
 
 if (length(args) != 1 && length(args) != 3 && length(args) != 4)
-  stop("Usage: plot.R FILE")
+  stop("Usage: plot-statistics.R FILE")
 
 if (length(args) >= 3) {
   width <- as.numeric(args[2])
@@ -26,18 +26,16 @@ if (length(args) >= 4) {
 file <- args[1]
 
 message("Reading ", file)
-data <- read.csv(file,
-                 header = TRUE)
+data <- read.csv(file, header = TRUE)
 
 plot_lines <-
   ggplot(data,
          aes(x = algorithm, y = lines, color = implementation, shape = implementation)) +
   geom_point() +
   xlab(x_label) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
   ylab("lines") +
   theme(legend.position = "bottom")
-  # theme(legend.position = "none")
 
 if (!dir.exists("plots"))
   dir.create("plots/", recursive = TRUE)
@@ -54,10 +52,9 @@ plot_characters <-
          aes(x = algorithm, y = characters, color = implementation, shape = implementation)) +
   geom_point() +
   xlab(x_label) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
   ylab("characters") +
   theme(legend.position = "bottom")
-  # theme(legend.position = "none")
 
 if (!dir.exists("plots"))
   dir.create("plots/", recursive = TRUE)
@@ -74,10 +71,9 @@ plot_tokens <-
          aes(x = algorithm, y = tokens, color = implementation, shape = implementation)) +
   geom_point() +
   xlab(x_label) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
   ylab("tokens") +
   theme(legend.position = "bottom")
-  # theme(legend.position = "none")
 
 if (!dir.exists("plots"))
   dir.create("plots/", recursive = TRUE)
@@ -94,10 +90,9 @@ plot_gzip_size <-
          aes(x = algorithm, y = gzip_size, color = implementation, shape = implementation)) +
   geom_point() +
   xlab(x_label) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
   ylab("gzip size") +
   theme(legend.position = "bottom")
-  # theme(legend.position = "none")
 
 if (!dir.exists("plots"))
   dir.create("plots/", recursive = TRUE)

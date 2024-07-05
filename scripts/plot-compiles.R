@@ -6,24 +6,18 @@ library("stringr")
 
 args <- commandArgs(trailingOnly = TRUE)
 
-if (length(args) < 2 || length(args) == 3 || length(args) > 6)
-  stop("Usage: plot.R COMPILES AUTOTUNING [WIDTH HEIGHT [X_LABEL [Y_LIM]]]")
+if (length(args) < 2 || length(args) == 3 || length(args) > 5)
+  stop("Usage: plot-compiles.R COMPILES AUTOTUNING [WIDTH HEIGHT [Y_LIM]]")
 
 if (length(args) >= 4) {
   width <- as.numeric(args[3])
   height <- as.numeric(args[4])
 } else {
   width <- 4
-  height <- 3
+  height <- 2.8
 }
 
-if (length(args) >= 5) {
-  x_label <- args[5]
-} else {
-  x_label <- ""
-}
-
-if (length(args) >= 6 && args[6] == "no") {
+if (length(args) >= 5 && args[5] == "no") {
   y_lim <- FALSE
 } else {
   y_lim <- TRUE
@@ -199,7 +193,6 @@ data <- compiles %>%
   mutate(slowdown = time) %>%
   summarize(slowdown = mean(slowdown))
 
-# add a mean algorithm
 mean_algorithm <- data %>%
   group_by(implementation) %>%
   summarize(slowdown = exp(mean(log(slowdown))),
@@ -212,13 +205,12 @@ plot <-
          aes(x = algorithm, y = slowdown, fill = implementation)) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_hline(yintercept = 1, linetype = "dotted", color = "black") +
-  xlab(x_label) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
   ylab("slowdown") +
-  theme(legend.position = "bottom", legend.title = element_blank())
-
-# if (y_lim)
-#   plot <- plot + ylim(0, 20)
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        legend.margin = margin(0, 0, 0, 0))
 
 if (!dir.exists("plots"))
   dir.create("plots/", recursive = TRUE)

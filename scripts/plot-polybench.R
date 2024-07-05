@@ -7,7 +7,7 @@ library("stringr")
 args <- commandArgs(trailingOnly = TRUE)
 
 if (length(args) != 1 && length(args) != 3 && length(args) != 4)
-  stop("Usage: plot.R FILE")
+  stop("Usage: plot-polybench.R FILE")
 
 if (length(args) >= 3) {
   width <- as.numeric(args[2])
@@ -17,17 +17,10 @@ if (length(args) >= 3) {
   height <- 3
 }
 
-if (length(args) >= 4) {
-  x_label <- args[4]
-} else {
-  x_label <- ""
-}
-
 file <- args[1]
 
 message("Reading ", file)
-data <- read.csv(file,
-                 header = TRUE)
+data <- read.csv(file, header = TRUE)
 
 data <- data %>%
   group_by(name) %>%
@@ -45,11 +38,11 @@ mean_algorithm <- data %>%
 data <- rbind(data, mean_algorithm)
 
 plot <-
-  ggplot(data,
-         aes(x = name, y = speedup)) +
+  ggplot(data, aes(x = name, y = speedup)) +
   geom_hline(yintercept = 1, linetype = "solid", color = "gray") +
   geom_point() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1), axis.title.x=element_blank()) +
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
   ylab("speedup") +
   theme(legend.position = "none")
 
