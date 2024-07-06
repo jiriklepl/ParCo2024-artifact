@@ -45,7 +45,8 @@ plot_file <- paste0("plots/lines-", str_replace(basename(file), ".csv", ".pdf"))
 ggsave(plot_file,
        plot_lines,
        width = width,
-       height = height)
+       height = height,
+       device = cairo_pdf)
 
 plot_characters <-
   ggplot(data,
@@ -64,7 +65,8 @@ plot_file <- paste0("plots/characters-", str_replace(basename(file), ".csv", ".p
 ggsave(plot_file,
        plot_characters,
        width = width,
-       height = height)
+       height = height,
+       device = cairo_pdf)
 
 plot_tokens <-
   ggplot(data,
@@ -83,7 +85,8 @@ plot_file <- paste0("plots/tokens-", str_replace(basename(file), ".csv", ".pdf")
 ggsave(plot_file,
        plot_tokens,
        width = width,
-       height = height)
+       height = height,
+       device = cairo_pdf)
 
 plot_gzip_size <-
   ggplot(data,
@@ -102,4 +105,5 @@ plot_file <- paste0("plots/gzip-size-", str_replace(basename(file), ".csv", ".pd
 ggsave(plot_file,
        plot_gzip_size,
        width = width,
-       height = height)
+       height = height,
+       device = cairo_pdf)

@@ -196,12 +196,16 @@ data <- compiles %>%
 mean_algorithm <- data %>%
   group_by(implementation) %>%
   summarize(slowdown = exp(mean(log(slowdown))),
-            algorithm = "\rMEAN")
+            algorithm = "MEAN")
 
-data <- rbind(data, mean_algorithm)
+data_with_mean <- rbind(data, mean_algorithm)
+
+data_with_mean$algorithm <-
+  factor(data_with_mean$algorithm,
+         levels = c("MEAN", unique(data$algorithm)))
 
 plot <-
-  ggplot(data,
+  ggplot(data_with_mean,
          aes(x = algorithm, y = slowdown, fill = implementation)) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_hline(yintercept = 1, linetype = "dotted", color = "black") +
@@ -216,4 +220,4 @@ if (!dir.exists("plots"))
   dir.create("plots/", recursive = TRUE)
 
 plot_file <- paste0("plots/", str_replace(basename(compiles_file), ".csv", ".pdf"))
-ggsave(plot_file, plot, width = width, height = height)
+ggsave(plot_file, plot, width = width, height = height, device = cairo_pdf)

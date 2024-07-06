@@ -39,12 +39,17 @@ mean_algorithm <- data %>%
   group_by(implementation) %>%
   summarize(time = 1 / exp(mean(log(speedup))),
             speedup = exp(mean(log(speedup))),
-            name = "\rMEAN")
+            name = "MEAN")
 
-data <- rbind(data, mean_algorithm)
+data_with_mean <- rbind(data, mean_algorithm)
+
+data_with_mean$name <-
+  factor(data_with_mean$name,
+         levels = c("MEAN", unique(data$name)))
 
 plot <-
-  ggplot(data, aes(x = name, y = speedup)) +
+  ggplot(data_with_mean,
+         aes(x = name, y = speedup)) +
   geom_hline(yintercept = 1, linetype = "solid", color = "gray") +
   geom_point() +
   theme(axis.title.x = element_blank(),
@@ -63,4 +68,5 @@ plot_file <- paste0("plots/", str_replace(basename(file), ".csv", ".pdf"))
 ggsave(plot_file,
        plot,
        width = width,
-       height = height)
+       height = height,
+       device = cairo_pdf)

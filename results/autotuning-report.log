@@ -66,8 +66,3 @@ Compilation overhead change from baseline
 
 	Algorithms not in any category: 0
 `summarise()` has grouped output by 'algorithm'. You can override using the `.groups` argument.
-Warning messages:
-1: In grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y,  :
-  font width unknown for character 0x0d in encoding latin1
-2: In grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
-  font width unknown for character 0x0d in encoding latin1
