@@ -220,4 +220,4 @@ if (!dir.exists("plots"))
   dir.create("plots/", recursive = TRUE)
 
 plot_file <- paste0("plots/", str_replace(basename(compiles_file), ".csv", ".pdf"))
-ggsave(plot_file, plot, width = width, height = height, device = cairo_pdf)
+ggsave(plot_file, plot, width = width, height = height)
