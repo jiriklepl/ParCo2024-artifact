@@ -66,3 +66,5 @@ Compilation overhead change from baseline
 
 	Algorithms not in any category: 0
 `summarise()` has grouped output by 'algorithm'. You can override using the `.groups` argument.
+Mean compilation slowdown (autotuned): 4.16123036024921
+Mean compilation slowdown (untuned): 3.34275621941317

@@ -198,6 +198,9 @@ mean_algorithm <- data %>%
   summarize(slowdown = exp(mean(log(slowdown))),
             algorithm = "MEAN")
 
+message("Mean compilation slowdown (autotuned): ", mean_algorithm %>% filter(implementation == "autotuned") %>% pull(slowdown))
+message("Mean compilation slowdown (untuned): ", mean_algorithm %>% filter(implementation == "untuned") %>% pull(slowdown))
+
 data_with_mean <- rbind(data, mean_algorithm)
 
 data_with_mean$algorithm <-

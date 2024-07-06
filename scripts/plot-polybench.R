@@ -35,6 +35,8 @@ mean_algorithm <- data %>%
             speedup = exp(mean(log(speedup))),
             name = "MEAN")
 
+message("Mean algorithm speedup: ", mean_algorithm$speedup)
+
 data_with_mean <- rbind(data, mean_algorithm)
 
 data_with_mean$name <-
